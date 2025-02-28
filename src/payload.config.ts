@@ -17,6 +17,8 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
+import { cloudinaryStorage } from 'payload-cloudinary'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -68,6 +70,20 @@ export default buildConfig({
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
+    cloudinaryStorage({
+      config: {
+        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? '',
+        api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY ?? '',
+        api_secret: process.env.CLOUDINARY_API_SECRET ?? '',
+      },
+      collections: {
+        media: true, // Enable for media collection
+        // Add more collections as needed
+      },
+      folder: '', // Optional, defaults to 'payload-media' (Doesn't seem to work)
+      disableLocalStorage: true, // Optional, defaults to true
+      enabled: true, // Optional, defaults to true
+    }),
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
