@@ -32,6 +32,11 @@ export default buildConfig({
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
+    meta: {
+      description: 'Where you find and study anything in the world.',
+      icons: [{ type: 'image/png', rel: 'icon', url: '/favicon.svg' }],
+      titleSuffix: '- Manza Search',
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
