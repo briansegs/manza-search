@@ -3,7 +3,8 @@ import { getServerSideURL } from './getURL'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'A website for articles and research.',
+  description:
+    'Manza Search provides curated articles and in-depth research tools for students, professionals, and anyone interested in deep knowledge.',
   images: [
     {
       url: `${getServerSideURL()}/manza-search-OG.webp`,
