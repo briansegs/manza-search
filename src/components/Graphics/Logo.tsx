@@ -1,6 +1,11 @@
-export const Logo = () => {
+export const Logo = ({
+  size = 'size-64',
+  src = '/favicon.svg',
+  alt = 'Manza Search logo',
+  className = '',
+}) => {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src="/favicon.svg" alt="Manza Search logo" className="size-64" />
+    <img src={src} alt={alt} className={`${size} ${className}`} />
   )
 }
