@@ -15,15 +15,19 @@ export const Logo = (props: Props) => {
 
   return (
     /* eslint-disable @next/next/no-img-element */
-    <img
-      alt="Payload Logo"
-      width={193}
-      height={34}
-      loading={loading}
-      fetchPriority={priority}
-      decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
-    />
+    <div className="flex items-center gap-1">
+      <img
+        alt="Manza Search Logo"
+        width={44}
+        height={44}
+        loading={loading}
+        fetchPriority={priority}
+        decoding="async"
+        className={clsx('h-11 w-11', className)}
+        src="/favicon.svg"
+      />
+
+      <div className="text-nowrap font-serif text-2xl font-medium">Manza search</div>
+    </div>
   )
 }

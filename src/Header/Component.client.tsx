@@ -10,6 +10,7 @@ import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { Search } from '@/search/Component'
 
 interface HeaderClientProps {
   data: Header
@@ -32,20 +33,28 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [headerTheme])
 
   return (
-    <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="flex justify-between py-8">
+    <header
+      className="bg-header flex h-16 items-center text-white"
+      {...(theme ? { 'data-theme': theme } : {})}
+    >
+      <div className="container flex items-center justify-between py-2">
         <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+          <Logo loading="eager" priority="high" className="invert" />
         </Link>
 
-        <div className="flex gap-4">
-          <HeaderNav data={data} />
+        <div className="prose mx-auto max-w-[30rem] flex-grow text-center dark:prose-invert">
+          <Search />
+        </div>
 
+        <div className="flex items-center gap-4">
           <SignedOut>
             <SignInButton />
+            <span className="mx-2 h-5 w-[2px] bg-gray-300/70" />
             <SignUpButton />
           </SignedOut>
+
           <SignedIn>
+            <HeaderNav data={data} />
             <UserButton />
           </SignedIn>
         </div>
