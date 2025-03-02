@@ -37,21 +37,19 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       className="bg-header flex h-16 items-center text-white"
       {...(theme ? { 'data-theme': theme } : {})}
     >
-      <div className="container flex justify-between py-2">
+      <div className="container flex items-center justify-between py-2">
         <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+          <Logo loading="eager" priority="high" className="invert" />
         </Link>
 
-        <div className="prose flex-grow text-center dark:prose-invert">
-          <div className="mx-auto max-w-[30rem]">
-            <Search />
-          </div>
+        <div className="prose mx-auto max-w-[30rem] flex-grow text-center dark:prose-invert">
+          <Search />
         </div>
 
         <div className="flex items-center gap-4">
           <SignedOut>
             <SignInButton />
-            {'|'}
+            <span className="mx-2 h-5 w-[2px] bg-gray-300/70" />
             <SignUpButton />
           </SignedOut>
 

@@ -15,19 +15,19 @@ export const Logo = (props: Props) => {
 
   return (
     /* eslint-disable @next/next/no-img-element */
-    <div className="flex items-center gap-0">
+    <div className="flex items-center gap-1">
       <img
         alt="Manza Search Logo"
-        width={34}
-        height={34}
+        width={44}
+        height={44}
         loading={loading}
         fetchPriority={priority}
         decoding="async"
-        className={clsx('h-[34px] w-full max-w-[9.375rem]', className)}
+        className={clsx('h-11 w-11', className)}
         src="/favicon.svg"
       />
 
-      <div className="text-nowrap font-serif text-2xl">Manza search</div>
+      <div className="text-nowrap font-serif text-2xl font-medium">Manza search</div>
     </div>
   )
 }
