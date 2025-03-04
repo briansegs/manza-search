@@ -107,6 +107,7 @@ export interface Config {
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    navBar: NavBarSelect<false> | NavBarSelect<true>;
   };
   locale: null;
   user: User & {

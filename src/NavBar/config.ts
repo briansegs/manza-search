@@ -1,7 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
-import { revalidateNavBar } from './hooks/revalidateHeader'
+import { revalidateNavBar } from './hooks/revalidateNavBar'
 
 export const NavBar: GlobalConfig = {
   slug: 'navBar',
