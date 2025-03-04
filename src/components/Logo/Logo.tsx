@@ -19,7 +19,7 @@ export const Logo = (props: Props) => {
     <div className="flex items-center gap-1">
       <img
         alt="Manza Search Logo"
-        width={'auto'}
+        width="auto"
         height={48}
         loading={loading}
         fetchPriority={priority}
