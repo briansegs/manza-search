@@ -36,7 +36,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     <header className="flex h-16 bg-header text-white" {...(theme ? { 'data-theme': theme } : {})}>
       <div className="container flex items-center justify-between py-2">
         <Link href="/">
-          <Logo loading="eager" priority="high" className="invert" />
+          <Logo loading="eager" priority="high" src="/manzaSearch-logo-long.png" />
         </Link>
 
         <div className="prose mx-auto max-w-[30rem] flex-grow text-center dark:prose-invert">
