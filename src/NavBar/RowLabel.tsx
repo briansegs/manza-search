@@ -1,4 +1,6 @@
 'use client'
+
+import React from 'react'
 import { NavBar } from '@/payload-types'
 import { RowLabelProps, useRowLabel } from '@payloadcms/ui'
 
