@@ -5,10 +5,11 @@ interface Props {
   className?: string
   loading?: 'lazy' | 'eager'
   priority?: 'auto' | 'high' | 'low'
+  src: string
 }
 
 export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
+  const { loading: loadingFromProps, priority: priorityFromProps, className, src } = props
 
   const loading = loadingFromProps || 'lazy'
   const priority = priorityFromProps || 'low'
@@ -18,16 +19,14 @@ export const Logo = (props: Props) => {
     <div className="flex items-center gap-1">
       <img
         alt="Manza Search Logo"
-        width={44}
-        height={44}
+        width={'auto'}
+        height={48}
         loading={loading}
         fetchPriority={priority}
         decoding="async"
-        className={clsx('h-11 w-11', className)}
-        src="/favicon.svg"
+        className={clsx('h-12 w-auto', className)}
+        src={src}
       />
-
-      <div className="text-nowrap font-serif text-2xl font-medium">Manza search</div>
     </div>
   )
 }

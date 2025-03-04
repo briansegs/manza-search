@@ -1,6 +1,6 @@
 export const Logo = ({
-  size = 'size-64',
-  src = '/favicon.svg',
+  size = 'h-64 w-auto',
+  src = '/manzaSearch-logo.png',
   alt = 'Manza Search logo',
   className = '',
 }) => {

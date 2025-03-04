@@ -16,7 +16,7 @@ export async function Footer() {
     <footer className="mt-auto border-t border-border bg-black text-white dark:bg-card">
       <div className="container flex flex-col gap-8 py-8 md:flex-row md:justify-between">
         <Link className="flex items-center" href="/">
-          <Logo className="invert" />
+          <Logo src="/manzaSearch-logo-long.png" />
         </Link>
 
         <div className="flex flex-col-reverse items-start gap-4 md:flex-row md:items-center">
