@@ -93,6 +93,7 @@ const config = {
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
         header: '#00253f',
+        navBar: '#60b3d3',
       },
       fontFamily: {
         mono: ['var(--font-geist-mono)'],
