@@ -68,6 +68,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    articles: Article;
     media: Media;
     categories: Category;
     users: User;
@@ -84,6 +85,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -179,6 +181,10 @@ export interface Page {
               | ({
                   relationTo: 'posts';
                   value: string | Post;
+                } | null)
+                | ({
+                  relationTo: 'articles';
+                  value: string | Article;
                 } | null);
             url?: string | null;
             label: string;
@@ -232,6 +238,53 @@ export interface Post {
     [k: string]: unknown;
   };
   relatedPosts?: (string | Post)[] | null;
+  categories?: (string | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  title: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
@@ -419,6 +472,10 @@ export interface CallToActionBlock {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -469,6 +526,10 @@ export interface ContentBlock {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -747,6 +808,10 @@ export interface Redirect {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+        | ({
+          relationTo: 'articles';
+          value: string | Article;
         } | null);
     url?: string | null;
   };
@@ -906,6 +971,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: string | Post;
+      } | null)
+      | ({
+        relationTo: 'articles';
+        value: string | Article;
       } | null)
     | ({
         relationTo: 'media';
@@ -1125,6 +1194,37 @@ export interface PostsSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   relatedPosts?: T;
+  categories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  heroImage?: T;
+  content?: T;
+  relatedArticles?: T;
   categories?: T;
   meta?:
     | T
@@ -1606,6 +1706,10 @@ export interface NavBar {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -1701,7 +1805,12 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+        | ({
+          relationTo: 'articles';
+          value: string | Article;
         } | null);
+      
     global?: string | null;
     user?: (string | null) | User;
   };
