@@ -38,12 +38,12 @@ export default async function Article({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
   const { slug = '' } = await paramsPromise
   const url = '/articles/' + slug
-  const article = await queryPostBySlug({ slug })
+  const article = await queryArticleBySlug({ slug })
 
   if (!article) return <PayloadRedirects url={url} />
 
   return (
-    <article className="pb-16 pt-16">
+    <article className="pb-16">
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -51,12 +51,62 @@ export default async function Article({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <div className="container">{article.title}</div>
+      {/* Related Articles */}
+      <div className="bg-black">
+        <div className="container flex w-full gap-4 py-1">
+          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
+            Lions
+          </div>
+
+          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
+            Egypt
+          </div>
+
+          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
+            Sunflowers
+          </div>
+
+          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
+            Eart worms
+          </div>
+
+          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
+            Great Oaks
+          </div>
+        </div>
+      </div>
+
+      <div className="flex h-[200vh] w-full">
+        {/* Left Menu */}
+        <div className="sticky top-0 h-[450px] w-28 rounded-r-xl bg-slate-900"></div>
+
+        <div className="flex w-full flex-col">
+          {/* Right Menu */}
+          <div className="sticky top-0 ml-auto h-24 w-[750px] rounded-xl bg-slate-900"></div>
+
+          {/* Hero & Content */}
+          <div className="container">{article.title}</div>
+        </div>
+      </div>
+
+      {/* Right multiple purpose button */}
+      <div className="fixed right-0 top-1/2 z-50 size-28 rounded-xl bg-red-600"></div>
+
+      {/* Bottom menu */}
+      <div className="fixed bottom-0 z-10 flex h-14 w-full justify-between bg-slate-900">
+        <div className="w-28 bg-red-600"></div>
+        <div className="flex items-center justify-between">
+          <div className="rounded-[8px] border-2 border-white bg-black px-2 py-[1px] text-white">
+            Doc Pad
+          </div>
+        </div>
+        <div className="w-28 bg-blue-500"></div>
+      </div>
     </article>
   )
 }
 
-const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
+const queryArticleBySlug = cache(async ({ slug }: { slug: string }) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
@@ -79,7 +129,7 @@ const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug = '' } = await paramsPromise
-  const article = await queryPostBySlug({ slug })
+  const article = await queryArticleBySlug({ slug })
 
   return generateMeta({ doc: article })
 }
