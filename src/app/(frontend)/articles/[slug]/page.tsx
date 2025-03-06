@@ -71,7 +71,7 @@ export default async function Article({ params: paramsPromise }: Args) {
           {/* Hero & Content */}
 
           {/* ArticleHero */}
-          <ArticleHero />
+          <ArticleHero article={article} />
         </div>
       </div>
 

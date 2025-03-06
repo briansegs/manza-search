@@ -1,6 +1,11 @@
+import { Media } from '@/components/Media'
+import { Article } from '@/payload-types'
+import { Image } from 'lucide-react'
 import React from 'react'
 
-export const ArticleHero: React.FC = () => {
+export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
+  const { heroImage } = article
+
   return (
     <div className="w-full p-2">
       <div className="flex justify-between gap-2 border-4 border-black px-2 py-8">
@@ -34,7 +39,14 @@ export const ArticleHero: React.FC = () => {
         </div>
 
         <div className="bg-slate-100 p-12">
-          <div className="h-48 w-96 bg-orange-200"></div>
+          {heroImage && typeof heroImage !== 'string' ? (
+            <Media imgClassName="h-48 min-w-96" resource={heroImage} />
+          ) : (
+            <div className="flex h-48 min-w-96 flex-col items-center justify-center gap-1 border-2 border-neutral-500 bg-slate-300 font-medium">
+              {/* eslint-disable-next-line jsx-a11y/alt-text */}
+              <Image /> Image Missing
+            </div>
+          )}
         </div>
       </div>
     </div>
