@@ -7,6 +7,9 @@ import React, { cache } from 'react'
 import { generateMeta } from '@/utilities/generateMeta'
 import { Metadata } from 'next'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import RelatedArticles from '@/components/Article/RelatedArticles'
+import TopMenu from '@/components/Article/TopMenu'
+import LeftMenu from '@/components/Article/LeftMenu'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -52,37 +55,15 @@ export default async function Article({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       {/* Related Articles */}
-      <div className="bg-black">
-        <div className="container flex w-full gap-4 py-1">
-          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
-            Lions
-          </div>
-
-          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
-            Egypt
-          </div>
-
-          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
-            Sunflowers
-          </div>
-
-          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
-            Eart worms
-          </div>
-
-          <div className="flex justify-center rounded-[8px] bg-white px-3 py-[2px] font-medium">
-            Great Oaks
-          </div>
-        </div>
-      </div>
+      <RelatedArticles />
 
       <div className="flex h-[200vh] w-full">
         {/* Left Menu */}
-        <div className="sticky top-0 h-[450px] w-28 rounded-r-xl bg-slate-900"></div>
+        <LeftMenu />
 
         <div className="flex w-full flex-col">
-          {/* Right Menu */}
-          <div className="sticky top-0 ml-auto h-24 w-[750px] rounded-xl bg-slate-900"></div>
+          {/* Top Menu */}
+          <TopMenu />
 
           {/* Hero & Content */}
           <div className="container">{article.title}</div>
@@ -90,11 +71,11 @@ export default async function Article({ params: paramsPromise }: Args) {
       </div>
 
       {/* Right multiple purpose button */}
-      <div className="fixed right-0 top-1/2 z-50 size-28 rounded-xl bg-red-600"></div>
+      <div className="bg-menu-red fixed right-0 top-1/2 z-50 size-28 rounded-xl"></div>
 
       {/* Bottom menu */}
-      <div className="fixed bottom-0 z-10 flex h-14 w-full justify-between bg-slate-900">
-        <div className="w-28 bg-red-600"></div>
+      <div className="bg-menu-primary fixed bottom-0 z-10 flex h-14 w-full justify-between">
+        <div className="bg-menu-red w-28"></div>
         <div className="flex items-center justify-between">
           <div className="rounded-[8px] border-2 border-white bg-black px-2 py-[1px] text-white">
             Doc Pad
