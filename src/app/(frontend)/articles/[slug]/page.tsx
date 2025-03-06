@@ -10,6 +10,9 @@ import { LivePreviewListener } from '@/components/LivePreviewListener'
 import RelatedArticles from '@/components/Article/RelatedArticles'
 import TopMenu from '@/components/Article/TopMenu'
 import LeftMenu from '@/components/Article/LeftMenu'
+import RightButtonMenu from '@/components/Article/RightButtonMenu'
+import BottomMenu from '@/components/Article/BottomMenu'
+import { ArticleHero } from '@/heros/ArticleHero'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -66,23 +69,17 @@ export default async function Article({ params: paramsPromise }: Args) {
           <TopMenu />
 
           {/* Hero & Content */}
-          <div className="container">{article.title}</div>
+
+          {/* ArticleHero */}
+          <ArticleHero />
         </div>
       </div>
 
       {/* Right multiple purpose button */}
-      <div className="bg-menu-red fixed right-0 top-1/2 z-50 size-28 rounded-xl"></div>
+      <RightButtonMenu />
 
       {/* Bottom menu */}
-      <div className="bg-menu-primary fixed bottom-0 z-10 flex h-14 w-full justify-between">
-        <div className="bg-menu-red w-28"></div>
-        <div className="flex items-center justify-between">
-          <div className="rounded-[8px] border-2 border-white bg-black px-2 py-[1px] text-white">
-            Doc Pad
-          </div>
-        </div>
-        <div className="w-28 bg-blue-500"></div>
-      </div>
+      <BottomMenu />
     </article>
   )
 }
