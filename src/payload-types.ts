@@ -1648,6 +1648,10 @@ export interface Header {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
