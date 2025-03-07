@@ -1,6 +1,6 @@
+import MissingImage from '@/components/ImageMissing'
 import { Media } from '@/components/Media'
 import { Article } from '@/payload-types'
-import { Image } from 'lucide-react'
 import React from 'react'
 
 export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
@@ -38,15 +38,16 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
           </div>
         </div>
 
-        <div className="bg-slate-100 p-12">
-          {heroImage && typeof heroImage !== 'string' ? (
-            <Media imgClassName="h-48 min-w-96" resource={heroImage} />
-          ) : (
-            <div className="flex h-48 min-w-96 flex-col items-center justify-center gap-1 border-2 border-neutral-500 bg-slate-300 font-medium">
-              {/* eslint-disable-next-line jsx-a11y/alt-text */}
-              <Image /> Image Missing
-            </div>
-          )}
+        <div className="flex items-center justify-center bg-slate-100 p-12">
+          <div className="h-48 w-96 overflow-hidden">
+            {heroImage && typeof heroImage !== 'string' ? (
+              <Media imgClassName="size-full object-cover" resource={heroImage} />
+            ) : (
+              <div className="flex size-full flex-col items-center justify-center gap-1 border-2 border-neutral-500 bg-card">
+                <MissingImage />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

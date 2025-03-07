@@ -7,6 +7,7 @@ import React, { Fragment } from 'react'
 import type { Article } from '@/payload-types'
 
 import { Media } from '@/components/Media'
+import MissingImage from '@/components/ImageMissing'
 
 export type CardArticleData = Pick<Article, 'slug' | 'categories' | 'meta' | 'title'>
 
@@ -35,7 +36,11 @@ export const ArticleCard: React.FC<{
       ref={card.ref}
     >
       <div className="relative h-36 w-56 overflow-hidden">
-        {!metaImage && <div className="flex h-full items-center justify-center">No image</div>}
+        {!metaImage && (
+          <div className="flex h-full items-center justify-center">
+            <MissingImage />
+          </div>
+        )}
         {metaImage && typeof metaImage !== 'string' && (
           <Media resource={metaImage} imgClassName="size-full object-cover" fill />
         )}
