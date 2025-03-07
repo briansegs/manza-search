@@ -19,7 +19,7 @@ export const ArticleCard: React.FC<{
   relationTo?: 'articles'
   showCategories?: boolean
   title?: string
-  createdAt?: Date
+  createdAt?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
@@ -28,6 +28,7 @@ export const ArticleCard: React.FC<{
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
+  const dateIsString = createdAt && typeof createdAt === 'string'
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
@@ -90,10 +91,12 @@ export const ArticleCard: React.FC<{
           )}
         </div>
 
-        <div className="flex items-center gap-1 pb-4 pl-4 text-sm text-slate-600">
-          <p>Updated:</p>
-          <time dateTime={createdAt}>{formatDateTime(createdAt)}</time>
-        </div>
+        {dateIsString && (
+          <div className="flex items-center gap-1 pb-4 pl-4 text-sm text-slate-600">
+            <p>Updated:</p>
+            <time dateTime={createdAt}>{formatDateTime(createdAt)}</time>
+          </div>
+        )}
       </div>
     </article>
   )
