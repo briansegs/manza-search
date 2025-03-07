@@ -284,7 +284,7 @@ export interface Article {
     };
     [k: string]: unknown;
   };
-  relatedArticles?: (string | Article)[] | null;
+  relatedArticles?: Article[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;

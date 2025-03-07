@@ -48,6 +48,8 @@ export default async function Article({ params: paramsPromise }: Args) {
 
   if (!article) return <PayloadRedirects url={url} />
 
+  const { relatedArticles } = article
+
   return (
     <article className="pb-16">
       <PageClient />
@@ -58,7 +60,7 @@ export default async function Article({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
 
       {/* Related Articles */}
-      <RelatedArticles />
+      <RelatedArticles articles={relatedArticles} />
 
       <div className="flex h-[200vh] w-full">
         {/* Left Menu */}
