@@ -69,11 +69,11 @@ export default async function Article({ params: paramsPromise }: Args) {
         <div className="flex w-full flex-col">
           {/* Top Menu */}
           <TopMenu />
-
           {/* Hero & Content */}
-
           {/* ArticleHero */}
           <ArticleHero article={article} />
+          {/* Blocks */}
+          Blocks
         </div>
       </div>
 
