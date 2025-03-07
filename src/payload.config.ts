@@ -19,6 +19,7 @@ import { getServerSideURL } from './utilities/getURL'
 
 import { cloudinaryStorage } from 'payload-cloudinary'
 import { NavBar } from './NavBar/config'
+import { Articles } from './collections/Articles'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -76,7 +77,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Articles, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, NavBar],
   plugins: [
