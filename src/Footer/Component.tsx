@@ -14,6 +14,7 @@ export async function Footer() {
 
   return (
     <footer className="z-20 mt-auto border-t border-border bg-black text-white dark:bg-card">
+      {/* z-20 ensures footer appears above article components */}
       <div className="container flex flex-col gap-8 py-8 md:flex-row md:justify-between">
         <Link className="flex items-center" href="/">
           <Logo src="/manzaSearch-logo-long.png" />

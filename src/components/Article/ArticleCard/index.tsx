@@ -8,6 +8,7 @@ import type { Article } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import MissingImage from '@/components/ImageMissing'
+import { formatDateTime } from '@/utilities/formatDateTime'
 
 export type CardArticleData = Pick<Article, 'slug' | 'categories' | 'meta' | 'title'>
 
@@ -18,11 +19,12 @@ export const ArticleCard: React.FC<{
   relationTo?: 'articles'
   showCategories?: boolean
   title?: string
+  createdAt?: Date
 }> = (props) => {
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title } = doc || {}
+  const { slug, categories, meta, title, createdAt } = doc || {}
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
@@ -45,43 +47,53 @@ export const ArticleCard: React.FC<{
           <Media resource={metaImage} imgClassName="size-full object-cover" fill />
         )}
       </div>
-      <div className="flex flex-col p-4">
-        {showCategories && hasCategories && (
-          <div className="mb-4 text-sm uppercase">
-            {showCategories && hasCategories && (
-              <div>
-                {categories?.map((category, index) => {
-                  if (typeof category === 'object') {
-                    const { title: titleFromCategory } = category
 
-                    const categoryTitle = titleFromCategory || 'Untitled category'
+      <div className="flex flex-col justify-between">
+        <div className="flex flex-col p-4">
+          {showCategories && hasCategories && (
+            <div className="mb-4 text-sm uppercase">
+              {showCategories && hasCategories && (
+                <div>
+                  {categories?.map((category, index) => {
+                    if (typeof category === 'object') {
+                      const { title: titleFromCategory } = category
 
-                    const isLast = index === categories.length - 1
+                      const categoryTitle = titleFromCategory || 'Untitled category'
 
-                    return (
-                      <Fragment key={index}>
-                        {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
-                    )
-                  }
+                      const isLast = index === categories.length - 1
 
-                  return null
-                })}
-              </div>
-            )}
-          </div>
-        )}
-        {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
-          </div>
-        )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+                      return (
+                        <Fragment key={index}>
+                          {categoryTitle}
+                          {!isLast && <Fragment>, &nbsp;</Fragment>}
+                        </Fragment>
+                      )
+                    }
+
+                    return null
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+          {titleToUse && (
+            <div className="prose">
+              <h3>
+                <Link className="not-prose" href={href} ref={link.ref}>
+                  {titleToUse}
+                </Link>
+              </h3>
+            </div>
+          )}
+          {description && (
+            <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>
+          )}
+        </div>
+
+        <div className="flex items-center gap-1 pb-4 pl-4 text-sm text-slate-600">
+          <p>Updated:</p>
+          <time dateTime={createdAt}>{formatDateTime(createdAt)}</time>
+        </div>
       </div>
     </article>
   )

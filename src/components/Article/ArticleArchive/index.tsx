@@ -14,11 +14,14 @@ export const ArticleArchive: React.FC<Props> = (props) => {
     <div className={cn('container')}>
       <div>
         <div className="flex flex-col gap-6">
+          {(!articles || articles.length === 0) && (
+            <p className="text-gray-500">No articles found</p>
+          )}
           {articles?.map((result, index) => {
             if (typeof result === 'object' && result !== null) {
               return (
-                <div className="" key={index}>
-                  <ArticleCard className="" doc={result} relationTo="articles" showCategories />
+                <div key={index}>
+                  <ArticleCard doc={result} relationTo="articles" showCategories />
                 </div>
               )
             }
