@@ -10,7 +10,7 @@ import { Media } from '@/components/Media'
 import MissingImage from '@/components/ImageMissing'
 import { formatDateTime } from '@/utilities/formatDateTime'
 
-export type CardArticleData = Pick<Article, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardArticleData = Pick<Article, 'slug' | 'categories' | 'meta' | 'title' | 'createdAt'>
 
 export const ArticleCard: React.FC<{
   alignItems?: 'center'
