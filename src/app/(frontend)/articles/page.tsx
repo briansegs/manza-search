@@ -2,8 +2,8 @@ import React from 'react'
 import PageClient from './page.client'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import Link from 'next/link'
 import { Metadata } from 'next'
+import { ArticleArchive } from '@/components/Article/ArticleArchive'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -35,17 +35,7 @@ export default async function Page() {
       </div>
 
       <div className="container">
-        {articles.totalDocs > 1 && articles.page && (
-          <ol className="flex flex-col gap-4">
-            {articles.docs.map(({ slug, meta }) => (
-              <li className="list-inside list-disc hover:underline" key={slug}>
-                <Link href={`/articles/${slug}`}>
-                  <span className="text-lg font-bold">{meta?.title}:</span> {meta?.description}
-                </Link>
-              </li>
-            ))}
-          </ol>
-        )}
+        <ArticleArchive articles={articles.docs} />
       </div>
     </div>
   )
