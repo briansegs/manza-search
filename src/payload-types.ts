@@ -1258,7 +1258,7 @@ export interface AdSectionSelect<T extends boolean = true> {
           appearance?: T;
         };
         id?: T;
-      }
+      }[];
   id?: T;
   blockName?: T;
   blockType: T;
