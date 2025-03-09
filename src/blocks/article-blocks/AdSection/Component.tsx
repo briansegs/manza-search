@@ -1,19 +1,7 @@
-import MissingImage from '@/components/ImageMissing'
 import { CMSLink } from '@/components/Link'
-import { Media } from '@/components/Media'
-import { AdSection as AdSectionProps, Media as MediaType } from '@/payload-types'
+import { AdSection as AdSectionProps } from '@/payload-types'
 import React from 'react'
-import { TitleBar } from '../components'
-
-const renderMedia = (media: MediaType) => (
-  <Media resource={media} imgClassName="size-full object-cover" fill />
-)
-
-const renderPlaceholder = () => (
-  <div className="flex h-full items-center justify-center bg-card p-4">
-    <MissingImage />
-  </div>
-)
+import { renderMedia, renderPlaceholder, TitleBar } from '../components'
 
 export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
   const { title, ads } = props
