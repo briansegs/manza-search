@@ -15,7 +15,6 @@ export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
           ads.map(({ id, link, media }) => {
             const hasValidLink =
               link && (link.type === 'reference' ? link.reference : link.type === 'custom')
-            const hasValidMedia = media && media.url
 
             return (
               <div
@@ -23,10 +22,8 @@ export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
                 className="border-content relative h-64 w-96 overflow-hidden rounded-lg hover:border-menu-red"
               >
                 {hasValidLink ? (
-                  <CMSLink {...link}>
-                    {hasValidMedia ? renderMedia(media) : renderPlaceholder()}
-                  </CMSLink>
-                ) : hasValidMedia ? (
+                  <CMSLink {...link}>{media ? renderMedia(media) : renderPlaceholder()}</CMSLink>
+                ) : media ? (
                   renderMedia(media)
                 ) : (
                   renderPlaceholder()

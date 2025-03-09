@@ -1318,7 +1318,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   | {
     adSection?: T |  AdSectionSelect<T>;
     contentSection?: T | ContentSectionSelect<T>;
-  };
+  }[];
   relatedArticles?: T;
   categories?: T;
   meta?:

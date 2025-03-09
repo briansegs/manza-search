@@ -3,22 +3,24 @@ import React from 'react'
 import { renderMedia, TitleBar } from '../components'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
+import clsx from 'clsx'
 
 const buttonStyles = 'bg-slate-200 hover:bg-slate-300 text-black border-2 border-black'
 
 export const ContentSection: React.FC<ContentSectionProps> = (props) => {
   const { title, alignment, media, content } = props
 
-  const hasValidMedia = media && media.url
-
   return (
     <div className="flex w-full flex-col gap-4 p-2">
       <TitleBar title={title} />
 
       <div
-        className={`border-content flex w-full ${alignment === 'right' && 'flex-row-reverse'} justify-between gap-8 px-16 py-12`}
+        className={clsx(
+          'border-content flex w-full justify-between gap-8 px-16 py-12',
+          alignment === 'right' && 'flex-row-reverse',
+        )}
       >
-        {hasValidMedia && (
+        {media && (
           <div className="flex-shrink-0">
             <div className="mb-4 flex justify-around">
               <Button className={`${buttonStyles}`}>B</Button>
@@ -32,7 +34,7 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
           </div>
         )}
         {content && (
-          <div className={`${hasValidMedia && 'mt-12'}`}>
+          <div className={clsx(media && 'mt-12')}>
             <RichText data={content} enableGutter={false} />
           </div>
         )}
