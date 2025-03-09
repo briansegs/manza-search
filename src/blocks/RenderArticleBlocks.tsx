@@ -3,9 +3,11 @@ import React, { Fragment } from 'react'
 import type { Article } from '@/payload-types'
 
 import { AdSectionBlock } from './article-blocks/AdSection/Component'
+import { ContentSection } from './article-blocks/ContentSection/Component'
 
 const blockComponents = {
   adSection: AdSectionBlock,
+  contentSection: ContentSection,
 }
 
 export const RenderArticleBlocks: React.FC<{

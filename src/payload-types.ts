@@ -269,7 +269,7 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | Media;
-  layout: (AdSection)[];
+  layout: (AdSection | ContentSection)[];
   relatedArticles?: Article[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -516,6 +516,33 @@ export interface AdSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'adSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentSection".
+ */
+export interface ContentSection {
+  title?: string;
+  alignment: ('left' | 'right') | null;
+  media?: Media | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1213,6 +1240,44 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AdSection_select".
+ */
+export interface AdSectionSelect<T extends boolean = true> {
+  title?: T;
+  ads?:
+  | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?: {
+          type?: T;
+          newTab?: T;
+          reference?: T;
+          url?: T;
+          label: T;
+          appearance?: T;
+        };
+        id?: T;
+      }
+  id?: T;
+  blockName?: T;
+  blockType: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentSection_select".
+ */
+export interface ContentSectionSelect<T extends boolean = true> {
+  title?: T;
+  alignment: T;
+  media?: T;
+  content?: T; 
+  id?: T;
+  blockName?: T;
+  blockType: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1249,7 +1314,11 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
-  layout?: T;
+  layout?: | T
+  | {
+    adSection?: T |  AdSectionSelect<T>;
+    contentSection?: T | ContentSectionSelect<T>;
+  };
   relatedArticles?: T;
   categories?: T;
   meta?:

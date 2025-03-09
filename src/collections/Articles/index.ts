@@ -15,6 +15,7 @@ import { CollectionConfig } from 'payload'
 import { revalidateArticle, revalidateDelete } from './hooks/revalidateArticle'
 import { populateAuthors } from './hooks/populateAuthors'
 import { AdSection } from '@/blocks/article-blocks/AdSection/config'
+import { ContentSection } from '@/blocks/article-blocks/ContentSection/config'
 
 export const Articles: CollectionConfig<'articles'> = {
   slug: 'articles',
@@ -78,7 +79,7 @@ export const Articles: CollectionConfig<'articles'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [AdSection],
+              blocks: [AdSection, ContentSection],
               admin: {
                 initCollapsed: true,
               },
