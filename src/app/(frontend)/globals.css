@@ -89,7 +89,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    @apply flex min-h-[100vh] flex-col bg-background text-foreground;
   }
 }
 
@@ -100,4 +100,10 @@ html {
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+}
+
+@layer components {
+  .border-content {
+    @apply border-4 border-black shadow-[10px_10px_10px_black];
+  }
 }

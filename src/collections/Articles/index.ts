@@ -1,8 +1,5 @@
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
-import { Banner } from '@/blocks/Banner/config'
-import { Code } from '@/blocks/Code/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { slugField } from '@/fields/slug'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import {
@@ -12,18 +9,12 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import {
-  BlocksFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+
 import { CollectionConfig } from 'payload'
 
 import { revalidateArticle, revalidateDelete } from './hooks/revalidateArticle'
 import { populateAuthors } from './hooks/populateAuthors'
+import { AdSection } from '@/blocks/article-blocks/AdSection/config'
 
 export const Articles: CollectionConfig<'articles'> = {
   slug: 'articles',
@@ -79,23 +70,18 @@ export const Articles: CollectionConfig<'articles'> = {
               type: 'upload',
               relationTo: 'media',
             },
+          ],
+          label: 'Hero',
+        },
+        {
+          fields: [
             {
-              name: 'content',
-              type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ]
-                },
-              }),
-              label: false,
-              required: true,
+              name: 'layout',
+              type: 'blocks',
+              blocks: [AdSection],
+              admin: {
+                initCollapsed: true,
+              },
             },
           ],
           label: 'Content',

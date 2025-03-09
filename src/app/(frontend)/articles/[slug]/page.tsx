@@ -13,6 +13,7 @@ import LeftMenu from '@/components/Article/LeftMenu'
 import RightButtonMenu from '@/components/Article/RightButtonMenu'
 import BottomMenu from '@/components/Article/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
+import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -48,7 +49,7 @@ export default async function Article({ params: paramsPromise }: Args) {
 
   if (!article) return <PayloadRedirects url={url} />
 
-  const { relatedArticles } = article
+  const { relatedArticles, layout } = article
 
   return (
     <article className="pb-16">
@@ -73,7 +74,7 @@ export default async function Article({ params: paramsPromise }: Args) {
           {/* ArticleHero */}
           <ArticleHero article={article} />
           {/* Blocks */}
-          Blocks
+          <RenderArticleBlocks blocks={layout} />
         </div>
       </div>
 

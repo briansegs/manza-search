@@ -7,7 +7,7 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
   const { heroImage } = article
 
   return (
-    <div className="w-full p-2">
+    <div className="mb-8 w-full p-2">
       <div className="flex justify-between gap-2 border-4 border-black px-2 py-8">
         <div className="flex w-full items-center justify-center bg-slate-100">
           <div className="flex items-center gap-6">
