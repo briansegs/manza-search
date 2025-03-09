@@ -1249,7 +1249,7 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
-  content?: T;
+  layout?: T;
   relatedArticles?: T;
   categories?: T;
   meta?:

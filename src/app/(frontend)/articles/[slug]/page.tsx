@@ -60,28 +60,22 @@ export default async function Article({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      {/* Related Articles */}
       <RelatedArticles articles={relatedArticles} />
 
-      <div className="flex h-[200vh] w-full">
-        {/* Left Menu */}
+      <div className="flex w-full">
         <LeftMenu />
 
         <div className="flex w-full flex-col">
-          {/* Top Menu */}
           <TopMenu />
+
           {/* Hero & Content */}
-          {/* ArticleHero */}
           <ArticleHero article={article} />
-          {/* Blocks */}
+
           <RenderArticleBlocks blocks={layout} />
         </div>
       </div>
-
-      {/* Right multiple purpose button */}
       <RightButtonMenu />
 
-      {/* Bottom menu */}
       <BottomMenu />
     </article>
   )
