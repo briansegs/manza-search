@@ -4,7 +4,9 @@ import { Media as MediaType } from '@/payload-types'
 
 export const TitleBar = ({ title }: { title: string | null | undefined }) => (
   <div className="border-content w-full bg-header pl-10">
-    <p className={`${!title && 'h-[28px]'} font-serif text-lg text-white`}>{title || ''}</p>
+    <p className={`${!title && 'h-[28px]'} font-serif text-lg capitalize text-white`}>
+      {title || ''}
+    </p>
   </div>
 )
 

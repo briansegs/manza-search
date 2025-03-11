@@ -269,7 +269,7 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | Media;
-  layout: (AdSection | ContentSection)[];
+  layout: (AdSection | ContentSection | ImageSection)[];
   relatedArticles?: Article[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -543,6 +543,22 @@ export interface ContentSection {
   id?: string | null;
   blockName?: string | null;
   blockType: 'contentSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSection".
+ */
+export interface ImageSection {
+  title?: string | null;
+  images?:
+    | {
+        media?: Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1278,6 +1294,22 @@ export interface ContentSectionSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSection_select".
+ */
+export interface ImageSectionSelect<T extends boolean = true> {
+  title?: T;
+  images?:
+  | T
+    | {
+        media?: T;
+        id?: T;
+      }[];
+  id?: T;
+  blockName?: T;
+  blockType: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1318,6 +1350,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   | {
     adSection?: T |  AdSectionSelect<T>;
     contentSection?: T | ContentSectionSelect<T>;
+    imageSection?: T | ImageSectionSelect<T>;
   }[];
   relatedArticles?: T;
   categories?: T;
