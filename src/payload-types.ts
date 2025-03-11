@@ -523,7 +523,7 @@ export interface AdSection {
  */
 export interface ContentSection {
   title?: string;
-  alignment: ('left' | 'right') | null;
+  alignment?: ('left' | 'right') | null;
   media?: Media | null;
   content?: {
     root: {
@@ -1285,9 +1285,9 @@ export interface AdSectionSelect<T extends boolean = true> {
  */
 export interface ContentSectionSelect<T extends boolean = true> {
   title?: T;
-  alignment: T;
+  alignment?: T;
   media?: T;
-  content?: T; 
+  content?: T;
   id?: T;
   blockName?: T;
   blockType: T;
@@ -1348,7 +1348,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   heroImage?: T;
   layout?: | T
   | {
-    adSection?: T |  AdSectionSelect<T>;
+    adSection?: T | AdSectionSelect<T>;
     contentSection?: T | ContentSectionSelect<T>;
     imageSection?: T | ImageSectionSelect<T>;
   }[];

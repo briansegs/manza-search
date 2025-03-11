@@ -7,7 +7,7 @@ export const ImageSection: Block = {
     {
       name: 'title',
       type: 'text',
-      label: 'title',
+      label: 'Title',
     },
     {
       name: 'images',
