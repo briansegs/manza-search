@@ -1,6 +1,6 @@
 import { ContentSection as ContentSectionProps } from '@/payload-types'
 import React from 'react'
-import { renderMedia, renderPlaceholder, TitleBar } from '../components'
+import { renderMedia, TitleBar } from '../components'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
 import clsx from 'clsx'
@@ -10,7 +10,6 @@ const buttonStyles = 'bg-slate-200 hover:bg-slate-300 text-black border-2 border
 export const ContentSection: React.FC<ContentSectionProps> = (props) => {
   const { title, alignment, image1, image2, content } = props
 
-  console.log('alignment: ', alignment)
   return (
     <div className="flex w-full flex-col gap-4 p-2">
       <TitleBar title={title} />
