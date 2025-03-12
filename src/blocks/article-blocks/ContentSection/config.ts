@@ -34,12 +34,27 @@ export const ContentSection: Block = {
           label: 'Right',
           value: 'right',
         },
+        {
+          label: 'Left & Right',
+          value: 'left & right',
+        },
       ],
     },
     {
-      name: 'media',
+      name: 'image1',
       type: 'upload',
       relationTo: 'media',
+      label: 'Image 1',
+      hasMany: false,
+    },
+    {
+      name: 'image2',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Image 2',
+      admin: {
+        condition: (_, siblingData) => siblingData.alignment === 'left & right',
+      },
       hasMany: false,
     },
     {

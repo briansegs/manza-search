@@ -523,8 +523,9 @@ export interface AdSection {
  */
 export interface ContentSection {
   title?: string;
-  alignment?: ('left' | 'right') | null;
-  media?: Media | null;
+  alignment?: ('left' | 'right' | 'left & right') | null;
+  image1?: Media | null;
+  image2?: Media | null;
   content?: {
     root: {
       type: string;
@@ -1297,7 +1298,8 @@ export interface AdSectionSelect<T extends boolean = true> {
 export interface ContentSectionSelect<T extends boolean = true> {
   title?: T;
   alignment?: T;
-  media?: T;
+  image1?: T;
+  image2?: T;
   content?: T;
   id?: T;
   blockName?: T;
