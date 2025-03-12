@@ -62,10 +62,10 @@ export default async function Article({ params: paramsPromise }: Args) {
 
       <RelatedArticles articles={relatedArticles} />
 
-      <div className="flex w-full">
+      <div className="flex">
         <LeftMenu />
 
-        <div className="flex w-full flex-col">
+        <div className="flex w-full min-w-0 flex-col">
           <TopMenu />
 
           {/* Hero & Content */}

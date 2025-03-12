@@ -17,6 +17,7 @@ import { populateAuthors } from './hooks/populateAuthors'
 import { AdSection } from '@/blocks/article-blocks/AdSection/config'
 import { ContentSection } from '@/blocks/article-blocks/ContentSection/config'
 import { ImageSection } from '@/blocks/article-blocks/ImageSection/config'
+import { ResourceSection } from '@/blocks/article-blocks/ResourceSection/config'
 
 export const Articles: CollectionConfig<'articles'> = {
   slug: 'articles',
@@ -80,7 +81,7 @@ export const Articles: CollectionConfig<'articles'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [AdSection, ContentSection, ImageSection],
+              blocks: [AdSection, ContentSection, ImageSection, ResourceSection],
               admin: {
                 initCollapsed: true,
               },
