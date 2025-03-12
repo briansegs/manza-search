@@ -55,7 +55,7 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
             )}
 
             {content && (
-              <div className={clsx(image1 || (image2 && 'mt-2'))}>
+              <div className={clsx((image1 || image2) && 'mt-2')}>
                 <RichText data={content} enableGutter={false} />
               </div>
             )}
