@@ -1,10 +1,10 @@
 import React from 'react'
 
-type audioType = {
+type AudioType = {
   name: string
 }
 
-const audio: audioType[] = []
+const audio: AudioType[] = []
 
 const Audio = () => {
   return (

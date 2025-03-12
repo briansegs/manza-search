@@ -2,12 +2,12 @@ import React from 'react'
 import { renderMedia, renderPlaceholder } from '../../components'
 import { Media as MediaType } from '@/payload-types'
 
-type imagesType = {
+type ImagesType = {
   media: MediaType
   id: string
 }
 
-export const images: imagesType[] = [
+export const images: ImagesType[] = [
   {
     media: {
       alt: 'post 3',

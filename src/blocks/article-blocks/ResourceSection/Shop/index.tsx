@@ -3,7 +3,7 @@ import { Media } from '@/payload-types'
 import React from 'react'
 import { renderMedia, renderPlaceholder } from '../../components'
 
-type shopType = {
+type ShopType = {
   image?: Media
   id: string
   name: string
@@ -12,7 +12,7 @@ type shopType = {
   shipping: string
 }
 
-const shop: shopType[] = [
+const shop: ShopType[] = [
   {
     id: '67d0ada48f59c7a439a3055d',
     name: 'Item 1',
@@ -92,7 +92,7 @@ const Shop = () => {
           </div>
         ))
       ) : (
-        <div className="py-4 text-center">No books available</div>
+        <div className="py-4 text-center">No shop available</div>
       )}
     </>
   )

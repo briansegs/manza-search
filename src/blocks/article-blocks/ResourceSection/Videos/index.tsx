@@ -3,13 +3,13 @@ import { Media } from '@/payload-types'
 import React from 'react'
 import { renderMedia, renderPlaceholder } from '../../components'
 
-type videosType = {
+type VideosType = {
   image?: Media
   id: string
   name: string
 }
 
-const videos: videosType[] = [
+const videos: VideosType[] = [
   {
     id: '67d0ada48f59c7a439a3055d',
     name: 'Video 1',
@@ -20,7 +20,7 @@ const videos: videosType[] = [
   },
   {
     id: '67d0adaa8f59c7a439a30561',
-    name: 'video 3',
+    name: 'Video 3',
   },
   {
     id: '67d0adac8f59c7a439a30563',
@@ -65,7 +65,7 @@ const Videos = () => {
           </div>
         ))
       ) : (
-        <div className="py-4 text-center">No books available</div>
+        <div className="py-4 text-center">No videos available</div>
       )}
     </>
   )

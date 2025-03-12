@@ -3,7 +3,7 @@ import React from 'react'
 import { renderMedia, renderPlaceholder } from '../../components'
 import { Button } from '@/components/ui/button'
 
-type booksType = {
+type BooksType = {
   image?: Media
   id: string
   name: string
@@ -12,7 +12,7 @@ type booksType = {
   shipping: string
 }
 
-const books: booksType[] = [
+const books: BooksType[] = [
   {
     id: '67d0ada48f59c7a439a3055d',
     name: 'The Great Gatsby',
