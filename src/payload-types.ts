@@ -269,7 +269,7 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | Media;
-  layout: (AdSection | ContentSection | ImageSection | ResourceSection)[];
+  layout: (AdSection | ContentSection | ResourceSection)[];
   relatedArticles?: Article[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -1372,7 +1372,6 @@ export interface ArticlesSelect<T extends boolean = true> {
   | {
     adSection?: T | AdSectionSelect<T>;
     contentSection?: T | ContentSectionSelect<T>;
-    imageSection?: T | ImageSectionSelect<T>;
     resourceSection?: T | ResourceSectionSelect<T>;
   }[];
   relatedArticles?: T;
