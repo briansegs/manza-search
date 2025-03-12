@@ -1321,7 +1321,7 @@ export interface ImageSectionSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ResourseSection_select".
+ * via the `definition` "ResourceSection_select".
  */
 export interface ResourceSectionSelect<T extends boolean = true> {
   title?: T;
