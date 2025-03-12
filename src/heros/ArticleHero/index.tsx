@@ -11,37 +11,42 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
       <div className="flex justify-between gap-2 border-4 border-black px-2 py-8">
         <div className="flex w-full items-center justify-center bg-slate-100">
           <div className="flex items-center gap-6">
-            <p>Menu</p>
+            <p className="cursor-pointer font-serif text-xl hover:text-navBar">Menu</p>
 
             <ul className="list-inside list-disc">
-              <li>Pin</li>
-              <li>Save</li>
-              <li>History</li>
-              <li>Lists</li>
+              <li className="cursor-pointer hover:text-navBar">Pin</li>
+              <li className="cursor-pointer hover:text-navBar">Save</li>
+              <li className="cursor-pointer hover:text-navBar">History</li>
+              <li className="cursor-pointer hover:text-navBar">Lists</li>
             </ul>
           </div>
         </div>
 
         <div className="flex w-full items-center justify-center bg-slate-100">
           <div className="flex items-center gap-6">
-            <p>Shop</p>
+            <p className="cursor-pointer font-serif text-xl hover:text-navBar">Shop</p>
 
-            <ul className="list-inside list-disc">
-              <li>table of Content</li>
-              <li>list 1</li>
-              <li>Books</li>
-              <li>List 3</li>
-              <li>Fun Fact</li>
-              <li>IMG</li>
-              <li>list 6</li>
-            </ul>
+            <div className="flex flex-col items-center border-2 border-black">
+              <div className="bg-black px-6 py-[2px] font-serif text-white underline underline-offset-2">
+                Table of Content
+              </div>
+
+              <ul className="list-inside list-disc p-2">
+                <li className="cursor-pointer hover:text-navBar">list 1</li>
+                <li className="cursor-pointer hover:text-navBar">Books</li>
+                <li className="cursor-pointer hover:text-navBar">List 3</li>
+                <li className="cursor-pointer hover:text-navBar">Fun Fact</li>
+                <li className="cursor-pointer hover:text-navBar">IMG</li>
+                <li className="cursor-pointer hover:text-navBar">list 6</li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-center bg-slate-100 p-12">
-          <div className="h-48 w-96 overflow-hidden">
+        <div className="flex items-center justify-center bg-slate-100 px-12 py-6">
+          <div className="relative h-64 w-96 overflow-hidden shadow-[10px_10px_10px_black]">
             {heroImage && typeof heroImage !== 'string' ? (
-              <Media imgClassName="size-full object-cover" resource={heroImage} />
+              <Media imgClassName="size-full object-cover" resource={heroImage} fill />
             ) : (
               <div className="flex size-full flex-col items-center justify-center gap-1 border-2 border-neutral-500 bg-card">
                 <MissingImage />

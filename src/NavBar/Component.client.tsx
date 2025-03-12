@@ -13,7 +13,7 @@ export const NavBarClient: React.FC<NavBarClientProps> = ({ data }) => {
 
   return (
     <div className="flex h-16 bg-black">
-      <div className="bg-navBar container flex w-2/3 items-center justify-between rounded-b-xl border-4 border-black">
+      <div className="container flex w-2/3 items-center justify-between rounded-b-xl border-4 border-black bg-navBar">
         <nav className="flex w-full items-center justify-center gap-8">
           {navItems.map(({ link }, i) => {
             return (
@@ -21,7 +21,7 @@ export const NavBarClient: React.FC<NavBarClientProps> = ({ data }) => {
                 key={i}
                 {...link}
                 appearance="link"
-                className="font-serif text-xl uppercase text-white hover:no-underline"
+                className="font-serif text-xl uppercase text-white hover:text-black hover:no-underline"
               />
             )
           })}
