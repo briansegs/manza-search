@@ -68,6 +68,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    articles: Article;
     media: Media;
     categories: Category;
     users: User;
@@ -84,6 +85,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -179,6 +181,10 @@ export interface Page {
               | ({
                   relationTo: 'posts';
                   value: string | Post;
+                } | null)
+                | ({
+                  relationTo: 'articles';
+                  value: string | Article;
                 } | null);
             url?: string | null;
             label: string;
@@ -232,6 +238,39 @@ export interface Post {
     [k: string]: unknown;
   };
   relatedPosts?: (string | Post)[] | null;
+  categories?: (string | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface Article {
+  id: string;
+  title: string;
+  heroImage?: (string | null) | Media;
+  layout: (AdSection | ContentSection | ResourceSection)[];
+  relatedArticles?: Article[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
@@ -419,6 +458,10 @@ export interface CallToActionBlock {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -433,6 +476,100 @@ export interface CallToActionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AdSection".
+ */
+export interface AdSection {
+  title?: string | null;
+  ads?:
+    | {
+        media?: Media | null;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'adSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentSection".
+ */
+export interface ContentSection {
+  title?: string;
+  alignment?: ('left' | 'right') | null;
+  media?: Media | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSection".
+ */
+export interface ImageSection {
+  title?: string | null;
+  images?:
+    | {
+        media?: Media | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ResourceSection".
+ */
+export interface ResourceSection {
+  title?: string | null;
+  type?: ('images' | 'books' | 'audio' | 'videos' | 'shop') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'resourceSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -469,6 +606,10 @@ export interface ContentBlock {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -747,6 +888,10 @@ export interface Redirect {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+        | ({
+          relationTo: 'articles';
+          value: string | Article;
         } | null);
     url?: string | null;
   };
@@ -906,6 +1051,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: string | Post;
+      } | null)
+      | ({
+        relationTo: 'articles';
+        value: string | Article;
       } | null)
     | ({
         relationTo: 'media';
@@ -1118,6 +1267,71 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AdSection_select".
+ */
+export interface AdSectionSelect<T extends boolean = true> {
+  title?: T;
+  ads?:
+  | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?: {
+          type?: T;
+          newTab?: T;
+          reference?: T;
+          url?: T;
+          label: T;
+          appearance?: T;
+        };
+        id?: T;
+      }[];
+  id?: T;
+  blockName?: T;
+  blockType: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentSection_select".
+ */
+export interface ContentSectionSelect<T extends boolean = true> {
+  title?: T;
+  alignment?: T;
+  media?: T;
+  content?: T;
+  id?: T;
+  blockName?: T;
+  blockType: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSection_select".
+ */
+export interface ImageSectionSelect<T extends boolean = true> {
+  title?: T;
+  images?:
+  | T
+    | {
+        media?: T;
+        id?: T;
+      }[];
+  id?: T;
+  blockName?: T;
+  blockType: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ResourceSection_select".
+ */
+export interface ResourceSectionSelect<T extends boolean = true> {
+  title?: T;
+  type?: T;
+  id?: T;
+  blockName?: T;
+  blockType: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1125,6 +1339,42 @@ export interface PostsSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   relatedPosts?: T;
+  categories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  heroImage?: T;
+  layout?: | T
+  | {
+    adSection?: T | AdSectionSelect<T>;
+    contentSection?: T | ContentSectionSelect<T>;
+    resourceSection?: T | ResourceSectionSelect<T>;
+  }[];
+  relatedArticles?: T;
   categories?: T;
   meta?:
     | T
@@ -1548,6 +1798,10 @@ export interface Header {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -1577,6 +1831,10 @@ export interface Footer {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -1606,6 +1864,10 @@ export interface NavBar {
             | ({
                 relationTo: 'posts';
                 value: string | Post;
+              } | null)
+              | ({
+                relationTo: 'articles';
+                value: string | Article;
               } | null);
           url?: string | null;
           label: string;
@@ -1701,7 +1963,12 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+        | ({
+          relationTo: 'articles';
+          value: string | Article;
         } | null);
+      
     global?: string | null;
     user?: (string | null) | User;
   };
