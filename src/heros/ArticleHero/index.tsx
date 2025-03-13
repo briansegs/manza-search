@@ -31,10 +31,14 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
                 Table of Content
               </div>
 
-              <ul className="list-inside list-disc p-2">
+              <ul className="h-48 w-full list-inside list-disc overflow-y-auto p-2">
                 <li className="cursor-pointer hover:text-navBar">list 1</li>
                 <li className="cursor-pointer hover:text-navBar">Books</li>
                 <li className="cursor-pointer hover:text-navBar">List 3</li>
+                <li className="cursor-pointer hover:text-navBar">Fun Fact</li>
+                <li className="cursor-pointer hover:text-navBar">IMG</li>
+                <li className="cursor-pointer hover:text-navBar">list 6</li>
+
                 <li className="cursor-pointer hover:text-navBar">Fun Fact</li>
                 <li className="cursor-pointer hover:text-navBar">IMG</li>
                 <li className="cursor-pointer hover:text-navBar">list 6</li>

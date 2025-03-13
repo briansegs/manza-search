@@ -21,7 +21,7 @@ export const NavBarClient: React.FC<NavBarClientProps> = ({ data }) => {
                 key={i}
                 {...link}
                 appearance="link"
-                className="font-serif text-xl uppercase text-white hover:text-black hover:no-underline"
+                className="font-serif text-xl uppercase text-white hover:text-blue-800 hover:no-underline"
               />
             )
           })}

@@ -19,7 +19,7 @@ export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
             return (
               <div
                 key={id}
-                className="border-content relative h-64 w-96 overflow-hidden rounded-lg hover:border-menu-red"
+                className="border-content relative h-64 w-96 overflow-hidden rounded-lg hover:shadow-[10px_10px_10px_#60b3d3]"
               >
                 {hasValidLink ? (
                   <CMSLink {...link}>{media ? renderMedia(media) : renderPlaceholder()}</CMSLink>
