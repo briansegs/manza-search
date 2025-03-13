@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Media } from '@/payload-types'
 import React from 'react'
 import { renderMedia, renderPlaceholder } from '../../components'
+import clsx from 'clsx'
 
 type VideosType = {
   image?: Media
@@ -32,6 +33,9 @@ const videos: VideosType[] = [
   },
 ]
 
+const buttonStyles =
+  'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-navBar'
+
 const Videos = () => {
   return (
     <>
@@ -48,18 +52,10 @@ const Videos = () => {
               </div>
 
               <div className="mb-3 flex justify-center gap-4">
-                <Button className="size-14 rounded-full border-4 border-white bg-black text-xl text-white">
-                  B
-                </Button>
-                <Button className="size-14 rounded-full border-4 border-white bg-black text-xl text-white">
-                  A
-                </Button>
-                <Button className="size-14 rounded-full border-4 border-white bg-black text-base text-white">
-                  LM
-                </Button>
-                <Button className="size-14 rounded-full border-4 border-white bg-black text-base text-white">
-                  QS
-                </Button>
+                <Button className={clsx(buttonStyles)}>B</Button>
+                <Button className={clsx(buttonStyles)}>A</Button>
+                <Button className={clsx(buttonStyles)}>LM</Button>
+                <Button className={clsx(buttonStyles)}>QS</Button>
               </div>
             </div>
           </div>
