@@ -94,7 +94,7 @@ const config = {
         warning: 'hsl(var(--warning))',
         header: '#00253f',
         navBar: '#60b3d3',
-        'menu-primary': '#0f172a',
+        'menu-primary': '#191e22',
         'menu-red': '#dc2626',
       },
       fontFamily: {
