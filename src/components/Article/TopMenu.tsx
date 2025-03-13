@@ -3,7 +3,7 @@ import { MenuButtonDark, MenuButtonLight } from './components'
 
 const TopMenu = () => {
   return (
-    <div className="sticky top-0 z-10 ml-auto flex h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu-primary">
+    <div className="sticky top-0 z-10 ml-auto flex h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu-primary hover:bg-black">
       <div className="flex">
         <MenuButtonLight name="TOP" />
         <MenuButtonLight name="HIGHLIGHT" />

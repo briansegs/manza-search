@@ -1,7 +1,7 @@
 import { Button } from '../ui/button'
 
 export const MenuButtonDark = ({ name }: { name: string }) => (
-  <Button className="bg-black font-sans text-sm hover:bg-white hover:text-black">{name}</Button>
+  <Button className="bg-black font-sans text-sm hover:bg-black hover:text-navBar">{name}</Button>
 )
 
 export const MenuButtonLight = ({ name }: { name: string }) => (
