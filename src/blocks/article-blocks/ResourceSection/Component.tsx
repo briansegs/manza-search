@@ -25,8 +25,8 @@ export const ResourceSection: React.FC<ResourceSectionProps> = (props) => {
     <div className="flex w-full flex-col gap-4 p-2">
       <TitleBar title={title} />
 
-      <div className="border-content w-full overflow-x-auto py-12">
-        <div className="mx-auto flex w-fit gap-8 px-16">
+      <div className="border-content w-full overflow-x-auto py-4 sm:py-12">
+        <div className="mx-auto flex w-fit gap-8 px-4 sm:px-16">
           <ResourceToRender />
         </div>
       </div>

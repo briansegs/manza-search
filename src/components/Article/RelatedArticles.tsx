@@ -13,7 +13,7 @@ const RelatedArticles: React.FC<Props> = (props) => {
 
   return (
     <div className="bg-black">
-      <div className="container flex w-full gap-4 py-1">
+      <div className="container flex w-full gap-4 overflow-x-auto py-1">
         {hasArticles &&
           articles?.map(({ id, title, slug }) => (
             <Link key={id} href={`/articles/${slug}`}>

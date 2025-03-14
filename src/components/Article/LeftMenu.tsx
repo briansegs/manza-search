@@ -3,7 +3,7 @@ import { MenuButtonDark, MenuButtonLight } from './components'
 
 const LeftMenu = () => {
   return (
-    <div className="sticky top-0 flex h-[650px] w-28 flex-col rounded-r-xl border-4 border-black bg-menu-primary py-4 hover:bg-black">
+    <div className="sticky top-0 hidden h-[650px] w-28 flex-col rounded-r-xl border-4 border-black bg-menu-primary py-4 hover:bg-black lg:flex">
       <div className="flex flex-col items-center gap-4">
         <MenuButtonLight name="TOP" />
         <MenuButtonLight name="IMG" />

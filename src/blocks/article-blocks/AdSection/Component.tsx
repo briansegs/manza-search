@@ -10,7 +10,7 @@ export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
     <div className="flex w-full flex-col gap-4 p-2">
       <TitleBar title={title} />
 
-      <div className="border-content flex w-full justify-around gap-6 px-16 py-12">
+      <div className="border-content flex w-full flex-wrap justify-around gap-6 px-4 py-4 md:px-16 md:py-12">
         {ads && ads.length > 0 ? (
           ads.map(({ id, link, media }) => {
             const hasValidLink =
