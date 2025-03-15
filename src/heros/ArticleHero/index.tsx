@@ -8,7 +8,7 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
 
   return (
     <div className="mb-8 w-full p-2">
-      <div className="flex flex-wrap justify-center gap-2 border-4 border-black px-2 py-8 xl:flex-nowrap xl:justify-between">
+      <div className="flex flex-wrap justify-center gap-2 border-4 border-black px-2 py-4 lg:py-8 xl:flex-nowrap xl:justify-between">
         <div className="flex w-full flex-col items-center gap-2 md:flex-row md:items-stretch">
           <div className="flex w-full items-center justify-center bg-slate-100 px-12 py-6 sm:w-[480px] md:w-full">
             <div className="flex items-center gap-6">
