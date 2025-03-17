@@ -35,12 +35,15 @@ export const ArticleCard: React.FC<{
 
   return (
     <article
-      className={cn('flex rounded-lg border border-border bg-card hover:cursor-pointer', className)}
+      className={cn(
+        'flex flex-col rounded-lg border border-border bg-card hover:cursor-pointer lg:flex-row',
+        className,
+      )}
       ref={card.ref}
     >
-      <div className="relative h-36 w-56 overflow-hidden">
+      <div className="relative min-h-36 w-56 flex-shrink-0 overflow-hidden lg:min-h-0">
         {!metaImage && (
-          <div className="flex h-full items-center justify-center">
+          <div className="flex h-36 items-center justify-center lg:h-full">
             <MissingImage />
           </div>
         )}
