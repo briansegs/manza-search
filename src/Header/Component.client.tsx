@@ -7,12 +7,12 @@ import React, { useEffect, useState } from 'react'
 import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav } from './Nav'
+import { HeaderNav, MobileHeaderNav } from './Nav'
 
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Search } from '@/search/Component'
-import { ShoppingCart } from 'lucide-react'
-import { CMSLink } from '@/components/Link'
+import { Menu, ShoppingCart } from 'lucide-react'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 interface HeaderClientProps {
   data: Header
@@ -23,8 +23,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
-
-  const navItems = data?.navItems || []
 
   useEffect(() => {
     setHeaderTheme(null)
@@ -51,7 +49,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             <Search />
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="hidden items-center gap-4 lg:flex">
             <Link href="/settings">Settings</Link>
             <Link href="/shopping-cart">
               <span className="sr-only">Shopping cart</span>
@@ -66,25 +64,46 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <UserButton />
             </SignedIn>
           </div>
+
+          <div className="block lg:hidden">
+            <Popover>
+              <PopoverTrigger>
+                <Menu />
+              </PopoverTrigger>
+              <PopoverContent className="block overflow-hidden rounded-xl border-4 border-black bg-header p-0 lg:hidden">
+                <div className="flex items-center justify-between gap-4 px-2 py-3 text-white">
+                  <Link href="/settings">Settings</Link>
+
+                  <div className="flex gap-4">
+                    <Link href="/shopping-cart">
+                      <span className="sr-only">Shopping cart</span>
+                      <ShoppingCart className="w-5" />
+                    </Link>
+
+                    <SignedOut>
+                      <SignInButton />
+                    </SignedOut>
+
+                    <SignedIn>
+                      <UserButton />
+                    </SignedIn>
+                  </div>
+                </div>
+
+                <div className="bg-black px-2 py-2">
+                  <div className="mx-auto w-64">
+                    <Search />
+                  </div>
+                </div>
+
+                <MobileHeaderNav data={data} />
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
       </header>
 
-      <div className="flex h-16 bg-black">
-        <div className="container flex w-2/3 items-center justify-between overflow-x-auto rounded-b-xl border-4 border-black bg-navBar">
-          <nav className="container flex w-full items-center justify-between gap-2">
-            {navItems.map(({ link }, i) => {
-              return (
-                <CMSLink
-                  key={i}
-                  {...link}
-                  appearance="link"
-                  className="font-serif text-lg uppercase text-white hover:text-blue-800 hover:no-underline xl:text-xl"
-                />
-              )
-            })}
-          </nav>
-        </div>
-      </div>
+      <HeaderNav data={data} />
     </>
   )
 }
