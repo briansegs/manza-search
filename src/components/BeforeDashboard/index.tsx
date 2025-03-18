@@ -13,12 +13,16 @@ const BeforeDashboard: React.FC = () => {
       </Banner>
       <p>{"Here's what to do next:"}</p>
       <ul className={`${baseClass}__instructions`}>
-        <li>Suggestion</li>
-        <li>Suggestion</li>
-        <li>Suggestion</li>
-        <li>Suggestion</li>
+        <li>Add a new Article by clicking on `Articles` under `Collections`.</li>
+        <li>Edit your navigation items under `Globals` {'->'} `Header`.</li>
+        <li>Add and edit images by clicking on `Media` under `Collections`.</li>
       </ul>
       <p>{'Pro Tip: '}</p>
+      <p>
+        {
+          'Please do not edit any other fields or collections while this project is still in development.'
+        }
+      </p>
     </div>
   )
 }
