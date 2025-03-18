@@ -43,7 +43,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     mediaBlock: ({ node }) => (
       <MediaBlock
         className="col-span-3 col-start-1"
-        imgClassName="mx-auto max-w-[75%] rounded-lg"
+        imgClassName="mx-auto lg:max-w-[75%] sm:max-w-[90%] max-w-full rounded-lg"
         {...node.fields}
         captionClassName="mx-auto max-w-[48rem]"
         enableGutter={false}

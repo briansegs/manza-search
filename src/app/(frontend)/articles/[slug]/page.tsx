@@ -8,12 +8,12 @@ import { generateMeta } from '@/utilities/generateMeta'
 import { Metadata } from 'next'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import RelatedArticles from '@/components/Article/RelatedArticles'
-import TopMenu from '@/components/Article/TopMenu'
-import LeftMenu from '@/components/Article/LeftMenu'
+import TopMenuContainer from '@/components/Article/TopMenuContainer'
 import RightButtonMenu from '@/components/Article/RightButtonMenu'
 import BottomMenu from '@/components/Article/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
+import LeftMenuContainer from '@/components/Article/LeftMenuContainer'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -63,10 +63,10 @@ export default async function Article({ params: paramsPromise }: Args) {
       <RelatedArticles articles={relatedArticles} />
 
       <div className="flex">
-        <LeftMenu />
+        <LeftMenuContainer />
 
         <div className="flex w-full min-w-0 flex-col">
-          <TopMenu />
+          <TopMenuContainer />
 
           {/* Hero & Content */}
           <ArticleHero article={article} />

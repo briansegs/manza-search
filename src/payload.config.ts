@@ -18,7 +18,6 @@ import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
 import { cloudinaryStorage } from 'payload-cloudinary'
-import { NavBar } from './NavBar/config'
 import { Articles } from './collections/Articles'
 
 const filename = fileURLToPath(import.meta.url)
@@ -79,7 +78,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Articles, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, NavBar],
+  globals: [Header, Footer],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

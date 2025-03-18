@@ -10,7 +10,7 @@ import { Media } from '@/components/Media'
 import MissingImage from '@/components/ImageMissing'
 import { formatDateTime } from '@/utilities/formatDateTime'
 
-export type CardArticleData = Pick<Article, 'slug' | 'categories' | 'meta' | 'title' | 'createdAt'>
+export type CardArticleData = Pick<Article, 'slug' | 'categories' | 'meta' | 'title' | 'updatedAt'>
 
 export const ArticleCard: React.FC<{
   alignItems?: 'center'
@@ -19,28 +19,31 @@ export const ArticleCard: React.FC<{
   relationTo?: 'articles'
   showCategories?: boolean
   title?: string
-  createdAt?: string
+  updatedAt?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title, createdAt } = doc || {}
+  const { slug, categories, meta, title, updatedAt } = doc || {}
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
-  const dateIsString = createdAt && typeof createdAt === 'string'
+  const dateIsString = updatedAt && typeof updatedAt === 'string'
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
 
   return (
     <article
-      className={cn('flex rounded-lg border border-border bg-card hover:cursor-pointer', className)}
+      className={cn(
+        'flex flex-col rounded-lg border border-border bg-card hover:cursor-pointer lg:flex-row',
+        className,
+      )}
       ref={card.ref}
     >
-      <div className="relative h-36 w-56 overflow-hidden">
+      <div className="relative min-h-36 w-56 flex-shrink-0 overflow-hidden lg:min-h-0">
         {!metaImage && (
-          <div className="flex h-full items-center justify-center">
+          <div className="flex h-36 items-center justify-center lg:h-full">
             <MissingImage />
           </div>
         )}
@@ -94,7 +97,7 @@ export const ArticleCard: React.FC<{
         {dateIsString && (
           <div className="flex items-center gap-1 pb-4 pl-4 text-sm text-slate-600">
             <p>Updated:</p>
-            <time dateTime={createdAt}>{formatDateTime(createdAt)}</time>
+            <time dateTime={updatedAt}>{formatDateTime(updatedAt)}</time>
           </div>
         )}
       </div>

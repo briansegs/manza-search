@@ -3,7 +3,7 @@ import { Button } from '../ui/button'
 
 const BottomMenu = () => {
   return (
-    <div className="fixed bottom-0 z-10 flex h-16 w-full justify-between bg-menu-red">
+    <div className="fixed bottom-0 z-10 flex h-12 w-full justify-between bg-menu-red sm:h-16">
       <div className="w-28 py-1 pr-1">
         <Button className="size-full rounded-b-none rounded-tl-none rounded-tr-xl bg-menu-red font-serif text-base hover:bg-pink-500">
           Tools

@@ -12,8 +12,8 @@ const RelatedArticles: React.FC<Props> = (props) => {
   const hasArticles = articles && Array.isArray(articles) && articles.length > 0
 
   return (
-    <div className="bg-black">
-      <div className="container flex w-full gap-4 py-1">
+    <div className="mb-2 bg-black lg:mb-0">
+      <div className="container flex w-full gap-4 overflow-x-auto py-1">
         {hasArticles &&
           articles?.map(({ id, title, slug }) => (
             <Link key={id} href={`/articles/${slug}`}>

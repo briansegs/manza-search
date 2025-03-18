@@ -26,7 +26,7 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
     <div className="flex w-full flex-col gap-4 p-2">
       <TitleBar title={title} />
 
-      <div className="border-content flex w-full flex-col gap-8 px-16 py-12">
+      <div className="border-content flex w-full flex-col gap-4 px-4 py-6 sm:gap-8 sm:px-16 sm:py-12">
         <div className="flex justify-end">
           <div className="flex w-64 justify-around">
             <Button className={`${buttonStyles}`}>B</Button>
@@ -38,8 +38,8 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
         {alignment !== 'left & right' ? (
           <div
             className={clsx(
-              'flex w-full justify-between gap-8',
-              alignment === 'right' && 'flex-row-reverse',
+              'flex w-full flex-col justify-between gap-8',
+              alignment === 'right' ? 'xl:flex-row-reverse' : 'xl:flex-row',
             )}
           >
             {image1 && <ImageContainer image={image1} />}
@@ -51,7 +51,7 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
             )}
           </div>
         ) : (
-          <div className="flex justify-between gap-8">
+          <div className="flex flex-col justify-between gap-8 xl:flex-row">
             {image1 && <ImageContainer image={image1} />}
 
             {content && (

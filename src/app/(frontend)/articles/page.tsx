@@ -13,7 +13,7 @@ export default async function Page() {
 
   const articles = await payload.find({
     collection: 'articles',
-    sort: 'createdAt',
+    sort: '-updatedAt',
     depth: 1,
     limit: 12,
     overrideAccess: false,
@@ -22,7 +22,7 @@ export default async function Page() {
       slug: true,
       categories: true,
       meta: true,
-      createdAt: true,
+      updatedAt: true,
     },
   })
 
