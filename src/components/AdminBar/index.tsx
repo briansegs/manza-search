@@ -23,6 +23,10 @@ const collectionLabels = {
     plural: 'Posts',
     singular: 'Post',
   },
+  articles: {
+    plural: 'Articles',
+    singular: 'Article',
+  },
   projects: {
     plural: 'Projects',
     singular: 'Project',
@@ -48,7 +52,7 @@ export const AdminBar: React.FC<{
 
   return (
     <div
-      className={cn(baseClass, 'py-2 bg-black text-white', {
+      className={cn(baseClass, 'bg-black py-2 text-white', {
         block: show,
         hidden: !show,
       })}
