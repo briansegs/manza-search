@@ -2,17 +2,17 @@ import { ContentSection as ContentSectionProps, Media } from '@/payload-types'
 import React from 'react'
 import { renderMedia, TitleBar } from '../components'
 import RichText from '@/components/RichText'
-import { Button } from '@/components/ui/button'
+
 import clsx from 'clsx'
+import ContentButtons from './ContentButtons'
+import { cn } from '@/utilities/ui'
 
-const buttonStyles = 'bg-slate-200 hover:bg-slate-300 text-black border-2 border-black'
-
-const ImageContainer = ({ image }: { image: Media }) => {
+const ImageContainer = ({ image, className }: { image: Media; className?: string }) => {
   if (!image) return null
 
   return (
     <div className="flex-shrink-0">
-      <div className="border-content relative size-64 overflow-hidden rounded-lg">
+      <div className={cn('border-content relative w-64 overflow-hidden rounded-[10px]', className)}>
         {renderMedia(image)}
       </div>
     </div>
@@ -26,43 +26,48 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
     <div className="flex w-full flex-col gap-4 p-2">
       <TitleBar title={title} />
 
-      <div className="border-content flex w-full flex-col gap-4 px-4 py-6 sm:gap-8 sm:px-16 sm:py-12">
-        <div className="flex justify-end">
-          <div className="flex w-64 justify-around">
-            <Button className={`${buttonStyles}`}>B</Button>
-            <Button className={`${buttonStyles}`}>A</Button>
-            <Button className={`${buttonStyles}`}>LM</Button>
-          </div>
-        </div>
+      <div className="border-content flex w-full flex-col gap-4 px-4 py-4 sm:gap-8 sm:px-10 xl:flex-row">
+        {image1 && (alignment === 'left' || alignment === 'left & right') && (
+          <div className="mb-6 flex flex-col-reverse justify-between sm:flex-row xl:mb-0">
+            <ImageContainer image={image1} className="h-[304px]" />
 
-        {alignment !== 'left & right' ? (
-          <div
-            className={clsx(
-              'flex w-full flex-col justify-between gap-8',
-              alignment === 'right' ? 'xl:flex-row-reverse' : 'xl:flex-row',
-            )}
-          >
-            {image1 && <ImageContainer image={image1} />}
-
-            {content && (
-              <div className={clsx(image1 && 'mt-2')}>
-                <RichText data={content} enableGutter={false} />
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="flex flex-col justify-between gap-8 xl:flex-row">
-            {image1 && <ImageContainer image={image1} />}
-
-            {content && (
-              <div className={clsx((image1 || image2) && 'mt-2')}>
-                <RichText data={content} enableGutter={false} />
-              </div>
-            )}
-
-            {image2 && <ImageContainer image={image2} />}
+            <div className="mb-2 flex justify-end xl:hidden">
+              <ContentButtons />
+            </div>
           </div>
         )}
+
+        <div>
+          <div
+            className={clsx('mb-2 justify-end', alignment !== 'right' ? 'hidden xl:flex' : 'flex')}
+          >
+            <ContentButtons />
+          </div>
+
+          {alignment !== 'left & right' ? (
+            <div className="flex w-full flex-col justify-between gap-8 lg:flex-row">
+              {content && (
+                <div className={clsx(image1 && alignment === 'right' && 'mt-2')}>
+                  <RichText className="font-serif" data={content} enableGutter={false} />
+                </div>
+              )}
+
+              {image1 && alignment === 'right' && (
+                <ImageContainer image={image1} className="h-64" />
+              )}
+            </div>
+          ) : (
+            <div className="flex flex-col justify-between gap-8 xl:flex-row">
+              {content && (
+                <div className="mt-2">
+                  <RichText className="font-serif" data={content} enableGutter={false} />
+                </div>
+              )}
+
+              {image2 && <ImageContainer image={image2} className="h-64" />}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

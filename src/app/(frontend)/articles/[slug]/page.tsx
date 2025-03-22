@@ -9,7 +9,7 @@ import { Metadata } from 'next'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import RelatedArticles from '@/components/Article/RelatedArticles'
 import TopMenuContainer from '@/components/Article/TopMenuContainer'
-import RightButtonMenu from '@/components/Article/RightButtonMenu'
+import RightMenuContainer from '@/components/Article/RightMenuContainer'
 import BottomMenu from '@/components/Article/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
@@ -74,7 +74,7 @@ export default async function Article({ params: paramsPromise }: Args) {
           <RenderArticleBlocks blocks={layout} />
         </div>
       </div>
-      <RightButtonMenu />
+      <RightMenuContainer />
 
       <BottomMenu />
     </article>

@@ -59,7 +59,7 @@ const Books = () => {
     <>
       {books && books.length > 0 ? (
         books.map(({ image, id, name, shop, price, shipping }) => (
-          <div key={id} className="border-content h-fit rounded-lg bg-header">
+          <div key={id} className="border-content h-fit overflow-hidden rounded-[10px] bg-header">
             <div className="relative h-96 w-[300px] flex-shrink-0 overflow-hidden">
               {image ? renderMedia(image) : renderPlaceholder()}
             </div>

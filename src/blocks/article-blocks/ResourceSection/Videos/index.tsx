@@ -41,7 +41,7 @@ const Videos = () => {
     <>
       {videos && videos.length > 0 ? (
         videos.map(({ image, id, name }) => (
-          <div key={id} className="border-content h-fit rounded-lg bg-header">
+          <div key={id} className="border-content h-fit overflow-hidden rounded-[10px] bg-header">
             <div className="relative h-64 w-96 flex-shrink-0 overflow-hidden">
               {image ? renderMedia(image) : renderPlaceholder()}
             </div>
