@@ -9,7 +9,7 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
 
   return (
     <div className="w-full p-2">
-      <div className="border-4 border-black">
+      <div className="border-content border-4">
         <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
           <h2 className="py-2 font-serif text-xl uppercase text-white">Scope Section</h2>
         </div>
