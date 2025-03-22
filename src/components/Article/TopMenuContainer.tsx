@@ -4,6 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Button } from '../ui/button'
 import { LeftMenu } from './LeftMenuContainer'
 import { ChevronDown } from 'lucide-react'
+import { RightMenu } from './RightMenuContainer'
 
 const TopMenu = ({ styles }: { styles?: string }) => (
   <div className={`${styles} flex`}>
@@ -27,28 +28,34 @@ const TopMenuContainer = () => {
         <TopMenu />
       </div>
 
-      <div className="sticky top-0 z-10 ml-auto flex gap-4 pl-1 lg:hidden">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button className="flex gap-2 rounded-xl border-4 border-black bg-menu-primary hover:bg-black">
-              <ChevronDown /> Resources
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-fit rounded-xl border-4 border-black bg-menu-primary hover:bg-black lg:hidden">
-            <LeftMenu />
-          </PopoverContent>
-        </Popover>
+      <div className="sticky top-0 z-10 ml-auto flex justify-between px-1 lg:hidden">
+        <div className="flex gap-2">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button className="flex gap-2 rounded-xl border-4 border-black bg-menu-primary hover:bg-black">
+                Resources <ChevronDown />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-fit rounded-xl border-4 border-black bg-menu-primary hover:bg-black lg:hidden">
+              <LeftMenu />
+            </PopoverContent>
+          </Popover>
 
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button className="flex gap-2 rounded-xl border-4 border-black bg-menu-primary hover:bg-black">
-              <ChevronDown /> Actions
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-fit rounded-xl border-4 border-black bg-menu-primary hover:bg-black lg:hidden">
-            <TopMenu styles="flex-col items-center" />
-          </PopoverContent>
-        </Popover>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button className="flex gap-2 rounded-xl border-4 border-black bg-menu-primary hover:bg-black">
+                Actions <ChevronDown />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-fit rounded-xl border-4 border-black bg-menu-primary hover:bg-black lg:hidden">
+              <TopMenu styles="flex-col items-center" />
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        <div className="block sm:hidden">
+          <RightMenu />
+        </div>
       </div>
     </div>
   )
