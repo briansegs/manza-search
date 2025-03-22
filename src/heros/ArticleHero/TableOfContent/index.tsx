@@ -20,7 +20,7 @@ export default function TableOfContent() {
             Table of Content
           </div>
 
-          <ul className="h-52 w-full list-inside list-disc overflow-y-auto p-2">
+          <ul className="h-52 w-full list-inside list-disc overflow-y-auto p-2 font-serif text-lg">
             {tableItems.map((item, index) => (
               <li key={index} className="cursor-pointer hover:text-navBar">
                 {item}
