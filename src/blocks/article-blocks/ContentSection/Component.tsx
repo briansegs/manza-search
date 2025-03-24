@@ -37,7 +37,7 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
           </div>
         )}
 
-        <div>
+        <div className="w-full">
           <div
             className={clsx('mb-2 justify-end', alignment !== 'right' ? 'hidden xl:flex' : 'flex')}
           >
