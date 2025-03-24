@@ -4,13 +4,11 @@ import type { Article } from '@/payload-types'
 
 import { AdSectionBlock } from './article-blocks/AdSection/Component'
 import { ContentSection } from './article-blocks/ContentSection/Component'
-import { ImageSection } from './article-blocks/ImageSection/Component'
 import { ResourceSection } from './article-blocks/ResourceSection/Component'
 
 const blockComponents = {
   adSection: AdSectionBlock,
   contentSection: ContentSection,
-  imageSection: ImageSection,
   resourceSection: ResourceSection,
 }
 
