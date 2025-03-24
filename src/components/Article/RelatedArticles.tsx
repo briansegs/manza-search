@@ -9,7 +9,7 @@ export type Props = {
 const RelatedArticles: React.FC<Props> = (props) => {
   const { articles } = props
 
-  const hasArticles = articles && Array.isArray(articles) && articles.length > 0
+  const hasArticles = articles && Array.isArray(articles) && articles.length > 0 
 
   return (
     <div className="mb-2 bg-black lg:mb-0">
