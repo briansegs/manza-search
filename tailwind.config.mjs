@@ -9,10 +9,7 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-<<<<<<< Updated upstream
-  // darkMode: ['selector', '[data-theme="dark"]'],
-=======
->>>>>>> Stashed changes
+  darkMode: ['selector', '[data-theme="dark"]'],
   plugins: [tailwindcssAnimate, typography],
   prefix: '',
   safelist: [

@@ -30,7 +30,7 @@ export default async function Page() {
     <div className="pb-24 pt-24">
       <PageClient />
       <div className="container mb-16">
-        <div className="prose max-w-none dark:prose-invert">
+        <div className="prose max-w-none">
           <h1>Articles</h1>
         </div>
       </div>

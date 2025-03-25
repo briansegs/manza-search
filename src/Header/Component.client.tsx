@@ -45,7 +45,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             <Logo loading="eager" priority="high" src="/manzaSearch-logo-long.png" />
           </Link>
 
-          <div className="prose mx-auto hidden max-w-[30rem] flex-grow text-center dark:prose-invert lg:block">
+          <div className="prose mx-auto hidden max-w-[30rem] flex-grow text-center lg:block">
             <Search />
           </div>
 
