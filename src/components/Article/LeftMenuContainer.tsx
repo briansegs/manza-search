@@ -1,28 +1,30 @@
 import React from 'react'
-import { MenuButtonDark, MenuButtonLight } from './components'
+import MenuButton, { scrollToTop } from './MenuButton'
+
+const MenuSeparator = () => <div className="mb-2 h-1 w-full bg-black" />
 
 export const LeftMenu = () => (
   <>
     <div className="flex flex-col items-center gap-4">
-      <MenuButtonLight name="TOP" />
-      <MenuButtonLight name="IMG" />
-      <MenuButtonLight name="VIDS" />
+      <MenuButton onClick={scrollToTop}>TOP</MenuButton>
+      <MenuButton>IMG</MenuButton>
+      <MenuButton>VIDS</MenuButton>
     </div>
 
-    <div className="mb-2 h-1 w-full bg-black" />
+    <MenuSeparator />
 
     <div className="flex flex-col items-center gap-4">
-      <MenuButtonDark name="TBL" />
+      <MenuButton dark>TBL</MenuButton>
 
-      <MenuButtonLight name="Articles" />
-      <MenuButtonLight name="SHOP" />
-      <MenuButtonLight name="Authors" />
+      <MenuButton>Articles</MenuButton>
+      <MenuButton>SHOP</MenuButton>
+      <MenuButton>Authors</MenuButton>
     </div>
 
-    <div className="mb-2 h-1 w-full bg-black" />
+    <MenuSeparator />
 
     <div className="flex flex-col items-center">
-      <MenuButtonDark name="OVS" />
+      <MenuButton dark>OVS</MenuButton>
     </div>
   </>
 )
