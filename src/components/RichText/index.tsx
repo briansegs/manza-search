@@ -37,7 +37,8 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
 
   switch (relationTo) {
     case 'articles':
-      return (href = `/articles/${slug}`)
+      href = `/articles/${slug}`
+      break
 
     default: // Pages
       href = `/${slug}`
