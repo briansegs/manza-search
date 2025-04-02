@@ -1,28 +1,30 @@
 import React from 'react'
-import { MenuButtonDark, MenuButtonLight } from './components'
+import { MenuButton } from './components'
 
 export const LeftMenu = () => (
   <>
     <div className="flex flex-col items-center gap-4">
-      <MenuButtonLight name="TOP" />
-      <MenuButtonLight name="IMG" />
-      <MenuButtonLight name="VIDS" />
+      <MenuButton scroll light>
+        TOP
+      </MenuButton>
+      <MenuButton light>IMG</MenuButton>
+      <MenuButton light>VIDS</MenuButton>
     </div>
 
     <div className="mb-2 h-1 w-full bg-black" />
 
     <div className="flex flex-col items-center gap-4">
-      <MenuButtonDark name="TBL" />
+      <MenuButton dark>TBL</MenuButton>
 
-      <MenuButtonLight name="Articles" />
-      <MenuButtonLight name="SHOP" />
-      <MenuButtonLight name="Authors" />
+      <MenuButton light>Articles</MenuButton>
+      <MenuButton light>SHOP</MenuButton>
+      <MenuButton light>Authors</MenuButton>
     </div>
 
     <div className="mb-2 h-1 w-full bg-black" />
 
     <div className="flex flex-col items-center">
-      <MenuButtonDark name="OVS" />
+      <MenuButton dark>OVS</MenuButton>
     </div>
   </>
 )
