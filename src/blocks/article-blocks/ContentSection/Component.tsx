@@ -7,7 +7,12 @@ import clsx from 'clsx'
 import ContentButtons from './ContentButtons'
 import { cn } from '@/utilities/ui'
 
-const ImageContainer = ({ image, className }: { image: Media; className?: string }) => {
+interface ImageContainerProps {
+  image: string | Media
+  className?: string
+}
+
+const ImageContainer = ({ image, className }: ImageContainerProps) => {
   if (!image) return null
 
   return (

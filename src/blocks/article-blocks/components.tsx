@@ -8,7 +8,7 @@ export const TitleBar = ({ title }: { title: string | null | undefined }) => (
   </div>
 )
 
-export const renderMedia = (media: MediaType) => (
+export const renderMedia = (media: string | MediaType) => (
   <Media resource={media} imgClassName="size-full object-cover" fill />
 )
 

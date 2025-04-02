@@ -71,7 +71,7 @@ export default async function Article({ params: paramsPromise }: Args) {
           {/* Hero & Content */}
           <ArticleHero article={article} />
 
-          <RenderArticleBlocks blocks={layout} />
+          <RenderArticleBlocks blocks={layout ?? []} />
         </div>
       </div>
       <RightMenuContainer />

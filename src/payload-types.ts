@@ -217,8 +217,8 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | Media;
-  layout: (AdSection | ContentSection | ResourceSection)[];
-  relatedArticles?: Article[] | null;
+  layout?: (AdSection | ContentSection | ResourceSection)[] | null;
+  relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
@@ -342,7 +342,7 @@ export interface AdSection {
   title?: string | null;
   ads?:
     | {
-        media?: null | Media;
+        media?: (string | null) | Media;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom') | null;
@@ -372,8 +372,8 @@ export interface AdSection {
 export interface ContentSection {
   title?: string | null;
   alignment?: ('left' | 'right' | 'left & right') | null;
-  image1?: null | Media;
-  image2?: null | Media;
+  image1?: (string | null) | Media;
+  image2?: (string | null) | Media;
   content?: {
     root: {
       type: string;
