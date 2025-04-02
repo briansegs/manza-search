@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react'
 
-import type { Article } from '@/payload-types'
+import {
+  AdSection as AdSectionBlockType,
+  ContentSection as ContentSectionType,
+  ResourceSection as ResourceSectionType,
+} from '@/payload-types'
 
 import { AdSectionBlock } from './article-blocks/AdSection/Component'
 import { ContentSection } from './article-blocks/ContentSection/Component'
@@ -13,16 +17,13 @@ const blockComponents = {
 }
 
 export const RenderArticleBlocks: React.FC<{
-  blocks: Article['layout'][0][]
-}> = (props) => {
-  const { blocks } = props
-
-  const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
-
-  if (hasBlocks) {
+  blocks: (AdSectionBlockType | ContentSectionType | ResourceSectionType)[] | null
+}> = ({ blocks }) => {
+  const validBlocks = Array.isArray(blocks) ? blocks : []
+  if (validBlocks.length > 0) {
     return (
       <Fragment>
-        {blocks.map((block, index) => {
+        {blocks?.map((block, index) => {
           const { blockType } = block
 
           if (blockType && blockType in blockComponents) {
