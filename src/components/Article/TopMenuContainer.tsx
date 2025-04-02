@@ -1,5 +1,5 @@
 import React from 'react'
-import { MenuButton } from './components'
+import MenuButton, { scrollToTop } from './MenuButton'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '../ui/button'
 import { LeftMenu } from './LeftMenuContainer'
@@ -8,16 +8,14 @@ import { RightMenu } from './RightMenuContainer'
 
 const TopMenu = ({ styles }: { styles?: string }) => (
   <div className={`${styles} flex`}>
-    <MenuButton scroll light>
-      TOP
-    </MenuButton>
-    <MenuButton light>HIGHLIGHT</MenuButton>
-    <MenuButton light>LOVE</MenuButton>
-    <MenuButton light>PIN</MenuButton>
-    <MenuButton light>SAVE</MenuButton>
-    <MenuButton light>History</MenuButton>
-    <MenuButton light>RM</MenuButton>
-    <MenuButton light>LIST</MenuButton>
+    <MenuButton onClick={scrollToTop}>TOP</MenuButton>
+    <MenuButton>HIGHLIGHT</MenuButton>
+    <MenuButton>LOVE</MenuButton>
+    <MenuButton>PIN</MenuButton>
+    <MenuButton>SAVE</MenuButton>
+    <MenuButton>History</MenuButton>
+    <MenuButton>RM</MenuButton>
+    <MenuButton>LIST</MenuButton>
 
     <MenuButton dark>SHARE</MenuButton>
   </div>
