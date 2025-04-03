@@ -230,6 +230,7 @@ export interface Article {
   };
   publishedAt?: string | null;
   authors?: (string | User)[] | null;
+  externalAuthors?: string[] | null;
   populatedAuthors?:
     | {
         id?: string | null;
@@ -1281,6 +1282,7 @@ export interface ArticlesSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   authors?: T;
+  externalAuthors?: T;
   populatedAuthors?:
     | T
     | {

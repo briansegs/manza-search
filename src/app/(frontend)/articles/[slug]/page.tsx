@@ -13,7 +13,7 @@ import RightMenuContainer from '@/components/Article/RightMenuContainer'
 import BottomMenu from '@/components/Article/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
-import LeftMenuContainer from '@/components/Article/LeftMenuContainer'
+import LeftMenuContainer from '@/components/Article/LeftMenu/LeftMenuContainer'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -63,10 +63,10 @@ export default async function Article({ params: paramsPromise }: Args) {
       <RelatedArticles articles={relatedArticles} />
 
       <div className="flex">
-        <LeftMenuContainer />
+        <LeftMenuContainer article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
-          <TopMenuContainer />
+          <TopMenuContainer article={article} />
 
           {/* Hero & Content */}
           <ArticleHero article={article} />
