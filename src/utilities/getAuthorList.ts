@@ -6,7 +6,7 @@ interface GetAuthorListProps {
 }
 
 /**
- * Merges populated authers array and external authors array.
+ * Merges populated authors array and external authors array.
  * @param populatedAuthors
  * @param externalAuthors
  * @returns An array of author's names(string).

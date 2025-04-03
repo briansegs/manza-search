@@ -18,9 +18,11 @@ const AuthorsButton: React.FC<AuthorsButtonProps> = ({ authors, children }) => (
         side="right"
       >
         <ul className="flex flex-col">
-          {authors.map((author, index) => (
-            <li key={index}>{author}</li>
-          ))}
+          {authors.length > 0 ? (
+            authors.map((author, index) => <li key={index}>{author}</li>)
+          ) : (
+            <li>No authors listed for this article.</li>
+          )}
         </ul>
       </PopoverContent>
     )}

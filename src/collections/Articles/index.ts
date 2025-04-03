@@ -177,9 +177,10 @@ export const Articles: CollectionConfig<'articles'> = {
       hasMany: true,
       relationTo: 'users',
     },
+    // The externalAuthors field complements the authors field by allowing non-system users to be credited
     {
       name: 'externalAuthors',
-      label: 'Authors ( external )',
+      label: 'Authors ( External )',
       type: 'text',
       hasMany: true,
       admin: {

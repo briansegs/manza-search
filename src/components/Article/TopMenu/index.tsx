@@ -2,11 +2,11 @@ import scrollToTop from '@/utilities/scrollToTop'
 import React from 'react'
 import MenuButton from '../MenuButton'
 
-interface TopMenu {
+interface TopMenuProps {
   styles?: string
 }
 
-const TopMenu: React.FC<TopMenu> = ({ styles }) => (
+const TopMenu: React.FC<TopMenuProps> = ({ styles }) => (
   <div className={`${styles} flex`}>
     <MenuButton onClick={scrollToTop}>TOP</MenuButton>
     <MenuButton>HIGHLIGHT</MenuButton>

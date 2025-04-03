@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * 'use client' Scrolls the window to the top position.
+ * Scrolls the window to the top position.
  */
 export default function scrollToTop(): void {
   if (typeof window === 'undefined' || !window.scrollTo) return
