@@ -1,5 +1,3 @@
-'use client'
-
 import { ButtonProps, buttonVariants } from '../ui/button'
 import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/utilities/ui'
@@ -32,12 +30,6 @@ const MenuButton: React.FC<MenuButtonProps> = ({
       {...props}
     />
   )
-}
-
-export const scrollToTop = () => {
-  if (typeof window !== 'undefined') {
-    window.scrollTo({ top: 100, behavior: 'smooth' })
-  }
 }
 
 export default MenuButton

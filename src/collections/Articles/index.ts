@@ -169,12 +169,23 @@ export const Articles: CollectionConfig<'articles'> = {
     },
     {
       name: 'authors',
+      label: 'Authors ( Internal )',
       type: 'relationship',
       admin: {
         position: 'sidebar',
       },
       hasMany: true,
       relationTo: 'users',
+    },
+    // The externalAuthors field complements the authors field by allowing non-system users to be credited
+    {
+      name: 'externalAuthors',
+      label: 'Authors ( External )',
+      type: 'text',
+      hasMany: true,
+      admin: {
+        position: 'sidebar',
+      },
     },
     // This field is only used to populate the user data via the `populateAuthors` hook
     // This is because the `user` collection has access control locked to protect user privacy
