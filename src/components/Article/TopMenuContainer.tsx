@@ -1,10 +1,13 @@
 import React from 'react'
-import MenuButton, { scrollToTop } from './MenuButton'
+import MenuButton from './MenuButton'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '../ui/button'
-import { LeftMenu } from './LeftMenuContainer'
 import { ChevronDown } from 'lucide-react'
 import { RightMenu } from './RightMenuContainer'
+import { Article } from '@/payload-types'
+import getAuthorList from '@/utilities/getAuthorList'
+import LeftMenu from './LeftMenu'
+import scrollToTop from '@/utilities/scrollToTop'
 
 const TopMenu = ({ styles }: { styles?: string }) => (
   <div className={`${styles} flex`}>
@@ -21,7 +24,15 @@ const TopMenu = ({ styles }: { styles?: string }) => (
   </div>
 )
 
-const TopMenuContainer = () => {
+interface TopMenuContainerProps {
+  article: Article
+}
+
+const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article }) => {
+  const { populatedAuthors, externalAuthors } = article
+
+  const authorList = getAuthorList({ populatedAuthors, externalAuthors })
+
   return (
     <div className="sticky top-0 z-10">
       <div className="ml-auto hidden h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu-primary hover:bg-black lg:flex">
@@ -37,7 +48,7 @@ const TopMenuContainer = () => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-fit rounded-xl border-4 border-black bg-menu-primary hover:bg-black lg:hidden">
-              <LeftMenu />
+              <LeftMenu authors={authorList} />
             </PopoverContent>
           </Popover>
 
