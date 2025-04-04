@@ -33,7 +33,6 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({ data, children, dark }) =
         <ul className="flex flex-col">
           {data.length > 0 ? (
             data.map((item, index) => {
-              console.log('typeof data: ', typeof data)
               if (typeof item === 'string') return <li key={index}>{item}</li>
 
               if (isSectionTitle(item)) {

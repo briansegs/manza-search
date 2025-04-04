@@ -391,7 +391,7 @@ export interface AdSection {
  * via the `definition` "ContentSection".
  */
 export interface ContentSection {
-  title?: string | null;
+  title: string;
   alignment?: ('left' | 'right' | 'left & right') | null;
   image1?: (string | null) | Media;
   image2?: (string | null) | Media;
@@ -419,7 +419,7 @@ export interface ContentSection {
  * via the `definition` "ResourceSection".
  */
 export interface ResourceSection {
-  title?: string | null;
+  title: string;
   type?: ('images' | 'books' | 'audio' | 'videos' | 'shop') | null;
   id?: string | null;
   blockName?: string | null;

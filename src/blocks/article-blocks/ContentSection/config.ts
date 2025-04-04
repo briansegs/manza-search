@@ -19,6 +19,7 @@ export const ContentSection: Block = {
       name: 'title',
       type: 'text',
       label: 'Title',
+      required: true,
     },
     {
       name: 'alignment',

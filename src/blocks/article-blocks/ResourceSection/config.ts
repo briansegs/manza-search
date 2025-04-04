@@ -8,6 +8,7 @@ export const ResourceSection: Block = {
       name: 'title',
       type: 'text',
       label: 'Title',
+      required: true,
     },
     {
       name: 'type',
