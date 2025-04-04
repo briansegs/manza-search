@@ -22,7 +22,9 @@ const TableOfContent: React.FC<TableOfContentProps> = ({ layout }) => {
           <ul className="h-52 w-full list-outside list-disc overflow-y-auto p-2 pl-7 font-serif text-lg">
             {sectionTitles.map(({ id, title }) => (
               <li key={id} className="max-w-full cursor-pointer hover:text-navBar">
-                <ScrollToSection id={id ?? ''}>{title}</ScrollToSection>
+                <ScrollToSection className="capitalize" id={id ?? ''}>
+                  {title}
+                </ScrollToSection>
               </li>
             ))}
           </ul>

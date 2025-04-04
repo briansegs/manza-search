@@ -39,7 +39,9 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({ data, children, dark }) =
                 const { id, title } = item
                 return (
                   <li key={id} className="hover:text-navBar">
-                    <ScrollToSection id={id ?? ''}>{title}</ScrollToSection>
+                    <ScrollToSection className="capitalize" id={id ?? ''}>
+                      {title}
+                    </ScrollToSection>
                   </li>
                 )
               }
