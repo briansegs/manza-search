@@ -360,7 +360,7 @@ export interface Media {
  * via the `definition` "AdSection".
  */
 export interface AdSection {
-  title?: string | null;
+  title: string;
   ads?:
     | {
         media?: (string | null) | Media;
