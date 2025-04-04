@@ -1,15 +1,17 @@
 import React from 'react'
 import MenuButton from '../MenuButton'
-import AuthorsButton from './AuthorsButton'
+import PopoverButton from '../PopoverButton'
 import scrollToTop from '@/utilities/scrollToTop'
+import { Article } from '@/payload-types'
 
 const MenuSeparator = () => <div className="mb-2 h-1 w-full bg-black" />
 
 interface LeftMenuProps {
   authors: string[]
+  otherVerifiedSources: Article['otherVerifiedSources']
 }
 
-const LeftMenu: React.FC<LeftMenuProps> = ({ authors }) => {
+const LeftMenu: React.FC<LeftMenuProps> = ({ authors, otherVerifiedSources }) => {
   return (
     <>
       <div className="flex flex-col items-center gap-4">
@@ -27,13 +29,15 @@ const LeftMenu: React.FC<LeftMenuProps> = ({ authors }) => {
 
         <MenuButton>SHOP</MenuButton>
 
-        <AuthorsButton authors={authors}>Authors</AuthorsButton>
+        <PopoverButton data={authors}>Authors</PopoverButton>
       </div>
 
       <MenuSeparator />
 
       <div className="flex flex-col items-center">
-        <MenuButton dark>OVS</MenuButton>
+        <PopoverButton data={otherVerifiedSources} dark>
+          OVS
+        </PopoverButton>
       </div>
     </>
   )
