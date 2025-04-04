@@ -2,7 +2,7 @@
 import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import type { Article } from '@/payload-types'
 
@@ -10,24 +10,22 @@ import { Media } from '@/components/Media'
 import MissingImage from '@/components/ImageMissing'
 import { formatDateTime } from '@/utilities/formatDateTime'
 
-export type CardArticleData = Pick<Article, 'slug' | 'categories' | 'meta' | 'title' | 'updatedAt'>
+export type CardArticleData = Pick<Article, 'slug' | 'meta' | 'title' | 'updatedAt'>
 
 export const ArticleCard: React.FC<{
   alignItems?: 'center'
   className?: string
   doc?: CardArticleData
   relationTo?: 'articles'
-  showCategories?: boolean
   title?: string
   updatedAt?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, showCategories, title: titleFromProps } = props
+  const { className, doc, relationTo, title: titleFromProps } = props
 
-  const { slug, categories, meta, title, updatedAt } = doc || {}
+  const { slug, meta, title, updatedAt } = doc || {}
   const { description, image: metaImage } = meta || {}
 
-  const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const dateIsString = updatedAt && typeof updatedAt === 'string'
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
@@ -54,32 +52,6 @@ export const ArticleCard: React.FC<{
 
       <div className="flex flex-col justify-between">
         <div className="flex flex-col p-4">
-          {showCategories && hasCategories && (
-            <div className="mb-4 text-sm uppercase">
-              {showCategories && hasCategories && (
-                <div>
-                  {categories?.map((category, index) => {
-                    if (typeof category === 'object') {
-                      const { title: titleFromCategory } = category
-
-                      const categoryTitle = titleFromCategory || 'Untitled category'
-
-                      const isLast = index === categories.length - 1
-
-                      return (
-                        <Fragment key={index}>
-                          {categoryTitle}
-                          {!isLast && <Fragment>, &nbsp;</Fragment>}
-                        </Fragment>
-                      )
-                    }
-
-                    return null
-                  })}
-                </div>
-              )}
-            </div>
-          )}
           {titleToUse && (
             <div className="prose">
               <h3>

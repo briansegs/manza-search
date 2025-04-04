@@ -8,12 +8,12 @@ interface LeftMenuContainerProps {
 }
 
 const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ article }) => {
-  const { populatedAuthors, externalAuthors } = article
+  const { populatedAuthors, externalAuthors, otherVerifiedSources } = article
 
   const authorList = getAuthorList({ populatedAuthors, externalAuthors })
   return (
     <div className="sticky top-0 hidden h-[650px] w-28 flex-col rounded-r-xl border-4 border-black bg-menu-primary py-4 hover:bg-black lg:flex">
-      <LeftMenu authors={authorList} />
+      <LeftMenu authors={authorList} otherVerifiedSources={otherVerifiedSources} />
     </div>
   )
 }

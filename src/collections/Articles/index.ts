@@ -17,6 +17,7 @@ import { populateAuthors } from './hooks/populateAuthors'
 import { AdSection } from '@/blocks/article-blocks/AdSection/config'
 import { ContentSection } from '@/blocks/article-blocks/ContentSection/config'
 import { ResourceSection } from '@/blocks/article-blocks/ResourceSection/config'
+import { link } from '@/fields/link'
 
 export const Articles: CollectionConfig<'articles'> = {
   slug: 'articles',
@@ -29,7 +30,6 @@ export const Articles: CollectionConfig<'articles'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    categories: true,
     meta: {
       image: true,
       description: true,
@@ -107,13 +107,36 @@ export const Articles: CollectionConfig<'articles'> = {
               relationTo: 'articles',
             },
             {
-              name: 'categories',
-              type: 'relationship',
+              name: 'otherVerifiedSources',
+              label: 'Other verified sources',
+              type: 'array',
               admin: {
                 position: 'sidebar',
+                initCollapsed: true,
+                components: {
+                  RowLabel: '@/components/Article/CustomRowLabel.tsx#CustomRowLabel',
+                },
               },
-              hasMany: true,
-              relationTo: 'categories',
+              fields: [
+                {
+                  name: 'label',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'enableLink',
+                  type: 'checkbox',
+                },
+                link({
+                  overrides: {
+                    admin: {
+                      condition: (_, { enableLink }) => Boolean(enableLink),
+                    },
+                  },
+                  appearances: false,
+                  disableLabel: true,
+                }),
+              ],
             },
           ],
           label: 'Meta',
@@ -182,6 +205,7 @@ export const Articles: CollectionConfig<'articles'> = {
       name: 'externalAuthors',
       label: 'Authors ( External )',
       type: 'text',
+      minLength: 1,
       hasMany: true,
       admin: {
         position: 'sidebar',

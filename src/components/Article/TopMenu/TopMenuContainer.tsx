@@ -11,7 +11,7 @@ interface TopMenuContainerProps {
 }
 
 const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article }) => {
-  const { populatedAuthors, externalAuthors } = article
+  const { populatedAuthors, externalAuthors, otherVerifiedSources } = article
 
   const authorList = getAuthorList({ populatedAuthors, externalAuthors })
 
@@ -26,7 +26,7 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article }) => {
       <div className="sticky top-0 z-10 ml-auto flex justify-between px-1 lg:hidden">
         <div className="flex gap-2">
           <DropdownMenu label="Resources">
-            <LeftMenu authors={authorList} />
+            <LeftMenu otherVerifiedSources={otherVerifiedSources} authors={authorList} />
           </DropdownMenu>
 
           <DropdownMenu label="Actions">
