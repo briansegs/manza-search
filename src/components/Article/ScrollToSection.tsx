@@ -16,7 +16,14 @@ const ScrollToSection: React.FC<ScrollToSectionProps> = ({ id, children }) => {
     })
   }
 
-  return <button onClick={handleClick}>{children}</button>
+  return (
+    <button
+      onClick={handleClick}
+      className="inline-block max-w-full overflow-hidden text-ellipsis whitespace-nowrap px-1 text-left align-middle"
+    >
+      {children}
+    </button>
+  )
 }
 
 export default ScrollToSection

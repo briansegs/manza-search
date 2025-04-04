@@ -14,5 +14,5 @@ export default function getSectionTitles({
 }: {
   layout: Article['layout']
 }): sectionTitle[] {
-  return layout?.map(({ id, title }) => ({ id: id, title: title })) ?? []
+  return layout?.map(({ id, title }) => ({ id, title })) ?? []
 }
