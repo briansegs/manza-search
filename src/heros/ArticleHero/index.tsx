@@ -5,7 +5,7 @@ import React from 'react'
 import TableOfContent from './TableOfContent'
 
 export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
-  const { heroImage } = article
+  const { heroImage, layout } = article
 
   return (
     <div className="w-full p-2">
@@ -29,7 +29,7 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
               </div>
             </div>
 
-            <TableOfContent />
+            <TableOfContent layout={layout} />
           </div>
 
           <div className="flex w-full items-center justify-center bg-slate-100 px-4 py-6 sm:w-fit sm:px-12">

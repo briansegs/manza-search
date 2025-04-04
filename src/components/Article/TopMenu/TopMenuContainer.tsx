@@ -5,15 +5,18 @@ import getAuthorList from '@/utilities/getAuthorList'
 import LeftMenu from '../LeftMenu'
 import TopMenu from '.'
 import DropdownMenu from './DropdownMenu'
+import getSectionTitles from '@/utilities/getSectionTitles'
 
 interface TopMenuContainerProps {
   article: Article
 }
 
 const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article }) => {
-  const { populatedAuthors, externalAuthors, otherVerifiedSources } = article
+  const { populatedAuthors, externalAuthors, otherVerifiedSources, layout } = article
 
   const authorList = getAuthorList({ populatedAuthors, externalAuthors })
+
+  const sectionTitles = getSectionTitles({ layout })
 
   return (
     <div className="sticky top-0 z-10">
@@ -26,7 +29,11 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article }) => {
       <div className="sticky top-0 z-10 ml-auto flex justify-between px-1 lg:hidden">
         <div className="flex gap-2">
           <DropdownMenu label="Resources">
-            <LeftMenu otherVerifiedSources={otherVerifiedSources} authors={authorList} />
+            <LeftMenu
+              sectionTitles={sectionTitles}
+              otherVerifiedSources={otherVerifiedSources}
+              authors={authorList}
+            />
           </DropdownMenu>
 
           <DropdownMenu label="Actions">

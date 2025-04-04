@@ -31,6 +31,7 @@ export const AdSection: Block = {
       name: 'title',
       type: 'text',
       label: 'Title',
+      required: true,
     },
     {
       name: 'ads',

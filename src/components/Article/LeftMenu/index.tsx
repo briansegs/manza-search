@@ -3,15 +3,17 @@ import MenuButton from '../MenuButton'
 import PopoverButton from '../PopoverButton'
 import scrollToTop from '@/utilities/scrollToTop'
 import { Article } from '@/payload-types'
+import { sectionTitle } from '@/utilities/getSectionTitles'
 
 const MenuSeparator = () => <div className="mb-2 h-1 w-full bg-black" />
 
 interface LeftMenuProps {
   authors: string[]
   otherVerifiedSources: Article['otherVerifiedSources']
+  sectionTitles: sectionTitle[]
 }
 
-const LeftMenu: React.FC<LeftMenuProps> = ({ authors, otherVerifiedSources }) => {
+const LeftMenu: React.FC<LeftMenuProps> = ({ authors, otherVerifiedSources, sectionTitles }) => {
   return (
     <>
       <div className="flex flex-col items-center gap-4">
@@ -23,7 +25,9 @@ const LeftMenu: React.FC<LeftMenuProps> = ({ authors, otherVerifiedSources }) =>
       <MenuSeparator />
 
       <div className="flex flex-col items-center gap-4">
-        <MenuButton dark>TBL</MenuButton>
+        <PopoverButton data={sectionTitles} dark>
+          TBL
+        </PopoverButton>
 
         <MenuButton>Articles</MenuButton>
 
@@ -35,7 +39,7 @@ const LeftMenu: React.FC<LeftMenuProps> = ({ authors, otherVerifiedSources }) =>
       <MenuSeparator />
 
       <div className="flex flex-col items-center">
-        <PopoverButton data={otherVerifiedSources} dark>
+        <PopoverButton data={otherVerifiedSources ?? []} dark>
           OVS
         </PopoverButton>
       </div>
