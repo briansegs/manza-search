@@ -21,7 +21,7 @@ export const ArticleArchive: React.FC<Props> = (props) => {
             if (typeof result === 'object' && result !== null) {
               return (
                 <div key={index}>
-                  <ArticleCard doc={result} relationTo="articles" showCategories />
+                  <ArticleCard doc={result} relationTo="articles" />
                 </div>
               )
             }
