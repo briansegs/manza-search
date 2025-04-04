@@ -2,7 +2,7 @@
 import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
-import React, { Fragment } from 'react'
+import React from 'react'
 
 import type { Article } from '@/payload-types'
 
@@ -17,7 +17,6 @@ export const ArticleCard: React.FC<{
   className?: string
   doc?: CardArticleData
   relationTo?: 'articles'
-  showCategories?: boolean
   title?: string
   updatedAt?: string
 }> = (props) => {
