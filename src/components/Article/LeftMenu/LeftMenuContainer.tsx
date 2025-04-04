@@ -2,18 +2,10 @@ import React from 'react'
 import { Article } from '@/payload-types'
 import LeftMenu from '.'
 import getAuthorList from '@/utilities/getAuthorList'
+import getSectionTitles from '@/utilities/getSectionTitles'
 
 interface LeftMenuContainerProps {
   article: Article
-}
-
-export interface sectionTitle {
-  id?: string | null
-  title?: string | null
-}
-
-export function getSectionTitles({ layout }: { layout: Article['layout'] }): sectionTitle[] {
-  return layout?.map(({ id, title }) => ({ id: id, title: title })) ?? []
 }
 
 const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ article }) => {
