@@ -49,13 +49,15 @@
     "payload": "latest",
     "payload-admin-bar": "^1.0.6",
     "payload-cloudinary": "^1.5.0",
+    "pino": "^9.6.0",
     "prism-react-renderer": "^2.3.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-hook-form": "7.45.4",
     "sharp": "0.32.6",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
