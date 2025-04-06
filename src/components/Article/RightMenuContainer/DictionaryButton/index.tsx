@@ -66,7 +66,7 @@ const DictionaryButton: React.FC = () => {
           </DialogDescription>
         </DialogHeader>
         <div>
-          <form onSubmit={handleSubmit} className="mb-2">
+          <form onSubmit={handleSubmit}>
             <div className="flex items-center rounded border-2 border-black bg-white">
               <Input
                 min={2}
@@ -81,7 +81,7 @@ const DictionaryButton: React.FC = () => {
               </button>
             </div>
 
-            <div className="ml-2 h-2 text-xs text-red-400">{formError}</div>
+            <div className="ml-2 h-5 pt-[3px] text-xs text-red-400">{formError}</div>
           </form>
 
           <div className="h-[450px] overflow-y-auto rounded border-2 border-black bg-white p-2 font-serif text-menu-primary">
