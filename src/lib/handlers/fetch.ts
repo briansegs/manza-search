@@ -2,13 +2,10 @@ import { ActionResponse } from '@/types/global'
 import { RequestError } from '../http-error'
 import logger from '../logger'
 import handleError from './error'
+import { isError } from '@/utilities/isError'
 
 interface FetchOptions extends RequestInit {
   timeout?: number
-}
-
-function isError(error: unknown): error is Error {
-  return error instanceof Error
 }
 
 export async function fetchHandler<T>(
@@ -39,6 +36,11 @@ export async function fetchHandler<T>(
 
     if (!response.ok) {
       throw new RequestError(response.status, `HTTP error: ${response.status}`)
+    }
+
+    const contentType = response.headers.get('content-type')
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new RequestError(415, 'Response is not JSON')
     }
 
     return await response.json()

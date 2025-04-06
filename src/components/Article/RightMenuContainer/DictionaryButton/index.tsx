@@ -17,19 +17,20 @@ import DefinitionContent from './DefinitionContent'
 import DefinitionPlaceholder from './DefinitionPlaceholder'
 import DefinitionFetching from './DefinitionFetching'
 import { DictionaryEntry } from '../types'
+import { errorMessage } from '@/utilities/errorMessage'
 
 const DictionaryButton: React.FC = () => {
   const [definitions, setDefinitions] = useState<DictionaryEntry[]>([])
   const [value, setValue] = useState('')
   const [isFetching, setIsFetching] = useState<boolean>(false)
-  const [formError, setFormError] = useState<boolean>(false)
+  const [formError, setFormError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setDefinitions([])
 
     if (!value || value.length <= 1) {
-      setFormError(true)
+      setFormError(errorMessage.required)
       return
     }
 
@@ -38,15 +39,15 @@ const DictionaryButton: React.FC = () => {
       const { success, error, data } = await api.dictionary.getDefinitions(value)
 
       if (!success) {
-        setFormError(true)
-        console.log(error?.message)
+        setFormError(errorMessage.fetch)
+        console.error(error?.message)
       } else {
-        setFormError(false)
+        setFormError(null)
         setDefinitions(data ?? [])
       }
     } catch (error) {
-      setFormError(true)
-      console.log(error)
+      setFormError(errorMessage.fetch)
+      console.error(error)
     } finally {
       setIsFetching(false)
     }
@@ -80,15 +81,13 @@ const DictionaryButton: React.FC = () => {
               </button>
             </div>
 
-            <div className="ml-2 h-2 text-xs text-red-400">
-              {formError ? 'Word not found. Please check your spelling.' : ''}
-            </div>
+            <div className="ml-2 h-2 text-xs text-red-400">{formError}</div>
           </form>
 
           <div className="h-[450px] overflow-y-auto rounded border-2 border-black bg-white p-2 font-serif text-menu-primary">
             {isFetching ? (
               <DefinitionFetching />
-            ) : definitions ? (
+            ) : definitions.length > 0 ? (
               <DefinitionContent definitions={definitions} />
             ) : (
               <DefinitionPlaceholder />

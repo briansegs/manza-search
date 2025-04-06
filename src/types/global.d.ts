@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server'
+
 export type ActionResponse<T = null> = {
   success: boolean
   data?: T
