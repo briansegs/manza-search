@@ -83,19 +83,21 @@ const config = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          blue: 'hsl(var(--primary-blue))',
         },
         ring: 'hsl(var(--ring))',
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+          blue: 'hsl(var(--secondary-blue))',
         },
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
         warning: 'hsl(var(--warning))',
-        header: '#00253f',
-        navBar: '#60b3d3',
-        'menu-primary': '#191e22',
-        'menu-red': '#dc2626',
+        menu: {
+          DEFAULT: 'hsl(var(--menu))',
+          red: 'hsl(var(--menu-red))',
+        },
       },
       fontFamily: {
         mono: ['var(--font-geist-mono)'],
@@ -110,6 +112,9 @@ const config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+      },
+      borderRadius: {
+        primary: 'var(--radius-primary)',
       },
       typography: () => ({
         DEFAULT: {

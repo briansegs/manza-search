@@ -18,13 +18,13 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
           <div className="flex w-full flex-col items-center gap-2 md:flex-row md:items-stretch">
             <div className="flex w-full items-center justify-center bg-slate-100 px-12 py-6 sm:w-[480px] md:w-full">
               <div className="flex items-center gap-6">
-                <p className="cursor-pointer font-serif text-xl hover:text-navBar">Menu</p>
+                <p className="hover:text-secondary-blue cursor-pointer font-serif text-xl">Menu</p>
 
                 <ul className="list-inside list-disc font-serif text-lg">
-                  <li className="cursor-pointer hover:text-navBar">Pin</li>
-                  <li className="cursor-pointer hover:text-navBar">Save</li>
-                  <li className="cursor-pointer hover:text-navBar">History</li>
-                  <li className="cursor-pointer hover:text-navBar">Lists</li>
+                  <li className="hover:text-secondary-blue cursor-pointer">Pin</li>
+                  <li className="hover:text-secondary-blue cursor-pointer">Save</li>
+                  <li className="hover:text-secondary-blue cursor-pointer">History</li>
+                  <li className="hover:text-secondary-blue cursor-pointer">Lists</li>
                 </ul>
               </div>
             </div>

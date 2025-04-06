@@ -52,14 +52,17 @@ const books: BooksType[] = [
 ]
 
 const buttonStyles =
-  'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-navBar'
+  'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-secondary-blue'
 
 const Books = () => {
   return (
     <>
       {books && books.length > 0 ? (
         books.map(({ image, id, name, shop, price, shipping }) => (
-          <div key={id} className="border-content h-fit overflow-hidden rounded-[10px] bg-header">
+          <div
+            key={id}
+            className="border-content bg-primary-blue rounded-primary h-fit overflow-hidden"
+          >
             <div className="relative h-96 w-[300px] flex-shrink-0">
               {image ? renderMedia(image) : renderPlaceholder()}
             </div>

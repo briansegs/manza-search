@@ -11,8 +11,8 @@ const BottomMenu = () => {
       </div>
 
       <div className="flex-1 overflow-hidden rounded-t-xl border-[5px] border-green-600">
-        <div className="flex size-full items-center justify-center bg-menu-primary hover:bg-black">
-          <Button className="h-fit rounded-[8px] border-2 border-white bg-menu-primary px-1 py-[1px] font-serif font-semibold text-white hover:bg-black">
+        <div className="bg-menu flex size-full items-center justify-center hover:bg-black">
+          <Button className="bg-menu h-fit rounded-[8px] border-2 border-white px-1 py-[1px] font-serif font-semibold text-white hover:bg-black">
             DOC PAD
           </Button>
         </div>

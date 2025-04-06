@@ -52,14 +52,17 @@ const shop: ShopType[] = [
 ]
 
 const buttonStyles =
-  'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-navBar'
+  'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-secondary-blue'
 
 const Shop = () => {
   return (
     <>
       {shop && shop.length > 0 ? (
         shop.map(({ image, id, name, shop, price, shipping }) => (
-          <div key={id} className="border-content h-fit overflow-hidden rounded-[10px] bg-header">
+          <div
+            key={id}
+            className="border-content bg-primary-blue rounded-primary h-fit overflow-hidden"
+          >
             <div className="relative h-72 w-96 flex-shrink-0">
               {image ? renderMedia(image) : renderPlaceholder()}
             </div>

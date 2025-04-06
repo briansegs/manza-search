@@ -12,7 +12,7 @@ const TableOfContent: React.FC<TableOfContentProps> = ({ layout }) => {
   return (
     <div className="flex w-full items-center justify-center bg-slate-100 px-12 py-6 sm:w-[480px] md:w-full">
       <div className="flex items-center gap-10">
-        <p className="cursor-pointer font-serif text-xl hover:text-navBar">Shop</p>
+        <p className="hover:text-secondary-blue cursor-pointer font-serif text-xl">Shop</p>
 
         <div className="flex max-w-44 flex-col items-center border-2 border-black">
           <div className="w-full text-nowrap bg-black px-6 py-[2px] text-center font-serif text-white underline underline-offset-2">
@@ -21,7 +21,7 @@ const TableOfContent: React.FC<TableOfContentProps> = ({ layout }) => {
 
           <ul className="h-52 w-full list-outside list-disc overflow-y-auto p-2 pl-7 font-serif text-lg">
             {sectionTitles.map(({ id, title }) => (
-              <li key={id} className="max-w-full cursor-pointer hover:text-navBar">
+              <li key={id} className="hover:text-secondary-blue max-w-full cursor-pointer">
                 <ScrollToSection className="capitalize" id={id ?? ''}>
                   {title}
                 </ScrollToSection>

@@ -16,7 +16,7 @@ const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ article }) => {
   const sectionTitles = getSectionTitles({ layout })
 
   return (
-    <div className="sticky top-0 hidden h-[650px] w-28 flex-col rounded-r-xl border-4 border-black bg-menu-primary py-4 hover:bg-black lg:flex">
+    <div className="bg-menu sticky top-0 hidden h-[650px] w-28 flex-col rounded-r-xl border-4 border-black py-4 hover:bg-black lg:flex">
       <LeftMenu
         authors={authorList}
         otherVerifiedSources={otherVerifiedSources}
