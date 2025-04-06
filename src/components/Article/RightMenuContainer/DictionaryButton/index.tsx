@@ -35,7 +35,7 @@ const DictionaryButton: React.FC = () => {
 
     try {
       setIsFetching(true)
-      const { success, error, data } = await api.dictionary.getMeaning(value)
+      const { success, error, data } = await api.dictionary.getDefinitions(value)
 
       if (!success) {
         setFormError(true)
