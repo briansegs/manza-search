@@ -34,14 +34,17 @@ const videos: VideosType[] = [
 ]
 
 const buttonStyles =
-  'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-navBar'
+  'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-secondary-blue'
 
 const Videos = () => {
   return (
     <>
       {videos && videos.length > 0 ? (
         videos.map(({ image, id, name }) => (
-          <div key={id} className="border-content h-fit overflow-hidden rounded-[10px] bg-header">
+          <div
+            key={id}
+            className="border-content bg-primary-blue rounded-primary h-fit overflow-hidden"
+          >
             <div className="relative h-64 w-96 flex-shrink-0">
               {image ? renderMedia(image) : renderPlaceholder()}
             </div>

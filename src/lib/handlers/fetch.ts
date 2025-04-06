@@ -1,3 +1,4 @@
+import { ActionResponse } from '@/types/global'
 import { RequestError } from '../http-error'
 import logger from '../logger'
 import handleError from './error'
@@ -8,16 +9,6 @@ interface FetchOptions extends RequestInit {
 
 function isError(error: unknown): error is Error {
   return error instanceof Error
-}
-
-export type ActionResponse<T = null> = {
-  success: boolean
-  data?: T
-  error?: {
-    message: string
-    details?: Record<string, string[]>
-  }
-  status?: number
 }
 
 export async function fetchHandler<T>(

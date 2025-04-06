@@ -22,7 +22,7 @@ export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
                 <div
                   key={id}
                   className={clsx(
-                    'border-content relative h-72 w-[406px] flex-shrink-0 overflow-hidden rounded-[10px] hover:shadow-[10px_10px_10px_#60b3d3]',
+                    'border-content rounded-primary relative h-72 w-[406px] flex-shrink-0 overflow-hidden hover:shadow-[10px_10px_10px_#60b3d3]',
                     index === 0 ? 'hover:border-red-500' : '',
                     index === 1 ? 'hover:border-green-500' : '',
                     index === 2 ? 'hover:border-blue-500' : '',

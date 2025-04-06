@@ -27,7 +27,7 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({ data, children, dark }) =
     </PopoverTrigger>
     {data && (
       <PopoverContent
-        className="w-fit rounded-lg border-2 border-black bg-menu-primary py-2 font-serif text-white"
+        className="bg-menu w-fit rounded-lg border-2 border-black py-2 font-serif text-white"
         side="right"
       >
         <ul className="flex flex-col">
@@ -38,7 +38,7 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({ data, children, dark }) =
               if (isSectionTitle(item)) {
                 const { id, title } = item
                 return (
-                  <li key={id} className="hover:text-navBar">
+                  <li key={id} className="hover:text-secondary-blue">
                     <ScrollToSection className="capitalize" id={id ?? ''}>
                       {title}
                     </ScrollToSection>
@@ -51,7 +51,7 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({ data, children, dark }) =
                 return (
                   <li key={id}>
                     {link?.url ? (
-                      <CMSLink {...link} className="hover:text-navBar">
+                      <CMSLink {...link} className="hover:text-secondary-blue">
                         {label}
                       </CMSLink>
                     ) : (

@@ -24,7 +24,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({
         dark
           ? 'bg-black font-sans text-sm hover:bg-black'
           : 'bg-transparent font-serif text-lg hover:bg-transparent',
-        'hover:text-navBar',
+        'hover:text-secondary-blue',
       )}
       ref={ref}
       {...props}

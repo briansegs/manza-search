@@ -25,9 +25,11 @@
 
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
+    --primary-blue: 207, 100%, 12%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-blue: 197, 59%, 61%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
@@ -47,6 +49,9 @@
     --success: 196 52% 74%;
     --warning: 34 89% 85%;
     --error: 10 100% 86%;
+
+    --menu: 204, 10%, 12%;
+    --menu-red: 0, 70%, 50%;
   }
 
   /* [data-theme='dark'] {

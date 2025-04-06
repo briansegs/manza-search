@@ -32,7 +32,7 @@ const Images = () => {
         images.map(({ media, id }) => (
           <div
             key={id}
-            className="border-content relative h-72 w-96 flex-shrink-0 overflow-hidden rounded-[10px]"
+            className="border-content rounded-primary relative h-72 w-96 flex-shrink-0 overflow-hidden"
           >
             {media ? renderMedia(media) : renderPlaceholder()}
           </div>

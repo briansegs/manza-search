@@ -3,7 +3,7 @@ import { Media } from '@/components/Media'
 import { Media as MediaType } from '@/payload-types'
 
 export const TitleBar = ({ title }: { title: string | null | undefined }) => (
-  <div className="border-content w-full bg-header pl-10">
+  <div className="border-content bg-primary-blue w-full pl-10">
     <p className="min-h-[28px] font-serif text-lg capitalize text-white">{title || ''}</p>
   </div>
 )

@@ -17,7 +17,9 @@ const ImageContainer = ({ image, className }: ImageContainerProps) => {
 
   return (
     <div className="flex-shrink-0">
-      <div className={cn('border-content relative w-64 overflow-hidden rounded-[10px]', className)}>
+      <div
+        className={cn('border-content rounded-primary relative w-64 overflow-hidden', className)}
+      >
         {renderMedia(image)}
       </div>
     </div>
