@@ -5,7 +5,7 @@ import { ActionResponse } from '@/types/global'
 export const api = {
   dictionary: {
     getDefinitions: (word: string): Promise<ActionResponse<DictionaryEntry[]>> =>
-      fetchHandler(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/dictionary/definitions`, {
+      fetchHandler(`/api/dictionary/definitions`, {
         method: 'POST',
         body: JSON.stringify({ word }),
       }),
