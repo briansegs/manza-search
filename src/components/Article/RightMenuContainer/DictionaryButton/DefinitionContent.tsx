@@ -37,56 +37,52 @@ const DefinitionContent: React.FC<DefinitionContentProps> = ({ definitions }) =>
           </div>
         )}
 
-        <>
-          {meanings.map(({ partOfSpeech, definitions }, index) => (
-            <div key={index} className="mt-1">
-              <div>
-                <div className="flex items-end gap-2">
-                  <div className="text-lg font-semibold capitalize text-sky-500">
-                    {partOfSpeech}
-                  </div>
-                </div>
-
-                {definitions.map(({ definition, example, synonyms, antonyms }, index) => (
-                  <div key={index} className="my-2 ml-2">
-                    <div>
-                      <span className="font-bold">{`${index + 1}. `}</span>
-                      {definition}
-                    </div>
-
-                    {example && (
-                      <div className="ml-4 mt-1">
-                        <span className="font-bold">Ex.</span> {example}
-                      </div>
-                    )}
-
-                    {synonyms.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        <div className="ml-4 font-bold">Synonyms:</div>
-                        {synonyms.map((synonym, index) => (
-                          <div key={index} className="mr-2 capitalize text-amber-600">
-                            {synonym}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {antonyms.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        <div className="ml-4 font-bold">Antonyms:</div>
-                        {antonyms.map((antonym, index) => (
-                          <div key={index} className="mr-2 capitalize text-amber-700">
-                            {antonym}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
+        {meanings.map(({ partOfSpeech, definitions }, index) => (
+          <div key={index} className="mt-1">
+            <div>
+              <div className="flex items-end gap-2">
+                <div className="text-lg font-semibold capitalize text-sky-500">{partOfSpeech}</div>
               </div>
+
+              {definitions.map(({ definition, example, synonyms, antonyms }, index) => (
+                <div key={index} className="my-2 ml-2">
+                  <div>
+                    <span className="font-bold">{`${index + 1}. `}</span>
+                    {definition}
+                  </div>
+
+                  {example && (
+                    <div className="ml-4 mt-1">
+                      <span className="font-bold">Ex.</span> {example}
+                    </div>
+                  )}
+
+                  {synonyms.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      <div className="ml-4 font-bold">Synonyms:</div>
+                      {synonyms.map((synonym, index) => (
+                        <div key={index} className="mr-2 capitalize text-amber-600">
+                          {synonym}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {antonyms.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      <div className="ml-4 font-bold">Antonyms:</div>
+                      {antonyms.map((antonym, index) => (
+                        <div key={index} className="mr-2 capitalize text-amber-700">
+                          {antonym}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </>
+          </div>
+        ))}
       </div>
     ))}
   </div>

@@ -114,7 +114,7 @@ const config = {
         },
       },
       borderRadius: {
-        primary: '10px',
+        primary: 'var(--radius-primary)',
       },
       typography: () => ({
         DEFAULT: {

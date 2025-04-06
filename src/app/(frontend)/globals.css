@@ -52,6 +52,8 @@
 
     --menu: 204, 10%, 12%;
     --menu-red: 0, 70%, 50%;
+
+    --radius-primary: 10px;
   }
 
   /* [data-theme='dark'] {
