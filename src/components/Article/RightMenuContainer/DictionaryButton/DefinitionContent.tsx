@@ -26,7 +26,7 @@ const DefinitionContent: React.FC<DefinitionContentProps> = ({ definitions }) =>
           </div>
         )}
 
-        {phonetics && (
+        {phonetics && phonetics.length > 0 && (
           <div className="flex gap-2">
             <div className="font-bold">Phonetics:</div>
             {phonetics.map(({ text }, index) => (
