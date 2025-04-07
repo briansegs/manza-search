@@ -4,7 +4,7 @@ const Toolbar: React.FC = () => {
   return (
     <div
       id="custom-toolbar"
-      className="grid h-fit w-32 grid-cols-[repeat(auto-fill,minmax(2rem,1fr))] gap-1"
+      className="grid h-fit w-32 grid-cols-[repeat(auto-fill,minmax(2.5rem,1fr))]"
     >
       {/* Toggle buttons */}
       <button className="ql-bold" />

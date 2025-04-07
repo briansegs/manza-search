@@ -41,14 +41,14 @@ const DocPadEditor: React.FC = () => {
   }, [])
 
   return (
-    <div className="flex w-full justify-between px-4 pb-4">
+    <div className="flex w-full justify-between">
       <Toolbar />
 
-      <div className="mb-1 flex-1 bg-white">
+      <div className="flex-1 bg-white">
         <div id="editor" ref={editorRef} />
       </div>
 
-      <div className="mb-1 w-32 bg-menu-red">{/* Add save, delete, and view notes buttons */}</div>
+      <div className="w-32 bg-menu-red">{/* Add save, delete, edit, and view notes buttons */}</div>
     </div>
   )
 }

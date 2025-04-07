@@ -15,8 +15,8 @@ const DocPad: React.FC = () => {
       </PopoverTrigger>
       <PopoverContent
         side="top"
-        sideOffset={10}
-        className="w-[80vw] rounded-primary border-4 border-black bg-menu p-0"
+        sideOffset={19}
+        className="w-[80vw] rounded-b-none rounded-t-primary border-x-4 border-t-4 border-black bg-menu px-2 py-0"
       >
         <div className="flex w-full flex-col items-center gap-7">
           <div className="h-fit rounded-b-[8px] border-[1px] border-white bg-black px-14 py-[1px] font-serif font-semibold text-white">
