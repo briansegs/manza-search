@@ -19,20 +19,9 @@ const Toolbar: React.FC = () => {
       <button className="ql-clean" />
 
       {/* Dropdowns */}
-      <select className="ql-header col-span-full w-full">
-        <option value="1" />
-        <option value="2" />
-        <option value="3" />
-        <option value="4" />
-        <option value="5" />
-        <option value="6" />
-      </select>
+      <select className="ql-header col-span-full w-full" />
 
-      <select className="ql-size col-span-full w-full">
-        <option value="small" />
-        <option value="large" />
-        <option value="huge" />
-      </select>
+      <select className="ql-size col-span-full w-full" />
 
       <select className="ql-font col-span-full w-full" />
 
