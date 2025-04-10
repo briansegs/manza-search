@@ -25,7 +25,7 @@ const DocPad: React.FC = () => {
 
           <Suspense
             fallback={
-              <div className="flex h-[324px] w-full items-center justify-center text-gray-500">
+              <div className="flex h-[355px] w-full items-center justify-center text-gray-500">
                 <LoaderCircle className="mr-4 animate-spin" /> Loading editor...
               </div>
             }
