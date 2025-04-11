@@ -99,7 +99,6 @@ const DocPadEditor: React.FC = () => {
       : [...notes, newNote]
 
     setNotes(updatedNotes)
-    localStorage.setItem('docpad_notes', JSON.stringify(updatedNotes))
     clearNotePad()
   }
 
@@ -125,7 +124,6 @@ const DocPadEditor: React.FC = () => {
   const deleteNote = (id: string) => {
     const updatedNotes = notes.filter((note) => note.id !== id)
     setNotes(updatedNotes)
-    localStorage.setItem('docpad_notes', JSON.stringify(updatedNotes))
     if (currentId === id) {
       clearNotePad()
     }
