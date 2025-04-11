@@ -16,9 +16,12 @@ import Toolbar from './Toolbar'
 import { v4 as uuidv4 } from 'uuid'
 import TitleInput from './TitleInput'
 import clsx from 'clsx'
-import DocPadMenuButton from './DocPadMenuButton'
+import { Folder, SquareKanban } from 'lucide-react'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import useBreakpoint from '@/hooks/useBreakpoint'
+import NoteCRUDManager from './NoteCRUDManager'
 
-type Note = {
+export type Note = {
   id: string
   title: string
   content: string
@@ -28,6 +31,7 @@ const DocPadEditor: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([])
   const [currentId, setCurrentId] = useState<string | null>(null)
   const [title, setTitle] = useState('')
+  const { isMobile } = useBreakpoint()
 
   useEffect(() => {
     const storedNotes = localStorage.getItem('docpad_notes')
@@ -43,6 +47,7 @@ const DocPadEditor: React.FC = () => {
         placeholder: 'Start typing here...',
       }),
       StarterKit.configure({
+        heading: false,
         bulletList: {
           keepMarks: true,
           keepAttributes: false,
@@ -77,6 +82,8 @@ const DocPadEditor: React.FC = () => {
         class: 'focus:outline-none',
       },
     },
+
+    immediatelyRender: false,
   })
 
   // Save the current note to localStorage
@@ -132,8 +139,41 @@ const DocPadEditor: React.FC = () => {
 
   return (
     <div className="flex h-[355px] w-full justify-between">
-      {/* Editor Toolbar */}
-      <Toolbar editor={editor} />
+      {isMobile ? (
+        <div className="space-y-2 pr-1">
+          {/* Editor Toolbar  */}
+          <Popover>
+            <PopoverTrigger className="mt-2 flex text-white">
+              <SquareKanban className="size-8" />
+            </PopoverTrigger>
+
+            <PopoverContent className="w-fit border-2 border-black bg-menu p-1" side="right">
+              <Toolbar editor={editor} />
+            </PopoverContent>
+          </Popover>
+
+          {/* Note management interface | CRUD -> local storage */}
+          <Popover>
+            <PopoverTrigger className="flex text-white">
+              <Folder className="size-8" />
+            </PopoverTrigger>
+
+            <PopoverContent className="w-fit border-2 border-black bg-menu p-2" side="right">
+              <NoteCRUDManager
+                saveNote={saveNote}
+                currentId={currentId}
+                clearNotePad={clearNotePad}
+                notes={notes}
+                loadNote={loadNote}
+                deleteNote={deleteNote}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+      ) : (
+        // Editor Toolbar
+        <Toolbar editor={editor} />
+      )}
 
       {/* Editor */}
       <div className="relative flex flex-1 flex-col bg-white">
@@ -164,38 +204,17 @@ const DocPadEditor: React.FC = () => {
         </div>
       </div>
 
-      {/* Note management interface | CRUD to local storage */}
-      <div className="flex h-full w-32 flex-col gap-2 text-white">
-        <DocPadMenuButton onClick={saveNote}>
-          {currentId ? 'Update Note' : 'Save Note'}
-        </DocPadMenuButton>
-        <DocPadMenuButton onClick={clearNotePad}>New Note</DocPadMenuButton>
-
-        <div className="flex min-h-0 flex-1 flex-col gap-2 pl-2 pt-2">
-          <h3 className="font-bold">Saved Notes</h3>
-          <ul className="space-y-2 overflow-y-auto text-sm">
-            {notes.map((note) => (
-              <li
-                key={note.id}
-                className="flex items-center justify-between rounded bg-black px-2 py-1"
-              >
-                <button
-                  onClick={() => loadNote(note)}
-                  className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-left hover:text-secondary-blue"
-                >
-                  {note.title}
-                </button>
-                <button
-                  onClick={() => deleteNote(note.id)}
-                  className="ml-2 text-red-200 hover:text-red-400"
-                >
-                  ✕
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      {/* Note management interface | CRUD -> local storage */}
+      {!isMobile && (
+        <NoteCRUDManager
+          saveNote={saveNote}
+          currentId={currentId}
+          clearNotePad={clearNotePad}
+          notes={notes}
+          loadNote={loadNote}
+          deleteNote={deleteNote}
+        />
+      )}
     </div>
   )
 }

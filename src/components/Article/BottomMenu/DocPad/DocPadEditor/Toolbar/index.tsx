@@ -51,6 +51,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
     <div
       id="custom-toolbar"
       className={clsx('grid h-fit w-32 grid-cols-6', 'rounded-l-sm border-2 border-black')}
+      onFocusCapture={(e) => {
+        e.stopPropagation()
+      }}
     >
       <ToolbarButton
         onClick={() => editor.chain().focus().undo().run()}
@@ -74,8 +77,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
 
       <ToolbarButton
         onClick={() => editor.chain().focus().unsetAllMarks().run()}
-        // description="Clear text formatting"
-        // TODO: fix tooltip description from showing when editor opens
+        description="Clear text formatting"
       >
         {/* Clear Text Formatting */}
         <Eraser className={iconStyles()} />
