@@ -20,6 +20,7 @@ import { Folder, SquareKanban } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import useBreakpoint from '@/hooks/useBreakpoint'
 import NoteCRUDManager from './NoteCRUDManager'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 export type Note = {
   id: string
@@ -28,17 +29,10 @@ export type Note = {
 }
 
 const DocPadEditor: React.FC = () => {
-  const [notes, setNotes] = useState<Note[]>([])
+  const [notes, setNotes] = useLocalStorage<Note[]>('docpad_notes', [])
   const [currentId, setCurrentId] = useState<string | null>(null)
   const [title, setTitle] = useState('')
   const { isMobile } = useBreakpoint()
-
-  useEffect(() => {
-    const storedNotes = localStorage.getItem('docpad_notes')
-    if (storedNotes) {
-      setNotes(JSON.parse(storedNotes))
-    }
-  }, [])
 
   // Initialize Tiptap editor
   const editor = useEditor({
