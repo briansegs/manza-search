@@ -138,12 +138,12 @@ const DocPadEditor: React.FC = () => {
   }
 
   return (
-    <div className="flex h-[355px] w-full justify-between">
+    <div className="flex h-[355px] w-full flex-col justify-between md:flex-row">
       {isMobile ? (
-        <div className="space-y-2 pr-1">
+        <div className="flex items-center justify-between pb-1">
           {/* Editor Toolbar  */}
           <Popover>
-            <PopoverTrigger className="mt-2 flex text-white">
+            <PopoverTrigger className="flex text-white">
               <SquareKanban className="size-8" />
             </PopoverTrigger>
 
@@ -158,7 +158,7 @@ const DocPadEditor: React.FC = () => {
               <Folder className="size-8" />
             </PopoverTrigger>
 
-            <PopoverContent className="w-fit border-2 border-black bg-menu p-2" side="right">
+            <PopoverContent className="w-fit border-2 border-black bg-menu p-2" side="left">
               <NoteCRUDManager
                 saveNote={saveNote}
                 currentId={currentId}
