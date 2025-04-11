@@ -38,8 +38,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
   const iconStyles = (tagOrObj?: string | object, obj?: object) => {
     const isActive =
       typeof tagOrObj === 'string'
-        ? editor && editor.isActive(tagOrObj, obj)
-        : editor && editor.isActive(tagOrObj as object)
+        ? editor.isActive(tagOrObj, obj)
+        : editor.isActive(tagOrObj as object)
 
     return clsx(
       tagOrObj ? (isActive ? 'text-secondary-blue' : 'text-white') : 'text-white',
@@ -57,7 +57,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
     >
       <ToolbarButton
         onClick={() => editor.chain().focus().undo().run()}
-        disabled={editor && !editor.can().chain().focus().undo().run()}
+        disabled={!editor.can().chain().focus().undo().run()}
         description="Undo"
         colSpan="3"
       >
@@ -67,7 +67,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
 
       <ToolbarButton
         onClick={() => editor.chain().focus().redo().run()}
-        disabled={editor && !editor.can().chain().focus().redo().run()}
+        disabled={!editor.can().chain().focus().redo().run()}
         description="Redo"
         colSpan="3"
       >
@@ -125,7 +125,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       </ToolbarButton>
 
       <ToolbarButton
-        onClick={() => editor && editor.chain().focus().toggleBold().run()}
+        onClick={() => editor.chain().focus().toggleBold().run()}
         description="Toggle bold"
       >
         {/* Bold */}
@@ -133,7 +133,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       </ToolbarButton>
 
       <ToolbarButton
-        onClick={() => editor && editor.chain().focus().toggleItalic().run()}
+        onClick={() => editor.chain().focus().toggleItalic().run()}
         description="Toggle italic"
       >
         {/* Italic */}
@@ -142,7 +142,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
 
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleStrike().run()}
-        disabled={editor && !editor.can().chain().focus().toggleStrike().run()}
+        disabled={!editor.can().chain().focus().toggleStrike().run()}
         description="Toggle strike through"
       >
         {/* Strike Through */}
@@ -175,7 +175,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
 
       <ToolbarButton
         onClick={() => editor.chain().focus().toggleCode().run()}
-        disabled={editor && !editor.can().chain().focus().toggleCode().run()}
+        disabled={!editor.can().chain().focus().toggleCode().run()}
         description="Toggle code"
         colSpan="3"
       >
