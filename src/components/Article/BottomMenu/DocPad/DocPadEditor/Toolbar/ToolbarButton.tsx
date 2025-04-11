@@ -19,7 +19,14 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger className={colSpan ? `col-span-${colSpan}` : 'col-span-2'} asChild>
+        <TooltipTrigger
+          className={cn({
+            'col-span-2': colSpan === '2' || !colSpan,
+            'col-span-3': colSpan === '3',
+            'col-span-6': colSpan === '6',
+          })}
+          asChild
+        >
           <button className={cn(buttonStyles, className)} {...props} />
         </TooltipTrigger>
         {description && (
