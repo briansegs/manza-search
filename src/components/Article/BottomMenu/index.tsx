@@ -12,7 +12,7 @@ const BottomMenu = () => {
       </div>
 
       <div className="flex-1 overflow-hidden rounded-t-xl border-[5px] border-green-600">
-        <div className="flex size-full w-full items-center justify-center bg-menu hover:bg-black">
+        <div className="flex size-full items-center justify-center bg-menu hover:bg-black">
           <DocPad />
         </div>
       </div>
