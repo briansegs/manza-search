@@ -4,7 +4,7 @@ import ToolbarButton from './ToolbarButton'
 import { Highlighter } from 'lucide-react'
 import { Editor } from '@tiptap/react'
 
-const HightlighterColors = [
+const HighlighterColors = [
   {
     label: 'red',
     color: '#fca5a5',
@@ -40,7 +40,7 @@ const HighlighterSelect: React.FC<HighlighterSelectProps> = ({ editor, iconStyle
       </PopoverTrigger>
 
       <PopoverContent className="flex w-fit items-center gap-2 border-2 border-black bg-menu p-2">
-        {HightlighterColors.map(({ color, label }) => (
+        {HighlighterColors.map(({ color, label }) => (
           <button
             key={label}
             onClick={() => editor.chain().focus().toggleHighlight({ color: color }).run()}
