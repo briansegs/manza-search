@@ -21,7 +21,7 @@ const DefinitionContent: React.FC<DefinitionContentProps> = ({ definitions }) =>
 
         {phonetic && (
           <div className="flex items-end gap-2">
-            <div className="font-bold">Phonetic:</div>{' '}
+            <div className="font-bold">Phonetic:</div>
             <div className="text-muted-foreground">{phonetic}</div>
           </div>
         )}

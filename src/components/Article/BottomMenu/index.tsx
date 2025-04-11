@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button } from '../../ui/button'
+import DocPad from './DocPad'
 
 const BottomMenu = () => {
   return (
@@ -11,10 +12,8 @@ const BottomMenu = () => {
       </div>
 
       <div className="flex-1 overflow-hidden rounded-t-xl border-[5px] border-green-600">
-        <div className="bg-menu flex size-full items-center justify-center hover:bg-black">
-          <Button className="bg-menu h-fit rounded-[8px] border-2 border-white px-1 py-[1px] font-serif font-semibold text-white hover:bg-black">
-            DOC PAD
-          </Button>
+        <div className="flex size-full w-full items-center justify-center bg-menu hover:bg-black">
+          <DocPad />
         </div>
       </div>
 
