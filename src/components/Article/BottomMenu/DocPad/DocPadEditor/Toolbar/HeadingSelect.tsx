@@ -34,6 +34,8 @@ const headings = [
   },
 ]
 
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
+
 type HeadingSelectProps = {
   editor: Editor | null
 }
@@ -78,7 +80,7 @@ const HeadingSelect: React.FC<HeadingSelectProps> = ({ editor }) => {
                     return editor
                       .chain()
                       .focus()
-                      .toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 })
+                      .toggleHeading({ level: level as HeadingLevel })
                       .run()
                   }}
                 >
