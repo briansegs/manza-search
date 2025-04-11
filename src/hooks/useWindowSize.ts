@@ -2,6 +2,10 @@ import { useSyncExternalStore } from 'react'
 
 const listeners: Set<() => void> = new Set()
 let size = { width: 0, height: 0 }
+// Initialize size if in browser
+if (typeof window !== 'undefined') {
+  size = { width: window.innerWidth, height: window.innerHeight }
+}
 
 function getSnapshot() {
   return size
@@ -19,7 +23,7 @@ function onResize() {
     timeout = null
     size = { width: window.innerWidth, height: window.innerHeight }
     listeners.forEach((listener) => listener())
-  }, 100) // You can tweak the delay
+  }, 100) // Tweak the delay
 }
 
 function subscribe(callback: () => void) {
