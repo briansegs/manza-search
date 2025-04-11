@@ -54,6 +54,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       onFocusCapture={(e) => {
         e.stopPropagation()
       }}
+      role="toolbar"
+      aria-label="Text formatting options"
     >
       <ToolbarButton
         onClick={() => editor.chain().focus().undo().run()}
