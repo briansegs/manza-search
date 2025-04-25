@@ -11,8 +11,8 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
+import { Footer } from './Globals/Footer/config'
+import { Header } from './Globals/Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -20,6 +20,7 @@ import { getServerSideURL } from './utilities/getURL'
 import { cloudinaryStorage } from 'payload-cloudinary'
 import { Articles } from './collections/Articles'
 import { HomeMedia } from './collections/HomeMedia'
+import { Home } from './Globals/Home/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -79,7 +80,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Articles, Media, HomeMedia, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, Home],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
@@ -92,6 +93,7 @@ export default buildConfig({
       collections: {
         media: true, // Enable for media collection
         // Add more collections as needed
+        'home-media': true,
       },
       folder: '', // Optional, defaults to 'payload-media' (Doesn't seem to work)
       disableLocalStorage: true, // Optional, defaults to true

@@ -143,8 +143,8 @@ importers:
         specifier: ^1.0.6
         version: 1.0.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       payload-cloudinary:
-        specifier: ^1.5.0
-        version: 1.7.0(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.33.0(graphql@16.10.0)(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
+        specifier: 1.5.0
+        version: 1.5.0(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.33.0(graphql@16.10.0)(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
       pino:
         specifier: 9.6.0
         version: 9.6.0
@@ -4042,8 +4042,8 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  payload-cloudinary@1.7.0:
-    resolution: {integrity: sha512-MCjB9hiCfEY+SDzQN8EQpbvCPYcquoSHBwN1seLIRsVMp3zOP5zmGjQkN8nFcMLXM5HG4OsRUVfWOB6jxQ2IUA==}
+  payload-cloudinary@1.5.0:
+    resolution: {integrity: sha512-IJ0akFGt40j6y7xzoXhxBRcJLJUSpGrscyTL68Pjz7GEKRHspUv6W79kiNcQ7Tnw2Gwo4PbyiqTD+EcD7/G2WA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       payload: ^2.0.0
@@ -9847,7 +9847,7 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  payload-cloudinary@1.7.0(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.33.0(graphql@16.10.0)(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3):
+  payload-cloudinary@1.5.0(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.33.0(graphql@16.10.0)(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3):
     dependencies:
       '@payloadcms/plugin-cloud-storage': 3.33.0(@types/react@19.0.12)(monaco-editor@0.52.2)(next@15.2.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.33.0(graphql@16.10.0)(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
       cloudinary: 2.6.0

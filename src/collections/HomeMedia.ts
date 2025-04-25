@@ -11,6 +11,10 @@ import { authenticated } from '../access/authenticated'
 
 export const HomeMedia: CollectionConfig = {
   slug: 'home-media',
+  labels: {
+    singular: 'Home Media',
+    plural: 'Home Media',
+  },
   access: {
     create: authenticated,
     delete: authenticated,

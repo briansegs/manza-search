@@ -107,10 +107,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    home: Home;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    home: HomeSelect<false> | HomeSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1902,6 +1904,48 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: string;
+  layout?: PromoBlock[] | null;
+  suggestedArticles?: (string | Article)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlock".
+ */
+export interface PromoBlock {
+  title: string;
+  content?:
+    | {
+        media?: (string | null) | HomeMedia;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'promoBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1945,6 +1989,45 @@ export interface FooterSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        promoBlock?: T | PromoBlockSelect<T>;
+      };
+  suggestedArticles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PromoBlock_select".
+ */
+export interface PromoBlockSelect<T extends boolean = true> {
+  title?: T;
+  content?:
+    | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
