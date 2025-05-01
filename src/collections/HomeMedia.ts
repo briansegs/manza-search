@@ -8,6 +8,11 @@ import {
 
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export const HomeMedia: CollectionConfig = {
   slug: 'home-media',
@@ -38,6 +43,7 @@ export const HomeMedia: CollectionConfig = {
     },
   ],
   upload: {
+    staticDir: path.resolve(dirname, '../../public/home-media'),
     adminThumbnail: 'thumbnail',
     focalPoint: true,
     imageSizes: [

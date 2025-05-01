@@ -17,7 +17,7 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
-import { cloudinaryStorage } from 'payload-cloudinary'
+import { cloudinaryStorage } from './cloudinaryAdapter'
 import { Articles } from './collections/Articles'
 import { HomeMedia } from './collections/HomeMedia'
 import { Home } from './Globals/Home/config'
@@ -86,18 +86,15 @@ export default buildConfig({
     // storage-adapter-placeholder
     cloudinaryStorage({
       config: {
-        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? '',
-        api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY ?? '',
-        api_secret: process.env.CLOUDINARY_API_SECRET ?? '',
+        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
+        api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!,
+        api_secret: process.env.CLOUDINARY_API_SECRET!,
       },
       collections: {
-        media: true, // Enable for media collection
-        // Add more collections as needed
+        media: true,
         'home-media': true,
       },
-      folder: '', // Optional, defaults to 'payload-media' (Doesn't seem to work)
-      disableLocalStorage: true, // Optional, defaults to true
-      enabled: true, // Optional, defaults to true
+      folder: 'manza-search-media',
     }),
   ],
   secret: process.env.PAYLOAD_SECRET,

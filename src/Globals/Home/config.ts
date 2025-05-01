@@ -3,10 +3,38 @@ import { revalidateHome } from './hooks/revalidateHome'
 import { PromoBlock } from '@/blocks/HomeBlocks/PromoBlock/config'
 import { link } from '@/fields/link'
 
+import { authenticated } from '../../access/authenticated'
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+
 export const Home: GlobalConfig = {
   slug: 'home',
   access: {
-    read: () => true,
+    read: authenticatedOrPublished,
+    update: authenticated,
+  },
+  admin: {
+    livePreview: {
+      url: () => {
+        const encodedParams = new URLSearchParams({
+          slug: 'home',
+          collection: 'home',
+          path: '/',
+          previewSecret: process.env.PREVIEW_SECRET || '',
+        })
+        const url = `/next/preview?${encodedParams.toString()}`
+        return url
+      },
+    },
+    preview: () => {
+      const encodedParams = new URLSearchParams({
+        slug: 'home',
+        collection: 'home',
+        path: '/',
+        previewSecret: process.env.PREVIEW_SECRET || '',
+      })
+      const url = `/next/preview?${encodedParams.toString()}`
+      return url
+    },
   },
   fields: [
     {
