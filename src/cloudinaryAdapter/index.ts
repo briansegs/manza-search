@@ -3,7 +3,6 @@ import type {
   PluginOptions as CloudStoragePluginOptions,
   CollectionOptions,
   GeneratedAdapter,
-  HandleUpload,
 } from '@payloadcms/plugin-cloud-storage/types'
 
 import type { Config } from 'payload'
@@ -177,44 +176,18 @@ function cloudinaryStorageInternal({
       api_secret: config.api_secret,
     })
 
-    const rawUpload: HandleUpload = getHandleUpload({
-      cloudinary,
-      collection,
-      folder,
-      prefix: collection.slug,
-      versioning,
-      publicID,
-    })
-
-    const wrappedUpload: HandleUpload = async (ctx) => {
-      // let Payload’s adapter do its work
-      await rawUpload(ctx)
-      const data = ctx.data as PayloadDocument
-
-      if (!data.filename || !data.cloudinary) return
-
-      const folderPath = path.posix.dirname(data.cloudinary.public_id)
-      const securePath = path.posix.dirname(data.cloudinary.secure_url)
-      const baseName = data.filename.replace(/\.[^/.]+$/, '')
-
-      data.cloudinary.public_id = path.join(folderPath, baseName)
-      data.cloudinary.secure_url = path.join(securePath, baseName + '.webp')
-
-      const thumb = data.sizes?.thumbnail
-      if (thumb?.filename && thumb.url) {
-        const thumbnailPath = path.posix.dirname(thumb.url)
-        const thumbnailURL = `${thumbnailPath}/${thumb.filename}`
-
-        thumb.url = thumbnailURL
-        data.thumbnailURL = thumbnailURL
-      }
-    }
-
     return {
       name: 'cloudinary',
       generateURL: getGenerateURL({ config, folder, versioning }),
       handleDelete: getHandleDelete({ cloudinary, folder, collection }),
-      handleUpload: wrappedUpload,
+      handleUpload: getHandleUpload({
+        cloudinary,
+        collection,
+        folder,
+        prefix: collection.slug,
+        versioning,
+        publicID,
+      }),
       staticHandler: getHandler({ cloudinary, collection, folder }),
     }
   }

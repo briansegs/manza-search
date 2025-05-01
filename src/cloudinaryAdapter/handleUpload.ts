@@ -6,7 +6,7 @@ import type { CloudinaryVersioningOptions, PublicIDOptions } from './types'
 
 import path from 'path'
 import stream from 'stream'
-import { getResourceType } from './utils'
+import { getResourceType, sanitizeForPublicID } from './utils'
 
 interface Args {
   cloudinary: typeof cloudinaryType
@@ -67,19 +67,6 @@ const getUploadOptions = (
     default:
       return baseOptions
   }
-}
-
-/**
- * Sanitize a string to be used as part of a public ID
- * @param str String to sanitize
- * @returns Sanitized string
- */
-const sanitizeForPublicID = (str: string): string => {
-  return str
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '-') // Replace any character that's not a letter or number with a hyphen
-    .replace(/-+/g, '-') // Replace consecutive hyphens with a single hyphen
-    .replace(/^-|-$/g, '') // Remove leading or trailing hyphens
 }
 
 /**
@@ -188,6 +175,7 @@ export const getHandleUpload =
       asset_folder: folderPath,
     }
 
+    // console.log('uploadOptions: ', uploadOptions)
     return new Promise((resolve, reject) => {
       try {
         const uploadStream = cloudinary.uploader.upload_stream(
@@ -200,8 +188,6 @@ export const getHandleUpload =
             }
 
             if (result) {
-              // console.log('data: ', data)
-              // console.log('result: ', result)
               const isPDFFile = isPDF(file.filename)
               const baseMetadata = {
                 public_id: result.public_id,
@@ -256,6 +242,27 @@ export const getHandleUpload =
                 ...typeSpecificMetadata,
               }
 
+              data.filename = path.posix.basename(result.url)
+
+              type SizeData = { filename?: string }
+              type Sizes = Record<string, SizeData>
+
+              const sizes: Sizes = data.sizes
+              Object.values(sizes).forEach((value) => {
+                if (value.filename) {
+                  value.filename = `${sanitizeForPublicID(value.filename.replace(/\.[^/.]+$/, ''))}.${result.format}`
+                }
+              })
+
+              const thumb = data.sizes.thumbnail
+              if (thumb.filename && thumb.url) {
+                const thumbnailPath = path.posix.dirname(thumb.url)
+                const thumbnailURL = `${thumbnailPath}/${thumb.filename}`
+
+                data.sizes.thumbnail = thumbnailURL
+                data.thumbnailURL = thumbnailURL
+              }
+
               // If versioning and history storage is enabled, store version info
               if (versioning?.enabled && versioning?.storeHistory) {
                 data.versions = data.versions || []
@@ -269,7 +276,6 @@ export const getHandleUpload =
               }
             }
 
-            // console.log('data: ', data)
             resolve(data)
           },
         )
