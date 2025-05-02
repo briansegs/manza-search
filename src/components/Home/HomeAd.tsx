@@ -2,6 +2,7 @@ import React from 'react'
 import { CMSLink } from '../Link'
 import { renderMedia, renderPlaceholder } from '@/blocks/article-blocks/components'
 import { Article, HomeMedia, Page } from '@/payload-types'
+import { cn } from '@/utilities/ui'
 
 interface HomeAdProps {
   media?: (string | null) | HomeMedia
@@ -26,7 +27,12 @@ const HomeAd: React.FC<HomeAdProps> = ({ enableLink, link, media }) => {
   const hasValidLink = link && (link.type === 'reference' ? link.reference : link.type === 'custom')
 
   return (
-    <div className="relative mt-16 w-52 border-2 border-black">
+    <div
+      className={cn(
+        'relative mt-4 h-[588px] w-52 self-center border-2 border-black',
+        'xl:mt-20 xl:self-start',
+      )}
+    >
       {hasValidLink && enableLink ? (
         <CMSLink {...link}>{media ? renderMedia(media) : renderPlaceholder()}</CMSLink>
       ) : media ? (

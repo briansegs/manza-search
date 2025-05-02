@@ -14,6 +14,7 @@ import SuggestedArticles from '@/components/Home/SuggestedArticles'
 import HomeMenu from '@/components/Home/HomeMenu'
 import WelcomeBanner from '@/components/Home/WelcomeBanner'
 import HomeAd from '@/components/Home/HomeAd'
+import { cn } from '@/utilities/ui'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -30,14 +31,14 @@ export default async function Page() {
   const { layout, suggestedArticles, enableLink, link, media } = content
 
   return (
-    <section className="h-screen pb-24">
+    <section className={cn('h-full pb-4', 'xl:h-screen xl:pb-24')}>
       <PageClient />
 
       {draft && <LivePreviewListener />}
 
       <SuggestedArticles articles={suggestedArticles} />
 
-      <div className="mt-10 flex h-full gap-2">
+      <div className={cn('mt-0 flex flex-col gap-2', 'xl:mt-10 xl:max-h-full xl:flex-row')}>
         <HomeMenu />
 
         <div className="flex flex-1 flex-col items-center">

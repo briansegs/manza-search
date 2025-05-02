@@ -8,7 +8,7 @@ const PromoBlock: React.FC<PromoBlockProps> = (props) => {
   const { title, content } = props
 
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col items-center">
       <div
         className={clsx(
           'w-[95%] border-4 border-black bg-primary-blue shadow-[10px_10px_10px_black]',
@@ -20,7 +20,7 @@ const PromoBlock: React.FC<PromoBlockProps> = (props) => {
         {title}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-14 px-4 py-12">
+      <div className="flex max-w-[1075px] flex-wrap justify-center gap-14 px-4 py-12">
         {content && content.length > 0 ? (
           content.map(({ id, link, media }) => {
             const hasValidLink =
