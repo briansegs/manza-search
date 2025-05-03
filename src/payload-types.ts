@@ -273,7 +273,7 @@ export interface Article {
  */
 export interface Media {
   id: string;
-  alt?: string | null;
+  alt: string;
   caption?: {
     root: {
       type: string;
@@ -924,7 +924,7 @@ export interface Form {
  */
 export interface HomeMedia {
   id: string;
-  alt?: string | null;
+  alt: string;
   caption?: {
     root: {
       type: string;
