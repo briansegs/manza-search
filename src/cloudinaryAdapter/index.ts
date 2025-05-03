@@ -61,14 +61,13 @@ export const cloudinaryStorage: CloudinaryStoragePlugin =
     const collectionsWithAdapter: CloudStoragePluginOptions['collections'] = Object.entries(
       cloudinaryOptions.collections,
     ).reduce(
-      (acc, [slug, collOptions]) => ({
-        ...acc,
-        [slug]: {
+      (acc, [slug, collOptions]) => {
+        acc[slug] = {
           ...(collOptions === true ? {} : collOptions),
           adapter,
-          // generateFileURL: myGenerateFileURL,
-        },
-      }),
+        }
+        return acc
+      },
       {} as Record<string, CollectionOptions>,
     )
 
