@@ -174,6 +174,8 @@ export const getHandleUpload =
       asset_folder: folderPath,
     }
 
+    console.log('data before: ', data)
+
     return new Promise((resolve, reject) => {
       try {
         const uploadStream = cloudinary.uploader.upload_stream(
@@ -252,12 +254,13 @@ export const getHandleUpload =
                 }
               })
 
-              const thumb = data.sizes.thumbnail
-              if (thumb.filename && thumb.url) {
+              if (data.sizes?.thumbnail?.filename && data.sizes.thumbnail.url) {
+                const thumb = data.sizes.thumbnail
+
                 const thumbnailPath = path.posix.dirname(thumb.url)
                 const thumbnailURL = `${thumbnailPath}/${thumb.filename}`
 
-                data.sizes.thumbnail = thumbnailURL
+                thumb.url = thumbnailURL
                 data.thumbnailURL = thumbnailURL
               }
 
@@ -274,6 +277,7 @@ export const getHandleUpload =
               }
             }
 
+            console.log('data after: ', data)
             resolve(data)
           },
         )
