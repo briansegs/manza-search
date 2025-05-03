@@ -21,6 +21,7 @@ import { cloudinaryStorage } from './cloudinaryAdapter'
 import { Articles } from './collections/Articles'
 import { HomeMedia } from './collections/HomeMedia'
 import { Home } from './Globals/Home/config'
+import { NEXT_PUBLIC_SERVER_URL } from 'next.config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,7 +44,7 @@ export default buildConfig({
     },
     meta: {
       description: 'Where you find and study anything in the world.',
-      icons: [{ type: 'image/png', rel: 'icon', url: '/favicon.svg' }],
+      icons: [{ type: 'image/png', rel: 'icon', url: `${NEXT_PUBLIC_SERVER_URL}/favicon.svg` }],
       titleSuffix: '- Manza Search',
     },
     importMap: {
