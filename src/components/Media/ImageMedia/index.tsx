@@ -62,7 +62,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         format="auto"
         loading={loading}
         sizes={sizes}
-        src={publicIdFromProps ? publicIdFromProps : publicId}
+        src={publicIdFromProps ? (publicIdFromProps as string) : publicId}
         width={!fill ? width : undefined}
       />
     </picture>
