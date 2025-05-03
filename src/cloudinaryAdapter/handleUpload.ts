@@ -169,13 +169,11 @@ export const getHandleUpload =
     const uploadOptions: UploadApiOptions = {
       ...getUploadOptions(file.filename, versioning),
       public_id: publicIdValue,
-      // folder: path.dirname(publicIdValue), // Extract folder from public_id
       use_filename: publicID?.useFilename !== false,
       unique_filename: publicID?.uniqueFilename !== false,
       asset_folder: folderPath,
     }
 
-    // console.log('uploadOptions: ', uploadOptions)
     return new Promise((resolve, reject) => {
       try {
         const uploadStream = cloudinary.uploader.upload_stream(

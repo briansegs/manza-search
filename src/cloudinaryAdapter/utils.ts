@@ -1,9 +1,13 @@
 import { IMAGE_EXTENSIONS, RAW_EXTENSIONS, VIDEO_EXTENSIONS } from './constants'
 
 export const getResourceType = (ext: string) => {
-  if (VIDEO_EXTENSIONS.includes(ext)) return 'video'
-  if (IMAGE_EXTENSIONS.includes(ext)) return 'image'
-  if (RAW_EXTENSIONS.includes(ext)) return 'raw'
+  // Ensure the extension is lowercase and has a leading dot
+  const normalizedExt = ext.toLowerCase().startsWith('.')
+    ? ext.toLowerCase()
+    : `.${ext.toLowerCase()}`
+  if (VIDEO_EXTENSIONS.includes(normalizedExt)) return 'video'
+  if (IMAGE_EXTENSIONS.includes(normalizedExt)) return 'image'
+  if (RAW_EXTENSIONS.includes(normalizedExt)) return 'raw'
   return 'auto' // Default to auto for unknown types
 }
 
