@@ -45,7 +45,11 @@ export default async function Page() {
           <WelcomeBanner />
 
           <div className="size-full overflow-y-auto border-[1px] border-black p-4">
-            <RenderHomeBlocks blocks={layout ?? []} />
+            {layout && layout.length > 0 ? (
+              <RenderHomeBlocks blocks={layout} />
+            ) : (
+              <div className="py-4 text-center">No content blocks available</div>
+            )}
           </div>
         </div>
 

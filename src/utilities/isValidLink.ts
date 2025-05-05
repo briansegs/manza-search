@@ -17,10 +17,7 @@ interface Link {
 
 export const isValidLink = (link?: Link) => {
   if (link) {
-    return (
-      !!link &&
-      ((link.type === 'reference' && !!link.reference) || (link.type === 'custom' && !!link.url))
-    )
+    return (link.type === 'reference' && !!link.reference) || (link.type === 'custom' && !!link.url)
   }
   return false
 }

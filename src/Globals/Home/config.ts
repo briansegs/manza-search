@@ -3,8 +3,8 @@ import { revalidateHome } from './hooks/revalidateHome'
 import { PromoBlock } from '@/blocks/HomeBlocks/PromoBlock/config'
 import { link } from '@/fields/link'
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 
 export const Home: GlobalConfig = {
   slug: 'home',
