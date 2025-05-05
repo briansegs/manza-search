@@ -5,6 +5,8 @@ import { RightMenu } from '../Article/RightMenuContainer'
 
 const itemStyles = 'hover:text-secondary-blue cursor-pointer'
 
+const menuItems = ['pinned', 'loved', 'saved', 'history', 'lists', 'shared']
+
 const HomeMenu: React.FC = () => {
   return (
     <div>
@@ -16,24 +18,22 @@ const HomeMenu: React.FC = () => {
       >
         <div className="p-1">Menu</div>
         <ul className="list-inside list-disc space-y-6 pl-6 pt-6 uppercase">
-          <li className={itemStyles}>pinned</li>
-          <li className={itemStyles}>loved</li>
-          <li className={itemStyles}>saved</li>
-          <li className={itemStyles}>history</li>
-          <li className={itemStyles}>lists</li>
-          <li className={itemStyles}>shared</li>
+          {menuItems.map((item, index) => (
+            <li className={itemStyles} key={index}>
+              {item}
+            </li>
+          ))}
         </ul>
       </div>
 
       <div className="flex gap-2 pl-2 pt-2 xl:hidden">
         <DropdownMenu label="Menu">
           <ul className="list-inside list-disc space-y-6 font-serif uppercase text-white">
-            <li className={itemStyles}>pinned</li>
-            <li className={itemStyles}>loved</li>
-            <li className={itemStyles}>saved</li>
-            <li className={itemStyles}>history</li>
-            <li className={itemStyles}>lists</li>
-            <li className={itemStyles}>shared</li>
+            {menuItems.map((item, index) => (
+              <li className={itemStyles} key={index}>
+                {item}
+              </li>
+            ))}
           </ul>
         </DropdownMenu>
 
