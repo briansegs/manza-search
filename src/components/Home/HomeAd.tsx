@@ -3,6 +3,7 @@ import { CMSLink } from '../Link'
 import { renderMedia, renderPlaceholder } from '@/blocks/article-blocks/components'
 import { Article, HomeMedia, Page } from '@/payload-types'
 import { cn } from '@/utilities/ui'
+import { isValidLink } from '@/utilities/isValidLink'
 
 interface HomeAdProps {
   media?: (string | null) | HomeMedia
@@ -24,8 +25,7 @@ interface HomeAdProps {
 }
 
 const HomeAd: React.FC<HomeAdProps> = ({ enableLink, link, media }) => {
-  const hasValidLink = link && (link.type === 'reference' ? link.reference : link.type === 'custom')
-
+  const hasValidLink = isValidLink(link)
   return (
     <div
       className={cn(

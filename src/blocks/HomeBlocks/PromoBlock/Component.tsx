@@ -1,6 +1,7 @@
 import { renderMedia, renderPlaceholder } from '@/blocks/article-blocks/components'
 import { CMSLink } from '@/components/Link'
 import { PromoBlock as PromoBlockProps } from '@/payload-types'
+import { isValidLink } from '@/utilities/isValidLink'
 import clsx from 'clsx'
 import React from 'react'
 
@@ -14,7 +15,6 @@ const PromoBlock: React.FC<PromoBlockProps> = (props) => {
           'w-[95%] border-4 border-black bg-primary-blue shadow-[10px_10px_10px_black]',
           'font-serif text-white',
           'pl-2',
-          'hover:border-red-500',
         )}
       >
         {title}
@@ -23,8 +23,7 @@ const PromoBlock: React.FC<PromoBlockProps> = (props) => {
       <div className="flex max-w-[1075px] flex-wrap justify-center gap-14 px-4 py-12">
         {content && content.length > 0 ? (
           content.map(({ id, link, media }) => {
-            const hasValidLink =
-              link && (link.type === 'reference' ? link.reference : link.type === 'custom')
+            const hasValidLink = isValidLink(link)
 
             return (
               <div
