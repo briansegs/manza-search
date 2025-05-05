@@ -26,6 +26,8 @@ interface HomeAdProps {
 
 const HomeAd: React.FC<HomeAdProps> = ({ enableLink, link, media }) => {
   const hasValidLink = isValidLink(link)
+
+  console.log('media: ', media)
   return (
     <div
       className={cn(

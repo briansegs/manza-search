@@ -30,6 +30,8 @@ export default async function Page() {
 
   const { layout, suggestedArticles, enableLink, link, media } = content
 
+  console.log('media: ', media)
+
   return (
     <section className={cn('h-full pb-4', 'xl:h-screen xl:pb-24')}>
       <PageClient />

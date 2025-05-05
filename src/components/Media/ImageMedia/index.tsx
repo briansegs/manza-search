@@ -28,6 +28,8 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     quality = 95,
   } = props
 
+  console.log('props: ', props)
+
   let width: number | undefined
   let height: number | undefined
   let alt = altFromProps || ''
@@ -48,6 +50,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   // NOTE: this is used by the browser to determine which image to download at different screen sizes
   const sizes = sizeFromProps ? sizeFromProps : generateSizes(breakpoints, sizeMap, '20vw')
 
+  console.log('publicId ', publicId)
   return (
     <picture>
       <CldImage
