@@ -1,10 +1,10 @@
 import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
-import { revalidateHeader } from './hooks/revalidateHeader'
+import { revalidateFooter } from './hooks/revalidateFooter'
 
-export const Header: GlobalConfig = {
-  slug: 'header',
+export const Footer: GlobalConfig = {
+  slug: 'footer',
   access: {
     read: () => true,
   },
@@ -17,16 +17,16 @@ export const Header: GlobalConfig = {
           appearances: false,
         }),
       ],
-      maxRows: 11,
+      maxRows: 6,
       admin: {
         initCollapsed: true,
         components: {
-          RowLabel: '@/Header/RowLabel#RowLabel',
+          RowLabel: '@/Globals/Footer/RowLabel#RowLabel',
         },
       },
     },
   ],
   hooks: {
-    afterChange: [revalidateHeader],
+    afterChange: [revalidateFooter],
   },
 }

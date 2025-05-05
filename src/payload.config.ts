@@ -11,14 +11,17 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
+import { Footer } from './Globals/Footer/config'
+import { Header } from './Globals/Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
-import { cloudinaryStorage } from 'payload-cloudinary'
+import { cloudinaryStorage } from './cloudinaryAdapter'
 import { Articles } from './collections/Articles'
+import { HomeMedia } from './collections/HomeMedia'
+import { Home } from './Globals/Home/config'
+import { NEXT_PUBLIC_SERVER_URL } from 'next.config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -41,7 +44,7 @@ export default buildConfig({
     },
     meta: {
       description: 'Where you find and study anything in the world.',
-      icons: [{ type: 'image/png', rel: 'icon', url: '/favicon.svg' }],
+      icons: [{ type: 'image/png', rel: 'icon', url: `${NEXT_PUBLIC_SERVER_URL}/favicon.svg` }],
       titleSuffix: '- Manza Search',
     },
     importMap: {
@@ -76,25 +79,23 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Articles, Media, Categories, Users],
+  collections: [Pages, Posts, Articles, Media, HomeMedia, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, Home],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
     cloudinaryStorage({
       config: {
-        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? '',
-        api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY ?? '',
-        api_secret: process.env.CLOUDINARY_API_SECRET ?? '',
+        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
+        api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!,
+        api_secret: process.env.CLOUDINARY_API_SECRET!,
       },
       collections: {
-        media: true, // Enable for media collection
-        // Add more collections as needed
+        media: true,
+        'home-media': true,
       },
-      folder: '', // Optional, defaults to 'payload-media' (Doesn't seem to work)
-      disableLocalStorage: true, // Optional, defaults to true
-      enabled: true, // Optional, defaults to true
+      folder: 'manza-search-media',
     }),
   ],
   secret: process.env.PAYLOAD_SECRET,
