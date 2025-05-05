@@ -77,7 +77,6 @@ export const Home: GlobalConfig = {
               name: 'media',
               type: 'upload',
               relationTo: 'home-media',
-              maxDepth: 2,
             },
             {
               name: 'enableLink',

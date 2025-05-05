@@ -22,7 +22,7 @@ export const revalidate = 600
 export default async function Page() {
   const { isEnabled: draft } = await draftMode()
 
-  const content: HomeCollectionType = await getCachedGlobal('home', 2)()
+  const content: HomeCollectionType = await getCachedGlobal('home', 1)()
 
   if (!content) {
     return <NotFound />

@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { cache } from 'react'
 import { CMSLink } from '../Link'
 import { renderMedia, renderPlaceholder } from '@/blocks/article-blocks/components'
 import { Article, HomeMedia, Page } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import { isValidLink } from '@/utilities/isValidLink'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import { draftMode } from 'next/headers'
 
 interface HomeAdProps {
   media?: (string | null) | HomeMedia
@@ -24,10 +27,21 @@ interface HomeAdProps {
   }
 }
 
-const HomeAd: React.FC<HomeAdProps> = ({ enableLink, link, media }) => {
+const HomeAd: React.FC<HomeAdProps> = async ({ enableLink, link, media }) => {
   const hasValidLink = isValidLink(link)
 
+  let contentMedia: HomeMedia | null = null
+
   console.log('media: ', media)
+
+  if (typeof media === 'string') {
+    contentMedia = await queryMediaById(media)
+  }
+
+  if (typeof media === 'object') {
+    contentMedia = media
+  }
+
   return (
     <div
       className={cn(
@@ -36,14 +50,31 @@ const HomeAd: React.FC<HomeAdProps> = ({ enableLink, link, media }) => {
       )}
     >
       {hasValidLink && enableLink ? (
-        <CMSLink {...link}>{media ? renderMedia(media) : renderPlaceholder()}</CMSLink>
-      ) : media ? (
-        renderMedia(media)
+        <CMSLink {...link}>
+          {contentMedia ? renderMedia(contentMedia) : renderPlaceholder()}
+        </CMSLink>
+      ) : contentMedia ? (
+        renderMedia(contentMedia)
       ) : (
         renderPlaceholder()
       )}
     </div>
   )
 }
+
+const queryMediaById = cache(async (id: string) => {
+  const { isEnabled: draft } = await draftMode()
+
+  const payload = await getPayload({ config: configPromise })
+
+  const result = await payload.findByID({
+    collection: 'home-media',
+    draft,
+    overrideAccess: draft,
+    id: id,
+  })
+
+  return result || null
+})
 
 export default HomeAd
