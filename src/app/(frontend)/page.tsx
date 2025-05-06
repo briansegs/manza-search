@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
-import React from 'react'
+import React, { cache } from 'react'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
 
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
@@ -8,7 +10,7 @@ import NotFound from './not-found'
 import RightMenuContainer from '@/components/Article/RightMenuContainer'
 import BottomMenu from '@/components/Article/BottomMenu'
 import { RenderHomeBlocks } from '@/blocks/RenderHomeBlocks'
-import { Home as HomeCollectionType } from '@/payload-types'
+import { Home as HomeCollectionType, HomeMedia } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import SuggestedArticles from '@/components/Home/SuggestedArticles'
 import HomeMenu from '@/components/Home/HomeMenu'
@@ -28,11 +30,19 @@ export default async function Page() {
     return <NotFound />
   }
 
+  let contentMedia: HomeMedia | null = null
+
   const { layout, suggestedArticles, enableLink, link, media } = content
 
+  if (typeof media === 'string') {
+    contentMedia = await queryMediaById(media)
+  }
+  if (typeof media === 'object') {
+    contentMedia = media
+  }
   console.log('content: ', content)
 
-  console.log('media: ', media)
+  console.log('contentMedia: ', contentMedia)
 
   return (
     <section className={cn('h-full pb-4', 'xl:h-screen xl:pb-24')}>
@@ -57,7 +67,7 @@ export default async function Page() {
           </div>
         </div>
 
-        <HomeAd enableLink={enableLink} link={link} media={media} />
+        <HomeAd enableLink={enableLink} link={link} media={contentMedia} />
       </div>
 
       <RightMenuContainer />
@@ -66,6 +76,21 @@ export default async function Page() {
     </section>
   )
 }
+
+const queryMediaById = cache(async (id: string) => {
+  const { isEnabled: draft } = await draftMode()
+
+  const payload = await getPayload({ config: configPromise })
+
+  const result = await payload.findByID({
+    collection: 'home-media',
+    draft,
+    overrideAccess: draft,
+    id: id,
+  })
+
+  return result || null
+})
 
 export function generateMetadata(): Metadata {
   return {
