@@ -97,6 +97,7 @@ const queryMediaById = cache(async (id: string) => {
     console.log('Error', error)
   }
   console.log('Failed...')
+  return null
 })
 
 export function generateMetadata(): Metadata {
