@@ -24,8 +24,9 @@ interface HomeAdProps {
   }
 }
 
-const HomeAd: React.FC<HomeAdProps> = ({ enableLink, link, media }) => {
+const HomeAd: React.FC<HomeAdProps> = async ({ enableLink, link, media }) => {
   const hasValidLink = isValidLink(link)
+
   return (
     <div
       className={cn(
