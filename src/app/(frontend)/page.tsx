@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
+import React from 'react'
 
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
@@ -10,7 +8,7 @@ import NotFound from './not-found'
 import RightMenuContainer from '@/components/Article/RightMenuContainer'
 import BottomMenu from '@/components/Article/BottomMenu'
 import { RenderHomeBlocks } from '@/blocks/RenderHomeBlocks'
-import { Home as HomeCollectionType, HomeMedia } from '@/payload-types'
+import { Home as HomeCollectionType } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import SuggestedArticles from '@/components/Home/SuggestedArticles'
 import HomeMenu from '@/components/Home/HomeMenu'
@@ -30,19 +28,7 @@ export default async function Page() {
     return <NotFound />
   }
 
-  // let contentMedia: HomeMedia | null = null
-
   const { layout, suggestedArticles, enableLink, link, media } = content
-
-  // if (typeof media === 'string') {
-  //   contentMedia = await queryMediaById(media)
-  // }
-  // if (typeof media === 'object') {
-  //   contentMedia = media
-  // }
-  console.log('content: ', content)
-
-  // console.log('contentMedia: ', contentMedia)
 
   return (
     <section className={cn('h-full pb-4', 'xl:h-screen xl:pb-24')}>
@@ -76,29 +62,6 @@ export default async function Page() {
     </section>
   )
 }
-
-// const queryMediaById = cache(async (id: string) => {
-//   const { isEnabled: draft } = await draftMode()
-
-//   const payload = await getPayload({ config: configPromise })
-//   console.log('id: ', id)
-
-//   try {
-//     const result = await payload.findByID({
-//       collection: 'home-media',
-//       draft,
-//       overrideAccess: draft,
-//       id: id,
-//       depth: 2,
-//     })
-
-//     return result || null
-//   } catch (error) {
-//     console.log('Error', error)
-//   }
-//   console.log('Failed...')
-//   return null
-// })
 
 export function generateMetadata(): Metadata {
   return {
