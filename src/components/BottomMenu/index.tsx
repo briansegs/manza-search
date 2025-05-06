@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import DocPad from './DocPad'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/utilities/ui'
 
-const BottomMenu = () => {
+const BottomMenu: React.FC = () => {
   return (
     <div className="fixed bottom-0 z-10 flex h-12 w-full justify-between sm:h-16">
       <div className="w-28">
