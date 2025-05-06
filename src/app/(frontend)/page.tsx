@@ -30,19 +30,19 @@ export default async function Page() {
     return <NotFound />
   }
 
-  let contentMedia: HomeMedia | null = null
+  // let contentMedia: HomeMedia | null = null
 
   const { layout, suggestedArticles, enableLink, link, media } = content
 
-  if (typeof media === 'string') {
-    contentMedia = await queryMediaById(media)
-  }
-  if (typeof media === 'object') {
-    contentMedia = media
-  }
+  // if (typeof media === 'string') {
+  //   contentMedia = await queryMediaById(media)
+  // }
+  // if (typeof media === 'object') {
+  //   contentMedia = media
+  // }
   console.log('content: ', content)
 
-  console.log('contentMedia: ', contentMedia)
+  // console.log('contentMedia: ', contentMedia)
 
   return (
     <section className={cn('h-full pb-4', 'xl:h-screen xl:pb-24')}>
@@ -67,7 +67,7 @@ export default async function Page() {
           </div>
         </div>
 
-        <HomeAd enableLink={enableLink} link={link} media={contentMedia} />
+        <HomeAd enableLink={enableLink} link={link} media={media} />
       </div>
 
       <RightMenuContainer />
@@ -77,28 +77,28 @@ export default async function Page() {
   )
 }
 
-const queryMediaById = cache(async (id: string) => {
-  const { isEnabled: draft } = await draftMode()
+// const queryMediaById = cache(async (id: string) => {
+//   const { isEnabled: draft } = await draftMode()
 
-  const payload = await getPayload({ config: configPromise })
-  console.log('id: ', id)
+//   const payload = await getPayload({ config: configPromise })
+//   console.log('id: ', id)
 
-  try {
-    const result = await payload.findByID({
-      collection: 'home-media',
-      draft,
-      overrideAccess: draft,
-      id: id,
-      depth: 2,
-    })
+//   try {
+//     const result = await payload.findByID({
+//       collection: 'home-media',
+//       draft,
+//       overrideAccess: draft,
+//       id: id,
+//       depth: 2,
+//     })
 
-    return result || null
-  } catch (error) {
-    console.log('Error', error)
-  }
-  console.log('Failed...')
-  return null
-})
+//     return result || null
+//   } catch (error) {
+//     console.log('Error', error)
+//   }
+//   console.log('Failed...')
+//   return null
+// })
 
 export function generateMetadata(): Metadata {
   return {
