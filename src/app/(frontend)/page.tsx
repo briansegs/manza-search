@@ -81,6 +81,7 @@ const queryMediaById = cache(async (id: string) => {
   const { isEnabled: draft } = await draftMode()
 
   const payload = await getPayload({ config: configPromise })
+  console.log('id: ', id)
 
   const result = await payload.findByID({
     collection: 'home-media',
