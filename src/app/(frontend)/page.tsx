@@ -83,14 +83,20 @@ const queryMediaById = cache(async (id: string) => {
   const payload = await getPayload({ config: configPromise })
   console.log('id: ', id)
 
-  const result = await payload.findByID({
-    collection: 'home-media',
-    draft,
-    overrideAccess: draft,
-    id: id,
-  })
+  try {
+    const result = await payload.findByID({
+      collection: 'home-media',
+      draft,
+      overrideAccess: draft,
+      id: id,
+      depth: 2,
+    })
 
-  return result || null
+    return result || null
+  } catch (error) {
+    console.log('Error', error)
+  }
+  console.log('Failed...')
 })
 
 export function generateMetadata(): Metadata {
