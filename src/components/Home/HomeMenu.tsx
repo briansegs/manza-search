@@ -26,7 +26,7 @@ const HomeMenu: React.FC = () => {
         </ul>
       </div>
 
-      <div className="flex gap-2 pl-2 pt-2 xl:hidden">
+      <div className={cn('flex gap-2 pl-2 pt-0', 'lg:pt-2 xl:hidden')}>
         <DropdownMenu label="Menu">
           <ul className="list-inside list-disc space-y-6 font-serif uppercase text-white">
             {menuItems.map((item, index) => (
