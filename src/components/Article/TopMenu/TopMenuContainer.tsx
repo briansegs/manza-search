@@ -1,5 +1,5 @@
 import React from 'react'
-import { RightMenu } from '../RightMenuContainer'
+import { RightMenu } from '@/components/RightMenuContainer'
 import { Article } from '@/payload-types'
 import getAuthorList from '@/utilities/getAuthorList'
 import LeftMenu from '../LeftMenu'
@@ -21,7 +21,7 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article }) => {
   return (
     <div className="sticky top-0 z-10">
       {/* Large device view */}
-      <div className="bg-menu ml-auto hidden h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black hover:bg-black lg:flex">
+      <div className="ml-auto hidden h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu hover:bg-black lg:flex">
         <TopMenu />
       </div>
 
