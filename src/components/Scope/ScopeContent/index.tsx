@@ -7,7 +7,13 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
   const miscArticles = articles.filter((article) => !article.categories)
 
   return (
-    <div className={cn('flex w-full flex-wrap justify-center gap-12', 'mt-12 px-2', 'lg:px-32')}>
+    <div
+      className={cn(
+        'flex w-full flex-wrap justify-center gap-12',
+        'mt-1 px-2',
+        'lg:mt-12 lg:px-32',
+      )}
+    >
       {categories
         ? categories?.map((categorie) => {
             const { id, title, slug } = categorie
