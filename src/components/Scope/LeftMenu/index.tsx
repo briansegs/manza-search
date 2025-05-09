@@ -2,14 +2,7 @@ import ScrollToSection from '@/components/ScrollToSection'
 import scrollToTop from '@/utilities/scrollToTop'
 import { cn } from '@/utilities/ui'
 import React from 'react'
-
-interface LeftMenuProps {
-  categories: {
-    id: string
-    title: string
-    slug?: string | null | undefined
-  }[]
-}
+import { LeftMenuProps } from './types'
 
 const LeftMenu: React.FC<LeftMenuProps> = ({ categories }) => {
   return (

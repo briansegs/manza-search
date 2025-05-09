@@ -1,5 +1,6 @@
-import { renderMedia, renderPlaceholder } from '@/blocks/article-blocks/components'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
 import { CMSLink } from '@/components/Link'
+import RenderMedia from '@/components/RenderMedia'
 import { PromoBlock as PromoBlockProps } from '@/payload-types'
 import { isValidLink } from '@/utilities/isValidLink'
 import clsx from 'clsx'
@@ -33,11 +34,13 @@ const PromoBlock: React.FC<PromoBlockProps> = (props) => {
                 )}
               >
                 {hasValidLink ? (
-                  <CMSLink {...link}>{media ? renderMedia(media) : renderPlaceholder()}</CMSLink>
+                  <CMSLink {...link}>
+                    {media ? <RenderMedia media={media} /> : <ImagePlaceholder />}
+                  </CMSLink>
                 ) : media ? (
-                  renderMedia(media)
+                  <RenderMedia media={media} />
                 ) : (
-                  renderPlaceholder()
+                  <ImagePlaceholder />
                 )}
               </div>
             )

@@ -2,7 +2,7 @@
 import React from 'react'
 import { useUser } from '@clerk/nextjs'
 
-const WelcomeBanner = () => {
+const WelcomeBanner: React.FC = () => {
   const { isLoaded, user } = useUser()
 
   const name = isLoaded && user && user.firstName ? user.firstName : ''

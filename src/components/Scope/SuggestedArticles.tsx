@@ -1,12 +1,8 @@
-import { Scope } from '@/payload-types'
 import Link from 'next/link'
 import React from 'react'
+import { SuggestedArticlesProps } from './types'
 
-export type Props = {
-  articles: Scope['suggestedArticles']
-}
-
-const SuggestedArticles: React.FC<Props> = (props) => {
+const SuggestedArticles: React.FC<SuggestedArticlesProps> = (props) => {
   const { articles } = props
 
   const hasArticles = articles && Array.isArray(articles) && articles.length > 0

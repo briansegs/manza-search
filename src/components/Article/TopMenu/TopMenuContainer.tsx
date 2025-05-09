@@ -4,7 +4,7 @@ import { Article } from '@/payload-types'
 import getAuthorList from '@/utilities/getAuthorList'
 import LeftMenu from '../LeftMenu'
 import TopMenu from '.'
-import DropdownMenu from './DropdownMenu'
+import DropdownMenu from '../../DropdownMenu'
 import getSectionTitles from '@/utilities/getSectionTitles'
 
 interface TopMenuContainerProps {

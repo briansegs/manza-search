@@ -1,8 +1,9 @@
 import { Media } from '@/payload-types'
 import React from 'react'
-import { renderMedia, renderPlaceholder } from '../../components'
 import { Button } from '@/components/ui/button'
 import clsx from 'clsx'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
+import RenderMedia from '@/components/RenderMedia'
 
 type BooksType = {
   image?: Media
@@ -61,10 +62,10 @@ const Books = () => {
         books.map(({ image, id, name, shop, price, shipping }) => (
           <div
             key={id}
-            className="border-content bg-primary-blue rounded-primary h-fit overflow-hidden"
+            className="border-content h-fit overflow-hidden rounded-primary bg-primary-blue"
           >
             <div className="relative h-96 w-[300px] flex-shrink-0">
-              {image ? renderMedia(image) : renderPlaceholder()}
+              {image ? <RenderMedia media={image} /> : <ImagePlaceholder />}
             </div>
 
             <div className="flex flex-col gap-2 p-2">

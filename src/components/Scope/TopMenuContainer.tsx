@@ -2,15 +2,8 @@ import React from 'react'
 import { RightMenu } from '@/components/RightMenuContainer'
 
 import LeftMenu from './LeftMenu'
-import DropdownMenu from '../Article/TopMenu/DropdownMenu'
-
-interface TopMenuContainerProps {
-  categories: {
-    id: string
-    title: string
-    slug?: string | null | undefined
-  }[]
-}
+import DropdownMenu from '../DropdownMenu'
+import { TopMenuContainerProps } from './types'
 
 const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ categories }) => {
   return (

@@ -1,7 +1,7 @@
 import { ResourceSection as ResourceSectionProps } from '@/payload-types'
 import React from 'react'
 import Images from './Images'
-import { TitleBar } from '../components'
+import { TitleBar } from '../TitleBar'
 import Books from './Books'
 import Audio from './Audio'
 import Videos from './Videos'

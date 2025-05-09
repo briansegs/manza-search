@@ -1,8 +1,10 @@
 import { CMSLink } from '@/components/Link'
 import { AdSection as AdSectionProps } from '@/payload-types'
 import React from 'react'
-import { renderMedia, renderPlaceholder, TitleBar } from '../components'
 import clsx from 'clsx'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
+import RenderMedia from '@/components/RenderMedia'
+import TitleBar from '../TitleBar'
 
 export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
   const { title, ads } = props
@@ -22,18 +24,20 @@ export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
                 <div
                   key={id}
                   className={clsx(
-                    'border-content rounded-primary relative h-72 w-[406px] flex-shrink-0 overflow-hidden hover:shadow-[10px_10px_10px_#60b3d3]',
+                    'border-content relative h-72 w-[406px] flex-shrink-0 overflow-hidden rounded-primary hover:shadow-[10px_10px_10px_#60b3d3]',
                     index === 0 ? 'hover:border-red-500' : '',
                     index === 1 ? 'hover:border-green-500' : '',
                     index === 2 ? 'hover:border-blue-500' : '',
                   )}
                 >
                   {hasValidLink ? (
-                    <CMSLink {...link}>{media ? renderMedia(media) : renderPlaceholder()}</CMSLink>
+                    <CMSLink {...link}>
+                      {media ? <RenderMedia media={media} /> : <ImagePlaceholder />}
+                    </CMSLink>
                   ) : media ? (
-                    renderMedia(media)
+                    <RenderMedia media={media} />
                   ) : (
-                    renderPlaceholder()
+                    <ImagePlaceholder />
                   )}
                 </div>
               )

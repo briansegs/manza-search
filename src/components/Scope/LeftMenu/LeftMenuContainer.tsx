@@ -1,14 +1,7 @@
 import React from 'react'
 import LeftMenu from '.'
 import { cn } from '@/utilities/ui'
-
-interface LeftMenuContainerProps {
-  categories: {
-    id: string
-    title: string
-    slug?: string | null | undefined
-  }[]
-}
+import { LeftMenuContainerProps } from './types'
 
 const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ categories }) => {
   return (

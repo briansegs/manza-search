@@ -1,6 +1,6 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import DropdownMenu from '../Article/TopMenu/DropdownMenu'
+import DropdownMenu from '../DropdownMenu'
 import { RightMenu } from '../RightMenuContainer'
 
 const itemStyles = 'hover:text-secondary-blue cursor-pointer'
