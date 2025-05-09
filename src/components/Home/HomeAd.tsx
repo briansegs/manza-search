@@ -1,28 +1,10 @@
 import React from 'react'
 import { CMSLink } from '../Link'
-import { renderMedia, renderPlaceholder } from '@/blocks/article-blocks/components'
-import { Article, HomeMedia, Page } from '@/payload-types'
 import { cn } from '@/utilities/ui'
 import { isValidLink } from '@/utilities/isValidLink'
-
-interface HomeAdProps {
-  media?: (string | null) | HomeMedia
-  enableLink?: boolean | null
-  link?: {
-    type?: ('reference' | 'custom') | null
-    newTab?: boolean | null
-    reference?:
-      | ({
-          relationTo: 'pages'
-          value: string | Page
-        } | null)
-      | ({
-          relationTo: 'articles'
-          value: string | Article
-        } | null)
-    url?: string | null
-  }
-}
+import ImagePlaceholder from '../ImagePlaceholder'
+import { HomeAdProps } from './types'
+import RenderMedia from '../RenderMedia'
 
 const HomeAd: React.FC<HomeAdProps> = async ({ enableLink, link, media }) => {
   const hasValidLink = isValidLink(link)
@@ -35,11 +17,11 @@ const HomeAd: React.FC<HomeAdProps> = async ({ enableLink, link, media }) => {
       )}
     >
       {hasValidLink && enableLink ? (
-        <CMSLink {...link}>{media ? renderMedia(media) : renderPlaceholder()}</CMSLink>
+        <CMSLink {...link}>{media ? <RenderMedia media={media} /> : <ImagePlaceholder />}</CMSLink>
       ) : media ? (
-        renderMedia(media)
+        <RenderMedia media={media} />
       ) : (
-        renderPlaceholder()
+        <ImagePlaceholder />
       )}
     </div>
   )

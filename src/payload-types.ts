@@ -108,11 +108,13 @@ export interface Config {
     header: Header;
     footer: Footer;
     home: Home;
+    scope: Scope;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
+    scope: ScopeSelect<false> | ScopeSelect<true>;
   };
   locale: null;
   user: User & {
@@ -223,6 +225,7 @@ export interface Article {
   heroImage?: (string | null) | Media;
   layout?: (AdSection | ContentSection | ResourceSection)[] | null;
   relatedArticles?: (string | Article)[] | null;
+  categories?: (string | Category)[] | null;
   otherVerifiedSources?:
     | {
         label: string;
@@ -452,6 +455,27 @@ export interface ResourceSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -609,27 +633,6 @@ export interface ArchiveBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'archive';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1426,6 +1429,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         resourceSection?: T | ResourceSectionSelect<T>;
       };
   relatedArticles?: T;
+  categories?: T;
   otherVerifiedSources?:
     | T
     | {
@@ -2030,6 +2034,16 @@ export interface PromoBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scope".
+ */
+export interface Scope {
+  id: string;
+  suggestedArticles?: (string | Article)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2122,6 +2136,16 @@ export interface PromoBlockSelect<T extends boolean = true> {
       };
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "scope_select".
+ */
+export interface ScopeSelect<T extends boolean = true> {
+  suggestedArticles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

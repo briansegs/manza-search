@@ -3,7 +3,7 @@ import MenuButton from './MenuButton'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Article } from '@/payload-types'
 import { CMSLink } from '../Link'
-import ScrollToSection from './ScrollToSection'
+import ScrollToSection from '../ScrollToSection'
 import { sectionTitle } from '@/utilities/getSectionTitles'
 
 interface PopoverButtonProps {
@@ -27,7 +27,7 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({ data, children, dark }) =
     </PopoverTrigger>
     {data && (
       <PopoverContent
-        className="bg-menu w-fit rounded-lg border-2 border-black py-2 font-serif text-white"
+        className="w-fit rounded-lg border-2 border-black bg-menu py-2 font-serif text-white"
         side="right"
       >
         <ul className="flex flex-col">

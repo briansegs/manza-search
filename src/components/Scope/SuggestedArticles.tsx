@@ -8,7 +8,7 @@ const SuggestedArticles: React.FC<SuggestedArticlesProps> = (props) => {
   const hasArticles = articles && Array.isArray(articles) && articles.length > 0
 
   return (
-    <div className="mb-2 overflow-auto bg-black lg:mb-0">
+    <div className="overflow-auto bg-black">
       <div className="container flex w-full gap-4 overflow-x-auto py-1">
         {hasArticles &&
           articles?.map((article) => {

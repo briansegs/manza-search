@@ -30,6 +30,7 @@ export const Articles: CollectionConfig<'articles'> = {
   defaultPopulate: {
     title: true,
     slug: true,
+    categories: true,
     meta: {
       image: true,
       description: true,
@@ -105,6 +106,15 @@ export const Articles: CollectionConfig<'articles'> = {
               },
               hasMany: true,
               relationTo: 'articles',
+            },
+            {
+              name: 'categories',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'categories',
             },
             {
               name: 'otherVerifiedSources',
