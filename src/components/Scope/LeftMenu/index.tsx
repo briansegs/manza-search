@@ -6,7 +6,7 @@ import { LeftMenuProps } from './types'
 
 const LeftMenu: React.FC<LeftMenuProps> = ({ categories }) => {
   return (
-    <ul className={cn('flex flex-col gap-2', 'font-serif text-white', 'px-4')}>
+    <ul className={cn('flex flex-col gap-2', 'font-serif text-white', 'px-4', 'overflow-auto')}>
       <li>
         <button onClick={scrollToTop} className="hover:text-secondary-blue">
           TOP
@@ -15,11 +15,12 @@ const LeftMenu: React.FC<LeftMenuProps> = ({ categories }) => {
 
       {categories.map(({ id, slug, title }) => (
         <li key={id} className="hover:text-secondary-blue">
-          <ScrollToSection className="capitalize" id={slug ?? ''}>
+          <ScrollToSection className="max-w-[107px] truncate capitalize" id={slug ?? ''}>
             {title}
           </ScrollToSection>
         </li>
       ))}
+
       <li className="hover:text-secondary-blue">
         <ScrollToSection className="capitalize" id="misc">
           Miscellaneous

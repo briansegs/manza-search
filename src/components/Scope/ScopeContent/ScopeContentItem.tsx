@@ -3,6 +3,7 @@ import React from 'react'
 import { ScopeContentItemProps } from '../types'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
+import { cn } from '@/utilities/ui'
 
 const ScopeContentItem: React.FC<ScopeContentItemProps> = ({ title, slug, media }) => (
   <div className="flex flex-col items-center gap-1">
@@ -12,7 +13,7 @@ const ScopeContentItem: React.FC<ScopeContentItemProps> = ({ title, slug, media 
       </div>
     </Link>
 
-    <div className="text-center font-serif text-white">{title}</div>
+    <div className={cn('text-center font-serif text-white', 'max-w-16 truncate')}>{title}</div>
   </div>
 )
 
