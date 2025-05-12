@@ -1,15 +1,13 @@
+interface Category {
+  id: string
+  title: string
+  slug?: string | null | undefined
+}
+
 export interface LeftMenuProps {
-  categories: {
-    id: string
-    title: string
-    slug?: string | null | undefined
-  }[]
+  categories: Category[]
 }
 
 export interface LeftMenuContainerProps {
-  categories: {
-    id: string
-    title: string
-    slug?: string | null | undefined
-  }[]
+  categories: Category[]
 }
