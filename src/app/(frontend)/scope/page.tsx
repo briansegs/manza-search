@@ -18,52 +18,65 @@ export const revalidate = 600
 export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
-  const categories = await payload.find({
-    collection: 'categories',
-    depth: 1,
-    overrideAccess: false,
-    select: {
-      title: true,
-      slug: true,
-    },
-  })
+  try {
+    const categories = await payload.find({
+      collection: 'categories',
+      depth: 1,
+      overrideAccess: false,
+      select: {
+        title: true,
+        slug: true,
+      },
+    })
 
-  const articles = await payload.find({
-    collection: 'articles',
-    sort: '-updatedAt',
-    depth: 1,
-    overrideAccess: false,
-    select: {
-      title: true,
-      slug: true,
-      categories: true,
-      heroImage: true,
-    },
-  })
+    const articles = await payload.find({
+      collection: 'articles',
+      sort: '-updatedAt',
+      depth: 1,
+      overrideAccess: false,
+      select: {
+        title: true,
+        slug: true,
+        categories: true,
+        heroImage: true,
+      },
+    })
 
-  const SocpeData: ScopeGlobalType = await getCachedGlobal('scope', 1)()
+    const SocpeData: ScopeGlobalType = await getCachedGlobal('scope', 1)()
 
-  return (
-    <section className="mb-24">
-      <PageClient />
-      <div className="min-h-screen w-full">
-        <SuggestedArticles articles={SocpeData.suggestedArticles} />
+    return (
+      <section className="mb-24">
+        <PageClient />
+        <div className="min-h-screen w-full">
+          <SuggestedArticles articles={SocpeData.suggestedArticles} />
 
-        <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
-          <h2 className="py-2 font-serif text-xl uppercase text-white">Scope HomePage</h2>
+          <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
+            <h2 className="py-2 font-serif text-xl uppercase text-white">Scope HomePage</h2>
+          </div>
+          <LeftMenuContainer categories={categories?.docs} />
+
+          <TopMenuContainer categories={categories?.docs} />
+
+          <ScopeContent categories={categories?.docs} articles={articles?.docs} />
+
+          <RightMenuContainer />
+
+          <BottomMenu />
         </div>
-        <LeftMenuContainer categories={categories?.docs} />
+      </section>
+    )
+  } catch (error) {
+    console.log('Error: ', error)
 
-        <TopMenuContainer categories={categories?.docs} />
-
-        <ScopeContent categories={categories?.docs} articles={articles?.docs} />
-
-        <RightMenuContainer />
-
-        <BottomMenu />
-      </div>
-    </section>
-  )
+    return (
+      <section className="mb-24">
+        <PageClient />
+        <div className="flex min-h-screen w-full items-center justify-center">
+          <h2 className="text-xl">Unable to load scope data. Please try again later.</h2>
+        </div>
+      </section>
+    )
+  }
 }
 
 export function generateMetadata(): Metadata {
