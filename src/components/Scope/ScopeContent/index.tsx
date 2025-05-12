@@ -25,13 +25,13 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
       )}
     >
       {categories && categories.length > 0
-        ? categories?.map((categorie) => {
-            const { id, title, slug } = categorie
+        ? categories?.map((category) => {
+            const { id, title, slug } = category
 
             const categorieArticles = articles.filter((article) => {
               if (article.categories) {
-                return article.categories?.some((categorie) =>
-                  typeof categorie !== 'string' ? categorie.slug === slug : false,
+                return article.categories?.some((category) =>
+                  typeof category !== 'string' ? category.slug === slug : false,
                 )
               }
 
