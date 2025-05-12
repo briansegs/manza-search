@@ -2,7 +2,7 @@
 
 import clsx from 'clsx'
 import React, { ReactNode } from 'react'
-import { ButtonProps } from '../ui/button'
+import { ButtonProps } from './ui/button'
 
 interface ScrollToSectionProps extends ButtonProps {
   id: string

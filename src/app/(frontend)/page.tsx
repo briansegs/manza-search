@@ -5,10 +5,10 @@ import React from 'react'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import NotFound from './not-found'
-import RightMenuContainer from '@/components/Article/RightMenuContainer'
+import RightMenuContainer from '@/components/RightMenuContainer'
 import BottomMenu from '@/components/BottomMenu'
 import { RenderHomeBlocks } from '@/blocks/RenderHomeBlocks'
-import { Home as HomeCollectionType } from '@/payload-types'
+import { Home as HomeGlobalType } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import SuggestedArticles from '@/components/Home/SuggestedArticles'
 import HomeMenu from '@/components/Home/HomeMenu'
@@ -22,7 +22,7 @@ export const revalidate = 600
 export default async function Page() {
   const { isEnabled: draft } = await draftMode()
 
-  const content: HomeCollectionType = await getCachedGlobal('home', 1)()
+  const content: HomeGlobalType = await getCachedGlobal('home', 1)()
 
   if (!content) {
     return <NotFound />

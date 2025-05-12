@@ -1,6 +1,7 @@
 import React from 'react'
-import { renderMedia, renderPlaceholder } from '../../components'
 import { Media as MediaType } from '@/payload-types'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
+import RenderMedia from '@/components/RenderMedia'
 
 type ImagesType = {
   media?: MediaType
@@ -32,9 +33,9 @@ const Images = () => {
         images.map(({ media, id }) => (
           <div
             key={id}
-            className="border-content rounded-primary relative h-72 w-96 flex-shrink-0 overflow-hidden"
+            className="border-content relative h-72 w-96 flex-shrink-0 overflow-hidden rounded-primary"
           >
-            {media ? renderMedia(media) : renderPlaceholder()}
+            {media ? <RenderMedia media={media} /> : <ImagePlaceholder />}
           </div>
         ))
       ) : (

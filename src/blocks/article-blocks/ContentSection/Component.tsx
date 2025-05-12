@@ -1,11 +1,12 @@
 import { ContentSection as ContentSectionProps, Media } from '@/payload-types'
 import React from 'react'
-import { renderMedia, TitleBar } from '../components'
 import RichText from '@/components/RichText'
 
 import clsx from 'clsx'
 import ContentButtons from './ContentButtons'
 import { cn } from '@/utilities/ui'
+import RenderMedia from '@/components/RenderMedia'
+import TitleBar from '../TitleBar'
 
 interface ImageContainerProps {
   image: string | Media
@@ -18,9 +19,9 @@ const ImageContainer = ({ image, className }: ImageContainerProps) => {
   return (
     <div className="flex-shrink-0">
       <div
-        className={cn('border-content rounded-primary relative w-64 overflow-hidden', className)}
+        className={cn('border-content relative w-64 overflow-hidden rounded-primary', className)}
       >
-        {renderMedia(image)}
+        {<RenderMedia media={image} />}
       </div>
     </div>
   )

@@ -22,6 +22,7 @@ import { Articles } from './collections/Articles'
 import { HomeMedia } from './collections/HomeMedia'
 import { Home } from './Globals/Home/config'
 import { NEXT_PUBLIC_SERVER_URL } from 'next.config'
+import { Scope } from './Globals/Scope/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -81,7 +82,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Articles, Media, HomeMedia, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Home],
+  globals: [Header, Footer, Home, Scope],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

@@ -1,11 +1,11 @@
 import { ResourceSection as ResourceSectionProps } from '@/payload-types'
 import React from 'react'
 import Images from './Images'
-import { TitleBar } from '../components'
 import Books from './Books'
 import Audio from './Audio'
 import Videos from './Videos'
 import Shop from './Shop'
+import TitleBar from '../TitleBar'
 
 const resource = {
   images: Images,
