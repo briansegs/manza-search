@@ -27,15 +27,17 @@ const ScopeContentContainer: React.FC<ScopeContentContainerProps> = ({ slug, tit
     </div>
 
     <div className="flex w-full flex-wrap justify-center gap-4 px-8">
-      {articles.map(({ id, title, slug: artileSlug, heroImage }) =>
-        heroImage && typeof heroImage === 'object' ? (
-          <ScopeContentItem
-            media={heroImage}
-            slug={artileSlug ? artileSlug : ''}
-            title={title}
-            key={id}
-          />
-        ) : null,
+      {articles.map(
+        ({ id, title, slug: articleSlug, heroImage }) =>
+          heroImage &&
+          typeof heroImage === 'object' && (
+            <ScopeContentItem
+              media={heroImage}
+              slug={articleSlug ? articleSlug : ''}
+              title={title}
+              key={id}
+            />
+          ),
       )}
     </div>
   </div>

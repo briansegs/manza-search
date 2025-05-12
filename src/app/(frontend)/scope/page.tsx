@@ -42,13 +42,13 @@ export default async function Page() {
       },
     })
 
-    const SocpeData: ScopeGlobalType = await getCachedGlobal('scope', 1)()
+    const ScopeData: ScopeGlobalType = await getCachedGlobal('scope', 1)()
 
     return (
       <section className="mb-24">
         <PageClient />
         <div className="min-h-screen w-full">
-          <SuggestedArticles articles={SocpeData.suggestedArticles} />
+          <SuggestedArticles articles={ScopeData.suggestedArticles} />
 
           <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
             <h2 className="py-2 font-serif text-xl uppercase text-white">Scope HomePage</h2>

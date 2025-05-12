@@ -8,11 +8,7 @@ const NoContent = () => <div className="mt-6 w-full text-center">No content to d
 const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => {
   const miscArticles = articles.filter((article) => !article.categories)
 
-  if (!categories && !miscArticles) {
-    return <NoContent />
-  }
-
-  if (categories?.length === 0 && miscArticles?.length === 0) {
+  if (!categories || (categories?.length === 0 && !miscArticles) || miscArticles?.length === 0) {
     return <NoContent />
   }
 
@@ -28,7 +24,7 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
         ? categories?.map((category) => {
             const { id, title, slug } = category
 
-            const categorieArticles = articles.filter((article) => {
+            const categoryArticles = articles.filter((article) => {
               if (article.categories) {
                 return article.categories?.some((category) =>
                   typeof category !== 'string' ? category.slug === slug : false,
@@ -38,10 +34,10 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
               return false
             })
 
-            return categorieArticles ? (
+            return categoryArticles ? (
               <ScopeContentContainer
-                articles={categorieArticles}
-                slug={slug ? slug : ''}
+                articles={categoryArticles}
+                slug={slug || ''}
                 title={title}
                 key={id}
               />

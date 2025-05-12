@@ -9,7 +9,7 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ categories }) => {
   return (
     <div className="sticky top-0 z-10 mt-1">
       {/* Mobile view */}
-      <div className="sticky top-0 z-10 ml-auto flex justify-between px-1 lg:hidden">
+      <div className="ml-auto flex justify-between px-1 lg:hidden">
         <DropdownMenu label="Table of Content">
           <LeftMenu categories={categories} />
         </DropdownMenu>

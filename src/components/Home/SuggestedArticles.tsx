@@ -2,9 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { SuggestedArticlesProps } from './types'
 
-const SuggestedArticles: React.FC<SuggestedArticlesProps> = (props) => {
-  const { articles } = props
-
+const SuggestedArticles: React.FC<SuggestedArticlesProps> = ({ articles }) => {
   const hasArticles = articles && Array.isArray(articles) && articles.length > 0
 
   return (
