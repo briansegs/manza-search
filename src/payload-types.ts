@@ -109,12 +109,14 @@ export interface Config {
     footer: Footer;
     home: Home;
     scope: Scope;
+    literature: Literature;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
     scope: ScopeSelect<false> | ScopeSelect<true>;
+    literature: LiteratureSelect<false> | LiteratureSelect<true>;
   };
   locale: null;
   user: User & {
@@ -2044,6 +2046,16 @@ export interface Scope {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "literature".
+ */
+export interface Literature {
+  id: string;
+  suggestedArticles?: (string | Article)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2142,6 +2154,16 @@ export interface PromoBlockSelect<T extends boolean = true> {
  * via the `definition` "scope_select".
  */
 export interface ScopeSelect<T extends boolean = true> {
+  suggestedArticles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "literature_select".
+ */
+export interface LiteratureSelect<T extends boolean = true> {
   suggestedArticles?: T;
   updatedAt?: T;
   createdAt?: T;
