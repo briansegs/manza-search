@@ -3,6 +3,7 @@ import { revalidateLiterature } from './hooks/revalidateLiterature'
 
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { link } from '@/fields/link'
 
 export const Literature: GlobalConfig = {
   slug: 'literature',
@@ -36,18 +37,57 @@ export const Literature: GlobalConfig = {
   },
   fields: [
     {
-      name: 'suggestedArticles',
-      label: 'Suggested Articles',
-      type: 'relationship',
-      relationTo: 'articles',
-      filterOptions: ({ id }) => {
-        return {
-          id: {
-            not_in: [id],
-          },
-        }
-      },
-      hasMany: true,
+      type: 'tabs',
+      tabs: [
+        {
+          fields: [
+            {
+              name: 'suggestedArticles',
+              type: 'relationship',
+              relationTo: 'articles',
+              filterOptions: ({ id }) => {
+                return {
+                  id: {
+                    not_in: [id],
+                  },
+                }
+              },
+              hasMany: true,
+            },
+          ],
+          label: 'Suggested Articles',
+        },
+        {
+          fields: [
+            {
+              name: 'pageAds',
+              label: 'Page Ad',
+              type: 'array',
+              fields: [
+                {
+                  name: 'media',
+                  type: 'upload',
+                  relationTo: 'literature-media',
+                },
+                {
+                  name: 'enableLink',
+                  type: 'checkbox',
+                },
+                link({
+                  overrides: {
+                    admin: {
+                      condition: (_, { enableLink }) => Boolean(enableLink),
+                    },
+                  },
+                  appearances: false,
+                  disableLabel: true,
+                }),
+              ],
+            },
+          ],
+          label: 'Page Ads',
+        },
+      ],
     },
   ],
   hooks: {

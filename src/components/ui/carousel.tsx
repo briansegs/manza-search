@@ -286,7 +286,7 @@ const CarouselDotButtons = React.forwardRef<HTMLButtonElement, React.ComponentPr
               className,
             )}
           >
-            <Circle className={cn()} />
+            <Circle />
             <span className="sr-only">Select slide</span>
           </Button>
         ))}
