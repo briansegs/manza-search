@@ -17,7 +17,7 @@ export interface LiteratureCategory {
 }
 
 interface LiteratureContentProps {
-  content: LiteratureCategory[]
+  content: LiteratureCategory[] | null | undefined
 }
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>

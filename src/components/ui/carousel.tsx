@@ -100,20 +100,6 @@ const Carousel = React.forwardRef<
     setApi(api)
   }, [api, setApi])
 
-  React.useEffect(() => {
-    if (!api) {
-      return
-    }
-
-    onSelect(api)
-    api.on('reInit', onSelect)
-    api.on('select', onSelect)
-
-    return () => {
-      api?.off('select', onSelect)
-    }
-  }, [api, onSelect])
-
   // Dot Button
   const onDotButtonClick = React.useCallback(
     (index: number) => {
