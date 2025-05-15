@@ -254,7 +254,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 CarouselNext.displayName = 'CarouselNext'
 
 const CarouselDotButtons = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
-  ({ className, variant = 'ghost2', size = 'icon', ...props }, ref) => {
+  ({ className, variant = 'carouselDot', size = 'icon', ...props }, ref) => {
     const { selectedIndex, scrollSnaps, onDotButtonClick } = useCarousel()
 
     return (
@@ -267,10 +267,7 @@ const CarouselDotButtons = React.forwardRef<HTMLButtonElement, React.ComponentPr
             key={index}
             onClick={() => onDotButtonClick(index)}
             {...props}
-            className={cn(
-              index === selectedIndex ? 'text-accent-foreground' : 'text-muted',
-              className,
-            )}
+            className={cn(index === selectedIndex && 'text-accent-foreground', className)}
           >
             <Circle />
             <span className="sr-only">Select slide</span>
