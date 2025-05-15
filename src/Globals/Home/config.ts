@@ -5,36 +5,21 @@ import { link } from '@/fields/link'
 
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { generatePreviewUrl } from '@/utilities/generatePreviewUrl'
+
+const slug = 'home'
 
 export const Home: GlobalConfig = {
-  slug: 'home',
+  slug,
   access: {
     read: authenticatedOrPublished,
     update: authenticated,
   },
   admin: {
     livePreview: {
-      url: () => {
-        const encodedParams = new URLSearchParams({
-          slug: 'home',
-          collection: 'home',
-          path: '/',
-          previewSecret: process.env.PREVIEW_SECRET || '',
-        })
-        const url = `/next/preview?${encodedParams.toString()}`
-        return url
-      },
+      url: generatePreviewUrl(slug),
     },
-    preview: () => {
-      const encodedParams = new URLSearchParams({
-        slug: 'home',
-        collection: 'home',
-        path: '/',
-        previewSecret: process.env.PREVIEW_SECRET || '',
-      })
-      const url = `/next/preview?${encodedParams.toString()}`
-      return url
-    },
+    preview: generatePreviewUrl(slug),
   },
   fields: [
     {

@@ -4,36 +4,21 @@ import { revalidateLiterature } from './hooks/revalidateLiterature'
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { link } from '@/fields/link'
+import { generatePreviewUrl } from '@/utilities/generatePreviewUrl'
+
+const slug = 'literature'
 
 export const Literature: GlobalConfig = {
-  slug: 'literature',
+  slug,
   access: {
     read: authenticatedOrPublished,
     update: authenticated,
   },
   admin: {
     livePreview: {
-      url: () => {
-        const encodedParams = new URLSearchParams({
-          slug: 'literature',
-          collection: 'literature',
-          path: '/',
-          previewSecret: process.env.PREVIEW_SECRET || '',
-        })
-        const url = `/next/preview?${encodedParams.toString()}`
-        return url
-      },
+      url: generatePreviewUrl(slug),
     },
-    preview: () => {
-      const encodedParams = new URLSearchParams({
-        slug: 'literature',
-        collection: 'literature',
-        path: '/',
-        previewSecret: process.env.PREVIEW_SECRET || '',
-      })
-      const url = `/next/preview?${encodedParams.toString()}`
-      return url
-    },
+    preview: generatePreviewUrl(slug),
   },
   fields: [
     {
