@@ -10,11 +10,11 @@ import BottomMenu from '@/components/BottomMenu'
 import { RenderHomeBlocks } from '@/blocks/RenderHomeBlocks'
 import { Home as HomeGlobalType } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import SuggestedArticles from '@/components/Home/SuggestedArticles'
 import HomeMenu from '@/components/Home/HomeMenu'
 import WelcomeBanner from '@/components/Home/WelcomeBanner'
 import HomeAd from '@/components/Home/HomeAd'
 import { cn } from '@/utilities/ui'
+import SuggestedArticles from '@/components/SuggestedArticles'
 
 export const dynamic = 'force-static'
 export const revalidate = 600

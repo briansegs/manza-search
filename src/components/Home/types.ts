@@ -1,4 +1,4 @@
-import { Article, Home, HomeMedia, Page } from '@/payload-types'
+import { Article, HomeMedia, Page } from '@/payload-types'
 
 export interface HomeAdProps {
   media?: (string | null) | HomeMedia
@@ -17,8 +17,4 @@ export interface HomeAdProps {
         } | null)
     url?: string | null
   }
-}
-
-export interface SuggestedArticlesProps {
-  articles: Home['suggestedArticles']
 }
