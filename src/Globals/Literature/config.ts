@@ -1,15 +1,14 @@
 import type { GlobalConfig } from 'payload'
-import { revalidateHome } from './hooks/revalidateHome'
-import { PromoBlock } from '@/blocks/HomeBlocks/PromoBlock/config'
-import { link } from '@/fields/link'
+import { revalidateLiterature } from './hooks/revalidateLiterature'
 
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { link } from '@/fields/link'
 import { generatePreviewUrl } from '@/utilities/generatePreviewUrl'
 
-const slug = 'home'
+const slug = 'literature'
 
-export const Home: GlobalConfig = {
+export const Literature: GlobalConfig = {
   slug,
   access: {
     read: authenticatedOrPublished,
@@ -25,19 +24,6 @@ export const Home: GlobalConfig = {
     {
       type: 'tabs',
       tabs: [
-        {
-          fields: [
-            {
-              name: 'layout',
-              type: 'blocks',
-              blocks: [PromoBlock],
-              admin: {
-                initCollapsed: true,
-              },
-            },
-          ],
-          label: 'Content',
-        },
         {
           fields: [
             {
@@ -59,30 +45,37 @@ export const Home: GlobalConfig = {
         {
           fields: [
             {
-              name: 'media',
-              type: 'upload',
-              relationTo: 'home-media',
-            },
-            {
-              name: 'enableLink',
-              type: 'checkbox',
-            },
-            link({
-              overrides: {
-                admin: {
-                  condition: (_, { enableLink }) => Boolean(enableLink),
+              name: 'pageAds',
+              label: 'Page Ad',
+              type: 'array',
+              fields: [
+                {
+                  name: 'media',
+                  type: 'upload',
+                  relationTo: 'literature-media',
                 },
-              },
-              appearances: false,
-              disableLabel: true,
-            }),
+                {
+                  name: 'enableLink',
+                  type: 'checkbox',
+                },
+                link({
+                  overrides: {
+                    admin: {
+                      condition: (_, { enableLink }) => Boolean(enableLink),
+                    },
+                  },
+                  appearances: false,
+                  disableLabel: true,
+                }),
+              ],
+            },
           ],
-          label: 'Page Ad',
+          label: 'Page Ads',
         },
       ],
     },
   ],
   hooks: {
-    afterChange: [revalidateHome],
+    afterChange: [revalidateLiterature],
   },
 }

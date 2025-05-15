@@ -10,7 +10,7 @@ import LeftMenuContainer from '@/components/Scope/LeftMenu/LeftMenuContainer'
 import ScopeContent from '@/components/Scope/ScopeContent'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Scope as ScopeGlobalType } from '@/payload-types'
-import SuggestedArticles from '@/components/Scope/SuggestedArticles'
+import SuggestedArticles from '@/components/SuggestedArticles'
 
 export const dynamic = 'force-static'
 export const revalidate = 600

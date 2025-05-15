@@ -1,4 +1,4 @@
-import { Category, Media, Scope } from '@/payload-types'
+import { Category, Media } from '@/payload-types'
 
 interface ScopeCategory {
   id: string
@@ -19,20 +19,10 @@ export interface ScopeContentProps {
   articles: ScopeArticle[]
 }
 
-export interface ScopeContentContainerProps {
-  slug: string
-  title: string
-  articles: ScopeArticle[]
-}
-
 export interface ScopeContentItemProps {
   title: string
   slug: string
   media: Media
-}
-
-export interface SuggestedArticlesProps {
-  articles: Scope['suggestedArticles']
 }
 
 export interface TopMenuContainerProps {
