@@ -15,7 +15,7 @@ import { isValidLink } from '@/utilities/isValidLink'
 import { LiteratureHeroProps } from './types'
 
 const LiteratureHero: React.FC<LiteratureHeroProps> = ({ ads }) => {
-  if (!ads || ads.length < 0) {
+  if (!ads || ads.length === 0) {
     return null
   }
 
