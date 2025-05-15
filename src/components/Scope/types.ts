@@ -19,12 +19,6 @@ export interface ScopeContentProps {
   articles: ScopeArticle[]
 }
 
-export interface ScopeContentContainerProps {
-  slug: string
-  title: string
-  articles: ScopeArticle[]
-}
-
 export interface ScopeContentItemProps {
   title: string
   slug: string

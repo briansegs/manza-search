@@ -1,7 +1,8 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
 import { ScopeContentProps } from '../types'
-import ScopeContentContainer from './ScopeContentContainer'
+import PageContentContainer from '@/components/PageContentContainer'
+import ScopeContentItem from './ScopeContentItem'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
@@ -35,18 +36,39 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
             })
 
             return categoryArticles ? (
-              <ScopeContentContainer
-                articles={categoryArticles}
-                slug={slug || ''}
-                title={title}
-                key={id}
-              />
+              <PageContentContainer slug={slug || ''} title={title} key={id}>
+                {categoryArticles.map(
+                  ({ id, title, slug: articleSlug, heroImage }) =>
+                    heroImage &&
+                    typeof heroImage === 'object' && (
+                      <ScopeContentItem
+                        media={heroImage}
+                        slug={articleSlug ? articleSlug : ''}
+                        title={title}
+                        key={id}
+                      />
+                    ),
+                )}
+              </PageContentContainer>
             ) : null
           })
         : null}
 
       {miscArticles && miscArticles.length > 0 ? (
-        <ScopeContentContainer title="Miscellaneous" slug="misc" articles={miscArticles} />
+        <PageContentContainer title="Miscellaneous" slug="misc">
+          {miscArticles.map(
+            ({ id, title, slug: articleSlug, heroImage }) =>
+              heroImage &&
+              typeof heroImage === 'object' && (
+                <ScopeContentItem
+                  media={heroImage}
+                  slug={articleSlug ? articleSlug : ''}
+                  title={title}
+                  key={id}
+                />
+              ),
+          )}
+        </PageContentContainer>
       ) : null}
     </div>
   )
