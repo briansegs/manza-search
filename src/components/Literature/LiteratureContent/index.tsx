@@ -23,7 +23,7 @@ interface LiteratureContentProps {
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
 const LiteratureContent: React.FC<LiteratureContentProps> = ({ content }) => {
-  if (!content) {
+  if (!content || content.length === 0) {
     return <NoContent />
   }
 
