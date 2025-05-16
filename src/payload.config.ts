@@ -29,6 +29,8 @@ import { Sound } from './Globals/Sound/config'
 import { SoundMedia } from './collections/SoundMedia'
 import { Art } from './Globals/Art/config'
 import { ArtMedia } from './collections/ArtMedia'
+import { HealthAndWellnessMedia } from './collections/HealthAndWellnessMedia'
+import { HealthAndWellness } from './Globals/HealthAndWellness/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -95,11 +97,12 @@ export default buildConfig({
     LiteratureMedia,
     SoundMedia,
     ArtMedia,
+    HealthAndWellnessMedia,
     Categories,
     Users,
   ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Home, Scope, Literature, Sound, Art],
+  globals: [Header, Footer, Home, Scope, Literature, Sound, Art, HealthAndWellness],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
@@ -115,6 +118,7 @@ export default buildConfig({
         'literature-media': true,
         'sound-media': true,
         'art-media': true,
+        'health-and-wellness-media': true,
       },
       folder: 'manza-search-media',
     }),

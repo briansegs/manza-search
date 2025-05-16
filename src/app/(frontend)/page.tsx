@@ -31,7 +31,7 @@ export default async function Page() {
   const { layout, suggestedArticles, enableLink, link, media } = content
 
   return (
-    <section className={cn('h-full pb-4', 'xl:h-screen xl:pb-24')}>
+    <section className={cn('mb-0 h-full pb-4', 'xl:mb-24 xl:h-screen xl:pb-16')}>
       <PageClient />
 
       {draft && <LivePreviewListener />}
