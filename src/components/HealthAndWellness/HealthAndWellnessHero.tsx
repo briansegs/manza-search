@@ -12,9 +12,9 @@ import { CMSLink } from '@/components/Link'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
 import { isValidLink } from '@/utilities/isValidLink'
-import { LiteratureHeroProps } from './types'
+import { HealthAndWellnessHeroProps } from './types'
 
-const LiteratureHero: React.FC<LiteratureHeroProps> = ({ ads }) => {
+const HealthAndWellnessHero: React.FC<HealthAndWellnessHeroProps> = ({ ads }) => {
   if (!ads || ads.length === 0) {
     return null
   }
@@ -52,4 +52,4 @@ const LiteratureHero: React.FC<LiteratureHeroProps> = ({ ads }) => {
   )
 }
 
-export default LiteratureHero
+export default HealthAndWellnessHero
