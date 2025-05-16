@@ -75,6 +75,7 @@ export interface Config {
     'literature-media': LiteratureMedia;
     'sound-media': SoundMedia;
     'art-media': ArtMedia;
+    'health-and-wellness-media': HealthAndWellnessMedia;
     categories: Category;
     users: User;
     redirects: Redirect;
@@ -96,6 +97,7 @@ export interface Config {
     'literature-media': LiteratureMediaSelect<false> | LiteratureMediaSelect<true>;
     'sound-media': SoundMediaSelect<false> | SoundMediaSelect<true>;
     'art-media': ArtMediaSelect<false> | ArtMediaSelect<true>;
+    'health-and-wellness-media': HealthAndWellnessMediaSelect<false> | HealthAndWellnessMediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -118,6 +120,7 @@ export interface Config {
     literature: Literature;
     sound: Sound;
     art: Art;
+    'health-and-wellness': HealthAndWellness;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -127,6 +130,7 @@ export interface Config {
     literature: LiteratureSelect<false> | LiteratureSelect<true>;
     sound: SoundSelect<false> | SoundSelect<true>;
     art: ArtSelect<false> | ArtSelect<true>;
+    'health-and-wellness': HealthAndWellnessSelect<false> | HealthAndWellnessSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1315,6 +1319,111 @@ export interface ArtMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "health-and-wellness-media".
+ */
+export interface HealthAndWellnessMedia {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1516,6 +1625,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'art-media';
         value: string | ArtMedia;
+      } | null)
+    | ({
+        relationTo: 'health-and-wellness-media';
+        value: string | HealthAndWellnessMedia;
       } | null)
     | ({
         relationTo: 'categories';
@@ -2120,6 +2233,57 @@ export interface ArtMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "health-and-wellness-media_select".
+ */
+export interface HealthAndWellnessMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -2629,6 +2793,37 @@ export interface Art {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "health-and-wellness".
+ */
+export interface HealthAndWellness {
+  id: string;
+  suggestedArticles?: (string | Article)[] | null;
+  pageAds?:
+    | {
+        media?: (string | null) | HealthAndWellnessMedia;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2787,6 +2982,31 @@ export interface SoundSelect<T extends boolean = true> {
  * via the `definition` "art_select".
  */
 export interface ArtSelect<T extends boolean = true> {
+  suggestedArticles?: T;
+  pageAds?:
+    | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "health-and-wellness_select".
+ */
+export interface HealthAndWellnessSelect<T extends boolean = true> {
   suggestedArticles?: T;
   pageAds?:
     | T
