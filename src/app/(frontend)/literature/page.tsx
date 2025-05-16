@@ -15,9 +15,20 @@ export const dynamic = 'force-static'
 export const revalidate = 600
 
 export default async function Page() {
-  const LiteratureData: LiteratureGlobalType = await getCachedGlobal('literature', 1)()
+  const literatureData: LiteratureGlobalType = await getCachedGlobal('literature', 1)()
 
-  const { suggestedArticles, pageAds } = LiteratureData
+  if (!literatureData) {
+    return (
+      <section>
+        <PageClient />
+        <div className="flex min-h-screen w-full items-center justify-center">
+          <h2 className="text-xl">Unable to load literature data. Please try again later.</h2>
+        </div>
+      </section>
+    )
+  }
+
+  const { suggestedArticles, pageAds } = literatureData
 
   return (
     <section>
