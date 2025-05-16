@@ -4,31 +4,31 @@ import PageClient from './page.client'
 import RightMenuContainer from '@/components/RightMenuContainer'
 import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import { Literature as LiteratureGlobalType } from '@/payload-types'
+import { Sound as SoundGlobalType } from '@/payload-types'
 import SuggestedArticles from '@/components/SuggestedArticles'
-import TopMenuContainer from '@/components/Literature/TopMenuContainer'
-import LiteratureContent from '@/components/Literature/LiteratureContent'
-import LiteratureHero from '@/components/Literature/LiteratureHero'
-import { bookData } from '@/components/Literature/LiteratureContent/mockData'
+import TopMenuContainer from '@/components/Sound/TopMenuContainer'
+import SoundContent from '@/components/Sound/SoundContent'
+import SoundHero from '@/components/Sound/SoundHero'
+import { audioData } from '@/components/Sound/SoundContent/mockData'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
 export default async function Page() {
-  const literatureData: LiteratureGlobalType = await getCachedGlobal('literature', 1)()
+  const soundData: SoundGlobalType = await getCachedGlobal('sound', 1)()
 
-  if (!literatureData) {
+  if (!soundData) {
     return (
       <section>
         <PageClient />
         <div className="flex min-h-screen w-full items-center justify-center">
-          <h2 className="text-xl">Unable to load literature data. Please try again later.</h2>
+          <h2 className="text-xl">Unable to load sound data. Please try again later.</h2>
         </div>
       </section>
     )
   }
 
-  const { suggestedArticles, pageAds } = literatureData
+  const { suggestedArticles, pageAds } = soundData
 
   return (
     <section>
@@ -38,15 +38,15 @@ export default async function Page() {
 
         <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
           <h2 className="py-2 text-center font-serif text-xl uppercase text-white">
-            Literature HomePage
+            Sound HomePage
           </h2>
         </div>
 
         <TopMenuContainer />
 
-        <LiteratureHero ads={pageAds} />
+        <SoundHero ads={pageAds} />
 
-        <LiteratureContent content={bookData} />
+        <SoundContent content={audioData} />
 
         <RightMenuContainer />
 

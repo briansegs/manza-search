@@ -25,6 +25,8 @@ import { NEXT_PUBLIC_SERVER_URL } from 'next.config'
 import { Scope } from './Globals/Scope/config'
 import { Literature } from './Globals/Literature/config'
 import { LiteratureMedia } from './collections/LiteratureMedia'
+import { Sound } from './Globals/Sound/config'
+import { SoundMedia } from './collections/SoundMedia'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -82,9 +84,19 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Articles, Media, HomeMedia, LiteratureMedia, Categories, Users],
+  collections: [
+    Pages,
+    Posts,
+    Articles,
+    Media,
+    HomeMedia,
+    LiteratureMedia,
+    SoundMedia,
+    Categories,
+    Users,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Home, Scope, Literature],
+  globals: [Header, Footer, Home, Scope, Literature, Sound],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
@@ -98,6 +110,7 @@ export default buildConfig({
         media: true,
         'home-media': true,
         'literature-media': true,
+        'sound-media': true,
       },
       folder: 'manza-search-media',
     }),

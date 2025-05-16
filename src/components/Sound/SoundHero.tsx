@@ -1,0 +1,55 @@
+import { cn } from '@/utilities/ui'
+import React from 'react'
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselDotButtons,
+  CarouselItem,
+} from '@/components/ui/carousel'
+
+import { CMSLink } from '@/components/Link'
+import ImagePlaceholder from '@/components/ImagePlaceholder'
+import RenderMedia from '@/components/RenderMedia'
+import { isValidLink } from '@/utilities/isValidLink'
+import { SoundHeroProps } from './types'
+
+const SoundHero: React.FC<SoundHeroProps> = ({ ads }) => {
+  if (!ads || ads.length === 0) {
+    return null
+  }
+
+  return (
+    <div className={cn('flex w-full justify-center', 'mt-1', 'lg:mt-12')}>
+      <div className="w-full max-w-4xl">
+        <Carousel>
+          <CarouselContent className="-ml-1">
+            {ads.map(({ media, enableLink, link, id }) => {
+              const hasValidLink = isValidLink(link)
+
+              return (
+                <CarouselItem key={id} className="pl-1 md:basis-1/2 lg:basis-1/3">
+                  <div className="relative aspect-square border-2 border-black">
+                    {hasValidLink && enableLink ? (
+                      <CMSLink {...link}>
+                        {media ? <RenderMedia media={media} /> : <ImagePlaceholder />}
+                      </CMSLink>
+                    ) : media ? (
+                      <RenderMedia media={media} />
+                    ) : (
+                      <ImagePlaceholder />
+                    )}
+                  </div>
+                </CarouselItem>
+              )
+            })}
+          </CarouselContent>
+
+          <CarouselDotButtons />
+        </Carousel>
+      </div>
+    </div>
+  )
+}
+
+export default SoundHero
