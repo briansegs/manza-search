@@ -21,7 +21,7 @@ const RelatedArticles: React.FC<Props> = (props) => {
 
               return (
                 <Link key={id} href={`/articles/${slug}`}>
-                  <div className="flex justify-center text-nowrap rounded-[8px] bg-white px-3 py-[2px] font-medium hover:text-secondary-blue">
+                  <div className="flex justify-center whitespace-nowrap rounded-[8px] bg-white px-3 py-[2px] font-medium hover:text-secondary-blue">
                     {title}
                   </div>
                 </Link>

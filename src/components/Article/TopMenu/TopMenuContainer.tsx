@@ -23,7 +23,7 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article, className 
   return (
     <div className={cn('sticky top-0 z-10', className)}>
       {/* Large device view */}
-      <div className="ml-auto hidden h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu hover:bg-black lg:flex">
+      <div className="hidden h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu hover:bg-black lg:flex">
         <TopMenu />
       </div>
 
