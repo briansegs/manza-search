@@ -66,10 +66,12 @@ export default async function Article({ params: paramsPromise }: Args) {
         <LeftMenuContainer article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
-          <TopMenuContainer article={article} />
+          <TopMenuContainer article={article} className="hidden sm:block" />
 
           {/* Hero & Content */}
           <ArticleHero article={article} />
+
+          <TopMenuContainer article={article} className="sm:hidden" />
 
           <RenderArticleBlocks blocks={layout ?? []} />
         </div>

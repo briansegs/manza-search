@@ -42,9 +42,9 @@ export default async function Page() {
           </h2>
         </div>
 
-        <TopMenuContainer />
-
         <SoundHero ads={pageAds} />
+
+        <TopMenuContainer />
 
         <SoundContent content={audioData} />
 

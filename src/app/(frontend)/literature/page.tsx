@@ -42,9 +42,9 @@ export default async function Page() {
           </h2>
         </div>
 
-        <TopMenuContainer />
-
         <LiteratureHero ads={pageAds} />
+
+        <TopMenuContainer />
 
         <LiteratureContent content={bookData} />
 

@@ -1,4 +1,3 @@
-import { cn } from '@/utilities/ui'
 import React from 'react'
 
 import {
@@ -20,8 +19,8 @@ const ArtHero: React.FC<ArtHeroProps> = ({ ads }) => {
   }
 
   return (
-    <div className={cn('flex w-full justify-center', 'mt-1', 'lg:mt-12')}>
-      <div className="w-full max-w-4xl">
+    <div className="mt-1 flex w-full justify-center">
+      <div className="w-full max-w-4xl rounded-[10px] bg-black px-2 pt-2">
         <Carousel>
           <CarouselContent className="-ml-1">
             {ads.map(({ media, enableLink, link, id }) => {
