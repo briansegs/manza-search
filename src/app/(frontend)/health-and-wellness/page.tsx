@@ -47,9 +47,9 @@ export default async function Page() {
           </h2>
         </div>
 
-        <TopMenuContainer />
-
         <HealthAndWellnessHero ads={pageAds} />
+
+        <TopMenuContainer />
 
         <HealthAndWellnessContent content={itemData} />
 

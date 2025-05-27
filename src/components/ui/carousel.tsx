@@ -271,7 +271,7 @@ const CarouselDotButtons = React.forwardRef<HTMLButtonElement, React.ComponentPr
             key={index}
             onClick={() => onDotButtonClick(index)}
             {...props}
-            className={cn(index === selectedIndex && 'text-accent-foreground', className)}
+            className={cn(index === selectedIndex && 'text-muted', className)}
           >
             <Circle />
             <span className="sr-only">Select slide</span>

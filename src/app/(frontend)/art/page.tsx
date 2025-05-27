@@ -40,9 +40,9 @@ export default async function Page() {
           <h2 className="py-2 text-center font-serif text-xl uppercase text-white">Art HomePage</h2>
         </div>
 
-        <TopMenuContainer />
-
         <ArtHero ads={pageAds} />
+
+        <TopMenuContainer />
 
         <ArtContent content={artWorkData} />
 
