@@ -75,6 +75,7 @@ export interface Config {
     'literature-media': LiteratureMedia;
     'sound-media': SoundMedia;
     'art-media': ArtMedia;
+    'travel-media': TravelMedia;
     'health-and-wellness-media': HealthAndWellnessMedia;
     categories: Category;
     users: User;
@@ -97,6 +98,7 @@ export interface Config {
     'literature-media': LiteratureMediaSelect<false> | LiteratureMediaSelect<true>;
     'sound-media': SoundMediaSelect<false> | SoundMediaSelect<true>;
     'art-media': ArtMediaSelect<false> | ArtMediaSelect<true>;
+    'travel-media': TravelMediaSelect<false> | TravelMediaSelect<true>;
     'health-and-wellness-media': HealthAndWellnessMediaSelect<false> | HealthAndWellnessMediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -119,6 +121,7 @@ export interface Config {
     scope: Scope;
     literature: Literature;
     sound: Sound;
+    travel: Travel;
     art: Art;
     'health-and-wellness': HealthAndWellness;
   };
@@ -129,6 +132,7 @@ export interface Config {
     scope: ScopeSelect<false> | ScopeSelect<true>;
     literature: LiteratureSelect<false> | LiteratureSelect<true>;
     sound: SoundSelect<false> | SoundSelect<true>;
+    travel: TravelSelect<false> | TravelSelect<true>;
     art: ArtSelect<false> | ArtSelect<true>;
     'health-and-wellness': HealthAndWellnessSelect<false> | HealthAndWellnessSelect<true>;
   };
@@ -1319,6 +1323,111 @@ export interface ArtMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "travel-media".
+ */
+export interface TravelMedia {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "health-and-wellness-media".
  */
 export interface HealthAndWellnessMedia {
@@ -1625,6 +1734,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'art-media';
         value: string | ArtMedia;
+      } | null)
+    | ({
+        relationTo: 'travel-media';
+        value: string | TravelMedia;
       } | null)
     | ({
         relationTo: 'health-and-wellness-media';
@@ -2233,6 +2346,57 @@ export interface ArtMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "travel-media_select".
+ */
+export interface TravelMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "health-and-wellness-media_select".
  */
 export interface HealthAndWellnessMediaSelect<T extends boolean = true> {
@@ -2762,6 +2926,37 @@ export interface Sound {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "travel".
+ */
+export interface Travel {
+  id: string;
+  suggestedArticles?: (string | Article)[] | null;
+  pageAds?:
+    | {
+        media?: (string | null) | TravelMedia;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "art".
  */
 export interface Art {
@@ -2957,6 +3152,31 @@ export interface LiteratureSelect<T extends boolean = true> {
  * via the `definition` "sound_select".
  */
 export interface SoundSelect<T extends boolean = true> {
+  suggestedArticles?: T;
+  pageAds?:
+    | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "travel_select".
+ */
+export interface TravelSelect<T extends boolean = true> {
   suggestedArticles?: T;
   pageAds?:
     | T
