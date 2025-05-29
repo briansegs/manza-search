@@ -12,6 +12,7 @@ import TravelHero from '@/components/Travel/TravelHero'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import TravelTitle from '@/components/Travel/TravelTitle'
+import { Metadata } from 'next'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -33,6 +34,9 @@ export default async function Page() {
     const travelData: TravelGlobalType = await getCachedGlobal('travel', 1)()
 
     const { suggestedArticles, heroImages, adImages } = travelData
+
+    console.log('travelData: ', travelData)
+    console.log('adImages: ', adImages)
 
     const articles = await payload.find({
       collection: 'articles',
@@ -91,5 +95,11 @@ export default async function Page() {
         </div>
       </section>
     )
+  }
+}
+
+export function generateMetadata(): Metadata {
+  return {
+    title: `Travel | Manza Search`,
   }
 }
