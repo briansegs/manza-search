@@ -66,7 +66,7 @@ export default async function Article({ params: paramsPromise }: Args) {
         <LeftMenuContainer article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
-          <TopMenuContainer article={article} className="hidden sm:block" />
+          <TopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
 
           {/* Hero & Content */}
           <ArticleHero article={article} />
