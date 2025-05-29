@@ -13,8 +13,8 @@ import RenderMedia from '@/components/RenderMedia'
 import { isValidLink } from '@/utilities/isValidLink'
 import { TravelHeroProps } from './types'
 
-const TravelHero: React.FC<TravelHeroProps> = ({ ads }) => {
-  if (!ads || ads.length === 0) {
+const TravelHero: React.FC<TravelHeroProps> = ({ images }) => {
+  if (!images || images.length === 0) {
     return null
   }
 
@@ -23,12 +23,12 @@ const TravelHero: React.FC<TravelHeroProps> = ({ ads }) => {
       <div className="w-full max-w-4xl rounded-[10px] bg-black px-2 pt-2">
         <Carousel>
           <CarouselContent className="-ml-1">
-            {ads.map(({ media, enableLink, link, id }) => {
+            {images.map(({ media, enableLink, link, id }) => {
               const hasValidLink = isValidLink(link)
 
               return (
-                <CarouselItem key={id} className="pl-1 md:basis-1/2 lg:basis-1/3">
-                  <div className="relative aspect-square border-2 border-black">
+                <CarouselItem key={id} className="pl-1">
+                  <div className="relative aspect-video border-2 border-black md:aspect-[16/6]">
                     {hasValidLink && enableLink ? (
                       <CMSLink {...link}>
                         {media ? <RenderMedia media={media} /> : <ImagePlaceholder />}

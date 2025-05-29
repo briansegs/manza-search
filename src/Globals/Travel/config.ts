@@ -45,8 +45,8 @@ export const Travel: GlobalConfig = {
         {
           fields: [
             {
-              name: 'pageAds',
-              label: 'Page Ad',
+              name: 'heroImages',
+              label: 'Hero Images',
               type: 'array',
               fields: [
                 {
@@ -70,7 +70,38 @@ export const Travel: GlobalConfig = {
               ],
             },
           ],
-          label: 'Page Ads',
+          label: 'Hero Images',
+        },
+        {
+          fields: [
+            {
+              name: 'adImages',
+              label: 'Ad Images',
+              type: 'array',
+              maxRows: 4,
+              fields: [
+                {
+                  name: 'media',
+                  type: 'upload',
+                  relationTo: 'travel-media',
+                },
+                {
+                  name: 'enableLink',
+                  type: 'checkbox',
+                },
+                link({
+                  overrides: {
+                    admin: {
+                      condition: (_, { enableLink }) => Boolean(enableLink),
+                    },
+                  },
+                  appearances: false,
+                  disableLabel: true,
+                }),
+              ],
+            },
+          ],
+          label: 'Ad Images',
         },
       ],
     },

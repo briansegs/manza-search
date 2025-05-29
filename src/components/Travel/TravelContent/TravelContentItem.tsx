@@ -3,14 +3,16 @@ import React from 'react'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
 import { cn } from '@/utilities/ui'
-import { Audio } from '.'
+import { Article } from '@/payload-types'
 
-const TravelContentItem: React.FC<Audio> = ({ title, audioImage, slug }) => (
-  <div className="flex flex-col items-center gap-1">
-    <Link href={`audio/${slug}`}>
+type TravelContentItem = Pick<Article, 'title' | 'heroImage' | 'slug'>
+
+const TravelContentItem: React.FC<TravelContentItem> = ({ title, heroImage, slug }) => (
+  <div className="mt-10 flex flex-col items-center gap-1">
+    <Link href={`articles/${slug}`}>
       <div className="relative size-16 overflow-hidden rounded-[10px] bg-white">
-        {audioImage.media && typeof audioImage.media === 'object' ? (
-          <RenderMedia media={audioImage.media} />
+        {heroImage && typeof heroImage === 'object' ? (
+          <RenderMedia media={heroImage} />
         ) : (
           <ImagePlaceholder />
         )}

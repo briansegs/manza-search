@@ -2931,7 +2931,28 @@ export interface Sound {
 export interface Travel {
   id: string;
   suggestedArticles?: (string | Article)[] | null;
-  pageAds?:
+  heroImages?:
+    | {
+        media?: (string | null) | TravelMedia;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  adImages?:
     | {
         media?: (string | null) | TravelMedia;
         enableLink?: boolean | null;
@@ -3178,7 +3199,22 @@ export interface SoundSelect<T extends boolean = true> {
  */
 export interface TravelSelect<T extends boolean = true> {
   suggestedArticles?: T;
-  pageAds?:
+  heroImages?:
+    | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
+  adImages?:
     | T
     | {
         media?: T;

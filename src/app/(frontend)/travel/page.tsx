@@ -4,20 +4,85 @@ import PageClient from './page.client'
 import RightMenuContainer from '@/components/RightMenuContainer'
 import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import { Travel as TravelGlobalType } from '@/payload-types'
+import { Article, Category, Travel as TravelGlobalType } from '@/payload-types'
 import SuggestedArticles from '@/components/SuggestedArticles'
 import TopMenuContainer from '@/components/Travel/TopMenuContainer'
 import TravelContent from '@/components/Travel/TravelContent'
 import TravelHero from '@/components/Travel/TravelHero'
-import { audioData } from '@/components/Travel/TravelContent/mockData'
+import { getPayload } from 'payload'
+import configPromise from '@payload-config'
+import TravelTitle from '@/components/Travel/TravelTitle'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default async function Page() {
-  const travelData: TravelGlobalType = await getCachedGlobal('travel', 1)()
+const continents = [
+  { title: 'Africa', slug: 'south-america' },
+  { title: 'Antarctica', slug: 'antarctica' },
+  { title: 'Asia', slug: 'asia' },
+  { title: 'Europe', slug: 'europe' },
+  { title: 'North America', slug: 'north-america' },
+  { title: 'Oceania', slug: 'oceania' },
+  { title: 'South America', slug: 'south-america' },
+]
 
-  if (!travelData) {
+export default async function Page() {
+  const payload = await getPayload({ config: configPromise })
+
+  try {
+    const travelData: TravelGlobalType = await getCachedGlobal('travel', 1)()
+
+    const { suggestedArticles, heroImages, adImages } = travelData
+
+    const articles = await payload.find({
+      collection: 'articles',
+      sort: '-updatedAt',
+      depth: 1,
+      overrideAccess: false,
+      where: {
+        categories: {
+          exists: true,
+        },
+      },
+    })
+
+    const articlesByContinents: {
+      title: string
+      slug: string
+      articles: Article[]
+    }[] = continents.map((continent) => ({
+      title: continent.title,
+      slug: continent.slug,
+      articles: articles.docs.filter((article) =>
+        article.categories?.some(
+          (cat: string | Category) => cat && typeof cat !== 'string' && cat.slug === continent.slug,
+        ),
+      ),
+    }))
+
+    return (
+      <section>
+        <PageClient />
+        <div className="min-h-screen w-full pb-24">
+          <SuggestedArticles articles={suggestedArticles} />
+
+          <TravelTitle />
+
+          <TravelHero images={heroImages} />
+
+          <TopMenuContainer />
+
+          <TravelContent content={articlesByContinents} adImages={adImages} />
+
+          <RightMenuContainer />
+
+          <BottomMenu />
+        </div>
+      </section>
+    )
+  } catch (error) {
+    console.error('Error: ', error)
+
     return (
       <section>
         <PageClient />
@@ -27,31 +92,4 @@ export default async function Page() {
       </section>
     )
   }
-
-  const { suggestedArticles, pageAds } = travelData
-
-  return (
-    <section>
-      <PageClient />
-      <div className="min-h-screen w-full pb-24">
-        <SuggestedArticles articles={suggestedArticles} />
-
-        <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
-          <h2 className="py-2 text-center font-serif text-xl uppercase text-white">
-            Travel HomePage
-          </h2>
-        </div>
-
-        <TravelHero ads={pageAds} />
-
-        <TopMenuContainer />
-
-        <TravelContent content={audioData} />
-
-        <RightMenuContainer />
-
-        <BottomMenu />
-      </div>
-    </section>
-  )
 }

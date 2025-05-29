@@ -1,31 +1,72 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import PageContentContainer from '@/components/PageContentContainer'
 import TravelContentItem from './TravelContentItem'
-
-export interface Audio {
-  slug: string
-  title: string
-  audioImage: { media: null }
-}
+import { Article, Media, Travel } from '@/payload-types'
+import RenderMedia from '@/components/RenderMedia'
+import TravelContentContainer from './TravelContentContainer'
 
 export interface TravelCategory {
-  slug: string
   title: string
-  id?: string
-  audio: Audio[]
+  slug: string
+  articles: Article[]
 }
+
+export interface TravelAd {
+  title: string
+  slug: string
+  ad: { media: Media }
+}
+
+type TravelContentBlock = TravelCategory | TravelAd
 
 interface TravelContentProps {
   content: TravelCategory[] | null | undefined
+  adImages: Travel['adImages']
 }
 
-const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
-
-const TravelContent: React.FC<TravelContentProps> = ({ content }) => {
-  if (!content || content.length === 0) {
+const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
+  if (!content?.length || !adImages?.length) {
     return <NoContent />
   }
+
+  const buildBlocks = (): TravelContentBlock[] => {
+    const blocks: TravelContentBlock[] = []
+
+    const tryPushCategory = (index: number) => {
+      const category = content[index]
+      if (category) {
+        blocks.push(category)
+      }
+    }
+
+    const tryPushAd = (index: number, label: string) => {
+      const adImage = adImages[index]
+      if (adImage?.media && typeof adImage.media === 'object' && 'url' in adImage.media) {
+        blocks.push({
+          title: label,
+          slug: `ad-${index + 1}`,
+          ad: { media: adImage.media as Media },
+        })
+      }
+    }
+
+    // Manual ordering of items
+    tryPushCategory(0)
+    tryPushAd(0, 'Ad 1')
+    tryPushCategory(1)
+    tryPushAd(1, 'Ad 2')
+    tryPushCategory(2)
+    tryPushCategory(3)
+    tryPushCategory(4)
+    tryPushAd(2, 'Ad 3')
+    tryPushCategory(5)
+    tryPushAd(3, 'Ad 4')
+    tryPushCategory(6)
+
+    return blocks
+  }
+
+  const blocks = buildBlocks()
 
   return (
     <div
@@ -35,23 +76,46 @@ const TravelContent: React.FC<TravelContentProps> = ({ content }) => {
         'lg:mt-12 lg:px-32',
       )}
     >
-      {content.map((category) => {
-        const { id, title, slug, audio } = category
-
-        return (
-          <PageContentContainer key={id} slug={slug} title={title}>
-            {audio.map(
-              ({ title, audioImage, slug }) =>
-                audioImage &&
-                typeof audioImage === 'object' && (
-                  <TravelContentItem audioImage={audioImage} title={title} slug={slug} key={slug} />
-                ),
-            )}
-          </PageContentContainer>
-        )
-      })}
+      {blocks.map((block) => (
+        <TravelContentContainer
+          key={block.slug}
+          slug={block.slug}
+          title={block.title}
+          ad={'ad' in block ? block.ad : undefined}
+        >
+          {'articles' in block ? (
+            block.articles.length > 0 ? (
+              <ArticlesList articles={block.articles} />
+            ) : (
+              <NoArticles />
+            )
+          ) : (
+            <RenderMedia media={block.ad.media} />
+          )}
+        </TravelContentContainer>
+      ))}
     </div>
   )
 }
+
+interface ArticlesListProps {
+  articles: Article[]
+}
+
+const ArticlesList: React.FC<ArticlesListProps> = ({ articles }) => (
+  <>
+    {articles.map(({ title, heroImage, slug }) =>
+      heroImage && typeof heroImage === 'object' ? (
+        <TravelContentItem key={slug} heroImage={heroImage} title={title} slug={slug} />
+      ) : null,
+    )}
+  </>
+)
+
+const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
+
+const NoArticles = () => (
+  <p className="mt-10 text-center text-sm italic text-muted-foreground">No articles available.</p>
+)
 
 export default TravelContent
