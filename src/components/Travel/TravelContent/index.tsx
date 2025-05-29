@@ -25,7 +25,7 @@ interface TravelContentProps {
 }
 
 const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
-  if (!content?.length || !adImages?.length) {
+  if (!content?.length) {
     return <NoContent />
   }
 
@@ -40,6 +40,8 @@ const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
     }
 
     const tryPushAd = (index: number, label: string) => {
+      if (!adImages || !adImages[index]) return null
+
       const adImage = adImages[index]
       if (adImage?.media && typeof adImage.media === 'object' && 'url' in adImage.media) {
         blocks.push({
@@ -76,24 +78,26 @@ const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
         'lg:mt-12 lg:px-32',
       )}
     >
-      {blocks.map((block) => (
-        <TravelContentContainer
-          key={block.slug}
-          slug={block.slug}
-          title={block.title}
-          ad={'ad' in block ? block.ad : undefined}
-        >
-          {'articles' in block ? (
-            block.articles.length > 0 ? (
-              <ArticlesList articles={block.articles} />
+      {blocks.map((block) => {
+        return (
+          <TravelContentContainer
+            key={block.slug}
+            slug={block.slug}
+            title={block.title}
+            ad={'ad' in block ? block.ad : undefined}
+          >
+            {'articles' in block ? (
+              block.articles.length > 0 ? (
+                <ArticlesList articles={block.articles} />
+              ) : (
+                <NoArticles />
+              )
             ) : (
-              <NoArticles />
-            )
-          ) : (
-            <RenderMedia media={block.ad.media} />
-          )}
-        </TravelContentContainer>
-      ))}
+              <RenderMedia media={block.ad.media} />
+            )}
+          </TravelContentContainer>
+        )
+      })}
     </div>
   )
 }
