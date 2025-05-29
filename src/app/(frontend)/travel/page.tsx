@@ -31,7 +31,7 @@ export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
   try {
-    const travelData: TravelGlobalType = await getCachedGlobal('travel', 1)()
+    const travelData: TravelGlobalType = await getCachedGlobal('travel', 2)()
 
     const { suggestedArticles, heroImages, adImages } = travelData
 
