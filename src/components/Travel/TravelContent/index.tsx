@@ -25,7 +25,7 @@ interface TravelContentProps {
 }
 
 const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
-  if (!content?.length || !adImages?.length) {
+  if (!content?.length) {
     return <NoContent />
   }
 
@@ -40,6 +40,8 @@ const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
     }
 
     const tryPushAd = (index: number, label: string) => {
+      if (!adImages || !adImages[index]) return null
+
       const adImage = adImages[index]
       if (adImage?.media && typeof adImage.media === 'object' && 'url' in adImage.media) {
         blocks.push({
@@ -68,8 +70,6 @@ const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
 
   const blocks = buildBlocks()
 
-  console.log('blocks: ', blocks)
-
   return (
     <div
       className={cn(
@@ -79,9 +79,6 @@ const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
       )}
     >
       {blocks.map((block) => {
-        if ('ad' in block) {
-          console.log(block.ad.media)
-        }
         return (
           <TravelContentContainer
             key={block.slug}

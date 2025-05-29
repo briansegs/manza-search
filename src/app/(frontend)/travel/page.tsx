@@ -31,13 +31,6 @@ export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
   try {
-    const travelData: TravelGlobalType = await getCachedGlobal('travel', 2)()
-
-    const { suggestedArticles, heroImages, adImages } = travelData
-
-    // console.log('travelData: ', travelData)
-    // console.log('adImages: ', adImages)
-
     const articles = await payload.find({
       collection: 'articles',
       sort: '-updatedAt',
@@ -63,6 +56,10 @@ export default async function Page() {
         ),
       ),
     }))
+
+    const travelData: TravelGlobalType = await getCachedGlobal('travel', 1)()
+
+    const { suggestedArticles, heroImages, adImages } = travelData
 
     return (
       <section>
