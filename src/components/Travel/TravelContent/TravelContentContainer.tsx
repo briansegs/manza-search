@@ -15,8 +15,6 @@ const TravelContentContainer: React.FC<TravelContentContainerProps> = ({
   children,
   ad,
 }) => {
-  console.log('ad: ', ad)
-
   return (
     <div
       id={slug}

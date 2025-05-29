@@ -35,8 +35,8 @@ export default async function Page() {
 
     const { suggestedArticles, heroImages, adImages } = travelData
 
-    console.log('travelData: ', travelData)
-    console.log('adImages: ', adImages)
+    // console.log('travelData: ', travelData)
+    // console.log('adImages: ', adImages)
 
     const articles = await payload.find({
       collection: 'articles',
