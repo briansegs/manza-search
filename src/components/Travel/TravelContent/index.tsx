@@ -68,6 +68,8 @@ const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
 
   const blocks = buildBlocks()
 
+  console.log('blocks: ', blocks)
+
   return (
     <div
       className={cn(
