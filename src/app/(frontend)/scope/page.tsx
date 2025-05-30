@@ -66,7 +66,7 @@ export default async function Page() {
       </section>
     )
   } catch (error) {
-    console.log('Error: ', error)
+    console.error('Error: ', error)
 
     return (
       <section className="mb-24">

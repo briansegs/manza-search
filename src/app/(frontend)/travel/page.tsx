@@ -59,21 +59,19 @@ export default async function Page() {
 
     const travelData: TravelGlobalType = await getCachedGlobal('travel', 1)()
 
-    const { suggestedArticles, heroImages, adImages } = travelData
-
     return (
       <section>
         <PageClient />
         <div className="min-h-screen w-full pb-24">
-          <SuggestedArticles articles={suggestedArticles} />
+          <SuggestedArticles articles={travelData?.suggestedArticles} />
 
           <TravelTitle />
 
-          <TravelHero images={heroImages} />
+          <TravelHero images={travelData?.heroImages} />
 
           <TopMenuContainer />
 
-          <TravelContent content={articlesByContinents} adImages={adImages} />
+          <TravelContent content={articlesByContinents || []} adImages={travelData?.adImages} />
 
           <RightMenuContainer />
 
