@@ -86,15 +86,14 @@ const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
             title={block.title}
             ad={'ad' in block ? block.ad : undefined}
           >
-            {'articles' in block ? (
-              block.articles.length > 0 ? (
+            {'articles' in block &&
+              (block.articles.length > 0 ? (
                 <ArticlesList articles={block.articles} />
               ) : (
                 <NoArticles />
-              )
-            ) : (
-              <RenderMedia media={block.ad.media} />
-            )}
+              ))}
+
+            {'ad' in block && <RenderMedia media={block.ad.media} />}
           </TravelContentContainer>
         )
       })}
