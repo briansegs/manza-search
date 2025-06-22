@@ -5,11 +5,12 @@ import RightMenuContainer from '@/components/RightMenuContainer'
 import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Art as ArtGlobalType } from '@/payload-types'
+
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import TopMenuContainer from '@/components/Art/TopMenuContainer'
-import ArtContent from '@/components/Art/ArtContent'
-import ArtHero from '@/components/Art/ArtHero'
-import { artWorkData } from '@/components/Art/ArtContent/mockData'
+import { ArtTopMenuContainer } from '@/features/art/components/ArtTopMenuContainer'
+import { ArtContent } from '@/features/art/components/ArtContent'
+import { ArtHero } from '@/features/art/components/ArtHero'
+import { artWorkData } from '@/features/art/mockData'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -42,7 +43,7 @@ export default async function Page() {
 
         <ArtHero ads={pageAds} />
 
-        <TopMenuContainer />
+        <ArtTopMenuContainer />
 
         <ArtContent content={artWorkData} />
 

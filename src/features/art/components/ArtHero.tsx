@@ -11,9 +11,9 @@ import { CMSLink } from '@/components/Link'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
 import { isValidLink } from '@/utilities/isValidLink'
-import { ArtHeroProps } from './types'
+import { ArtHeroProps } from '../types'
 
-const ArtHero: React.FC<ArtHeroProps> = ({ ads }) => {
+export function ArtHero({ ads }: ArtHeroProps) {
   if (!ads || ads.length === 0) {
     return null
   }
@@ -50,5 +50,3 @@ const ArtHero: React.FC<ArtHeroProps> = ({ ads }) => {
     </div>
   )
 }
-
-export default ArtHero

@@ -1,7 +1,7 @@
 import React from 'react'
 import { RightMenu } from '@/components/RightMenuContainer'
 
-const TopMenuContainer: React.FC = () => {
+export function ArtTopMenuContainer() {
   return (
     <div className="sticky top-0 z-10 mt-1">
       {/* Only visible on mobile devices */}
@@ -11,5 +11,3 @@ const TopMenuContainer: React.FC = () => {
     </div>
   )
 }
-
-export default TopMenuContainer

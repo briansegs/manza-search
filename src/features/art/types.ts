@@ -1,5 +1,5 @@
 import { Art } from '@/payload-types'
 
-export interface ArtHeroProps {
+export type ArtHeroProps = {
   ads: Art['pageAds']
 }

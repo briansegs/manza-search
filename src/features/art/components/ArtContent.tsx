@@ -1,7 +1,7 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
 import PageContentContainer from '@/components/PageContentContainer'
-import ArtContentItem from './ArtContentItem'
+import { ArtContentItem } from './ArtContentItem'
 
 export interface ArtWork {
   slug: string
@@ -22,7 +22,7 @@ interface ArtContentProps {
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-const ArtContent: React.FC<ArtContentProps> = ({ content }) => {
+export function ArtContent({ content }: ArtContentProps) {
   if (!content || content.length === 0) {
     return <NoContent />
   }
@@ -58,5 +58,3 @@ const ArtContent: React.FC<ArtContentProps> = ({ content }) => {
     </div>
   )
 }
-
-export default ArtContent
