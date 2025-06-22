@@ -2,9 +2,9 @@ import { Button } from '@/components/ui/button'
 import { Popover, PopoverTrigger } from '@/components/ui/popover'
 
 import React from 'react'
-import MoreOptionsContent from './MoreOptionsContent'
+import { MoreOptionsContent } from './MoreOptionsContent'
 
-const MoreOptions: React.FC = () => {
+export function MoreOptionsMenu() {
   return (
     <Popover>
       <PopoverTrigger>
@@ -17,5 +17,3 @@ const MoreOptions: React.FC = () => {
     </Popover>
   )
 }
-
-export default MoreOptions

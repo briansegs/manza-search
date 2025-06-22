@@ -1,7 +1,7 @@
 import React from 'react'
 import PageClient from './page.client'
 
-import RightMenuContainer from '@/components/RightMenuContainer'
+import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Sound as SoundGlobalType } from '@/payload-types'

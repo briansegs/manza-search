@@ -1,4 +1,4 @@
-export interface DictionaryEntry {
+export type DictionaryEntry = {
   word: string
   phonetic?: string
   phonetics: Phonetic[]
@@ -6,19 +6,23 @@ export interface DictionaryEntry {
   meanings: Meaning[]
 }
 
-export interface Phonetic {
+export type Phonetic = {
   text: string
   audio?: string
 }
 
-export interface Meaning {
+export type Meaning = {
   partOfSpeech: string
   definitions: Definition[]
 }
 
-export interface Definition {
+export type Definition = {
   definition: string
   example?: string
   synonyms: string[]
   antonyms: string[]
+}
+
+export type DefinitionContentProps = {
+  definitions: DictionaryEntry[]
 }

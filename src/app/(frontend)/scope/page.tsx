@@ -8,7 +8,7 @@ import { ScopeTopMenuContainer } from '@/features/scope/components/ScopeTopMenuC
 import { ScopeLeftMenuContainer } from '@/features/scope/components/ScopeLeftMenuContainer'
 import { ScopeContent } from '@/features/scope/components/ScopeContent'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import RightMenuContainer from '@/components/RightMenuContainer'
+import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import BottomMenu from '@/components/BottomMenu'
 
 import { getCachedGlobal } from '@/utilities/getGlobals'

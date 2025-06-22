@@ -1,5 +1,5 @@
 import React from 'react'
-import { RightMenu } from '@/components/RightMenuContainer'
+import { RightMenu } from '@/features/shared/components/RightMenu'
 
 export function ArtTopMenuContainer() {
   return (

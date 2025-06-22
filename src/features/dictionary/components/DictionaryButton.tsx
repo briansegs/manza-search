@@ -13,13 +13,14 @@ import { Button } from '@/components/ui/button'
 import { SearchIcon } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { api } from '@/lib/api'
-import DefinitionContent from './DefinitionContent'
+import { DefinitionContent } from './DefinitionContent'
 import DefinitionPlaceholder from './DefinitionPlaceholder'
 import DefinitionFetching from './DefinitionFetching'
-import { DictionaryEntry } from '../types'
-import { errorMessage } from '@/utilities/errorMessage'
 
-const DictionaryButton: React.FC = () => {
+import { errorMessage } from '@/utilities/errorMessage'
+import { DictionaryEntry } from '../types'
+
+export function DictionaryButton() {
   const [definitions, setDefinitions] = useState<DictionaryEntry[]>([])
   const [value, setValue] = useState('')
   const [isFetching, setIsFetching] = useState<boolean>(false)
@@ -56,9 +57,9 @@ const DictionaryButton: React.FC = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="rounded-primary size-full bg-menu-red hover:bg-black">d</Button>
+        <Button className="size-full rounded-primary bg-menu-red hover:bg-black">d</Button>
       </DialogTrigger>
-      <DialogContent className="bg-menu border-4 border-black">
+      <DialogContent className="border-4 border-black bg-menu">
         <DialogHeader>
           <DialogTitle className="font-serif text-white">Dictionary</DialogTitle>
           <DialogDescription className="font-serif">
@@ -84,7 +85,7 @@ const DictionaryButton: React.FC = () => {
             <div className="ml-2 h-5 pt-[3px] text-xs text-red-400">{formError}</div>
           </form>
 
-          <div className="h-[450px] overflow-y-auto rounded border-2 border-black bg-white p-2 font-serif text-menu-primary">
+          <div className="text-menu-primary h-[450px] overflow-y-auto rounded border-2 border-black bg-white p-2 font-serif">
             {isFetching ? (
               <DefinitionFetching />
             ) : definitions.length > 0 ? (
@@ -98,5 +99,3 @@ const DictionaryButton: React.FC = () => {
     </Dialog>
   )
 }
-
-export default DictionaryButton

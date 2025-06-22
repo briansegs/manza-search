@@ -16,7 +16,7 @@ const MOMenuButton: React.FC<MOMenuButtonProps> = ({ className, ...props }) => (
   <button className={cn(buttonStyles, className)} {...props} />
 )
 
-const MoreOptionsContent: React.FC = () => {
+export function MoreOptionsContent() {
   const { isMobileSM } = useBreakpoint()
 
   return (
@@ -55,5 +55,3 @@ const MoreOptionsContent: React.FC = () => {
     </PopoverContent>
   )
 }
-
-export default MoreOptionsContent

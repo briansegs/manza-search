@@ -3,8 +3,9 @@ import handleError from '@/lib/handlers/error'
 import { ValidationError } from '@/lib/http-error'
 import { DictAnswerSchema } from '@/lib/validations'
 import { NextResponse } from 'next/server'
-import { DictionaryEntry } from '@/components/RightMenuContainer/types'
+
 import { isError } from '@/utilities/isError'
+import { DictionaryEntry } from '@/features/dictionary/types'
 
 const path = process.env.DICTIONARY_API
 

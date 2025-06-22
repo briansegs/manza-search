@@ -49,7 +49,7 @@
     "redirects.js",
     "next.config.js",
     "next-sitemap.config.cjs"
-, "src/components/RightMenuContainer/MoreOptionsButton"  ],
+, "src/features/moreOptions"  ],
   "exclude": [
     "node_modules"
   ]
