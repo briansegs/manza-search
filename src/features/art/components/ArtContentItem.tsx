@@ -3,7 +3,7 @@ import React from 'react'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
 import { cn } from '@/utilities/ui'
-import { ArtWork } from './ArtContent'
+import { ArtWork } from '../types'
 
 export function ArtContentItem({ title, artWorkImage, slug }: ArtWork) {
   return (
