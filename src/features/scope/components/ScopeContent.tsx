@@ -1,12 +1,12 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
 import { ScopeContentProps } from '../types'
-import PageContentContainer from '@/components/PageContentContainer'
-import ScopeContentItem from './ScopeContentItem'
+import { ScopeContentItem } from './ScopeContentItem'
+import { ScopeContentContainer } from './ScopeContentContainer'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => {
+export function ScopeContent({ categories, articles }: ScopeContentProps) {
   const miscArticles = articles.filter((article) => !article.categories)
 
   if (!categories || (categories?.length === 0 && !miscArticles) || miscArticles?.length === 0) {
@@ -36,7 +36,7 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
             })
 
             return categoryArticles ? (
-              <PageContentContainer slug={slug || ''} title={title} key={id}>
+              <ScopeContentContainer slug={slug || ''} title={title} key={id}>
                 {categoryArticles.map(
                   ({ id, title, slug: articleSlug, heroImage }) =>
                     heroImage &&
@@ -49,13 +49,13 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
                       />
                     ),
                 )}
-              </PageContentContainer>
+              </ScopeContentContainer>
             ) : null
           })
         : null}
 
       {miscArticles && miscArticles.length > 0 ? (
-        <PageContentContainer title="Miscellaneous" slug="misc">
+        <ScopeContentContainer title="Miscellaneous" slug="misc">
           {miscArticles.map(
             ({ id, title, slug: articleSlug, heroImage }) =>
               heroImage &&
@@ -68,10 +68,8 @@ const ScopeContent: React.FC<ScopeContentProps> = ({ categories, articles }) => 
                 />
               ),
           )}
-        </PageContentContainer>
+        </ScopeContentContainer>
       ) : null}
     </div>
   )
 }
-
-export default ScopeContent

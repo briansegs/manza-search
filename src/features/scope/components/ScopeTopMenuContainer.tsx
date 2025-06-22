@@ -1,17 +1,17 @@
 import React from 'react'
 import { RightMenu } from '@/components/RightMenuContainer'
 
-import LeftMenu from './LeftMenu'
-import DropdownMenu from '../DropdownMenu'
-import { TopMenuContainerProps } from './types'
+import { ScopeLeftMenu } from './ScopeLeftMenu'
+import DropdownMenu from '@/components/DropdownMenu'
+import { TopMenuContainerProps } from '../types'
 
-const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ categories }) => {
+export function ScopeTopMenuContainer({ categories }: TopMenuContainerProps) {
   return (
     <div className="sticky top-0 z-10 mt-1">
       {/* Mobile view */}
       <div className="ml-auto flex justify-between px-1 lg:hidden">
         <DropdownMenu label="Table of Content">
-          <LeftMenu categories={categories} />
+          <ScopeLeftMenu categories={categories} />
         </DropdownMenu>
 
         <div className="block sm:hidden">
@@ -21,5 +21,3 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ categories }) => {
     </div>
   )
 }
-
-export default TopMenuContainer

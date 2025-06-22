@@ -6,7 +6,7 @@ interface SuggestedArticlesProps {
   articles: (string | Article)[] | null | undefined
 }
 
-const SuggestedArticles: React.FC<SuggestedArticlesProps> = (props) => {
+export function SuggestedArticles(props: SuggestedArticlesProps) {
   const { articles } = props
 
   const hasArticles = articles && Array.isArray(articles) && articles.length > 0
@@ -33,5 +33,3 @@ const SuggestedArticles: React.FC<SuggestedArticlesProps> = (props) => {
     </div>
   )
 }
-
-export default SuggestedArticles

@@ -1,9 +1,9 @@
 import React from 'react'
-import LeftMenu from '.'
+import { ScopeLeftMenu } from './ScopeLeftMenu'
 import { cn } from '@/utilities/ui'
-import { LeftMenuContainerProps } from './types'
+import { LeftMenuContainerProps } from '../types'
 
-const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ categories }) => {
+export function ScopeLeftMenuContainer({ categories }: LeftMenuContainerProps) {
   return (
     <div
       className={cn(
@@ -19,9 +19,7 @@ const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ categories }) => 
         Table of Content
       </div>
 
-      <LeftMenu categories={categories} />
+      <ScopeLeftMenu categories={categories} />
     </div>
   )
 }
-
-export default LeftMenuContainer

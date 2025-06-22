@@ -2,9 +2,9 @@ import ScrollToSection from '@/components/ScrollToSection'
 import scrollToTop from '@/utilities/scrollToTop'
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import { LeftMenuProps } from './types'
+import { LeftMenuProps } from '../types'
 
-const LeftMenu: React.FC<LeftMenuProps> = ({ categories }) => {
+export function ScopeLeftMenu({ categories }: LeftMenuProps) {
   return (
     <ul className={cn('flex flex-col gap-2', 'font-serif text-white', 'px-4', 'overflow-auto')}>
       <li>
@@ -29,5 +29,3 @@ const LeftMenu: React.FC<LeftMenuProps> = ({ categories }) => {
     </ul>
   )
 }
-
-export default LeftMenu

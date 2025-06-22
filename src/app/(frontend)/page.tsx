@@ -14,7 +14,7 @@ import HomeMenu from '@/components/Home/HomeMenu'
 import WelcomeBanner from '@/components/Home/WelcomeBanner'
 import HomeAd from '@/components/Home/HomeAd'
 import { cn } from '@/utilities/ui'
-import SuggestedArticles from '@/components/SuggestedArticles'
+import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
