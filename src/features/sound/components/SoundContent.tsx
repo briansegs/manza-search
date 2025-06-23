@@ -1,28 +1,12 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
 import PageContentContainer from '@/components/PageContentContainer'
-import SoundContentItem from './SoundContentItem'
-
-export interface Audio {
-  slug: string
-  title: string
-  audioImage: { media: null }
-}
-
-export interface SoundCategory {
-  slug: string
-  title: string
-  id?: string
-  audio: Audio[]
-}
-
-interface SoundContentProps {
-  content: SoundCategory[] | null | undefined
-}
+import { SoundContentItem } from './SoundContentItem'
+import { SoundContentProps } from '../types'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-const SoundContent: React.FC<SoundContentProps> = ({ content }) => {
+export function SoundContent({ content }: SoundContentProps) {
   if (!content || content.length === 0) {
     return <NoContent />
   }
@@ -53,5 +37,3 @@ const SoundContent: React.FC<SoundContentProps> = ({ content }) => {
     </div>
   )
 }
-
-export default SoundContent

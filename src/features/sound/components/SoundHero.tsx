@@ -11,9 +11,9 @@ import { CMSLink } from '@/components/Link'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
 import { isValidLink } from '@/utilities/isValidLink'
-import { SoundHeroProps } from './types'
+import { SoundHeroProps } from '../types'
 
-const SoundHero: React.FC<SoundHeroProps> = ({ ads }) => {
+export function SoundHero({ ads }: SoundHeroProps) {
   if (!ads || ads.length === 0) {
     return null
   }
@@ -50,5 +50,3 @@ const SoundHero: React.FC<SoundHeroProps> = ({ ads }) => {
     </div>
   )
 }
-
-export default SoundHero
