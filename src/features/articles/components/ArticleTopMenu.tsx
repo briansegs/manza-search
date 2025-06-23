@@ -1,14 +1,12 @@
 import scrollToTop from '@/utilities/scrollToTop'
 import React from 'react'
 import { ArticleMenuButton } from './ArticleMenuButton'
+import { ArticleTopMenuProps } from '../types'
+import { cn } from '@/utilities/ui'
 
-export type TopMenuProps = {
-  styles?: string
-}
-
-export function ArticleTopMenu({ styles }: TopMenuProps) {
+export function ArticleTopMenu({ styles }: ArticleTopMenuProps) {
   return (
-    <div className={`${styles} flex`}>
+    <div className={cn(styles, 'flex')}>
       <ArticleMenuButton onClick={scrollToTop}>TOP</ArticleMenuButton>
       <ArticleMenuButton>HIGHLIGHT</ArticleMenuButton>
       <ArticleMenuButton>LOVE</ArticleMenuButton>

@@ -45,3 +45,7 @@ export type ArticleTopMenuContainerProps = {
 export type RelatedArticlesProps = {
   articles: Article['relatedArticles']
 }
+
+export type ArticleTopMenuProps = {
+  styles?: string
+}
