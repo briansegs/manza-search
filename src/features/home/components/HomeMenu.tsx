@@ -7,7 +7,7 @@ const itemStyles = 'hover:text-secondary-blue cursor-pointer'
 
 const menuItems = ['pinned', 'loved', 'saved', 'history', 'lists', 'shared']
 
-const HomeMenu: React.FC = () => {
+export function HomeMenu() {
   return (
     <div>
       <div
@@ -44,5 +44,3 @@ const HomeMenu: React.FC = () => {
     </div>
   )
 }
-
-export default HomeMenu

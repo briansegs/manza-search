@@ -1,12 +1,12 @@
 import React from 'react'
-import { CMSLink } from '../Link'
+import { CMSLink } from '../../../components/Link'
 import { cn } from '@/utilities/ui'
 import { isValidLink } from '@/utilities/isValidLink'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
-import { HomeAdProps } from './types'
-import { RenderMedia } from '../../features/shared/components/RenderMedia'
+import { HomeAdProps } from '../types'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 
-const HomeAd: React.FC<HomeAdProps> = async ({ enableLink, link, media }) => {
+export function HomeAd({ enableLink, link, media }: HomeAdProps) {
   const hasValidLink = isValidLink(link)
 
   return (
@@ -26,5 +26,3 @@ const HomeAd: React.FC<HomeAdProps> = async ({ enableLink, link, media }) => {
     </div>
   )
 }
-
-export default HomeAd

@@ -10,9 +10,9 @@ import BottomMenu from '@/components/BottomMenu'
 import { RenderHomeBlocks } from '@/blocks/RenderHomeBlocks'
 import { Home as HomeGlobalType } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import HomeMenu from '@/components/Home/HomeMenu'
-import WelcomeBanner from '@/components/Home/WelcomeBanner'
-import HomeAd from '@/components/Home/HomeAd'
+import { HomeMenu } from '@/features/home/components/HomeMenu'
+import { HomeWelcomeBanner } from '@/features/home/components/HomeWelcomeBanner'
+import { HomeAd } from '@/features/home/components/HomeAd'
 import { cn } from '@/utilities/ui'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
 
@@ -42,7 +42,7 @@ export default async function Page() {
         <HomeMenu />
 
         <div className="flex flex-1 flex-col items-center">
-          <WelcomeBanner />
+          <HomeWelcomeBanner />
 
           <div className="size-full overflow-y-auto border-[1px] border-black p-4">
             {layout && layout.length > 0 ? (

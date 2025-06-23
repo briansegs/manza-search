@@ -2,7 +2,7 @@
 import React from 'react'
 import { useUser } from '@clerk/nextjs'
 
-const WelcomeBanner: React.FC = () => {
+export function HomeWelcomeBanner() {
   const { isLoaded, user } = useUser()
 
   const name = isLoaded && user && user.firstName ? user.firstName : ''
@@ -16,5 +16,3 @@ const WelcomeBanner: React.FC = () => {
     </div>
   )
 }
-
-export default WelcomeBanner
