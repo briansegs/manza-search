@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
-import RenderMedia from '@/components/RenderMedia'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import { cn } from '@/utilities/ui'
 import { Audio } from '../types'
 

@@ -4,7 +4,7 @@ import { Article } from '@/payload-types'
 import getAuthorList from '@/utilities/getAuthorList'
 import LeftMenu from '../LeftMenu'
 import TopMenu from '.'
-import DropdownMenu from '../../DropdownMenu'
+import { DropdownMenu } from '@/features/shared/components/DropdownMenu'
 import getSectionTitles from '@/utilities/getSectionTitles'
 import { cn } from '@/utilities/ui'
 

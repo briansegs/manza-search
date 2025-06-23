@@ -9,7 +9,7 @@ interface ScrollToSectionProps extends ButtonProps {
   children: ReactNode
 }
 
-const ScrollToSection: React.FC<ScrollToSectionProps> = ({ id, children, className }) => {
+export function ScrollToSection({ id, children, className }: ScrollToSectionProps) {
   const handleClick = () => {
     const section = document.getElementById(id)
     section?.scrollIntoView({
@@ -30,5 +30,3 @@ const ScrollToSection: React.FC<ScrollToSectionProps> = ({ id, children, classNa
     </button>
   )
 }
-
-export default ScrollToSection

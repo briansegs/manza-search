@@ -1,6 +1,6 @@
-import ImagePlaceholder from '@/components/ImagePlaceholder'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { CMSLink } from '@/components/Link'
-import RenderMedia from '@/components/RenderMedia'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import { PromoBlock as PromoBlockProps } from '@/payload-types'
 import { isValidLink } from '@/utilities/isValidLink'
 import clsx from 'clsx'

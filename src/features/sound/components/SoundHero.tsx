@@ -5,11 +5,11 @@ import {
   CarouselContent,
   CarouselDotButtons,
   CarouselItem,
-} from '@/components/ui/carousel'
+} from '@/features/shared/components/ui/carousel'
 
 import { CMSLink } from '@/components/Link'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
-import RenderMedia from '@/components/RenderMedia'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import { isValidLink } from '@/utilities/isValidLink'
 import { SoundHeroProps } from '../types'
 

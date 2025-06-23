@@ -2,8 +2,8 @@ import { CMSLink } from '@/components/Link'
 import { AdSection as AdSectionProps } from '@/payload-types'
 import React from 'react'
 import clsx from 'clsx'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
-import RenderMedia from '@/components/RenderMedia'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
 
 export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {

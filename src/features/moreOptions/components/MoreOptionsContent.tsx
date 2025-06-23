@@ -2,7 +2,7 @@
 
 import React from 'react'
 import useBreakpoint from '@/hooks/useBreakpoint'
-import { PopoverContent } from '@/components/ui/popover'
+import { PopoverContent } from '@/features/shared/components/ui/popover'
 import { cn } from '@/utilities/ui'
 
 const buttonStyles =

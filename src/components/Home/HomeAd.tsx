@@ -2,9 +2,9 @@ import React from 'react'
 import { CMSLink } from '../Link'
 import { cn } from '@/utilities/ui'
 import { isValidLink } from '@/utilities/isValidLink'
-import ImagePlaceholder from '../ImagePlaceholder'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { HomeAdProps } from './types'
-import RenderMedia from '../RenderMedia'
+import { RenderMedia } from '../../features/shared/components/RenderMedia'
 
 const HomeAd: React.FC<HomeAdProps> = async ({ enableLink, link, media }) => {
   const hasValidLink = isValidLink(link)

@@ -1,7 +1,7 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import DropdownMenu from '../DropdownMenu'
-import { RightMenu } from '../../features/shared/components/RightMenu'
+import { DropdownMenu } from '@/features/shared/components/DropdownMenu'
+import { RightMenu } from '@/features/shared/components/RightMenu'
 
 const itemStyles = 'hover:text-secondary-blue cursor-pointer'
 

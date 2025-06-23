@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/features/shared/components/ui/button'
 import { Media } from '@/payload-types'
 import React from 'react'
 import clsx from 'clsx'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
-import RenderMedia from '@/components/RenderMedia'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 
 type ShopType = {
   image?: Media

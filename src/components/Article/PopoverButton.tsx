@@ -1,9 +1,13 @@
 import React, { ReactNode } from 'react'
 import MenuButton from './MenuButton'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '../../features/shared/components/ui/popover'
 import { Article } from '@/payload-types'
 import { CMSLink } from '../Link'
-import ScrollToSection from '../ScrollToSection'
+import { ScrollToSection } from '@/features/shared/components/ScrollToSection'
 import { sectionTitle } from '@/utilities/getSectionTitles'
 
 interface PopoverButtonProps {

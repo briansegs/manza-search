@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { Popover, PopoverTrigger } from '@/components/ui/popover'
+import { Button } from '@/features/shared/components/ui/button'
+import { Popover, PopoverTrigger } from '@/features/shared/components/ui/popover'
 
 import React from 'react'
 import { MoreOptionsContent } from './MoreOptionsContent'

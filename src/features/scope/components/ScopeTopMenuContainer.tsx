@@ -2,7 +2,7 @@ import React from 'react'
 import { RightMenu } from '@/features/shared/components/RightMenu'
 
 import { ScopeLeftMenu } from './ScopeLeftMenu'
-import DropdownMenu from '@/components/DropdownMenu'
+import { DropdownMenu } from '@/features/shared/components/DropdownMenu'
 import { TopMenuContainerProps } from '../types'
 
 export function ScopeTopMenuContainer({ categories }: TopMenuContainerProps) {

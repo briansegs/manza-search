@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/features/shared/components/ui/button'
 
 const buttonStyles = 'bg-slate-200 hover:bg-slate-300 text-black border-2 border-black'
 

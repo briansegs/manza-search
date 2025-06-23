@@ -1,6 +1,6 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import PageContentContainer from '@/components/PageContentContainer'
+import { PageContentContainer } from '@/features/shared/components/PageContentContainer'
 import { SoundContentItem } from './SoundContentItem'
 import { SoundContentProps } from '../types'
 

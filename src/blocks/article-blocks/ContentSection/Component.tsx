@@ -5,7 +5,7 @@ import RichText from '@/components/RichText'
 import clsx from 'clsx'
 import ContentButtons from './ContentButtons'
 import { cn } from '@/utilities/ui'
-import RenderMedia from '@/components/RenderMedia'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
 
 interface ImageContainerProps {

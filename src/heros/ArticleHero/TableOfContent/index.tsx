@@ -1,4 +1,4 @@
-import ScrollToSection from '@/components/ScrollToSection'
+import { ScrollToSection } from '@/features/shared/components/ScrollToSection'
 import { Article } from '@/payload-types'
 import getSectionTitles from '@/utilities/getSectionTitles'
 

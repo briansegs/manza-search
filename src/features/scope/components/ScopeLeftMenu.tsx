@@ -1,4 +1,4 @@
-import ScrollToSection from '@/components/ScrollToSection'
+import { ScrollToSection } from '@/features/shared/components/ScrollToSection'
 import scrollToTop from '@/utilities/scrollToTop'
 import { cn } from '@/utilities/ui'
 import React from 'react'

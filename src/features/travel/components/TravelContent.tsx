@@ -2,7 +2,7 @@ import { cn } from '@/utilities/ui'
 import React from 'react'
 import { TravelContentItem } from './TravelContentItem'
 import { Article, Media } from '@/payload-types'
-import RenderMedia from '@/components/RenderMedia'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import { TravelContentContainer } from './TravelContentContainer'
 import { TravelContentBlock, TravelContentProps } from '../types'
 
