@@ -1,28 +1,12 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
 import PageContentContainer from '@/components/PageContentContainer'
-import LiteratureContentItem from './LiteratureContentItem'
-
-export interface Book {
-  slug: string
-  title: string
-  bookImage: { media: null }
-}
-
-export interface LiteratureCategory {
-  slug: string
-  title: string
-  id?: string
-  books: Book[]
-}
-
-interface LiteratureContentProps {
-  content: LiteratureCategory[] | null | undefined
-}
+import { LiteratureContentItem } from './LiteratureContentItem'
+import { LiteratureContentProps } from '../types'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-const LiteratureContent: React.FC<LiteratureContentProps> = ({ content }) => {
+export function LiteratureContent({ content }: LiteratureContentProps) {
   if (!content || content.length === 0) {
     return <NoContent />
   }
@@ -58,5 +42,3 @@ const LiteratureContent: React.FC<LiteratureContentProps> = ({ content }) => {
     </div>
   )
 }
-
-export default LiteratureContent

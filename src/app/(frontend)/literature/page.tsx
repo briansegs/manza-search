@@ -6,10 +6,10 @@ import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Literature as LiteratureGlobalType } from '@/payload-types'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import TopMenuContainer from '@/components/Literature/TopMenuContainer'
-import LiteratureContent from '@/components/Literature/LiteratureContent'
-import LiteratureHero from '@/components/Literature/LiteratureHero'
-import { bookData } from '@/components/Literature/LiteratureContent/mockData'
+import { LiteratureTopMenuContainer } from '@/features/literature/components/LiteratureTopMenuContainer'
+import { LiteratureContent } from '@/features/literature/components/LiteratureContent'
+import { LiteratureHero } from '@/features/literature/components/LiteratureHero'
+import { bookData } from '@/features/literature/mockData'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -44,7 +44,7 @@ export default async function Page() {
 
         <LiteratureHero ads={pageAds} />
 
-        <TopMenuContainer />
+        <LiteratureTopMenuContainer />
 
         <LiteratureContent content={bookData} />
 
