@@ -1,7 +1,7 @@
 import React from 'react'
 import { Media as MediaType } from '@/payload-types'
-import ImagePlaceholder from '@/components/ImagePlaceholder'
-import RenderMedia from '@/components/RenderMedia'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
 
 type ImagesType = {
   media?: MediaType

@@ -3,7 +3,7 @@ import PageClient from './page.client'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { Metadata } from 'next'
-import { ArticleArchive } from '@/components/Article/ArticleArchive'
+import { ArticleArchive } from '@/features/articles/components/ArticleArchive'
 
 export const dynamic = 'force-static'
 export const revalidate = 600

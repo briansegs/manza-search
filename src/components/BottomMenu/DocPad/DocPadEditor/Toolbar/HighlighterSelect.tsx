@@ -1,4 +1,4 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
 import React from 'react'
 import ToolbarButton from './ToolbarButton'
 import { Highlighter } from 'lucide-react'

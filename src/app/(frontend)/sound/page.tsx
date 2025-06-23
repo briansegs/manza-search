@@ -1,15 +1,15 @@
 import React from 'react'
 import PageClient from './page.client'
 
-import RightMenuContainer from '@/components/RightMenuContainer'
+import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Sound as SoundGlobalType } from '@/payload-types'
-import SuggestedArticles from '@/components/SuggestedArticles'
-import TopMenuContainer from '@/components/Sound/TopMenuContainer'
-import SoundContent from '@/components/Sound/SoundContent'
-import SoundHero from '@/components/Sound/SoundHero'
-import { audioData } from '@/components/Sound/SoundContent/mockData'
+import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
+import { SoundTopMenuContainer } from '@/features/sound/components/SoundTopMenuContainer'
+import { SoundContent } from '@/features/sound/components/SoundContent'
+import { SoundHero } from '@/features/sound/components/SoundHero'
+import { audioData } from '@/features/sound/mockData'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -44,7 +44,7 @@ export default async function Page() {
 
         <SoundHero ads={pageAds} />
 
-        <TopMenuContainer />
+        <SoundTopMenuContainer />
 
         <SoundContent content={audioData} />
 

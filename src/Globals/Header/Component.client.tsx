@@ -12,7 +12,7 @@ import { HeaderNav, MobileHeaderNav } from './Nav'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Search } from '@/search/Component'
 import { Menu, ShoppingCart } from 'lucide-react'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
 
 interface HeaderClientProps {
   data: Header
@@ -37,7 +37,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   return (
     <>
       <header
-        className="bg-primary-blue flex h-16 text-white"
+        className="flex h-16 bg-primary-blue text-white"
         {...(theme ? { 'data-theme': theme } : {})}
       >
         <div className="container flex items-center justify-between py-2">
@@ -70,7 +70,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <PopoverTrigger>
                 <Menu />
               </PopoverTrigger>
-              <PopoverContent className="bg-primary-blue block overflow-hidden rounded-xl border-4 border-black p-0 lg:hidden">
+              <PopoverContent className="block overflow-hidden rounded-xl border-4 border-black bg-primary-blue p-0 lg:hidden">
                 <div className="flex items-center justify-between gap-4 px-2 py-3 text-white">
                   <Link href="/settings">Settings</Link>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { PopoverContent } from '@/components/ui/popover'
+import { PopoverContent } from '@/features/shared/components/ui/popover'
 import useBreakpoint from '@/hooks/useBreakpoint'
 import React from 'react'
 import DocPadEditor from './DocPadEditor'

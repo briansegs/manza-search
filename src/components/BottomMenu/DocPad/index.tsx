@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Button } from '@/features/shared/components/ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
 import React, { Suspense } from 'react'
 import { LoaderCircle } from 'lucide-react'
 

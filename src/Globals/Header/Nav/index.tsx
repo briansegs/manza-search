@@ -5,8 +5,8 @@ import React from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent } from '@/components/ui/popover'
+import { Button } from '@/features/shared/components/ui/button'
+import { Popover, PopoverContent } from '@/features/shared/components/ui/popover'
 import { PopoverTrigger } from '@radix-ui/react-popover'
 import { cn } from '@/utilities/ui'
 

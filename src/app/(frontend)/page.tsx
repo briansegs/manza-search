@@ -5,16 +5,16 @@ import React from 'react'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import NotFound from './not-found'
-import RightMenuContainer from '@/components/RightMenuContainer'
+import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import BottomMenu from '@/components/BottomMenu'
 import { RenderHomeBlocks } from '@/blocks/RenderHomeBlocks'
 import { Home as HomeGlobalType } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import HomeMenu from '@/components/Home/HomeMenu'
-import WelcomeBanner from '@/components/Home/WelcomeBanner'
-import HomeAd from '@/components/Home/HomeAd'
+import { HomeMenu } from '@/features/home/components/HomeMenu'
+import { HomeWelcomeBanner } from '@/features/home/components/HomeWelcomeBanner'
+import { HomeAd } from '@/features/home/components/HomeAd'
 import { cn } from '@/utilities/ui'
-import SuggestedArticles from '@/components/SuggestedArticles'
+import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -42,7 +42,7 @@ export default async function Page() {
         <HomeMenu />
 
         <div className="flex flex-1 flex-col items-center">
-          <WelcomeBanner />
+          <HomeWelcomeBanner />
 
           <div className="size-full overflow-y-auto border-[1px] border-black p-4">
             {layout && layout.length > 0 ? (

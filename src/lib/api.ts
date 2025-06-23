@@ -1,4 +1,4 @@
-import { DictionaryEntry } from '@/components/RightMenuContainer/types'
+import { DictionaryEntry } from '@/features/dictionary/types'
 import { fetchHandler } from './handlers/fetch'
 import { ActionResponse } from '@/types/global'
 
