@@ -11,9 +11,9 @@ import { CMSLink } from '@/components/Link'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
 import { isValidLink } from '@/utilities/isValidLink'
-import { HealthAndWellnessHeroProps } from './types'
+import { HealthAndWellnessHeroProps } from '../types'
 
-const HealthAndWellnessHero: React.FC<HealthAndWellnessHeroProps> = ({ ads }) => {
+export function HealthAndWellnessHero({ ads }: HealthAndWellnessHeroProps) {
   if (!ads || ads.length === 0) {
     return null
   }
@@ -50,5 +50,3 @@ const HealthAndWellnessHero: React.FC<HealthAndWellnessHeroProps> = ({ ads }) =>
     </div>
   )
 }
-
-export default HealthAndWellnessHero

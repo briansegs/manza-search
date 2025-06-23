@@ -1,28 +1,12 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
 import PageContentContainer from '@/components/PageContentContainer'
-import HealthAndWellnessContentItem from './HealthAndWellnessContentItem'
-
-export interface Item {
-  slug: string
-  title: string
-  itemImage: { media: null }
-}
-
-export interface HealthAndWellnessCategory {
-  slug: string
-  title: string
-  id?: string
-  items: Item[]
-}
-
-interface HealthAndWellnessContentProps {
-  content: HealthAndWellnessCategory[] | null | undefined
-}
+import { HealthAndWellnessContentItem } from './HealthAndWellnessContentItem'
+import { HealthAndWellnessContentProps } from '../types'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-const HealthAndWellnessContent: React.FC<HealthAndWellnessContentProps> = ({ content }) => {
+export function HealthAndWellnessContent({ content }: HealthAndWellnessContentProps) {
   if (!content || content.length === 0) {
     return <NoContent />
   }
@@ -58,5 +42,3 @@ const HealthAndWellnessContent: React.FC<HealthAndWellnessContentProps> = ({ con
     </div>
   )
 }
-
-export default HealthAndWellnessContent

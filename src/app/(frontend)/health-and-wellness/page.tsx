@@ -6,10 +6,10 @@ import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { HealthAndWellness as HealthAndWellnessGlobalType } from '@/payload-types'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import TopMenuContainer from '@/components/HealthAndWellness/TopMenuContainer'
-import HealthAndWellnessContent from '@/components/HealthAndWellness/HealthAndWellnessContent'
-import HealthAndWellnessHero from '@/components/HealthAndWellness/HealthAndWellnessHero'
-import { itemData } from '@/components/HealthAndWellness/HealthAndWellnessContent/mockData'
+import { HealthAndWellnessTopMenuContainer } from '@/features/healthAndWellness/components/HealthAndWellnessTopMenuContainer'
+import { HealthAndWellnessContent } from '@/features/healthAndWellness/components/HealthAndWellnessContent'
+import { HealthAndWellnessHero } from '@/features/healthAndWellness/components/HealthAndWellnessHero'
+import { itemData } from '@/features/healthAndWellness/mockData'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -49,7 +49,7 @@ export default async function Page() {
 
         <HealthAndWellnessHero ads={pageAds} />
 
-        <TopMenuContainer />
+        <HealthAndWellnessTopMenuContainer />
 
         <HealthAndWellnessContent content={itemData} />
 
