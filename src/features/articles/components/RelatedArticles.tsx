@@ -1,14 +1,8 @@
-import { Article } from '@/payload-types'
 import Link from 'next/link'
 import React from 'react'
+import { RelatedArticlesProps } from '../types'
 
-export type Props = {
-  articles: Article['relatedArticles']
-}
-
-const RelatedArticles: React.FC<Props> = (props) => {
-  const { articles } = props
-
+export function RelatedArticles({ articles }: RelatedArticlesProps) {
   const hasArticles = articles && Array.isArray(articles) && articles.length > 0
 
   return (
@@ -33,5 +27,3 @@ const RelatedArticles: React.FC<Props> = (props) => {
     </div>
   )
 }
-
-export default RelatedArticles

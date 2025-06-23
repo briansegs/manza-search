@@ -7,13 +7,13 @@ import React, { cache } from 'react'
 import { generateMeta } from '@/utilities/generateMeta'
 import { Metadata } from 'next'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import RelatedArticles from '@/components/Article/RelatedArticles'
-import TopMenuContainer from '@/components/Article/TopMenu/TopMenuContainer'
+import { RelatedArticles } from '@/features/articles/components/RelatedArticles'
+import { ArticleTopMenuContainer } from '@/features/articles/components/ArticleTopMenuContainer'
 import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import BottomMenu from '@/components/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
-import LeftMenuContainer from '@/components/Article/LeftMenu/LeftMenuContainer'
+import { ArticleLeftMenuContainer } from '@/features/articles/components/ArticleLeftMenuContainer'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -63,15 +63,15 @@ export default async function Article({ params: paramsPromise }: Args) {
       <RelatedArticles articles={relatedArticles} />
 
       <div className="flex">
-        <LeftMenuContainer article={article} />
+        <ArticleLeftMenuContainer article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
-          <TopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
+          <ArticleTopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
 
           {/* Hero & Content */}
           <ArticleHero article={article} />
 
-          <TopMenuContainer article={article} className="sm:hidden" />
+          <ArticleTopMenuContainer article={article} className="sm:hidden" />
 
           <RenderArticleBlocks blocks={layout ?? []} />
         </div>

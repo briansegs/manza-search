@@ -1,14 +1,10 @@
 import React from 'react'
-import { Article } from '@/payload-types'
-import LeftMenu from '.'
+import { ArticleLeftMenu } from './ArticleLeftMenu'
 import getAuthorList from '@/utilities/getAuthorList'
 import getSectionTitles from '@/utilities/getSectionTitles'
+import { ArticleLeftMenuContainerProps } from '../types'
 
-interface LeftMenuContainerProps {
-  article: Article
-}
-
-const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ article }) => {
+export function ArticleLeftMenuContainer({ article }: ArticleLeftMenuContainerProps) {
   const { populatedAuthors, externalAuthors, otherVerifiedSources, layout } = article
 
   const authorList = getAuthorList({ populatedAuthors, externalAuthors })
@@ -16,8 +12,8 @@ const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ article }) => {
   const sectionTitles = getSectionTitles({ layout })
 
   return (
-    <div className="bg-menu sticky top-0 hidden h-[650px] w-28 flex-col rounded-r-xl border-4 border-black py-4 hover:bg-black lg:flex">
-      <LeftMenu
+    <div className="sticky top-0 hidden h-[650px] w-28 flex-col rounded-r-xl border-4 border-black bg-menu py-4 hover:bg-black lg:flex">
+      <ArticleLeftMenu
         authors={authorList}
         otherVerifiedSources={otherVerifiedSources}
         sectionTitles={sectionTitles}
@@ -25,5 +21,3 @@ const LeftMenuContainer: React.FC<LeftMenuContainerProps> = ({ article }) => {
     </div>
   )
 }
-
-export default LeftMenuContainer

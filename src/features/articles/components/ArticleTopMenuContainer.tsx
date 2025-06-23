@@ -1,19 +1,14 @@
 import React from 'react'
 import { RightMenu } from '@/features/shared/components/RightMenu'
-import { Article } from '@/payload-types'
 import getAuthorList from '@/utilities/getAuthorList'
-import LeftMenu from '../LeftMenu'
-import TopMenu from '.'
+import { ArticleLeftMenu } from './ArticleLeftMenu'
+import { ArticleTopMenu } from './ArticleTopMenu'
 import { DropdownMenu } from '@/features/shared/components/DropdownMenu'
 import getSectionTitles from '@/utilities/getSectionTitles'
 import { cn } from '@/utilities/ui'
+import { ArticleTopMenuContainerProps } from '../types'
 
-interface TopMenuContainerProps {
-  article: Article
-  className: string
-}
-
-const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article, className }) => {
+export function ArticleTopMenuContainer({ article, className }: ArticleTopMenuContainerProps) {
   const { populatedAuthors, externalAuthors, otherVerifiedSources, layout } = article
 
   const authorList = getAuthorList({ populatedAuthors, externalAuthors })
@@ -24,14 +19,14 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article, className 
     <div className={cn('sticky top-0 z-10', className)}>
       {/* Large device view */}
       <div className="hidden h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu hover:bg-black lg:flex">
-        <TopMenu />
+        <ArticleTopMenu />
       </div>
 
       {/* Mobile view */}
       <div className="sticky top-0 z-10 ml-auto flex justify-between px-1 lg:hidden">
         <div className="flex gap-1">
           <DropdownMenu label="Resources">
-            <LeftMenu
+            <ArticleLeftMenu
               sectionTitles={sectionTitles}
               otherVerifiedSources={otherVerifiedSources}
               authors={authorList}
@@ -39,7 +34,7 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article, className 
           </DropdownMenu>
 
           <DropdownMenu label="Actions">
-            <TopMenu styles="flex-col items-center" />
+            <ArticleTopMenu styles="flex-col items-center" />
           </DropdownMenu>
         </div>
 
@@ -50,5 +45,3 @@ const TopMenuContainer: React.FC<TopMenuContainerProps> = ({ article, className 
     </div>
   )
 }
-
-export default TopMenuContainer

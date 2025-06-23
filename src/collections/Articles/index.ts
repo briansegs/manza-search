@@ -124,7 +124,7 @@ export const Articles: CollectionConfig<'articles'> = {
                 position: 'sidebar',
                 initCollapsed: true,
                 components: {
-                  RowLabel: '@/components/Article/CustomRowLabel.tsx#CustomRowLabel',
+                  RowLabel: '@/features/articles/components/CustomRowLabel.tsx#CustomRowLabel',
                 },
               },
               fields: [

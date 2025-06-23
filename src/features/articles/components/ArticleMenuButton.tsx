@@ -1,12 +1,9 @@
-import { ButtonProps, buttonVariants } from '../../features/shared/components/ui/button'
+import { buttonVariants } from '../../shared/components/ui/button'
 import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/utilities/ui'
+import { ArticleMenuButtonProps } from '../types'
 
-interface MenuButtonProps extends ButtonProps {
-  dark?: boolean
-}
-
-const MenuButton: React.FC<MenuButtonProps> = ({
+export function ArticleMenuButton({
   asChild = false,
   className,
   size,
@@ -14,7 +11,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({
   ref,
   dark,
   ...props
-}) => {
+}: ArticleMenuButtonProps) {
   const Comp = asChild ? Slot : 'button'
 
   return (
@@ -31,5 +28,3 @@ const MenuButton: React.FC<MenuButtonProps> = ({
     />
   )
 }
-
-export default MenuButton

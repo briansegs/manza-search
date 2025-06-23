@@ -4,24 +4,18 @@ import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React from 'react'
 
-import type { Article } from '@/payload-types'
-
 import { Media } from '@/components/Media'
 import MissingImage from '@/components/ImageMissing'
 import { formatDateTime } from '@/utilities/formatDateTime'
+import { ArticleCardProps } from '../types'
 
-export type CardArticleData = Pick<Article, 'slug' | 'meta' | 'title' | 'updatedAt'>
-
-export const ArticleCard: React.FC<{
-  alignItems?: 'center'
-  className?: string
-  doc?: CardArticleData
-  relationTo?: 'articles'
-  title?: string
-  updatedAt?: string
-}> = (props) => {
+export function ArticleCard({
+  className,
+  doc,
+  relationTo,
+  title: titleFromProps,
+}: ArticleCardProps) {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, title: titleFromProps } = props
 
   const { slug, meta, title, updatedAt } = doc || {}
   const { description, image: metaImage } = meta || {}

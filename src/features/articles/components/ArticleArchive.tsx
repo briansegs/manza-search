@@ -1,15 +1,10 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
 
-import { ArticleCard, CardArticleData } from '../ArticleCard'
+import { ArticleCard } from './ArticleCard'
+import { ArticleArchiveProps } from '../types'
 
-export type Props = {
-  articles: CardArticleData[]
-}
-
-export const ArticleArchive: React.FC<Props> = (props) => {
-  const { articles } = props
-
+export function ArticleArchive({ articles }: ArticleArchiveProps) {
   return (
     <div className={cn('container')}>
       <div>
