@@ -1,20 +1,7 @@
-import React, { ReactNode } from 'react'
 import { cn } from '@/utilities/ui'
-import { Media } from '@/payload-types'
+import { TravelContentContainerProps } from '../types'
 
-interface TravelContentContainerProps {
-  slug: string
-  title: string
-  children: ReactNode
-  ad: { media: Media } | undefined
-}
-
-const TravelContentContainer: React.FC<TravelContentContainerProps> = ({
-  slug,
-  title,
-  children,
-  ad,
-}) => {
+export function TravelContentContainer({ slug, title, children, ad }: TravelContentContainerProps) {
   return (
     <div
       id={slug}
@@ -49,5 +36,3 @@ const TravelContentContainer: React.FC<TravelContentContainerProps> = ({
     </div>
   )
 }
-
-export default TravelContentContainer

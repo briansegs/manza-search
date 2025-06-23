@@ -1,30 +1,12 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import TravelContentItem from './TravelContentItem'
-import { Article, Media, Travel } from '@/payload-types'
+import { TravelContentItem } from './TravelContentItem'
+import { Article, Media } from '@/payload-types'
 import RenderMedia from '@/components/RenderMedia'
-import TravelContentContainer from './TravelContentContainer'
+import { TravelContentContainer } from './TravelContentContainer'
+import { TravelContentBlock, TravelContentProps } from '../types'
 
-export interface TravelCategory {
-  title: string
-  slug: string
-  articles: Article[]
-}
-
-export interface TravelAd {
-  title: string
-  slug: string
-  ad: { media: Media }
-}
-
-type TravelContentBlock = TravelCategory | TravelAd
-
-interface TravelContentProps {
-  content: TravelCategory[] | null | undefined
-  adImages: Travel['adImages']
-}
-
-const TravelContent: React.FC<TravelContentProps> = ({ content, adImages }) => {
+export function TravelContent({ content, adImages }: TravelContentProps) {
   if (!content?.length) {
     return <NoContent />
   }
@@ -120,5 +102,3 @@ const NoContent = () => <div className="mt-6 w-full text-center">No content to d
 const NoArticles = () => (
   <p className="mt-10 text-center text-sm italic text-muted-foreground">No articles available.</p>
 )
-
-export default TravelContent

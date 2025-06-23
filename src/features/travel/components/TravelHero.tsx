@@ -11,9 +11,9 @@ import { CMSLink } from '@/components/Link'
 import ImagePlaceholder from '@/components/ImagePlaceholder'
 import RenderMedia from '@/components/RenderMedia'
 import { isValidLink } from '@/utilities/isValidLink'
-import { TravelHeroProps } from './types'
+import { TravelHeroProps } from '../types'
 
-const TravelHero: React.FC<TravelHeroProps> = ({ images }) => {
+export function TravelHero({ images }: TravelHeroProps) {
   if (!images || images.length === 0) {
     return null
   }
@@ -50,5 +50,3 @@ const TravelHero: React.FC<TravelHeroProps> = ({ images }) => {
     </div>
   )
 }
-
-export default TravelHero

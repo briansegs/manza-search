@@ -6,12 +6,12 @@ import BottomMenu from '@/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Article, Category, Travel as TravelGlobalType } from '@/payload-types'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import TopMenuContainer from '@/components/Travel/TopMenuContainer'
-import TravelContent from '@/components/Travel/TravelContent'
-import TravelHero from '@/components/Travel/TravelHero'
+import { TravelTopMenuContainer } from '@/features/travel/components/TravelTopMenuContainer'
+import { TravelContent } from '@/features/travel/components/TravelContent'
+import { TravelHero } from '@/features/travel/components/TravelHero'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import TravelTitle from '@/components/Travel/TravelTitle'
+import { TravelTitle } from '@/features/travel/components/TravelTitle'
 import { Metadata } from 'next'
 
 export const dynamic = 'force-static'
@@ -69,7 +69,7 @@ export default async function Page() {
 
           <TravelHero images={travelData?.heroImages} />
 
-          <TopMenuContainer />
+          <TravelTopMenuContainer />
 
           <TravelContent content={articlesByContinents || []} adImages={travelData?.adImages} />
 
