@@ -9,7 +9,7 @@ import { ScopeLeftMenuContainer } from '@/features/scope/components/ScopeLeftMen
 import { ScopeContent } from '@/features/scope/components/ScopeContent'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
 import { RightMenuContainer } from '@/features/shared/components/RightMenu'
-import BottomMenu from '@/components/BottomMenu'
+import { BottomMenu } from '@/features/shared/components/BottomMenu'
 
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Scope as ScopeGlobalType } from '@/payload-types'

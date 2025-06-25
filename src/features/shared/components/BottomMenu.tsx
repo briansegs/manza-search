@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from '@/features/shared/components/ui/button'
-import DocPad from './DocPad'
+import { DocPadPopoverButton } from '@/features/docPad/components/DocPadPopoverButton'
 import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
 import { cn } from '@/utilities/ui'
 
-const BottomMenu: React.FC = () => {
+export function BottomMenu() {
   return (
     <div className="fixed bottom-0 z-10 flex h-12 w-full justify-between sm:h-16">
       <div className="w-28">
@@ -24,7 +24,7 @@ const BottomMenu: React.FC = () => {
 
       <div className="flex-1 overflow-hidden rounded-t-xl border-[5px] border-green-600">
         <div className="flex size-full items-center justify-center bg-menu hover:bg-black">
-          <DocPad />
+          <DocPadPopoverButton />
         </div>
       </div>
 
@@ -45,5 +45,3 @@ const BottomMenu: React.FC = () => {
     </div>
   )
 }
-
-export default BottomMenu

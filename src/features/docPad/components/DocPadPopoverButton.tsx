@@ -5,7 +5,7 @@ import { LoaderCircle } from 'lucide-react'
 
 const DocPadContent = React.lazy(() => import('./DocPadContent'))
 
-const DocPad: React.FC = () => {
+export function DocPadPopoverButton() {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -37,5 +37,3 @@ const DocPad: React.FC = () => {
     </Popover>
   )
 }
-
-export default DocPad

@@ -2,7 +2,7 @@ import React from 'react'
 import PageClient from './page.client'
 
 import { RightMenuContainer } from '@/features/shared/components/RightMenu'
-import BottomMenu from '@/components/BottomMenu'
+import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { HealthAndWellness as HealthAndWellnessGlobalType } from '@/payload-types'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
