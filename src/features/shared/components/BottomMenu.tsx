@@ -1,13 +1,13 @@
 import React from 'react'
 import { Button } from '@/features/shared/components/ui/button'
-import DocPad from './DocPad'
+import { DocPadPopoverButton } from '@/features/docPad/components/DocPadPopoverButton'
 import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
 import { cn } from '@/utilities/ui'
 
-const BottomMenu: React.FC = () => {
+export function BottomMenu() {
   return (
     <div className="fixed bottom-0 z-10 flex h-12 w-full justify-between sm:h-16">
-      <div className="w-28">
+      <div className="w-16 sm:w-28">
         <Popover>
           <PopoverTrigger asChild>
             <Button className="size-full rounded-b-none rounded-tl-none rounded-tr-xl bg-menu-red font-serif text-base hover:bg-pink-500">
@@ -22,17 +22,17 @@ const BottomMenu: React.FC = () => {
         </Popover>
       </div>
 
-      <div className="flex-1 overflow-hidden rounded-t-xl border-[5px] border-green-600">
+      <div className="flex-1 overflow-hidden rounded-t-xl border-x-[3px] border-t-[3px] border-green-600">
         <div className="flex size-full items-center justify-center bg-menu hover:bg-black">
-          <DocPad />
+          <DocPadPopoverButton />
         </div>
       </div>
 
-      <div className="w-28">
+      <div className="w-16 sm:w-28">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="size-full rounded-b-none rounded-tl-xl rounded-tr-none bg-blue-800 font-serif text-base hover:bg-green-600">
-              Menu box
+            <Button className="flex size-full gap-1 rounded-b-none rounded-tl-xl rounded-tr-none bg-blue-800 font-serif text-base hover:bg-green-600">
+              Menu <span className="hidden sm:block">Box</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent
@@ -45,5 +45,3 @@ const BottomMenu: React.FC = () => {
     </div>
   )
 }
-
-export default BottomMenu

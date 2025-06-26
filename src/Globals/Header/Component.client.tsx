@@ -7,18 +7,14 @@ import React, { useEffect, useState } from 'react'
 import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav, MobileHeaderNav } from './Nav'
+import { HeaderNav, MobileHeaderNav } from './Nav/HeaderNav'
 
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Search } from '@/search/Component'
 import { Menu, ShoppingCart } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
 
-interface HeaderClientProps {
-  data: Header
-}
-
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+export function HeaderClient({ data }: { data: Header }) {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
