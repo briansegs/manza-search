@@ -33,6 +33,7 @@ import { HealthAndWellnessMedia } from './collections/HealthAndWellnessMedia'
 import { HealthAndWellness } from './Globals/HealthAndWellness/config'
 import { TravelMedia } from './collections/TravelMedia'
 import { Travel } from './Globals/Travel/config'
+import { Topics } from './collections/Topics'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -102,6 +103,7 @@ export default buildConfig({
     TravelMedia,
     HealthAndWellnessMedia,
     Categories,
+    Topics,
     Users,
   ],
   cors: [getServerSideURL()].filter(Boolean),

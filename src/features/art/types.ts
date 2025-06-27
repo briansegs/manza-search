@@ -1,18 +1,17 @@
-import { Art } from '@/payload-types'
-import { Category } from '@/payload-types'
+import { Art, Article, Category } from '@/payload-types'
+
+type ArtArticleGroup = {
+  category: Pick<Category, 'title' | 'slug' | 'id'>
+  articles: Article[]
+}
+
+export type ArtContentItemProps = Pick<Article, 'title' | 'heroImage' | 'slug'>
 
 export type ArtHeroProps = {
   ads: Art['pageAds']
 }
 
-export type ArtWork = Pick<Category, 'title' | 'slug'> & {
-  artWorkImage: { media: null }
-}
-
-export type ArtCategory = Pick<Category, 'title' | 'slug' | 'id'> & {
-  artWork: ArtWork[]
-}
-
 export type ArtContentProps = {
-  content: ArtCategory[] | null | undefined
+  articlesByTopic?: ArtArticleGroup[]
+  paidTopSpot?: Art['paidTopSpot']
 }
