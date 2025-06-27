@@ -72,6 +72,24 @@ export const Art: GlobalConfig = {
           ],
           label: 'Page Ads',
         },
+        {
+          fields: [
+            {
+              name: 'paidTopSpot',
+              type: 'relationship',
+              relationTo: 'articles',
+              filterOptions: ({ id }) => {
+                return {
+                  id: {
+                    not_in: [id],
+                  },
+                }
+              },
+              hasMany: true,
+            },
+          ],
+          label: 'Paid Top Spot',
+        },
       ],
     },
   ],

@@ -78,6 +78,7 @@ export interface Config {
     'travel-media': TravelMedia;
     'health-and-wellness-media': HealthAndWellnessMedia;
     categories: Category;
+    topics: Topic;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -101,6 +102,7 @@ export interface Config {
     'travel-media': TravelMediaSelect<false> | TravelMediaSelect<true>;
     'health-and-wellness-media': HealthAndWellnessMediaSelect<false> | HealthAndWellnessMediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    topics: TopicsSelect<false> | TopicsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -480,17 +482,21 @@ export interface ResourceSection {
 export interface Category {
   id: string;
   title: string;
+  Topic?: (string | null) | Topic;
   slug?: string | null;
   slugLock?: boolean | null;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics".
+ */
+export interface Topic {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1748,6 +1754,10 @@ export interface PayloadLockedDocument {
         value: string | Category;
       } | null)
     | ({
+        relationTo: 'topics';
+        value: string | Topic;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null)
@@ -2452,17 +2462,20 @@ export interface HealthAndWellnessMediaSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
+  Topic?: T;
   slug?: T;
   slugLock?: T;
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics_select".
+ */
+export interface TopicsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3004,6 +3017,7 @@ export interface Art {
         id?: string | null;
       }[]
     | null;
+  paidTopSpot?: (string | Article)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3254,6 +3268,7 @@ export interface ArtSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  paidTopSpot?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

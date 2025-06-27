@@ -6,8 +6,11 @@ import { ArtContentProps } from '../types'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-export function ArtContent({ content }: ArtContentProps) {
-  if (!content || content.length === 0) {
+export function ArtContent({ articlesByTopic, paidTopSpot }: ArtContentProps) {
+  if (
+    (!articlesByTopic || articlesByTopic.length === 0) &&
+    (!paidTopSpot || paidTopSpot.length === 0)
+  ) {
     return <NoContent />
   }
 
@@ -19,23 +22,36 @@ export function ArtContent({ content }: ArtContentProps) {
         'lg:mt-12 lg:px-32',
       )}
     >
-      {content.map((category) => {
-        const { id, title, slug, artWork } = category
+      {paidTopSpot && Array.isArray(paidTopSpot) && paidTopSpot.length > 0 && (
+        <PageContentContainer slug="paid-top-spot" title="Paid Top Spot">
+          {paidTopSpot.map((article) => {
+            if (typeof article === 'string') return null
+
+            const { id, title, slug: articleSlug, meta } = article
+
+            return (
+              meta?.image &&
+              typeof meta?.image === 'object' && (
+                <ArtContentItem
+                  heroImage={meta?.image}
+                  slug={articleSlug ? articleSlug : ''}
+                  title={title}
+                  key={id}
+                />
+              )
+            )
+          })}
+        </PageContentContainer>
+      )}
+
+      {articlesByTopic?.map(({ articles, category }) => {
+        const { id, title, slug } = category
 
         return (
           <PageContentContainer key={id} slug={slug ?? ''} title={title}>
-            {artWork.map(
-              ({ title, artWorkImage, slug }) =>
-                artWorkImage &&
-                typeof artWorkImage === 'object' && (
-                  <ArtContentItem
-                    artWorkImage={artWorkImage}
-                    title={title}
-                    slug={slug}
-                    key={slug}
-                  />
-                ),
-            )}
+            {articles.map(({ title, heroImage, slug }) => (
+              <ArtContentItem heroImage={heroImage} title={title} slug={slug} key={slug} />
+            ))}
           </PageContentContainer>
         )
       })}
