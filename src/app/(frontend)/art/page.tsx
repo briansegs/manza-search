@@ -49,7 +49,7 @@ export default async function Page() {
       </section>
     )
   } catch (error) {
-    console.error('Error: ', error)
+    console.error('Art Page Error: ', error)
 
     return (
       <section>
