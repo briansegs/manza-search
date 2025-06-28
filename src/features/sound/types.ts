@@ -1,22 +1,17 @@
-import { Sound } from '@/payload-types'
+import { Sound, Article, Category } from '@/payload-types'
 
 export type SoundHeroProps = {
   ads: Sound['pageAds']
 }
 
-export type Audio = {
-  slug: string
-  title: string
-  audioImage: { media: null }
+type SoundArticleGroup = {
+  category: Pick<Category, 'title' | 'slug' | 'id'>
+  articles: Article[]
 }
 
-export type SoundCategory = {
-  slug: string
-  title: string
-  id?: string
-  audio: Audio[]
-}
+export type SoundContentItemProps = Pick<Article, 'title' | 'heroImage' | 'slug'>
 
 export type SoundContentProps = {
-  content: SoundCategory[] | null | undefined
+  articlesByTopic?: SoundArticleGroup[]
+  paidTopSpot?: Sound['paidTopSpot']
 }

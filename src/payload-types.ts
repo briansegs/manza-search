@@ -2935,6 +2935,7 @@ export interface Sound {
         id?: string | null;
       }[]
     | null;
+  paidTopSpot?: (string | Article)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3205,6 +3206,7 @@ export interface SoundSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  paidTopSpot?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
