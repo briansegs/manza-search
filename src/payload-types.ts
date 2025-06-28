@@ -3051,6 +3051,7 @@ export interface HealthAndWellness {
         id?: string | null;
       }[]
     | null;
+  paidTopSpot?: (string | Article)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3298,6 +3299,7 @@ export interface HealthAndWellnessSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  paidTopSpot?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

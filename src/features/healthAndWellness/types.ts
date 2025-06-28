@@ -1,22 +1,17 @@
-import { HealthAndWellness } from '@/payload-types'
+import { HealthAndWellness, Article, Category } from '@/payload-types'
 
 export type HealthAndWellnessHeroProps = {
   ads: HealthAndWellness['pageAds']
 }
 
-export type Item = {
-  slug: string
-  title: string
-  itemImage: { media: null }
+type HealthAndWellnessArticleGroup = {
+  category: Pick<Category, 'title' | 'slug' | 'id'>
+  articles: Article[]
 }
 
-export type HealthAndWellnessCategory = {
-  slug: string
-  title: string
-  id?: string
-  items: Item[]
-}
+export type HealthAndWellnessContentItemProps = Pick<Article, 'title' | 'heroImage' | 'slug'>
 
 export type HealthAndWellnessContentProps = {
-  content: HealthAndWellnessCategory[] | null | undefined
+  articlesByTopic?: HealthAndWellnessArticleGroup[]
+  paidTopSpot?: HealthAndWellness['paidTopSpot']
 }

@@ -3,15 +3,19 @@ import React from 'react'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import { cn } from '@/utilities/ui'
-import { Item } from '../types'
+import { HealthAndWellnessContentItemProps } from '../types'
 
-export function HealthAndWellnessContentItem({ title, itemImage, slug }: Item) {
+export function HealthAndWellnessContentItem({
+  title,
+  heroImage,
+  slug,
+}: HealthAndWellnessContentItemProps) {
   return (
     <div className="flex flex-col items-center gap-1">
-      <Link href={`health-and-wellness/${slug}`}>
+      <Link href={`articles/${slug}`}>
         <div className="relative size-16 overflow-hidden rounded-[10px] bg-white">
-          {itemImage.media && typeof itemImage.media === 'object' ? (
-            <RenderMedia media={itemImage.media} />
+          {heroImage && typeof heroImage === 'object' ? (
+            <RenderMedia media={heroImage} />
           ) : (
             <ImagePlaceholder />
           )}
