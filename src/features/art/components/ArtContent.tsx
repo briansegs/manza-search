@@ -29,16 +29,12 @@ export function ArtContent({ articlesByTopic, paidTopSpot }: ArtContentProps) {
 
             const { id, title, slug: articleSlug, meta } = article
 
+            if (!meta?.image || typeof meta.image !== 'object') {
+              return null
+            }
+
             return (
-              meta?.image &&
-              typeof meta?.image === 'object' && (
-                <ArtContentItem
-                  heroImage={meta?.image}
-                  slug={articleSlug ? articleSlug : ''}
-                  title={title}
-                  key={id}
-                />
-              )
+              <ArtContentItem heroImage={meta.image} slug={articleSlug} title={title} key={id} />
             )
           })}
         </PageContentContainer>
@@ -46,6 +42,8 @@ export function ArtContent({ articlesByTopic, paidTopSpot }: ArtContentProps) {
 
       {articlesByTopic?.map(({ articles, category }) => {
         const { id, title, slug } = category
+
+        if (articles.length === 0) return null
 
         return (
           <PageContentContainer key={id} slug={slug ?? ''} title={title}>

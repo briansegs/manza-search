@@ -1,22 +1,17 @@
-import { Literature } from '@/payload-types'
+import { Article, Category, Literature } from '@/payload-types'
+
+type LiteratureArticleGroup = {
+  category: Pick<Category, 'title' | 'slug' | 'id'>
+  articles: Article[]
+}
 
 export type LiteratureHeroProps = {
   ads: Literature['pageAds']
 }
 
-export type Book = {
-  slug: string
-  title: string
-  bookImage: { media: null }
-}
-
-export type LiteratureCategory = {
-  slug: string
-  title: string
-  id?: string
-  books: Book[]
-}
+export type LiteratureContentItemProps = Pick<Article, 'title' | 'heroImage' | 'slug'>
 
 export type LiteratureContentProps = {
-  content: LiteratureCategory[] | null | undefined
+  articlesByTopic?: LiteratureArticleGroup[]
+  paidTopSpot?: Literature['paidTopSpot']
 }

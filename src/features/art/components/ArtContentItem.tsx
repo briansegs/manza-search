@@ -8,7 +8,7 @@ import { ArtContentItemProps } from '../types'
 export function ArtContentItem({ title, heroImage, slug }: ArtContentItemProps) {
   return (
     <div className="flex flex-col items-center gap-1">
-      <Link href={`art/${slug}`}>
+      <Link href={`articles/${slug}`}>
         <div className="relative size-16 overflow-hidden rounded-[10px] bg-white">
           {heroImage && typeof heroImage === 'object' ? (
             <RenderMedia media={heroImage} />

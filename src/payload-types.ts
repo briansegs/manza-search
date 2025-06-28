@@ -2903,6 +2903,7 @@ export interface Literature {
         id?: string | null;
       }[]
     | null;
+  paidTopSpot?: (string | Article)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3178,6 +3179,7 @@ export interface LiteratureSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  paidTopSpot?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
