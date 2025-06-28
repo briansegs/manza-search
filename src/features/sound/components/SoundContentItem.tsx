@@ -3,15 +3,15 @@ import React from 'react'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import { cn } from '@/utilities/ui'
-import { Audio } from '../types'
+import { SoundContentItemProps } from '../types'
 
-export function SoundContentItem({ title, audioImage, slug }: Audio) {
+export function SoundContentItem({ title, heroImage, slug }: SoundContentItemProps) {
   return (
     <div className="flex flex-col items-center gap-1">
-      <Link href={`audio/${slug}`}>
+      <Link href={`articles/${slug}`}>
         <div className="relative size-16 overflow-hidden rounded-[10px] bg-white">
-          {audioImage.media && typeof audioImage.media === 'object' ? (
-            <RenderMedia media={audioImage.media} />
+          {heroImage && typeof heroImage === 'object' ? (
+            <RenderMedia media={heroImage} />
           ) : (
             <ImagePlaceholder />
           )}

@@ -46,9 +46,9 @@ export function LiteratureContent({ articlesByTopic, paidTopSpot }: LiteratureCo
       )}
 
       {articlesByTopic?.map(({ articles, category }) => {
-        const { id, title, slug } = category
+        if (!category || articles.length === 0) return null
 
-        if (articles.length === 0) return null
+        const { id, title, slug } = category
 
         return (
           <PageContentContainer key={id} slug={slug ?? ''} title={title}>

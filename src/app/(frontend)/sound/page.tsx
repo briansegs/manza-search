@@ -9,15 +9,46 @@ import { SuggestedArticles } from '@/features/shared/components/SuggestedArticle
 import { SoundTopMenuContainer } from '@/features/sound/components/SoundTopMenuContainer'
 import { SoundContent } from '@/features/sound/components/SoundContent'
 import { SoundHero } from '@/features/sound/components/SoundHero'
-import { audioData } from '@/features/sound/mockData'
+import { findArticlesByTopic } from '@/utilities/findArticlesByTopic'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
 export default async function Page() {
-  const soundData: SoundGlobalType = await getCachedGlobal('sound', 1)()
+  try {
+    const soundData: SoundGlobalType = await getCachedGlobal('sound', 2)()
 
-  if (!soundData) {
+    const articlesByTopic = await findArticlesByTopic('sound')
+
+    const { suggestedArticles, pageAds, paidTopSpot } = soundData
+
+    return (
+      <section>
+        <PageClient />
+        <div className="min-h-screen w-full pb-24">
+          <SuggestedArticles articles={suggestedArticles} />
+
+          <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
+            <h2 className="py-2 text-center font-serif text-xl uppercase text-white">
+              Sound HomePage
+            </h2>
+          </div>
+
+          <SoundHero ads={pageAds} />
+
+          <SoundTopMenuContainer />
+
+          <SoundContent articlesByTopic={articlesByTopic} paidTopSpot={paidTopSpot} />
+
+          <RightMenuContainer />
+
+          <BottomMenu />
+        </div>
+      </section>
+    )
+  } catch (error) {
+    console.error('Sound Page Error: ', error)
+
     return (
       <section>
         <PageClient />
@@ -27,31 +58,4 @@ export default async function Page() {
       </section>
     )
   }
-
-  const { suggestedArticles, pageAds } = soundData
-
-  return (
-    <section>
-      <PageClient />
-      <div className="min-h-screen w-full pb-24">
-        <SuggestedArticles articles={suggestedArticles} />
-
-        <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
-          <h2 className="py-2 text-center font-serif text-xl uppercase text-white">
-            Sound HomePage
-          </h2>
-        </div>
-
-        <SoundHero ads={pageAds} />
-
-        <SoundTopMenuContainer />
-
-        <SoundContent content={audioData} />
-
-        <RightMenuContainer />
-
-        <BottomMenu />
-      </div>
-    </section>
-  )
 }

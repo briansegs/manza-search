@@ -6,8 +6,11 @@ import { SoundContentProps } from '../types'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-export function SoundContent({ content }: SoundContentProps) {
-  if (!content || content.length === 0) {
+export function SoundContent({ articlesByTopic, paidTopSpot }: SoundContentProps) {
+  if (
+    (!articlesByTopic || articlesByTopic.length === 0) &&
+    (!paidTopSpot || paidTopSpot.length === 0)
+  ) {
     return <NoContent />
   }
 
@@ -19,18 +22,34 @@ export function SoundContent({ content }: SoundContentProps) {
         'lg:mt-12 lg:px-32',
       )}
     >
-      {content.map((category) => {
-        const { id, title, slug, audio } = category
+      {paidTopSpot && Array.isArray(paidTopSpot) && paidTopSpot.length > 0 && (
+        <PageContentContainer slug="paid-top-spot" title="Paid Top Spot">
+          {paidTopSpot.map((article) => {
+            if (typeof article === 'string') return null
+
+            const { id, title, slug: articleSlug, meta } = article
+
+            if (!meta?.image || typeof meta.image !== 'object') {
+              return null
+            }
+
+            return (
+              <SoundContentItem heroImage={meta.image} slug={articleSlug} title={title} key={id} />
+            )
+          })}
+        </PageContentContainer>
+      )}
+
+      {articlesByTopic?.map(({ articles, category }) => {
+        if (!category || articles.length === 0) return null
+
+        const { id, title, slug } = category
 
         return (
-          <PageContentContainer key={id} slug={slug} title={title}>
-            {audio.map(
-              ({ title, audioImage, slug }) =>
-                audioImage &&
-                typeof audioImage === 'object' && (
-                  <SoundContentItem audioImage={audioImage} title={title} slug={slug} key={slug} />
-                ),
-            )}
+          <PageContentContainer key={id} slug={slug ?? ''} title={title}>
+            {articles.map(({ title, heroImage, slug }) => (
+              <SoundContentItem heroImage={heroImage} title={title} slug={slug} key={slug} />
+            ))}
           </PageContentContainer>
         )
       })}
