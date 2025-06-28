@@ -47,6 +47,8 @@ export function ArtContent({ articlesByTopic, paidTopSpot }: ArtContentProps) {
       {articlesByTopic?.map(({ articles, category }) => {
         const { id, title, slug } = category
 
+        if (articles.length === 0) return null
+
         return (
           <PageContentContainer key={id} slug={slug ?? ''} title={title}>
             {articles.map(({ title, heroImage, slug }) => (
