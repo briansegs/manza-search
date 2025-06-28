@@ -10,6 +10,7 @@ import { SoundTopMenuContainer } from '@/features/sound/components/SoundTopMenuC
 import { SoundContent } from '@/features/sound/components/SoundContent'
 import { SoundHero } from '@/features/sound/components/SoundHero'
 import { findArticlesByTopic } from '@/utilities/findArticlesByTopic'
+import { Metadata } from 'next'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -57,5 +58,11 @@ export default async function Page() {
         </div>
       </section>
     )
+  }
+}
+
+export function generateMetadata(): Metadata {
+  return {
+    title: `Sound | Manza Search`,
   }
 }
