@@ -47,7 +47,7 @@ export default async function Page() {
       </section>
     )
   } catch (error) {
-    console.error('Art Page Error: ', error)
+    console.error('Sound Page Error: ', error)
 
     return (
       <section>
