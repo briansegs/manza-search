@@ -29,16 +29,17 @@ export function LiteratureContent({ articlesByTopic, paidTopSpot }: LiteratureCo
 
             const { id, title, slug: articleSlug, meta } = article
 
+            if (!meta?.image || typeof meta.image !== 'object') {
+              return null
+            }
+
             return (
-              meta?.image &&
-              typeof meta?.image === 'object' && (
-                <LiteratureContentItem
-                  heroImage={meta?.image}
-                  slug={articleSlug ? articleSlug : ''}
-                  title={title}
-                  key={id}
-                />
-              )
+              <LiteratureContentItem
+                heroImage={meta.image}
+                slug={articleSlug}
+                title={title}
+                key={id}
+              />
             )
           })}
         </PageContentContainer>
