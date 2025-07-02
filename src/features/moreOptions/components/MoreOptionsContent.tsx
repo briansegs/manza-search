@@ -3,18 +3,8 @@
 import React from 'react'
 import useBreakpoint from '@/hooks/useBreakpoint'
 import { PopoverContent } from '@/features/shared/components/ui/popover'
-import { cn } from '@/utilities/ui'
-
-const buttonStyles =
-  'size-14 rounded-full border-4 border-black font-serif text-white shadow-[10px_10px_10px_black] hover:text-white/50'
-
-interface MOMenuButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  className?: string
-}
-
-const MOMenuButton: React.FC<MOMenuButtonProps> = ({ className, ...props }) => (
-  <button className={cn(buttonStyles, className)} {...props} />
-)
+import { MOMenuButton } from './MOMenuButton'
+import { Messenger } from '@/features/messenger/Messenger'
 
 export function MoreOptionsContent() {
   const { isMobileSM } = useBreakpoint()
@@ -30,7 +20,7 @@ export function MoreOptionsContent() {
           <MOMenuButton className="bg-[#ffc8ce]">S</MOMenuButton>
           <MOMenuButton className="ml-1 bg-[#0011ff]">B</MOMenuButton>
           <MOMenuButton className="self-end bg-[#0011ff]">P</MOMenuButton>
-          <MOMenuButton className="bg-[#ff1c00]">M</MOMenuButton>
+          <Messenger />
           <MOMenuButton className="self-end bg-[#8a1384]">E</MOMenuButton>
           <MOMenuButton className="bg-[#006c00]">K</MOMenuButton>
         </div>
@@ -38,7 +28,7 @@ export function MoreOptionsContent() {
         <div className="mt-12 flex h-64 w-fit gap-2 sm:mt-0">
           <div className="flex w-[90px] flex-col justify-between gap-2 py-9">
             <MOMenuButton className="self-end bg-[#0011ff]">P</MOMenuButton>
-            <MOMenuButton className="bg-[#ff1c00]">M</MOMenuButton>
+            <Messenger />
             <MOMenuButton className="self-end bg-[#8a1384]">E</MOMenuButton>
           </div>
 
