@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '@/features/shared/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { DocPadPopoverButton } from '@/features/docPad/components/DocPadPopoverButton'
-import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/utilities/ui'
 
 export function BottomMenu() {

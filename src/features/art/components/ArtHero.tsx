@@ -5,7 +5,7 @@ import {
   CarouselContent,
   CarouselDotButtons,
   CarouselItem,
-} from '@/features/shared/components/ui/carousel'
+} from '@/components/ui/carousel'
 
 import { CMSLink } from '@/components/Link'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'

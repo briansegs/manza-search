@@ -1,11 +1,6 @@
-import { Button } from '@/features/shared/components/ui/button'
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from '@/features/shared/components/ui/command'
-import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
+import { Button } from '@/components/ui/button'
+import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/utilities/ui'
 import clsx from 'clsx'
 import { Check, ChevronsUpDown } from 'lucide-react'
