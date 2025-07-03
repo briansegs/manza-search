@@ -5,8 +5,9 @@ const buttonStyles =
 
 type MOMenuButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string
+  ref?: React.Ref<HTMLButtonElement>
 }
 
-export function MOMenuButton({ className, ...props }: MOMenuButtonProps) {
-  return <button className={cn(buttonStyles, className)} {...props} />
+export function MOMenuButton({ className, ref, ...props }: MOMenuButtonProps) {
+  return <button ref={ref} className={cn(buttonStyles, className)} {...props} />
 }

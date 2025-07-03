@@ -1,0 +1,89 @@
+'use client'
+
+import { Button } from '@/features/shared/components/ui/button'
+import { Card } from '@/features/shared/components/ui/card'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/features/shared/components/ui/tooltip'
+import { UserButton } from '@clerk/nextjs'
+import { ChatIdType, TabsType } from '../MessengerSidebarWrapper'
+import { Dispatch, SetStateAction } from 'react'
+import { MessageSquare, Users } from 'lucide-react'
+import { cn } from '@/utilities/ui'
+
+type MessengerNavbarProps = {
+  currentTab: TabsType
+  setCurrentTab: Dispatch<SetStateAction<TabsType>>
+  activeConversation: ChatIdType
+}
+
+const tabs = [
+  {
+    name: 'Conversations',
+    slug: 'conversations',
+    icon: <MessageSquare />,
+  },
+  {
+    name: 'Friends',
+    slug: 'friends',
+    icon: <Users />,
+  },
+]
+
+export function MessengerNavbar({
+  currentTab,
+  setCurrentTab,
+  activeConversation,
+}: MessengerNavbarProps) {
+  const isActive = !!activeConversation
+
+  return (
+    <Card
+      className={cn(
+        'flex h-16 w-full flex-row items-center justify-between p-2',
+        'lg:h-full lg:w-16 lg:flex-col lg:px-2 lg:py-4',
+        isActive ? 'hidden lg:flex' : '',
+      )}
+      onFocusCapture={(e) => {
+        e.stopPropagation()
+      }}
+    >
+      <nav className="w-full">
+        <ul
+          className={cn(
+            'flex items-center gap-4 lg:flex-col lg:justify-normal',
+            'flex-row justify-evenly',
+          )}
+        >
+          {tabs.map(({ name, slug, icon }, index) => {
+            return (
+              <li key={index} className="relative">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="icon"
+                      variant={currentTab === slug ? 'default' : 'outline'}
+                      onClick={() => setCurrentTab(slug as TabsType)}
+                    >
+                      {icon}
+                    </Button>
+                  </TooltipTrigger>
+
+                  <TooltipContent>
+                    <p>{name}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </li>
+            )
+          })}
+
+          <li className="flex items-center lg:hidden">
+            <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
+          </li>
+        </ul>
+      </nav>
+
+      <div className="hidden lg:flex">
+        <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
+      </div>
+    </Card>
+  )
+}

@@ -4,7 +4,7 @@ import React from 'react'
 import useBreakpoint from '@/hooks/useBreakpoint'
 import { PopoverContent } from '@/features/shared/components/ui/popover'
 import { MOMenuButton } from './MOMenuButton'
-import { Messenger } from '@/features/messenger/Messenger'
+import { Messenger } from '@/features/messenger/components/Messenger'
 
 export function MoreOptionsContent() {
   const { isMobileSM } = useBreakpoint()

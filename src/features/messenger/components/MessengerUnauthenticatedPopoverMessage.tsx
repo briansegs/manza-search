@@ -1,10 +1,10 @@
-import { Popover, PopoverContent, PopoverTrigger } from '../shared/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '../../shared/components/ui/popover'
 import { MessengerButton } from './MessengerButton'
 
 export function MessengerUnauthenticatedPopoverMessage() {
   return (
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <MessengerButton />
       </PopoverTrigger>
 

@@ -7,7 +7,7 @@ import { MoreOptionsContent } from './MoreOptionsContent'
 export function MoreOptionsMenu() {
   return (
     <Popover>
-      <PopoverTrigger>
+      <PopoverTrigger asChild>
         <Button className="bottom-2 right-2 block h-fit rounded-[8px] border-2 border-white bg-menu px-2 py-0 hover:bg-black sm:absolute">
           MO
         </Button>
