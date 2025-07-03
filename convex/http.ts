@@ -42,9 +42,15 @@ const handleClerkWebhook = httpAction(async (ctx, req) => {
       if (user) {
         console.log(`Updating user ${event.data.id} with: ${event.data}`)
       }
+
+      break
     }
     case 'user.updated': {
       console.log('Creating/Updating User:', event.data.id)
+
+      if (!event.data.email_addresses?.[0]?.email_address) {
+        throw new Error(`Missing email address in Clerk webhook for user ${event.data.id}`)
+      }
 
       await ctx.runMutation(internal.user.create, {
         username: `${event.data.first_name} ${event.data.last_name}`,
