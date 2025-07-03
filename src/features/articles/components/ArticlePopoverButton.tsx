@@ -1,5 +1,5 @@
 import { ArticleMenuButton } from './ArticleMenuButton'
-import { Popover, PopoverContent, PopoverTrigger } from '../../shared/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Article } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { ScrollToSection } from '@/features/shared/components/ScrollToSection'

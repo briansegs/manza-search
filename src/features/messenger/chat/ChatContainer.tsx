@@ -1,4 +1,4 @@
-import { Card } from '@/features/shared/components/ui/card'
+import { Card } from '@/components/ui/card'
 import React from 'react'
 import { ChatIdType } from '../components/sidebar/MessengerSidebarWrapper'
 

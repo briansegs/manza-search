@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/features/shared/components/ui/button'
-import { Card } from '@/features/shared/components/ui/card'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/features/shared/components/ui/tooltip'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { UserButton } from '@clerk/nextjs'
 import { ChatIdType, TabsType } from '../MessengerSidebarWrapper'
 import { Dispatch, SetStateAction } from 'react'

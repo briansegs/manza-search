@@ -1,4 +1,4 @@
-import { Button } from '@/features/shared/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { Media } from '@/payload-types'
 import React from 'react'
 import clsx from 'clsx'

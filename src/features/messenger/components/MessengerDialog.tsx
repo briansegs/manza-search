@@ -1,9 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/features/shared/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { MessengerButton } from './MessengerButton'
 import { MessengerLayout } from './MessengerLayout'
 

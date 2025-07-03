@@ -2,7 +2,7 @@ import React from 'react'
 
 import { HeaderThemeProvider } from './HeaderTheme'
 import { ThemeProvider } from './Theme'
-import { TooltipProvider } from '@/features/shared/components/ui/tooltip'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ConvexClientProvider } from './ConvexClientProvider'
 

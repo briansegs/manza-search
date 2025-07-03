@@ -1,6 +1,6 @@
 import { Media } from '@/payload-types'
 import React from 'react'
-import { Button } from '@/features/shared/components/ui/button'
+import { Button } from '@/components/ui/button'
 import clsx from 'clsx'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'

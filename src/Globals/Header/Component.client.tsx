@@ -12,7 +12,7 @@ import { HeaderNav, MobileHeaderNav } from './Nav/HeaderNav'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Search } from '@/search/Component'
 import { Menu, ShoppingCart } from 'lucide-react'
-import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 export function HeaderClient({ data }: { data: Header }) {
   /* Storing the value in a useState to avoid hydration errors */

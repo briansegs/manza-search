@@ -2,7 +2,7 @@
 
 import React from 'react'
 import useBreakpoint from '@/hooks/useBreakpoint'
-import { PopoverContent } from '@/features/shared/components/ui/popover'
+import { PopoverContent } from '@/components/ui/popover'
 import { MOMenuButton } from './MOMenuButton'
 import { Messenger } from '@/features/messenger/components/Messenger'
 
