@@ -5,6 +5,7 @@ import { ThemeProvider } from './Theme'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ConvexClientProvider } from './ConvexClientProvider'
+import { Toaster } from '@/components/ui/sonner'
 
 export const Providers: React.FC<{
   children: React.ReactNode
@@ -14,7 +15,10 @@ export const Providers: React.FC<{
       <ConvexClientProvider>
         <ThemeProvider>
           <HeaderThemeProvider>
-            <TooltipProvider>{children}</TooltipProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster richColors />
+            </TooltipProvider>
           </HeaderThemeProvider>
         </ThemeProvider>
       </ConvexClientProvider>

@@ -1,14 +1,41 @@
+'use client'
+
+import { useQuery } from 'convex/react'
 import { MessengerItemList } from '../components/item-list/MessengerItemList'
 import { ChatIdType } from '../components/sidebar/MessengerSidebarWrapper'
+import { AddFriendDialog } from './AddFriendDialog'
+import { api } from 'convex/_generated/api'
+import { Loader2 } from 'lucide-react'
+import { FriendRequest } from './FriendRequest'
 
 type MessengerFriendsContainerProps = {
   activeConversation: ChatIdType
 }
 
 export function MessengerFriendsContainer({ activeConversation }: MessengerFriendsContainerProps) {
+  const requests = useQuery(api.requests.get)
+
   return (
-    <MessengerItemList activeConversation={activeConversation} title="Friends">
-      Friends Container
+    <MessengerItemList
+      activeConversation={activeConversation}
+      title="Friends"
+      action={<AddFriendDialog />}
+    >
+      {!requests && <Loader2 className="h-8 w-8" />}
+
+      {requests?.length === 0 && (
+        <p className="flex h-full w-full items-center justify-center">No friend requests found</p>
+      )}
+
+      {requests?.map((request) => (
+        <FriendRequest
+          key={request.request._id}
+          id={request.request._id}
+          imageUrl={request.sender.imageUrl}
+          username={request.sender.username}
+          email={request.sender.email}
+        />
+      ))}
     </MessengerItemList>
   )
 }

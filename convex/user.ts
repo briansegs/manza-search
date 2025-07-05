@@ -1,7 +1,7 @@
-import { internalMutation, internalQuery } from './_generated/server'
+import { internalMutation, internalQuery, mutation } from './_generated/server'
 import { v } from 'convex/values'
 
-export const create = internalMutation({
+export const createUser = internalMutation({
   args: {
     username: v.string(),
     imageUrl: v.string(),
@@ -9,16 +9,128 @@ export const create = internalMutation({
     email: v.string(),
   },
   handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query('users')
+      .withIndex('by_clerkId', (q) => q.eq('clerkId', args.clerkId))
+      .unique()
+
+    if (existing) throw new Error('User already exists')
+
     await ctx.db.insert('users', args)
   },
 })
 
-export const get = internalQuery({
+export const getUser = internalQuery({
   args: { clerkId: v.string() },
-  async handler(ctx, args) {
-    return ctx.db
+  async handler(ctx, { clerkId }) {
+    const user = ctx.db
       .query('users')
-      .withIndex('by_clerkId', (q) => q.eq('clerkId', args.clerkId))
+      .withIndex('by_clerkId', (q) => q.eq('clerkId', clerkId))
       .unique()
+
+    if (!user) {
+      console.error(`User not found with ClerkId: ${clerkId}`)
+      return null
+    }
+
+    return user
+  },
+})
+
+export const deleteUserInternal = internalMutation({
+  args: {
+    clerkId: v.string(),
+  },
+  handler: async (ctx, { clerkId }) => {
+    const user = await ctx.db
+      .query('users')
+      .withIndex('by_clerkId', (q) => q.eq('clerkId', clerkId))
+      .unique()
+
+    if (!user) throw new Error(`User not found with ClerkId: ${clerkId}`)
+
+    await ctx.db.delete(user._id)
+  },
+})
+
+export const deleteUser = mutation({
+  args: {
+    clerkId: v.string(),
+  },
+  handler: async (ctx, { clerkId }) => {
+    // Check auth before updating
+    const identity = await ctx.auth.getUserIdentity()
+
+    if (!identity) {
+      throw new Error('Not authenticated')
+    }
+
+    // Check if the user is authorized to update this record
+    if (identity.identifier !== `clerk|${clerkId}`) {
+      throw new Error('Not authorized')
+    }
+
+    const user = await ctx.db
+      .query('users')
+      .withIndex('by_clerkId', (q) => q.eq('clerkId', clerkId))
+      .unique()
+
+    if (!user) throw new Error(`User not found with ClerkId: ${clerkId}`)
+
+    await ctx.db.delete(user._id)
+  },
+})
+
+export const updateUserInternal = internalMutation({
+  args: {
+    clerkId: v.string(),
+    data: v.object({
+      username: v.optional(v.string()),
+      email: v.optional(v.string()),
+      imageUrl: v.optional(v.string()),
+    }),
+  },
+  handler: async (ctx, { clerkId, data }) => {
+    const user = await ctx.db
+      .query('users')
+      .withIndex('by_clerkId', (q) => q.eq('clerkId', clerkId))
+      .unique()
+
+    if (!user) throw new Error(`User not found with ClerkId: ${clerkId}`)
+
+    await ctx.db.patch(user._id, data)
+  },
+})
+
+export const updateUser = mutation({
+  args: {
+    clerkId: v.string(),
+    data: v.object({
+      username: v.optional(v.string()),
+      email: v.optional(v.string()),
+      imageUrl: v.optional(v.string()),
+    }),
+  },
+  handler: async (ctx, { clerkId, data }) => {
+    // Check auth before updating
+    const identity = await ctx.auth.getUserIdentity()
+
+    if (!identity) {
+      throw new Error('Not authenticated')
+    }
+
+    // Check if the user is authorized to update this record
+    if (identity.identifier !== `clerk|${clerkId}`) {
+      throw new Error('Not authorized')
+    }
+
+    const user = await ctx.db
+      .query('users')
+      .withIndex('by_clerkId', (q) => q.eq('clerkId', clerkId))
+      .unique()
+
+    if (!user) throw new Error(`User not found with ClerkId: ${clerkId}`)
+
+    await ctx.db.patch(user._id, data)
   },
 })

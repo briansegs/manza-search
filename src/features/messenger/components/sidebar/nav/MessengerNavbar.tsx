@@ -8,6 +8,9 @@ import { ChatIdType, TabsType } from '../MessengerSidebarWrapper'
 import { Dispatch, SetStateAction } from 'react'
 import { MessageSquare, Users } from 'lucide-react'
 import { cn } from '@/utilities/ui'
+import { useQuery } from 'convex/react'
+import { api } from 'convex/_generated/api'
+import { Badge } from '@/components/ui/badge'
 
 type MessengerNavbarProps = {
   currentTab: TabsType
@@ -15,25 +18,28 @@ type MessengerNavbarProps = {
   activeConversation: ChatIdType
 }
 
-const tabs = [
-  {
-    name: 'Conversations',
-    slug: 'conversations',
-    icon: <MessageSquare />,
-  },
-  {
-    name: 'Friends',
-    slug: 'friends',
-    icon: <Users />,
-  },
-]
-
 export function MessengerNavbar({
   currentTab,
   setCurrentTab,
   activeConversation,
 }: MessengerNavbarProps) {
+  const requestsCount = useQuery(api.requests.count)
+
   const isActive = !!activeConversation
+
+  const tabs = [
+    {
+      name: 'Conversations',
+      slug: 'conversations',
+      icon: <MessageSquare />,
+    },
+    {
+      name: 'Friends',
+      slug: 'friends',
+      icon: <Users />,
+      count: requestsCount,
+    },
+  ]
 
   return (
     <Card
@@ -53,7 +59,7 @@ export function MessengerNavbar({
             'flex-row justify-evenly',
           )}
         >
-          {tabs.map(({ name, slug, icon }, index) => {
+          {tabs.map(({ name, slug, icon, count }, index) => {
             return (
               <li key={index} className="relative">
                 <Tooltip>
@@ -66,6 +72,8 @@ export function MessengerNavbar({
                       {icon}
                     </Button>
                   </TooltipTrigger>
+
+                  {count ? <Badge className="absolute bottom-7 left-6 px-2">{count}</Badge> : null}
 
                   <TooltipContent>
                     <p>{name}</p>
