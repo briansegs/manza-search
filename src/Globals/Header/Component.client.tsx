@@ -18,7 +18,7 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 import { Search } from '@/search/Component'
-import { Menu, ShoppingCart, User } from 'lucide-react'
+import { Menu, ShoppingCart } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 export function HeaderClient({ data }: { data: Header }) {

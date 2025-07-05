@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card'
 import { Id } from 'convex/_generated/dataModel'
 import { Check, User, X } from 'lucide-react'
 import { useMutationState } from '../hooks/useMutationState'
-import { api } from 'convex/_generated/api'
+import { api } from '../../../../convex/_generated/api'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
 

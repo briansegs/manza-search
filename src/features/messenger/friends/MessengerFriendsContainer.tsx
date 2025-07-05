@@ -4,7 +4,7 @@ import { useQuery } from 'convex/react'
 import { MessengerItemList } from '../components/item-list/MessengerItemList'
 import { ChatIdType } from '../components/sidebar/MessengerSidebarWrapper'
 import { AddFriendDialog } from './AddFriendDialog'
-import { api } from 'convex/_generated/api'
+import { api } from '../../../../convex/_generated/api'
 import { Loader2 } from 'lucide-react'
 import { FriendRequest } from './FriendRequest'
 

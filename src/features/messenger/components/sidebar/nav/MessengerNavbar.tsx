@@ -9,7 +9,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { MessageSquare, Users } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 import { useQuery } from 'convex/react'
-import { api } from 'convex/_generated/api'
+import { api } from '../../../../../../convex/_generated/api'
 import { Badge } from '@/components/ui/badge'
 
 type MessengerNavbarProps = {
