@@ -108,7 +108,12 @@ const handleClerkWebhook = httpAction(async (ctx, req) => {
     const { id } = event.data
 
     try {
-      await ctx.runMutation(internal.user.deleteUserInternal, { clerkId: id || '' })
+      if (!id) {
+        console.error('Missing user ID for deletion')
+        return new Response('Missing user ID', { status: 400 })
+      }
+
+      await ctx.runMutation(internal.user.deleteUserInternal, { clerkId: id })
       console.log(`User deleted: ${id}`)
     } catch (err) {
       console.error(`Error deleting user ${id}`, err)
