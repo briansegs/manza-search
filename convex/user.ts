@@ -1,5 +1,6 @@
 import { internalMutation, internalQuery, mutation } from './_generated/server'
-import { v } from 'convex/values'
+import { ConvexError, v } from 'convex/values'
+import { getUserByClerkId } from './_utils'
 
 export const createUser = internalMutation({
   args: {
@@ -22,8 +23,8 @@ export const createUser = internalMutation({
 
 export const getUser = internalQuery({
   args: { clerkId: v.string() },
-  async handler(ctx, { clerkId }) {
-    const user = ctx.db
+  handler: async (ctx, { clerkId }) => {
+    const user = await ctx.db
       .query('users')
       .withIndex('by_clerkId', (q) => q.eq('clerkId', clerkId))
       .unique()
@@ -62,12 +63,16 @@ export const deleteUser = mutation({
     const identity = await ctx.auth.getUserIdentity()
 
     if (!identity) {
-      throw new Error('Not authenticated')
+      throw new Error('Unauthorized')
     }
 
-    // Check if the user is authorized to update this record
-    if (identity.identifier !== `clerk|${clerkId}`) {
-      throw new Error('Not authorized')
+    const currentUser = await getUserByClerkId({
+      ctx,
+      clerkId: identity.subject,
+    })
+
+    if (!currentUser) {
+      throw new ConvexError('User not found')
     }
 
     const user = await ctx.db
@@ -116,12 +121,16 @@ export const updateUser = mutation({
     const identity = await ctx.auth.getUserIdentity()
 
     if (!identity) {
-      throw new Error('Not authenticated')
+      throw new Error('Unauthorized')
     }
 
-    // Check if the user is authorized to update this record
-    if (identity.identifier !== `clerk|${clerkId}`) {
-      throw new Error('Not authorized')
+    const currentUser = await getUserByClerkId({
+      ctx,
+      clerkId: identity.subject,
+    })
+
+    if (!currentUser) {
+      throw new ConvexError('User not found')
     }
 
     const user = await ctx.db
