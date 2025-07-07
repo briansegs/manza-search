@@ -8,7 +8,7 @@ export const get = query({
     const identity = await ctx.auth.getUserIdentity()
 
     if (!identity) {
-      throw new Error('Unauthorized')
+      throw new ConvexError('Unauthorized')
     }
 
     const currentUser = await getUserByClerkId({
@@ -47,7 +47,7 @@ export const count = query({
     const identity = await ctx.auth.getUserIdentity()
 
     if (!identity) {
-      throw new Error('Unauthorized')
+      throw new ConvexError('Unauthorized')
     }
 
     const currentUser = await getUserByClerkId({
