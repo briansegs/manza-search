@@ -139,6 +139,13 @@ export const accept = mutation({
       throw new ConvexError('There was an error accepting this request')
     }
 
+    const sender = await ctx.db.get(request.sender)
+
+    if (!sender) {
+      await ctx.db.delete(request._id)
+      throw new ConvexError('The sender no longer exists')
+    }
+
     const conversationId = await ctx.db.insert('conversations', {
       isGroup: false,
     })
