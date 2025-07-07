@@ -55,7 +55,7 @@ const handleClerkWebhook = httpAction(async (ctx, req) => {
     const email = email_addresses?.[0]?.email_address
 
     if (!email) {
-      console.warn(`Missing email for user.updated event. Skipping user: ${id}`)
+      console.warn(`Missing email for user.created event. Skipping user: ${id}`)
       return new Response('Email missing. Skipping.', { status: 200 })
     }
 
@@ -91,7 +91,7 @@ const handleClerkWebhook = httpAction(async (ctx, req) => {
       await ctx.runMutation(internal.user.updateUserInternal, {
         clerkId: id,
         data: {
-          username: username!,
+          username: username || '',
           imageUrl: image_url,
           email,
         },
