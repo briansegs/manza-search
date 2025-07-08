@@ -1,16 +1,27 @@
 'use client'
 
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { MessengerNavbar } from './nav/MessengerNavbar'
 import { MessengerFriendsContainer } from '../../friends/MessengerFriendsContainer'
 import { MessengerConversationsContainer } from '../../conversations/MessengerConversationsContainer'
 import { cn } from '@/utilities/ui'
 import { ChatFallback } from '../../chat/ChatFallback'
 import { ChatContainer } from '../../chat/ChatContainer'
+import { Id } from 'convex/_generated/dataModel'
 
 export type TabsType = 'friends' | 'conversations'
 
-export type ChatIdType = string | null | undefined
+export type ChatIdType = Id<'conversations'> | null | undefined
+
+export type activeConversationStateType = {
+  activeConversation: ChatIdType
+  setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
+}
+
+export type currentTabStateType = {
+  currentTab: TabsType
+  setCurrentTab: Dispatch<SetStateAction<TabsType>>
+}
 
 const defaultTab = 'conversations'
 
@@ -26,11 +37,17 @@ export function MessengerSidebarWrapper() {
         )}
 
         {currentTab === 'conversations' && (
-          <MessengerConversationsContainer activeConversation={activeConversation} />
+          <MessengerConversationsContainer
+            activeConversation={activeConversation}
+            setActiveConversation={setActiveConversation}
+          />
         )}
 
         {activeConversation ? (
-          <ChatContainer activeConversation={activeConversation} />
+          <ChatContainer
+            activeConversation={activeConversation}
+            setActiveConversation={setActiveConversation}
+          />
         ) : (
           <ChatFallback />
         )}

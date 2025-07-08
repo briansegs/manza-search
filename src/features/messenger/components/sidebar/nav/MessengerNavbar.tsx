@@ -4,19 +4,19 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { UserButton } from '@clerk/nextjs'
-import { ChatIdType, TabsType } from '../MessengerSidebarWrapper'
-import { Dispatch, SetStateAction } from 'react'
+import {
+  activeConversationStateType,
+  currentTabStateType,
+  TabsType,
+} from '../MessengerSidebarWrapper'
 import { MessageSquare, Users } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 import { useQuery } from 'convex/react'
 import { api } from '../../../../../../convex/_generated/api'
 import { Badge } from '@/components/ui/badge'
 
-type MessengerNavbarProps = {
-  currentTab: TabsType
-  setCurrentTab: Dispatch<SetStateAction<TabsType>>
-  activeConversation: ChatIdType
-}
+type MessengerNavbarProps = Pick<activeConversationStateType, 'activeConversation'> &
+  currentTabStateType
 
 export function MessengerNavbar({
   currentTab,
