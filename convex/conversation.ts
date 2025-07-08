@@ -51,6 +51,10 @@ export const get = query({
 
       const otherMemberDetails = await ctx.db.get(otherMembership.memberId)
 
+      if (!otherMemberDetails) {
+        throw new ConvexError('Other member details not found')
+      }
+
       return {
         ...conversation,
         otherMember: {
