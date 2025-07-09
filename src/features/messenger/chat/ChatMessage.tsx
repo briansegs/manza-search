@@ -22,7 +22,11 @@ export function ChatMessage({
   type,
 }: ChatMessageProps) {
   const formatTime = (timestamp: number) => {
-    return format(timestamp, 'HH:mm')
+    try {
+      return format(timestamp, 'HH:mm')
+    } catch (error) {
+      return `Error with time: ${error}`
+    }
   }
 
   return (
