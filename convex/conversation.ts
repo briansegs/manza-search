@@ -44,21 +44,21 @@ export const get = query({
       .withIndex('by_conversationId', (q) => q.eq('conversationId', args.id))
       .collect()
 
+    const otherMembership = allConversationMemberships.find(
+      (membership) => membership.memberId !== currentUser._id,
+    )
+
+    if (!otherMembership) {
+      throw new ConvexError('Other member not found in conversation')
+    }
+
+    const otherMemberDetails = await ctx.db.get(otherMembership.memberId)
+
+    if (!otherMemberDetails) {
+      throw new ConvexError('Other member details not found')
+    }
+
     if (!conversation.isGroup) {
-      const otherMembership = allConversationMemberships.find(
-        (membership) => membership.memberId !== currentUser._id,
-      )
-
-      if (!otherMembership) {
-        throw new ConvexError('Other member not found in conversation')
-      }
-
-      const otherMemberDetails = await ctx.db.get(otherMembership.memberId)
-
-      if (!otherMemberDetails) {
-        throw new ConvexError('Other member details not found')
-      }
-
       return {
         ...conversation,
         otherMember: {
