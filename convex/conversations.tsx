@@ -50,11 +50,19 @@ export const get = query({
         if (conversation.isGroup) {
           return { conversation, lastMessage }
         } else {
-          const otherMembership = allConversationMemberships.filter(
+          const otherMembership = allConversationMemberships.find(
             (membership) => membership.memberId !== currentUser._id,
-          )[0]
+          )
+
+          if (!otherMembership) {
+            throw new ConvexError('Other membership could not be found')
+          }
 
           const otherMember = await ctx.db.get(otherMembership.memberId)
+
+          if (!otherMember) {
+            throw new ConvexError('Other member could not be found')
+          }
 
           return {
             conversation,
