@@ -39,7 +39,7 @@ export const get = query({
       .order('desc')
       .collect()
 
-    const messagesWithSender = Promise.all(
+    const messagesWithSender = await Promise.all(
       messages.map(async (message) => {
         const messageSender = await ctx.db.get(message.senderId)
 
