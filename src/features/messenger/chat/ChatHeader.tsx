@@ -37,7 +37,7 @@ export function ChatHeader({ setActiveConversation, imageUrl, name, options }: C
         <Avatar className="h-8 w-8">
           <AvatarImage src={imageUrl} />
 
-          <AvatarFallback>{name?.substring(0, 1)}</AvatarFallback>
+          <AvatarFallback className="bg-white text-lg">{name?.substring(0, 1)}</AvatarFallback>
         </Avatar>
 
         <h2 className="font-semibold">{name}</h2>

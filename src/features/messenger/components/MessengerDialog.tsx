@@ -11,7 +11,10 @@ export function MessengerDialog() {
 
       <DialogTitle className="sr-only">Messenger</DialogTitle>
 
-      <DialogContent className="h-[90%] max-w-[80%] border-black bg-menu">
+      <DialogContent
+        className="h-[90%] max-w-[80%] border-black bg-menu"
+        closeButtonStyles="text-white"
+      >
         <MessengerLayout />
       </DialogContent>
     </Dialog>

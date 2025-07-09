@@ -11,6 +11,8 @@ import { ChatInput } from './ChatInput'
 import { useEffect, useState } from 'react'
 import { RemoveFriendDialog } from '../friends/RemoveFriendDialog'
 import { Id } from 'convex/_generated/dataModel'
+import { DeleteGroupDialog } from '../components/groups/DeleteGroupDialog'
+import { LeaveGroupDialog } from '../components/groups/LeaveGroupDialog'
 
 type ChatContainerProps = React.PropsWithChildren & activeConversationStateType
 
@@ -27,7 +29,7 @@ export function ChatContainer({
 
   const [leaveGroupDialogOpen, setLeaveGroupDialogOpen] = useState(false)
 
-  const [callType, setCallType] = useState<'audio' | 'video' | null>(null)
+  // const [callType, setCallType] = useState<'audio' | 'video' | null>(null)
 
   const conversation = useQuery(
     api.conversation.get,
@@ -69,12 +71,26 @@ export function ChatContainer({
             setActiveConversation={setActiveConversation}
           />
 
+          <LeaveGroupDialog
+            conversationId={activeConversation as Id<'conversations'>}
+            open={leaveGroupDialogOpen}
+            setOpen={setLeaveGroupDialogOpen}
+            setActiveConversation={setActiveConversation}
+          />
+
+          <DeleteGroupDialog
+            conversationId={activeConversation as Id<'conversations'>}
+            open={deleteGroupDialogOpen}
+            setOpen={setDeleteGroupDialogOpen}
+            setActiveConversation={setActiveConversation}
+          />
+
           <ChatHeader
-            imageUrl={conversation.isGroup ? undefined : conversation.otherMember.imageUrl}
+            imageUrl={conversation.isGroup ? undefined : conversation.otherMember?.imageUrl}
             name={
               conversation.isGroup
                 ? conversation.name
-                : conversation.otherMember.username || conversation.otherMember.email || ''
+                : conversation.otherMember?.username || conversation.otherMember?.email || ''
             }
             setActiveConversation={setActiveConversation}
             options={

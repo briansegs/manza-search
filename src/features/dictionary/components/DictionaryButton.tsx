@@ -59,7 +59,7 @@ export function DictionaryButton() {
       <DialogTrigger asChild>
         <Button className="size-full rounded-primary bg-menu-red hover:bg-black">d</Button>
       </DialogTrigger>
-      <DialogContent className="border-4 border-black bg-menu">
+      <DialogContent className="border-4 border-black bg-menu" closeButtonStyles="text-white">
         <DialogHeader>
           <DialogTitle className="font-serif text-white">Dictionary</DialogTitle>
           <DialogDescription className="font-serif">

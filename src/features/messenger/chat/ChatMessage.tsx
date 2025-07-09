@@ -50,7 +50,7 @@ export function ChatMessage({
           })}
         >
           {type === 'text' ? (
-            <p className="whitespace-pre-wrap text-wrap break-words">{content}</p>
+            <p className="whitespace-pre-wrap text-wrap break-words break-all">{content}</p>
           ) : null}
 
           <p

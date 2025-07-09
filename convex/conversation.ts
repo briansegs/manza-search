@@ -1,5 +1,5 @@
 import { ConvexError, v } from 'convex/values'
-import { query } from './_generated/server'
+import { mutation, query } from './_generated/server'
 import { getUserByClerkId } from './_utils'
 
 export const get = query({
@@ -44,21 +44,25 @@ export const get = query({
       .withIndex('by_conversationId', (q) => q.eq('conversationId', args.id))
       .collect()
 
-    const otherMembership = allConversationMemberships.find(
-      (membership) => membership.memberId !== currentUser._id,
-    )
-
-    if (!otherMembership) {
-      throw new ConvexError('Other member not found in conversation')
-    }
-
-    const otherMemberDetails = await ctx.db.get(otherMembership.memberId)
-
-    if (!otherMemberDetails) {
-      throw new ConvexError('Other member details not found')
+    if (!allConversationMemberships) {
+      throw new ConvexError('All Conversation Memberships could not be found')
     }
 
     if (!conversation.isGroup) {
+      const otherMembership = allConversationMemberships.find(
+        (membership) => membership.memberId !== currentUser._id,
+      )
+
+      if (!otherMembership) {
+        throw new ConvexError('Other member not found in conversation')
+      }
+
+      const otherMemberDetails = await ctx.db.get(otherMembership.memberId)
+
+      if (!otherMemberDetails) {
+        throw new ConvexError('Other member details not found')
+      }
+
       return {
         ...conversation,
         otherMember: {
@@ -67,6 +71,125 @@ export const get = query({
         },
         otherMembers: null,
       }
+    } else {
+      const otherMembers = await Promise.all(
+        allConversationMemberships
+          .filter((membership) => membership.memberId !== currentUser._id)
+          .map(async (membership) => {
+            const member = await ctx.db.get(membership.memberId)
+
+            if (!member) {
+              throw new ConvexError('Member could not be found')
+            }
+
+            return {
+              username: member.username,
+            }
+          }),
+      )
+
+      return {
+        ...conversation,
+        otherMembers,
+        otherMember: null,
+      }
     }
+  },
+})
+
+export const deleteGroup = mutation({
+  args: {
+    conversationId: v.id('conversations'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity()
+
+    if (!identity) {
+      throw new ConvexError('Unauthorized')
+    }
+
+    const currentUser = await getUserByClerkId({
+      ctx,
+      clerkId: identity.subject,
+    })
+
+    if (!currentUser) {
+      throw new ConvexError('User not found')
+    }
+
+    const conversation = await ctx.db.get(args.conversationId)
+
+    if (!conversation) {
+      throw new ConvexError('Conversation not found')
+    }
+
+    const memberships = await ctx.db
+      .query('conversationMembers')
+      .withIndex('by_conversationId', (q) => q.eq('conversationId', args.conversationId))
+      .collect()
+
+    if (!memberships || memberships.length <= 1) {
+      throw new ConvexError('This is not a direct conversation between two users')
+    }
+
+    const messages = await ctx.db
+      .query('messages')
+      .withIndex('by_conversationId', (q) => q.eq('conversationId', args.conversationId))
+      .collect()
+
+    await ctx.db.delete(args.conversationId)
+
+    await Promise.all(
+      memberships.map(async (membership) => {
+        await ctx.db.delete(membership._id)
+      }),
+    )
+
+    await Promise.all(
+      messages.map(async (message) => {
+        await ctx.db.delete(message._id)
+      }),
+    )
+  },
+})
+
+export const leaveGroup = mutation({
+  args: {
+    conversationId: v.id('conversations'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity()
+
+    if (!identity) {
+      throw new ConvexError('Unauthorized')
+    }
+
+    const currentUser = await getUserByClerkId({
+      ctx,
+      clerkId: identity.subject,
+    })
+
+    if (!currentUser) {
+      throw new ConvexError('User not found')
+    }
+
+    const conversation = await ctx.db.get(args.conversationId)
+
+    if (!conversation) {
+      throw new ConvexError('Conversation not found')
+    }
+
+    const membership = await ctx.db
+      .query('conversationMembers')
+      .withIndex('by_memberId_conversationId', (q) =>
+        q.eq('memberId', currentUser._id).eq('conversationId', args.conversationId),
+      )
+      .unique()
+
+    if (!membership) {
+      throw new ConvexError('You are not a member of this group')
+    }
+
+    await ctx.db.delete(membership._id)
   },
 })
