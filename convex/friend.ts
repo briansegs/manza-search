@@ -34,7 +34,7 @@ export const remove = mutation({
       .collect()
 
     if (!memberships || memberships.length !== 2) {
-      throw new ConvexError('This conversation does not have any members')
+      throw new ConvexError('This is not a direct conversation between two users')
     }
 
     const friendship = await ctx.db
