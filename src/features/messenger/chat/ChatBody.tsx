@@ -14,7 +14,7 @@ export function ChatBody({ activeConversation: conversationId }: ChatBodyProps) 
   })
 
   return (
-    <div className="no-scrollbar flex w-full flex-1 flex-col-reverse gap-2 overflow-x-scroll p-3">
+    <div className="no-scrollbar flex w-full flex-1 flex-col-reverse gap-2 overflow-y-scroll p-3">
       {messages?.map(({ message, senderImage, senderName, isCurrentUser }, index) => {
         const lastByUser =
           messages[index - 1]?.message.senderId === messages[index]?.message.senderId
