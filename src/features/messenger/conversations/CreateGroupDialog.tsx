@@ -171,7 +171,7 @@ export function CreateGroupDialog() {
               }}
             />
 
-            {members && members.length ? (
+            {members?.length ? (
               <Card className="no-scrollbar flex h-24 w-full items-center gap-3 overflow-x-auto p-2">
                 {friends
                   ?.filter((friend) => members.includes(friend._id))
