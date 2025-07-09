@@ -129,7 +129,7 @@ export const deleteGroup = mutation({
       .collect()
 
     if (!memberships || memberships.length <= 1) {
-      throw new ConvexError('This is not a direct conversation between two users')
+      throw new ConvexError('No members found for this conversation')
     }
 
     const messages = await ctx.db
