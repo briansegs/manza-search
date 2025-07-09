@@ -138,7 +138,7 @@ export function CreateGroupDialog() {
                             return (
                               <DropdownMenuCheckboxItem
                                 key={friend._id}
-                                className="fles w-full items-center gap-2 p-2"
+                                className="flex w-full items-center gap-2 p-2"
                                 onCheckedChange={(checked) => {
                                   if (checked) {
                                     form.setValue('members', [...members, friend._id])
