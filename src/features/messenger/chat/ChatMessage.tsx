@@ -9,6 +9,7 @@ type ChatMessageProps = {
   lastByUser: boolean
   content: string[]
   createdAt: number
+  seen?: React.ReactNode
   type: string
 }
 
@@ -19,6 +20,7 @@ export function ChatMessage({
   lastByUser,
   content,
   createdAt,
+  seen,
   type,
 }: ChatMessageProps) {
   const formatTime = (timestamp: number) => {
@@ -62,6 +64,8 @@ export function ChatMessage({
             {formatTime(createdAt)}
           </p>
         </div>
+
+        {seen}
       </div>
 
       <Avatar

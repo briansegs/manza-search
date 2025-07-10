@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { User } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
 
 type DMConversationItemProps = {
   setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
@@ -16,6 +17,7 @@ type DMConversationItemProps = {
   email: string
   lastMessageSender?: string
   lastMessageContent?: string
+  unseenCount: number
 }
 
 export function DMConversationItem({
@@ -26,12 +28,14 @@ export function DMConversationItem({
   email,
   lastMessageContent,
   lastMessageSender,
+  unseenCount,
 }: DMConversationItemProps) {
+  console.log('lastMessageSender: ', lastMessageSender)
   return (
     <Card className="w-full">
       <Button
         onClick={() => setActiveConversation(id)}
-        className="h-full w-full justify-start gap-4 truncate p-2 hover:bg-transparent"
+        className="h-full w-full justify-between gap-2 p-2 hover:bg-transparent"
         variant="ghost"
       >
         <div className="flex flex-row items-center gap-4 truncate">
@@ -59,6 +63,8 @@ export function DMConversationItem({
             )}
           </div>
         </div>
+
+        {unseenCount ? <Badge className="py-1.5">{unseenCount}</Badge> : null}
       </Button>
     </Card>
   )

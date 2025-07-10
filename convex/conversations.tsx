@@ -21,13 +21,13 @@ export const get = query({
       throw new ConvexError('User not found')
     }
 
-    const conversationMembership = await ctx.db
+    const conversationMemberships = await ctx.db
       .query('conversationMembers')
       .withIndex('by_memberId', (q) => q.eq('memberId', currentUser._id))
       .collect()
 
     const conversations = await Promise.all(
-      conversationMembership?.map(async (membership) => {
+      conversationMemberships?.map(async (membership) => {
         const conversation = await ctx.db.get(membership.conversationId)
 
         if (!conversation) {
@@ -39,7 +39,7 @@ export const get = query({
     )
 
     const conversationsWithDetails = await Promise.all(
-      conversations.map(async (conversation) => {
+      conversations.map(async (conversation, index) => {
         const allConversationMemberships = await ctx.db
           .query('conversationMembers')
           .withIndex('by_conversationId', (q) => q.eq('conversationId', conversation?._id))
@@ -47,8 +47,21 @@ export const get = query({
 
         const lastMessage = await getLastMessageDetails({ ctx, id: conversation.lastMessageId })
 
+        const lastSeenMessage = conversationMemberships[index].lastSeenMessage
+          ? await ctx.db.get(conversationMemberships[index].lastSeenMessage!)
+          : null
+
+        const lastSeenMessageTime = lastSeenMessage ? lastSeenMessage._creationTime : -1
+
+        const unseenMessages = await ctx.db
+          .query('messages')
+          .withIndex('by_conversationId', (q) => q.eq('conversationId', conversation._id))
+          .filter((q) => q.gt(q.field('_creationTime'), lastSeenMessageTime))
+          .filter((q) => q.neq(q.field('senderId'), currentUser._id))
+          .collect()
+
         if (conversation.isGroup) {
-          return { conversation, lastMessage }
+          return { conversation, lastMessage, unseenCount: unseenMessages.length }
         } else {
           const otherMembership = allConversationMemberships.find(
             (membership) => membership.memberId !== currentUser._id,
@@ -68,6 +81,7 @@ export const get = query({
             conversation,
             otherMember,
             lastMessage,
+            unseenCount: unseenMessages.length,
           }
         }
       }),
@@ -98,7 +112,7 @@ const getLastMessageDetails = async ({
 
   return {
     content,
-    sender: sender.username ? sender.username : sender.email,
+    sender: sender.username ? sender.username.split(' ')[0] : sender.email.split('@')[0],
   }
 }
 

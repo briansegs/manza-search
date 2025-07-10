@@ -41,6 +41,7 @@ export function MessengerConversationsContainer({
               setActiveConversation={setActiveConversation}
               lastMessageContent={conversations.lastMessage?.content}
               lastMessageSender={conversations.lastMessage?.sender}
+              unseenCount={conversations.unseenCount}
             />
           )
 
@@ -54,6 +55,7 @@ export function MessengerConversationsContainer({
             setActiveConversation={setActiveConversation}
             lastMessageContent={conversations.lastMessage?.content}
             lastMessageSender={conversations.lastMessage?.sender}
+            unseenCount={conversations.unseenCount}
           />
         )
       })}

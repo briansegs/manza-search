@@ -14,6 +14,7 @@ import { cn } from '@/utilities/ui'
 import { useQuery } from 'convex/react'
 import { api } from '../../../../../../convex/_generated/api'
 import { Badge } from '@/components/ui/badge'
+import { useMemo } from 'react'
 
 type MessengerNavbarProps = Pick<activeConversationStateType, 'activeConversation'> &
   currentTabStateType
@@ -25,6 +26,14 @@ export function MessengerNavbar({
 }: MessengerNavbarProps) {
   const requestsCount = useQuery(api.requests.count)
 
+  const conversations = useQuery(api.conversations.get)
+
+  const unseenMessagesCount = useMemo(() => {
+    return conversations?.reduce((acc, curr) => {
+      return acc + curr.unseenCount
+    }, 0)
+  }, [conversations])
+
   const isActive = !!activeConversation
 
   const tabs = [
@@ -32,6 +41,7 @@ export function MessengerNavbar({
       name: 'Conversations',
       slug: 'conversations',
       icon: <MessageSquare />,
+      count: unseenMessagesCount,
     },
     {
       name: 'Friends',

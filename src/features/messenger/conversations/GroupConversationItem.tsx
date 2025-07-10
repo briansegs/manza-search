@@ -6,14 +6,15 @@ import { ChatIdType } from '../components/sidebar/MessengerSidebarWrapper'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
 
 type GroupConversationItemProps = {
   setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
   id: Id<'conversations'>
   name: string
-
   lastMessageSender?: string
   lastMessageContent?: string
+  unseenCount: number
 }
 
 export function GroupConversationItem({
@@ -22,12 +23,13 @@ export function GroupConversationItem({
   name,
   lastMessageContent,
   lastMessageSender,
+  unseenCount,
 }: GroupConversationItemProps) {
   return (
     <Card className="w-full">
       <Button
         onClick={() => setActiveConversation(id)}
-        className="h-full w-full justify-start gap-4 truncate p-2 hover:bg-transparent"
+        className="h-full w-full justify-between gap-2 p-2 hover:bg-transparent"
         variant="ghost"
       >
         <div className="flex flex-row items-center gap-4 truncate">
@@ -53,6 +55,8 @@ export function GroupConversationItem({
             )}
           </div>
         </div>
+
+        {unseenCount ? <Badge className="py-1.5">{unseenCount}</Badge> : null}
       </Button>
     </Card>
   )

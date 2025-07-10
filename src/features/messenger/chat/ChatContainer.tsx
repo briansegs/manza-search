@@ -117,7 +117,18 @@ export function ChatContainer({
             }
           />
 
-          <ChatBody activeConversation={activeConversation} />
+          <ChatBody
+            activeConversation={activeConversation}
+            members={
+              conversation.isGroup
+                ? conversation.otherMembers
+                  ? conversation.otherMembers
+                  : []
+                : conversation.otherMember
+                  ? [conversation.otherMember]
+                  : []
+            }
+          />
 
           <ChatInput activeConversation={activeConversation} />
         </>
