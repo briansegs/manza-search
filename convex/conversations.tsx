@@ -47,10 +47,6 @@ export const get = query({
 
         const lastMessage = await getLastMessageDetails({ ctx, id: conversation.lastMessageId })
 
-        if (!conversationMemberships || conversationMemberships.length === 0) {
-          throw new ConvexError('Conversation memberships could not be found')
-        }
-
         const lastSeenMessage = conversationMemberships[index]?.lastSeenMessage
           ? await ctx.db.get(conversationMemberships[index].lastSeenMessage!)
           : null
