@@ -25,7 +25,7 @@ export const get = query({
     const conversation = await ctx.db.get(args.id)
 
     if (!conversation) {
-      throw new ConvexError('Conversation not found')
+      return null
     }
 
     const membership = await ctx.db

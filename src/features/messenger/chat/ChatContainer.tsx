@@ -50,89 +50,96 @@ export function ChatContainer({
     )
   }
 
-  return (
-    <Card className="flex max-h-[calc(100vh-5.1rem)] w-full flex-col gap-2 p-2 md:max-h-[calc(100vh-9.9rem)]">
-      {conversation === undefined && (
+  if (!conversation) {
+    return (
+      <Card className="h-full w-full p-4">
+        <div className="flex h-full w-full items-center justify-center">
+          <p className="flex h-full w-full items-center justify-center">Conversation not found</p>
+        </div>
+      </Card>
+    )
+  }
+
+  if (conversation === undefined) {
+    return (
+      <Card className="h-full w-full p-4">
         <div className="flex h-full w-full items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin" />
         </div>
-      )}
+      </Card>
+    )
+  }
 
-      {!conversation && (
-        <p className="flex h-full w-full items-center justify-center">Conversation not found</p>
-      )}
+  return (
+    <Card className="flex max-h-[calc(100vh-5.1rem)] w-full flex-col gap-2 p-2 md:max-h-[calc(100vh-9.9rem)]">
+      <RemoveFriendDialog
+        conversationId={activeConversation as Id<'conversations'>}
+        open={removeFriendDialogOpen}
+        setOpen={setRemoveFriendDialogOpen}
+        setActiveConversation={setActiveConversation}
+      />
 
-      {conversation && (
-        <>
-          <RemoveFriendDialog
-            conversationId={activeConversation as Id<'conversations'>}
-            open={removeFriendDialogOpen}
-            setOpen={setRemoveFriendDialogOpen}
-            setActiveConversation={setActiveConversation}
-          />
+      <LeaveGroupDialog
+        conversationId={activeConversation as Id<'conversations'>}
+        open={leaveGroupDialogOpen}
+        setOpen={setLeaveGroupDialogOpen}
+        setActiveConversation={setActiveConversation}
+      />
 
-          <LeaveGroupDialog
-            conversationId={activeConversation as Id<'conversations'>}
-            open={leaveGroupDialogOpen}
-            setOpen={setLeaveGroupDialogOpen}
-            setActiveConversation={setActiveConversation}
-          />
+      <DeleteGroupDialog
+        conversationId={activeConversation as Id<'conversations'>}
+        open={deleteGroupDialogOpen}
+        setOpen={setDeleteGroupDialogOpen}
+        setActiveConversation={setActiveConversation}
+      />
 
-          <DeleteGroupDialog
-            conversationId={activeConversation as Id<'conversations'>}
-            open={deleteGroupDialogOpen}
-            setOpen={setDeleteGroupDialogOpen}
-            setActiveConversation={setActiveConversation}
-          />
+      <ChatHeader
+        imageUrl={conversation.isGroup ? undefined : conversation.otherMember?.imageUrl}
+        name={
+          conversation.isGroup
+            ? conversation.name
+            : conversation.otherMember?.username || conversation.otherMember?.email || ''
+        }
+        setActiveConversation={setActiveConversation}
+        options={
+          conversation.isGroup
+            ? [
+                {
+                  label: 'Leave group',
+                  destructive: false,
+                  onClick: () => setLeaveGroupDialogOpen(true),
+                },
+                {
+                  label: 'Delete group',
+                  destructive: true,
+                  onClick: () => setDeleteGroupDialogOpen(true),
+                },
+              ]
+            : [
+                {
+                  label: 'Remove friend',
+                  destructive: true,
+                  onClick: () => setRemoveFriendDialogOpen(true),
+                },
+              ]
+        }
+      />
 
-          <ChatHeader
-            imageUrl={conversation.isGroup ? undefined : conversation.otherMember?.imageUrl}
-            name={
-              conversation.isGroup
-                ? conversation.name
-                : conversation.otherMember?.username || conversation.otherMember?.email || ''
-            }
-            setActiveConversation={setActiveConversation}
-            options={
-              conversation.isGroup
-                ? [
-                    {
-                      label: 'Leave group',
-                      destructive: false,
-                      onClick: () => setLeaveGroupDialogOpen(true),
-                    },
-                    {
-                      label: 'Delete group',
-                      destructive: true,
-                      onClick: () => setDeleteGroupDialogOpen(true),
-                    },
-                  ]
-                : [
-                    {
-                      label: 'Remove friend',
-                      destructive: true,
-                      onClick: () => setRemoveFriendDialogOpen(true),
-                    },
-                  ]
-            }
-          />
+      <ChatBody
+        activeConversation={activeConversation}
+        members={
+          conversation.isGroup
+            ? conversation.otherMembers
+              ? conversation.otherMembers
+              : []
+            : conversation.otherMember
+              ? [conversation.otherMember]
+              : []
+        }
+      />
 
-          <ChatBody
-            activeConversation={activeConversation}
-            members={
-              conversation.isGroup
-                ? conversation.otherMembers
-                  ? conversation.otherMembers
-                  : []
-                : conversation.otherMember
-                  ? [conversation.otherMember]
-                  : []
-            }
-          />
+      <ChatInput activeConversation={activeConversation} />
 
-          <ChatInput activeConversation={activeConversation} />
-        </>
-      )}
       {children}
     </Card>
   )
