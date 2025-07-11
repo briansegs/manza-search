@@ -26,8 +26,8 @@ export function ChatMessage({
   const formatTime = (timestamp: number) => {
     try {
       return format(timestamp, 'HH:mm')
-    } catch (error) {
-      return `Error with time: ${error}`
+    } catch (_error) {
+      return 'Invalid time'
     }
   }
 
