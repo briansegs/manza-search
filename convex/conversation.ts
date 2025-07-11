@@ -187,7 +187,17 @@ export const leaveGroup = mutation({
       throw new ConvexError('You are not a member of this group')
     }
 
-    await ctx.db.delete(membership._id)
+    const allMemberships = await ctx.db
+      .query('conversationMembers')
+      .withIndex('by_conversationId', (q) => q.eq('conversationId', args.conversationId))
+      .collect()
+
+    if (allMemberships.length <= 1) {
+      await ctx.db.delete(membership._id)
+      await ctx.db.delete(conversation._id)
+    } else {
+      await ctx.db.delete(membership._id)
+    }
   },
 })
 
