@@ -21,7 +21,11 @@ export function MessengerDialog() {
 
       <DialogContent
         aria-description="Messenger dialog content"
-        className={cn('md:h-[90%] md:max-w-[80%]', 'h-full w-full', 'border-black bg-menu')}
+        className={cn(
+          'sm:px-6 md:h-[90%] md:max-w-[80%]',
+          'h-full max-w-full px-0',
+          'border-black bg-menu',
+        )}
         closeButtonStyles="text-white"
       >
         <MessengerLayout />

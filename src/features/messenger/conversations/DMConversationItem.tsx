@@ -37,7 +37,7 @@ export function DMConversationItem({
         className="h-full w-full justify-between gap-2 p-2 hover:bg-transparent"
         variant="ghost"
       >
-        <div className="flex flex-row items-center gap-4 truncate">
+        <div className="flex w-0 flex-1 flex-row items-center gap-4 overflow-hidden">
           <Avatar>
             <AvatarImage src={imageUrl} />
 

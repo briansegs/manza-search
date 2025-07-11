@@ -51,7 +51,7 @@ export function ChatContainer({
   }
 
   return (
-    <Card className="flex h-full w-full flex-col gap-2 p-2">
+    <Card className="flex max-h-[calc(100vh-5.1rem)] w-full flex-col gap-2 p-2 md:max-h-[calc(100vh-9.9rem)]">
       {conversation === undefined && (
         <div className="flex h-full w-full items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin" />

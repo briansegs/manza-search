@@ -30,7 +30,9 @@ export function MessengerSidebarWrapper() {
   const [activeConversation, setActiveConversation] = useState<ChatIdType>(null)
 
   return (
-    <div className={cn('flex h-full w-full flex-col gap-4 p-4', 'lg:flex-row-reverse')}>
+    <div
+      className={cn('flex h-full w-full flex-col gap-4 px-1 py-4', 'sm:px-4 lg:flex-row-reverse')}
+    >
       <main className="flex h-full w-full gap-4 lg:h-full">
         {currentTab === 'friends' && (
           <MessengerFriendsContainer activeConversation={activeConversation} />
