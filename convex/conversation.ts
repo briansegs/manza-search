@@ -201,6 +201,17 @@ export const leaveGroup = mutation({
       .collect()
 
     if (allMemberships.length <= 1) {
+      const messages = await ctx.db
+        .query('messages')
+        .withIndex('by_conversationId', (q) => q.eq('conversationId', args.conversationId))
+        .collect()
+
+      await Promise.all(
+        messages.map(async (message) => {
+          await ctx.db.delete(message._id)
+        }),
+      )
+
       await ctx.db.delete(membership._id)
       await ctx.db.delete(conversation._id)
     } else {
