@@ -16,6 +16,10 @@ import { api } from '../../../../../../convex/_generated/api'
 import { Badge } from '@/components/ui/badge'
 import { useMemo } from 'react'
 
+function UserButtonAppearance() {
+  return <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
+}
+
 type MessengerNavbarProps = Pick<activeConversationStateType, 'activeConversation'> &
   currentTabStateType
 
@@ -94,13 +98,13 @@ export function MessengerNavbar({
           })}
 
           <li className="flex items-center lg:hidden">
-            <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
+            <UserButtonAppearance />
           </li>
         </ul>
       </nav>
 
       <div className="hidden lg:flex">
-        <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
+        <UserButtonAppearance />
       </div>
     </Card>
   )
