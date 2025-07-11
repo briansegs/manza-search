@@ -49,7 +49,7 @@ export function ChatBody({ activeConversation: conversationId, members }: ChatBo
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <p className="text-right text-sm text-muted-foreground">{`Seen by ${names[0]}, ${names[1]}, and ${names.length} more`}</p>
+                <p className="text-right text-sm text-muted-foreground">{`Seen by ${names[0]}, ${names[1]}, and ${names.length - 2} more`}</p>
               </TooltipTrigger>
 
               <TooltipContent>
