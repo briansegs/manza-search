@@ -8,10 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/features/shared/components/ui/dialog'
-import { Button } from '@/features/shared/components/ui/button'
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
 import { SearchIcon } from 'lucide-react'
-import { Input } from '@/features/shared/components/ui/input'
+import { Input } from '@/components/ui/input'
 import { api } from '@/lib/api'
 import { DefinitionContent } from './DefinitionContent'
 import DefinitionPlaceholder from './DefinitionPlaceholder'
@@ -59,7 +59,7 @@ export function DictionaryButton() {
       <DialogTrigger asChild>
         <Button className="size-full rounded-primary bg-menu-red hover:bg-black">d</Button>
       </DialogTrigger>
-      <DialogContent className="border-4 border-black bg-menu">
+      <DialogContent className="border-4 border-black bg-menu" closeButtonStyles="text-white">
         <DialogHeader>
           <DialogTitle className="font-serif text-white">Dictionary</DialogTitle>
           <DialogDescription className="font-serif">

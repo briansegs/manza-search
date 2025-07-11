@@ -1,6 +1,6 @@
 import { Article } from '@/payload-types'
 import { sectionTitle } from '@/utilities/getSectionTitles'
-import { ButtonProps } from '../shared/components/ui/button'
+import { ButtonProps } from '@/components/ui/button'
 import { ReactNode } from 'react'
 
 export type CardArticleData = Pick<Article, 'slug' | 'meta' | 'title' | 'updatedAt'>

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import { Popover, PopoverContent, PopoverTrigger } from '@/features/shared/components/ui/popover'
-import { Button } from '@/features/shared/components/ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Button } from '@/components/ui/button'
 import { ChevronDown } from 'lucide-react'
 
 interface DropdownMenuProps {

@@ -1,14 +1,14 @@
 import type { CountryField } from '@payloadcms/plugin-form-builder/types'
 import type { Control, FieldErrorsImpl } from 'react-hook-form'
 
-import { Label } from '@/features/shared/components/ui/label'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/features/shared/components/ui/select'
+} from '@/components/ui/select'
 import React from 'react'
 import { Controller } from 'react-hook-form'
 
