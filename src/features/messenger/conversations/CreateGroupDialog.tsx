@@ -96,7 +96,7 @@ export function CreateGroupDialog() {
       <DialogContent className="block">
         <DialogHeader>
           <DialogTitle>Create group</DialogTitle>
-          <DialogDescription>Add you friends to get started!</DialogDescription>
+          <DialogDescription>Add your friends to get started!</DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
