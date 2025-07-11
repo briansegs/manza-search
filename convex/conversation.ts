@@ -44,10 +44,6 @@ export const get = query({
       .withIndex('by_conversationId', (q) => q.eq('conversationId', args.id))
       .collect()
 
-    if (!allConversationMemberships) {
-      throw new ConvexError('All Conversation Memberships could not be found')
-    }
-
     if (!conversation.isGroup) {
       const otherMembership = allConversationMemberships.find(
         (membership) => membership.memberId !== currentUser._id,
