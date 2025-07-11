@@ -129,6 +129,14 @@ export const deleteGroup = mutation({
       throw new ConvexError('No members found for this conversation')
     }
 
+    const currentUserMembership = memberships.find(
+      (membership) => membership.memberId === currentUser._id,
+    )
+
+    if (!currentUserMembership) {
+      throw new ConvexError('You are not a member of this group')
+    }
+
     const messages = await ctx.db
       .query('messages')
       .withIndex('by_conversationId', (q) => q.eq('conversationId', args.conversationId))
