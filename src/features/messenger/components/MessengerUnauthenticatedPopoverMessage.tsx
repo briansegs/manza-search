@@ -8,7 +8,9 @@ export function MessengerUnauthenticatedPopoverMessage() {
         <MessengerButton />
       </PopoverTrigger>
 
-      <PopoverContent>Sign in to use messenger</PopoverContent>
+      <PopoverContent className="w-fit border-black bg-menu text-white">
+        Sign in to use the messenger
+      </PopoverContent>
     </Popover>
   )
 }
