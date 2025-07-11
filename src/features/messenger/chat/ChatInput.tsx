@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutationState } from '../hooks/useMutationState'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
-import { useRef } from 'react'
+// import { useRef } from 'react'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import TextAreaAutosize from 'react-textarea-autosize'
 import { Button } from '@/components/ui/button'
@@ -24,7 +24,7 @@ const chatMessageSchema = z.object({
 type ChatInputProps = Pick<activeConversationStateType, 'activeConversation'>
 
 export function ChatInput({ activeConversation: conversationId }: ChatInputProps) {
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  // const textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const { mutate: createMessage, pending } = useMutationState(api.message.create)
 

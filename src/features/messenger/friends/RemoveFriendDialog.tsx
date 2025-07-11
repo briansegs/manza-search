@@ -50,7 +50,7 @@ export function RemoveFriendDialog({
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
 
           <AlertDialogDescription>
-            This action cannot be undone. all messages will be deleted and you will not be able to
+            This action cannot be undone. All messages will be deleted and you will not be able to
             message this user. All group chats will still work as normal
           </AlertDialogDescription>
         </AlertDialogHeader>
