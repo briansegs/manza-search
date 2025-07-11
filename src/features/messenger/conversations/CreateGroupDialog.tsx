@@ -80,7 +80,7 @@ export function CreateGroupDialog() {
   return (
     <Dialog>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button size="icon" variant="outline">
             <DialogTrigger asChild>
               <CirclePlus />

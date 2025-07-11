@@ -62,7 +62,7 @@ export function AddFriendDialog() {
   return (
     <Dialog>
       <Tooltip>
-        <TooltipTrigger>
+        <TooltipTrigger asChild>
           <Button size="icon" variant="outline">
             <DialogTrigger>
               <UserPlus />
