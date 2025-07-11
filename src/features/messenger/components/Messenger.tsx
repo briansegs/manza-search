@@ -1,6 +1,7 @@
-import { Authenticated, Unauthenticated } from 'convex/react'
+import { Authenticated, AuthLoading, Unauthenticated } from 'convex/react'
 import { MessengerDialog } from './MessengerDialog'
 import { MessengerUnauthenticatedPopoverMessage } from './MessengerUnauthenticatedPopoverMessage'
+import { MessengerButton } from './MessengerButton'
 
 export function Messenger() {
   return (
@@ -8,6 +9,10 @@ export function Messenger() {
       <Authenticated>
         <MessengerDialog />
       </Authenticated>
+
+      <AuthLoading>
+        <MessengerButton />
+      </AuthLoading>
 
       <Unauthenticated>
         <MessengerUnauthenticatedPopoverMessage />
