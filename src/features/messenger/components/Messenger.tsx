@@ -5,7 +5,7 @@ import { MessengerButton } from './MessengerButton'
 
 export function Messenger() {
   return (
-    <div>
+    <>
       <Authenticated>
         <MessengerDialog />
       </Authenticated>
@@ -17,6 +17,6 @@ export function Messenger() {
       <Unauthenticated>
         <MessengerUnauthenticatedPopoverMessage />
       </Unauthenticated>
-    </div>
+    </>
   )
 }
