@@ -1,4 +1,10 @@
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { MessengerButton } from './MessengerButton'
 import { MessengerLayout } from './MessengerLayout'
 
@@ -10,8 +16,10 @@ export function MessengerDialog() {
       </DialogTrigger>
 
       <DialogTitle className="sr-only">Messenger</DialogTitle>
+      <DialogDescription className="sr-only">Messenger dialog content</DialogDescription>
 
       <DialogContent
+        aria-description="Messenger dialog content"
         className="h-[90%] max-w-[80%] border-black bg-menu"
         closeButtonStyles="text-white"
       >

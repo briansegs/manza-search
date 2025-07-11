@@ -30,7 +30,6 @@ export function DMConversationItem({
   lastMessageSender,
   unseenCount,
 }: DMConversationItemProps) {
-  console.log('lastMessageSender: ', lastMessageSender)
   return (
     <Card className="w-full">
       <Button
