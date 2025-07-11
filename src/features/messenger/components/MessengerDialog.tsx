@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/dialog'
 import { MessengerButton } from './MessengerButton'
 import { MessengerLayout } from './MessengerLayout'
+import { cn } from '@/utilities/ui'
 
 export function MessengerDialog() {
   return (
@@ -20,7 +21,7 @@ export function MessengerDialog() {
 
       <DialogContent
         aria-description="Messenger dialog content"
-        className="h-[90%] max-w-[80%] border-black bg-menu"
+        className={cn('md:h-[90%] md:max-w-[80%]', 'h-full w-full', 'border-black bg-menu')}
         closeButtonStyles="text-white"
       >
         <MessengerLayout />
