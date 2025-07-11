@@ -31,6 +31,7 @@ export function GroupConversationItem({
         onClick={() => setActiveConversation(id)}
         className="h-full w-full justify-between gap-2 p-2 hover:bg-transparent"
         variant="ghost"
+        aria-label={`Open conversation with ${name}`}
       >
         <div className="flex flex-row items-center gap-4 truncate">
           <Avatar>
