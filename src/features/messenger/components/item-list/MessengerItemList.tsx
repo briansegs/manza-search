@@ -12,7 +12,7 @@ type MessengerItemListProps = React.PropsWithChildren & {
 export function MessengerItemList({
   children,
   title,
-  action: Action,
+  action: ActionComponent,
   activeConversation,
 }: MessengerItemListProps) {
   const isActive = !!activeConversation
@@ -31,7 +31,7 @@ export function MessengerItemList({
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
 
-        {Action ? Action : null}
+        {ActionComponent ? ActionComponent : null}
       </div>
 
       <div className="flex h-full w-full flex-col items-center justify-start gap-2">{children}</div>
