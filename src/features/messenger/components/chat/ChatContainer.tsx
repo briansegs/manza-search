@@ -1,20 +1,18 @@
 'use client'
 
 import { Card } from '@/components/ui/card'
-import { activeConversationStateType } from '../components/sidebar/MessengerSidebarWrapper'
 import { useQuery } from 'convex/react'
-import { api } from '../../../../convex/_generated/api'
+import { api } from '../../../../../convex/_generated/api'
 import { Loader2 } from 'lucide-react'
 import { ChatHeader } from './ChatHeader'
 import { ChatBody } from './ChatBody'
 import { ChatInput } from './ChatInput'
 import { useEffect, useState } from 'react'
-import { RemoveFriendDialog } from '../friends/RemoveFriendDialog'
+import { ChatRemoveFriendDialog } from './ChatRemoveFriendDialog'
 import { Id } from 'convex/_generated/dataModel'
-import { DeleteGroupDialog } from '../components/groups/DeleteGroupDialog'
-import { LeaveGroupDialog } from '../components/groups/LeaveGroupDialog'
-
-type ChatContainerProps = React.PropsWithChildren & activeConversationStateType
+import { ChatDeleteGroupDialog } from './ChatDeleteGroupDialog'
+import { ChatLeaveGroupDialog } from './ChatLeaveGroupDialog'
+import { ChatContainerProps } from './types'
 
 export function ChatContainer({
   children,
@@ -72,21 +70,21 @@ export function ChatContainer({
 
   return (
     <Card className="flex max-h-[calc(100vh-5.1rem)] w-full flex-col gap-2 p-2 md:max-h-[calc(100vh-9.9rem)]">
-      <RemoveFriendDialog
+      <ChatRemoveFriendDialog
         conversationId={activeConversation as Id<'conversations'>}
         open={removeFriendDialogOpen}
         setOpen={setRemoveFriendDialogOpen}
         setActiveConversation={setActiveConversation}
       />
 
-      <LeaveGroupDialog
+      <ChatLeaveGroupDialog
         conversationId={activeConversation as Id<'conversations'>}
         open={leaveGroupDialogOpen}
         setOpen={setLeaveGroupDialogOpen}
         setActiveConversation={setActiveConversation}
       />
 
-      <DeleteGroupDialog
+      <ChatDeleteGroupDialog
         conversationId={activeConversation as Id<'conversations'>}
         open={deleteGroupDialogOpen}
         setOpen={setDeleteGroupDialogOpen}

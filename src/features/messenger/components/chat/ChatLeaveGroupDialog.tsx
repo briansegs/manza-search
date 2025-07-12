@@ -1,7 +1,5 @@
 'use client'
 
-import { Id } from 'convex/_generated/dataModel'
-import { Dispatch, SetStateAction } from 'react'
 import { useMutationState } from '../../hooks/useMutationState'
 import { api } from '../../../../../convex/_generated/api'
 import { toast } from 'sonner'
@@ -16,20 +14,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { activeConversationStateType } from '../../components/sidebar/MessengerSidebarWrapper'
+import { ChatLeaveGroupDialogProps } from './types'
 
-type LeaveGroupDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
-  conversationId: Id<'conversations'>
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
-}
-
-export function LeaveGroupDialog({
+export function ChatLeaveGroupDialog({
   setActiveConversation,
   conversationId,
   open,
   setOpen,
-}: LeaveGroupDialogProps) {
+}: ChatLeaveGroupDialogProps) {
   const { mutate: leaveGroup, pending } = useMutationState(api.conversation.leaveGroup)
 
   const handleLeaveGroup = async () => {

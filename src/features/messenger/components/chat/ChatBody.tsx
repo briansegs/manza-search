@@ -1,22 +1,13 @@
 'use client'
 
 import { useQuery } from 'convex/react'
-import { activeConversationStateType } from '../components/sidebar/MessengerSidebarWrapper'
-import { api } from '../../../../convex/_generated/api'
+import { api } from '../../../../../convex/_generated/api'
 import { Id } from 'convex/_generated/dataModel'
 import { ChatMessage } from './ChatMessage'
-import { useMutationState } from '../hooks/useMutationState'
+import { useMutationState } from '../../hooks/useMutationState'
 import { useEffect } from 'react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-
-type ChatBodyProps = Pick<activeConversationStateType, 'activeConversation'> & {
-  members: {
-    lastSeenMessageId?: Id<'messages'>
-    username?: string
-    email?: string
-    [key: string]: unknown
-  }[]
-}
+import { ChatBodyProps } from './types'
 
 export function ChatBody({ activeConversation: conversationId, members }: ChatBodyProps) {
   const messages = useQuery(api.messages.get, {

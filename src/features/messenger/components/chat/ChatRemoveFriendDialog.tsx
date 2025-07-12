@@ -1,9 +1,7 @@
 'use client'
 
-import { Id } from 'convex/_generated/dataModel'
-import { Dispatch, SetStateAction } from 'react'
-import { useMutationState } from '../hooks/useMutationState'
-import { api } from '../../../../convex/_generated/api'
+import { useMutationState } from '../../hooks/useMutationState'
+import { api } from '../../../../../convex/_generated/api'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
 import {
@@ -16,20 +14,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { activeConversationStateType } from '../components/sidebar/MessengerSidebarWrapper'
+import { ChatRemoveFriendDialogProps } from './types'
 
-type RemoveFriendDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
-  conversationId: Id<'conversations'>
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
-}
-
-export function RemoveFriendDialog({
+export function ChatRemoveFriendDialog({
   setActiveConversation,
   conversationId,
   open,
   setOpen,
-}: RemoveFriendDialogProps) {
+}: ChatRemoveFriendDialogProps) {
   const { mutate: removeFriend, pending } = useMutationState(api.friend.remove)
 
   const handleRemoveFriend = async () => {

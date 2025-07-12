@@ -1,9 +1,9 @@
 'use client'
 
-import { api } from '../../../../convex/_generated/api'
+import { api } from '../../../../../convex/_generated/api'
 import { useQuery } from 'convex/react'
 import { z } from 'zod'
-import { useMutationState } from '../hooks/useMutationState'
+import { useMutationState } from '../../hooks/useMutationState'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMemo } from 'react'
@@ -44,7 +44,7 @@ const createGroupFormSchema = z.object({
   members: z.string().array().min(1, { message: 'You must select at least 1 friend' }),
 })
 
-export function CreateGroupDialog() {
+export function ConversationsCreateGroupDialog() {
   const friends = useQuery(api.friends.get)
 
   const { mutate: createGroup, pending } = useMutationState(api.friends.createGroup)
@@ -148,16 +148,10 @@ export function CreateGroupDialog() {
                                 <Avatar className="h-8 w-8">
                                   <AvatarImage src={friend.imageUrl} />
 
-                                  <AvatarFallback>
-                                    {friend.username
-                                      ? friend.username.substring(0, 1)
-                                      : friend.email.substring(0, 1)}
-                                  </AvatarFallback>
+                                  <AvatarFallback>{getUserInitial(friend)}</AvatarFallback>
                                 </Avatar>
 
-                                <h4 className="truncate">
-                                  {friend.username ? friend.username : friend.email}
-                                </h4>
+                                <h4 className="truncate">{getUserDisplayName(friend)}</h4>
                               </DropdownMenuCheckboxItem>
                             )
                           })}
@@ -182,11 +176,7 @@ export function CreateGroupDialog() {
                           <Avatar>
                             <AvatarImage src={friend.imageUrl} />
 
-                            <AvatarFallback>
-                              {friend.username
-                                ? friend.username.substring(0, 1)
-                                : friend.email.substring(0, 1)}
-                            </AvatarFallback>
+                            <AvatarFallback>{getUserInitial(friend)}</AvatarFallback>
                           </Avatar>
 
                           <X
@@ -200,11 +190,7 @@ export function CreateGroupDialog() {
                           />
                         </div>
 
-                        <p className="truncate text-sm">
-                          {friend.username
-                            ? friend.username.split(' ')[0]
-                            : friend.email.split('@')[0]}
-                        </p>
+                        <p className="truncate text-sm">{getUserShortName(friend)}</p>
                       </div>
                     )
                   })}
@@ -221,4 +207,16 @@ export function CreateGroupDialog() {
       </DialogContent>
     </Dialog>
   )
+}
+
+const getUserDisplayName = (friend: { username?: string; email: string }) => {
+  return friend.username || friend.email
+}
+
+const getUserInitial = (friend: { username?: string; email: string }) => {
+  return friend.username ? friend.username.substring(0, 1) : friend.email.substring(0, 1)
+}
+
+const getUserShortName = (friend: { username?: string; email: string }) => {
+  return friend.username ? friend.username.split(' ')[0] : friend.email.split('@')[0]
 }

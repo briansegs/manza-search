@@ -1,47 +1,40 @@
 'use client'
 
-import { Id } from 'convex/_generated/dataModel'
-import { Dispatch, SetStateAction } from 'react'
-import { ChatIdType } from '../components/sidebar/MessengerSidebarWrapper'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { User } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { ConversationsDirectMessageItemProps } from './types'
 
-type GroupConversationItemProps = {
-  setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
-  id: Id<'conversations'>
-  name: string
-  lastMessageSender?: string
-  lastMessageContent?: string
-  unseenCount: number
-}
-
-export function GroupConversationItem({
+export function ConversationsDirectMessageItem({
   setActiveConversation,
   id,
-  name,
+  imageUrl,
+  username,
+  email,
   lastMessageContent,
   lastMessageSender,
   unseenCount,
-}: GroupConversationItemProps) {
+}: ConversationsDirectMessageItemProps) {
   return (
     <Card className="w-full">
       <Button
         onClick={() => setActiveConversation(id)}
         className="h-full w-full justify-between gap-2 p-2 hover:bg-transparent"
         variant="ghost"
-        aria-label={`Open conversation with ${name}`}
       >
-        <div className="flex flex-row items-center gap-4 truncate">
+        <div className="flex w-0 flex-1 flex-row items-center gap-4 overflow-hidden">
           <Avatar>
-            <AvatarFallback className="bg-white text-lg">
-              {name.charAt(0).toLocaleUpperCase()}
+            <AvatarImage src={imageUrl} />
+
+            <AvatarFallback>
+              <User />
             </AvatarFallback>
           </Avatar>
 
           <div className="flex flex-col items-start truncate">
-            <h4 className="truncate text-base">{name}</h4>
+            <h4 className="truncate text-base">{username ? username : email}</h4>
 
             {lastMessageSender && lastMessageContent ? (
               <span className="flex truncate overflow-ellipsis text-muted-foreground">
@@ -57,7 +50,7 @@ export function GroupConversationItem({
           </div>
         </div>
 
-        {unseenCount ? <Badge className="py-1.5">{unseenCount}</Badge> : null}
+        {unseenCount ? <Badge className="px-2">{unseenCount}</Badge> : null}
       </Button>
     </Card>
   )

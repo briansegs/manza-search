@@ -1,7 +1,5 @@
 'use client'
 
-import { Id } from 'convex/_generated/dataModel'
-import { Dispatch, SetStateAction } from 'react'
 import { useMutationState } from '../../hooks/useMutationState'
 import { api } from '../../../../../convex/_generated/api'
 import { toast } from 'sonner'
@@ -16,20 +14,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { activeConversationStateType } from '../../components/sidebar/MessengerSidebarWrapper'
+import { ChatDeleteGroupDialogProps } from './types'
 
-type DeleteGroupDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
-  conversationId: Id<'conversations'>
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
-}
-
-export function DeleteGroupDialog({
+export function ChatDeleteGroupDialog({
   setActiveConversation,
   conversationId,
   open,
   setOpen,
-}: DeleteGroupDialogProps) {
+}: ChatDeleteGroupDialogProps) {
   const { mutate: deleteGroup, pending } = useMutationState(api.conversation.deleteGroup)
 
   const handleDeleteGroup = async () => {

@@ -52,6 +52,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ editor }) => {
       id="custom-toolbar"
       className={clsx('grid h-fit w-32 grid-cols-6', 'rounded-l-sm border-2 border-black')}
       onFocusCapture={(e) => {
+        // Prevent focus events from bubbling up to parent components
         e.stopPropagation()
       }}
       role="toolbar"
