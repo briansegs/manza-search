@@ -16,6 +16,13 @@ import { api } from '../../../../../../convex/_generated/api'
 import { Badge } from '@/components/ui/badge'
 import { useMemo } from 'react'
 
+type Tab = {
+  name: string
+  slug: TabsType
+  icon: React.ReactNode
+  count?: number
+}
+
 function UserButtonAppearance() {
   return <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
 }
@@ -40,7 +47,7 @@ export function MessengerNavbar({
 
   const isActive = !!activeConversation
 
-  const tabs = [
+  const tabs: Tab[] = [
     {
       name: 'Conversations',
       slug: 'conversations',
