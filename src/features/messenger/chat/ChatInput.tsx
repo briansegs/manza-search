@@ -24,8 +24,6 @@ const chatMessageSchema = z.object({
 type ChatInputProps = Pick<activeConversationStateType, 'activeConversation'>
 
 export function ChatInput({ activeConversation: conversationId }: ChatInputProps) {
-  // const textareaRef = useRef<HTMLTextAreaElement | null>(null)
-
   const { mutate: createMessage, pending } = useMutationState(api.message.create)
 
   const form = useForm<z.infer<typeof chatMessageSchema>>({
