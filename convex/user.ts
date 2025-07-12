@@ -1,6 +1,6 @@
 import { internalMutation, internalQuery, mutation } from './_generated/server'
-import { ConvexError, v } from 'convex/values'
-import { getUserByClerkId } from './_utils'
+import { v } from 'convex/values'
+import { getAuthenticatedUser } from './_utils'
 
 export const createUser = internalMutation({
   args: {
@@ -60,20 +60,7 @@ export const deleteUser = mutation({
   },
   handler: async (ctx, { clerkId }) => {
     // Check auth before updating
-    const identity = await ctx.auth.getUserIdentity()
-
-    if (!identity) {
-      throw new Error('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
-      ctx,
-      clerkId: identity.subject,
-    })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
+    await getAuthenticatedUser(ctx)
 
     const user = await ctx.db
       .query('users')
@@ -118,20 +105,7 @@ export const updateUser = mutation({
   },
   handler: async (ctx, { clerkId, data }) => {
     // Check auth before updating
-    const identity = await ctx.auth.getUserIdentity()
-
-    if (!identity) {
-      throw new Error('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
-      ctx,
-      clerkId: identity.subject,
-    })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
+    await getAuthenticatedUser(ctx)
 
     const user = await ctx.db
       .query('users')

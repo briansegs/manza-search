@@ -1,26 +1,13 @@
 import { ConvexError, v } from 'convex/values'
 import { mutation, query } from './_generated/server'
-import { getUserByClerkId } from './_utils'
+import { getAuthenticatedUser, getConversationByConversationId } from './_utils'
 
 export const get = query({
   args: {
     id: v.id('conversations'),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
-
-    if (!identity) {
-      throw new ConvexError('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
-      ctx,
-      clerkId: identity.subject,
-    })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
+    const currentUser = await getAuthenticatedUser(ctx)
 
     const conversation = await ctx.db.get(args.id)
 
@@ -99,26 +86,12 @@ export const deleteGroup = mutation({
     conversationId: v.id('conversations'),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
+    const currentUser = await getAuthenticatedUser(ctx)
 
-    if (!identity) {
-      throw new ConvexError('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
+    await getConversationByConversationId({
       ctx,
-      clerkId: identity.subject,
+      conversationId: args.conversationId,
     })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
-
-    const conversation = await ctx.db.get(args.conversationId)
-
-    if (!conversation) {
-      throw new ConvexError('Conversation not found')
-    }
 
     const memberships = await ctx.db
       .query('conversationMembers')
@@ -163,26 +136,12 @@ export const leaveGroup = mutation({
     conversationId: v.id('conversations'),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
+    const currentUser = await getAuthenticatedUser(ctx)
 
-    if (!identity) {
-      throw new ConvexError('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
+    const conversation = await getConversationByConversationId({
       ctx,
-      clerkId: identity.subject,
+      conversationId: args.conversationId,
     })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
-
-    const conversation = await ctx.db.get(args.conversationId)
-
-    if (!conversation) {
-      throw new ConvexError('Conversation not found')
-    }
 
     const membership = await ctx.db
       .query('conversationMembers')
@@ -226,20 +185,7 @@ export const markRead = mutation({
     messageId: v.id('messages'),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
-
-    if (!identity) {
-      throw new ConvexError('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
-      ctx,
-      clerkId: identity.subject,
-    })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
+    const currentUser = await getAuthenticatedUser(ctx)
 
     const membership = await ctx.db
       .query('conversationMembers')

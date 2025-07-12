@@ -2,14 +2,14 @@
 
 import { Id } from 'convex/_generated/dataModel'
 import { Dispatch, SetStateAction } from 'react'
-import { ChatIdType } from '../components/sidebar/MessengerSidebarWrapper'
+import { ChatIdType } from '../MessengerLayout'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { User } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
-type DMConversationItemProps = {
+type ConversationsDirectMessageItemProps = {
   setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
   id: Id<'conversations'>
   imageUrl: string
@@ -20,7 +20,7 @@ type DMConversationItemProps = {
   unseenCount: number
 }
 
-export function DMConversationItem({
+export function ConversationsDirectMessageItem({
   setActiveConversation,
   id,
   imageUrl,
@@ -29,7 +29,7 @@ export function DMConversationItem({
   lastMessageContent,
   lastMessageSender,
   unseenCount,
-}: DMConversationItemProps) {
+}: ConversationsDirectMessageItemProps) {
   return (
     <Card className="w-full">
       <Button
@@ -63,7 +63,7 @@ export function DMConversationItem({
           </div>
         </div>
 
-        {unseenCount ? <Badge className="py-1.5">{unseenCount}</Badge> : null}
+        {unseenCount ? <Badge className="px-2">{unseenCount}</Badge> : null}
       </Button>
     </Card>
   )

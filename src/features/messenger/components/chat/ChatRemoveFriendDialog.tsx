@@ -16,27 +16,27 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { activeConversationStateType } from '../../components/sidebar/MessengerSidebarWrapper'
+import { activeConversationStateType } from '../MessengerLayout'
 
-type LeaveGroupDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
+type ChatRemoveFriendDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
   conversationId: Id<'conversations'>
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export function LeaveGroupDialog({
+export function ChatRemoveFriendDialog({
   setActiveConversation,
   conversationId,
   open,
   setOpen,
-}: LeaveGroupDialogProps) {
-  const { mutate: leaveGroup, pending } = useMutationState(api.conversation.leaveGroup)
+}: ChatRemoveFriendDialogProps) {
+  const { mutate: removeFriend, pending } = useMutationState(api.friend.remove)
 
-  const handleLeaveGroup = async () => {
-    leaveGroup({ conversationId })
+  const handleRemoveFriend = async () => {
+    removeFriend({ conversationId })
       .then(() => {
         setActiveConversation(null)
-        toast.success('Group left')
+        toast.success('Removed friend')
       })
       .catch((error) => {
         toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
@@ -50,16 +50,16 @@ export function LeaveGroupDialog({
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
 
           <AlertDialogDescription>
-            This action cannot be undone. You will not be able to see any previous messages or send
-            new messages to this group.
+            This action cannot be undone. All messages will be deleted and you will not be able to
+            message this user. All group chats will still work as normal
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
           <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
 
-          <AlertDialogAction disabled={pending} onClick={handleLeaveGroup}>
-            Leave
+          <AlertDialogAction disabled={pending} onClick={handleRemoveFriend}>
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

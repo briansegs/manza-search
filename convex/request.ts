@@ -1,30 +1,13 @@
 import { ConvexError, v } from 'convex/values'
 import { mutation } from './_generated/server'
-import { getUserByClerkId } from './_utils'
+import { getAuthenticatedUser } from './_utils'
 
 export const create = mutation({
   args: {
     email: v.string(),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
-
-    if (!identity) {
-      throw new ConvexError('Unauthorized')
-    }
-
-    if (args.email === identity.email) {
-      throw new ConvexError("Can't send a request to yourself")
-    }
-
-    const currentUser = await getUserByClerkId({
-      ctx,
-      clerkId: identity.subject,
-    })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
+    const currentUser = await getAuthenticatedUser(ctx)
 
     const receiver = await ctx.db
       .query('users')
@@ -88,20 +71,7 @@ export const deny = mutation({
     id: v.id('requests'),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
-
-    if (!identity) {
-      throw new ConvexError('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
-      ctx,
-      clerkId: identity.subject,
-    })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
+    const currentUser = await getAuthenticatedUser(ctx)
 
     const request = await ctx.db.get(args.id)
 
@@ -118,20 +88,7 @@ export const accept = mutation({
     id: v.id('requests'),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity()
-
-    if (!identity) {
-      throw new ConvexError('Unauthorized')
-    }
-
-    const currentUser = await getUserByClerkId({
-      ctx,
-      clerkId: identity.subject,
-    })
-
-    if (!currentUser) {
-      throw new ConvexError('User not found')
-    }
+    const currentUser = await getAuthenticatedUser(ctx)
 
     const request = await ctx.db.get(args.id)
 

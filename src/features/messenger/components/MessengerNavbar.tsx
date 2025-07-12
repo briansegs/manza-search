@@ -4,17 +4,20 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { UserButton } from '@clerk/nextjs'
-import {
-  activeConversationStateType,
-  currentTabStateType,
-  TabsType,
-} from '../MessengerSidebarWrapper'
+import { activeConversationStateType, currentTabStateType, TabsType } from './MessengerLayout'
 import { MessageSquare, Users } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 import { useQuery } from 'convex/react'
-import { api } from '../../../../../../convex/_generated/api'
+import { api } from '../../../../convex/_generated/api'
 import { Badge } from '@/components/ui/badge'
 import { useMemo } from 'react'
+
+type Tab = {
+  name: string
+  slug: TabsType
+  icon: React.ReactNode
+  count?: number
+}
 
 function UserButtonAppearance() {
   return <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
@@ -40,7 +43,7 @@ export function MessengerNavbar({
 
   const isActive = !!activeConversation
 
-  const tabs = [
+  const tabs: Tab[] = [
     {
       name: 'Conversations',
       slug: 'conversations',
@@ -63,6 +66,7 @@ export function MessengerNavbar({
         isActive ? 'hidden lg:flex' : '',
       )}
       onFocusCapture={(e) => {
+        // Prevent focus events from bubbling up to parent components
         e.stopPropagation()
       }}
     >
