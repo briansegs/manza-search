@@ -28,5 +28,5 @@ export type MessengerNavbarProps = Pick<activeConversationStateType, 'activeConv
 export type MessengerItemListProps = React.PropsWithChildren &
   Pick<activeConversationStateType, 'activeConversation'> & {
     title: string
-    action?: React.ReactNode
+    actionComponent?: React.ReactNode
   }

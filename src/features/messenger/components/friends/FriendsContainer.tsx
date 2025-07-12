@@ -15,7 +15,7 @@ export function FriendsContainer({ activeConversation }: FriendsContainerProps) 
     <MessengerItemList
       activeConversation={activeConversation}
       title="Friends"
-      action={<FriendsAddDialog />}
+      actionComponent={<FriendsAddDialog />}
     >
       {!requests && (
         <div className="flex h-[80%] w-full items-center justify-center">

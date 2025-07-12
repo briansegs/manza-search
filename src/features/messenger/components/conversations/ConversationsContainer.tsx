@@ -17,7 +17,7 @@ export function ConversationsContainer({
     <MessengerItemList
       activeConversation={activeConversation}
       title="Conversations"
-      action={<ConversationsCreateGroupDialog />}
+      actionComponent={<ConversationsCreateGroupDialog />}
     >
       {!conversations && (
         <div className="flex h-[80%] w-full items-center justify-center">

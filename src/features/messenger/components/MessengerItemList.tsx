@@ -6,7 +6,7 @@ import { MessengerItemListProps } from './types'
 export function MessengerItemList({
   children,
   title,
-  action: ActionComponent,
+  actionComponent,
   activeConversation,
 }: MessengerItemListProps) {
   const isActive = !!activeConversation
@@ -25,7 +25,7 @@ export function MessengerItemList({
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
 
-        {ActionComponent ? ActionComponent : null}
+        {actionComponent}
       </div>
 
       <div className="flex h-full w-full flex-col items-center justify-start gap-2">{children}</div>
