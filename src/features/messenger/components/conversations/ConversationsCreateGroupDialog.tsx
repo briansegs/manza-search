@@ -1,9 +1,9 @@
 'use client'
 
-import { api } from '../../../../convex/_generated/api'
+import { api } from '../../../../../convex/_generated/api'
 import { useQuery } from 'convex/react'
 import { z } from 'zod'
-import { useMutationState } from '../hooks/useMutationState'
+import { useMutationState } from '../../hooks/useMutationState'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMemo } from 'react'
@@ -44,7 +44,7 @@ const createGroupFormSchema = z.object({
   members: z.string().array().min(1, { message: 'You must select at least 1 friend' }),
 })
 
-export function CreateGroupDialog() {
+export function ConversationsCreateGroupDialog() {
   const friends = useQuery(api.friends.get)
 
   const { mutate: createGroup, pending } = useMutationState(api.friends.createGroup)

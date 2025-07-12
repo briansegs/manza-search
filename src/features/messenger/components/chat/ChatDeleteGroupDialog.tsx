@@ -16,20 +16,20 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { activeConversationStateType } from '../../components/sidebar/MessengerSidebarWrapper'
+import { activeConversationStateType } from '../MessengerLayout'
 
-type DeleteGroupDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
+type ChatDeleteGroupDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
   conversationId: Id<'conversations'>
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export function DeleteGroupDialog({
+export function ChatDeleteGroupDialog({
   setActiveConversation,
   conversationId,
   open,
   setOpen,
-}: DeleteGroupDialogProps) {
+}: ChatDeleteGroupDialogProps) {
   const { mutate: deleteGroup, pending } = useMutationState(api.conversation.deleteGroup)
 
   const handleDeleteGroup = async () => {

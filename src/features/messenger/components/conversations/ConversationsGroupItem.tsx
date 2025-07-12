@@ -2,13 +2,13 @@
 
 import { Id } from 'convex/_generated/dataModel'
 import { Dispatch, SetStateAction } from 'react'
-import { ChatIdType } from '../components/sidebar/MessengerSidebarWrapper'
+import { ChatIdType } from '../MessengerLayout'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 
-type GroupConversationItemProps = {
+type ConversationsGroupItemProps = {
   setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
   id: Id<'conversations'>
   name: string
@@ -17,14 +17,14 @@ type GroupConversationItemProps = {
   unseenCount: number
 }
 
-export function GroupConversationItem({
+export function ConversationsGroupItem({
   setActiveConversation,
   id,
   name,
   lastMessageContent,
   lastMessageSender,
   unseenCount,
-}: GroupConversationItemProps) {
+}: ConversationsGroupItemProps) {
   return (
     <Card className="w-full">
       <Button
@@ -57,7 +57,7 @@ export function GroupConversationItem({
           </div>
         </div>
 
-        {unseenCount ? <Badge className="py-1.5">{unseenCount}</Badge> : null}
+        {unseenCount ? <Badge className="px-2">{unseenCount}</Badge> : null}
       </Button>
     </Card>
   )

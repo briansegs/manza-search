@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { CircleArrowLeft, Settings } from 'lucide-react'
-import { activeConversationStateType } from '../components/sidebar/MessengerSidebarWrapper'
+import { activeConversationStateType } from '../MessengerLayout'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,

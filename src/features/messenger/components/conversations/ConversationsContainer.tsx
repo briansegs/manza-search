@@ -1,25 +1,25 @@
-import { MessengerItemList } from '@/features/messenger/components/item-list/MessengerItemList'
-import { activeConversationStateType } from '../components/sidebar/MessengerSidebarWrapper'
-import { DMConversationItem } from './DMConversationItem'
+import { MessengerItemList } from '@/features/messenger/components/MessengerItemList'
+import { activeConversationStateType } from '../MessengerLayout'
+import { ConversationsDirectMessageItem } from './ConversationsDirectMessageItem'
 import { useQuery } from 'convex/react'
-import { api } from '../../../../convex/_generated/api'
+import { api } from '../../../../../convex/_generated/api'
 import { Loader2 } from 'lucide-react'
-import { CreateGroupDialog } from './CreateGroupDialog'
-import { GroupConversationItem } from './GroupConversationItem'
+import { ConversationsCreateGroupDialog } from './ConversationsCreateGroupDialog'
+import { ConversationsGroupItem } from './ConversationsGroupItem'
 
-type MessengerConversationsContainerProps = activeConversationStateType
+type ConversationsContainerProps = activeConversationStateType
 
-export function MessengerConversationsContainer({
+export function ConversationsContainer({
   activeConversation,
   setActiveConversation,
-}: MessengerConversationsContainerProps) {
+}: ConversationsContainerProps) {
   const conversations = useQuery(api.conversations.get)
 
   return (
     <MessengerItemList
       activeConversation={activeConversation}
       title="Conversations"
-      action={<CreateGroupDialog />}
+      action={<ConversationsCreateGroupDialog />}
     >
       {!conversations && (
         <div className="flex h-[80%] w-full items-center justify-center">
@@ -34,7 +34,7 @@ export function MessengerConversationsContainer({
       {conversations?.map((conversations) => {
         if (conversations.conversation.isGroup)
           return (
-            <GroupConversationItem
+            <ConversationsGroupItem
               key={conversations.conversation._id}
               id={conversations.conversation._id}
               name={conversations.conversation.name || ''}
@@ -46,7 +46,7 @@ export function MessengerConversationsContainer({
           )
 
         return (
-          <DMConversationItem
+          <ConversationsDirectMessageItem
             key={conversations.conversation._id}
             id={conversations.conversation._id}
             imageUrl={conversations.otherMember?.imageUrl || ''}

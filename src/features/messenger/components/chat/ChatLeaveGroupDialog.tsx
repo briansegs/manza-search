@@ -2,8 +2,8 @@
 
 import { Id } from 'convex/_generated/dataModel'
 import { Dispatch, SetStateAction } from 'react'
-import { useMutationState } from '../hooks/useMutationState'
-import { api } from '../../../../convex/_generated/api'
+import { useMutationState } from '../../hooks/useMutationState'
+import { api } from '../../../../../convex/_generated/api'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
 import {
@@ -16,27 +16,27 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { activeConversationStateType } from '../components/sidebar/MessengerSidebarWrapper'
+import { activeConversationStateType } from '../MessengerLayout'
 
-type RemoveFriendDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
+type ChatLeaveGroupDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
   conversationId: Id<'conversations'>
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export function RemoveFriendDialog({
+export function ChatLeaveGroupDialog({
   setActiveConversation,
   conversationId,
   open,
   setOpen,
-}: RemoveFriendDialogProps) {
-  const { mutate: removeFriend, pending } = useMutationState(api.friend.remove)
+}: ChatLeaveGroupDialogProps) {
+  const { mutate: leaveGroup, pending } = useMutationState(api.conversation.leaveGroup)
 
-  const handleRemoveFriend = async () => {
-    removeFriend({ conversationId })
+  const handleLeaveGroup = async () => {
+    leaveGroup({ conversationId })
       .then(() => {
         setActiveConversation(null)
-        toast.success('Removed friend')
+        toast.success('Group left')
       })
       .catch((error) => {
         toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
@@ -50,16 +50,16 @@ export function RemoveFriendDialog({
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
 
           <AlertDialogDescription>
-            This action cannot be undone. All messages will be deleted and you will not be able to
-            message this user. All group chats will still work as normal
+            This action cannot be undone. You will not be able to see any previous messages or send
+            new messages to this group.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
           <AlertDialogCancel disabled={pending}>Cancel</AlertDialogCancel>
 
-          <AlertDialogAction disabled={pending} onClick={handleRemoveFriend}>
-            Delete
+          <AlertDialogAction disabled={pending} onClick={handleLeaveGroup}>
+            Leave
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

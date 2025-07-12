@@ -1,7 +1,7 @@
 import { Card } from '@/components/ui/card'
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import { ChatIdType } from '../sidebar/MessengerSidebarWrapper'
+import { ChatIdType } from './MessengerLayout'
 
 type MessengerItemListProps = React.PropsWithChildren & {
   title: string
