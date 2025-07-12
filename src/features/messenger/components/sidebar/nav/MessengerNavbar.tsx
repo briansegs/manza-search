@@ -63,6 +63,7 @@ export function MessengerNavbar({
         isActive ? 'hidden lg:flex' : '',
       )}
       onFocusCapture={(e) => {
+        // Prevent focus events from bubbling up to parent components
         e.stopPropagation()
       }}
     >

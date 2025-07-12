@@ -24,6 +24,7 @@ export function MessengerItemList({
         'lg:block': isActive,
       })}
       onFocusCapture={(e) => {
+        // Prevent focus events from bubbling up to parent components
         e.stopPropagation()
       }}
     >
