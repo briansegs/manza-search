@@ -4,27 +4,18 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { UserButton } from '@clerk/nextjs'
-import { activeConversationStateType, currentTabStateType, TabsType } from './MessengerLayout'
+
 import { MessageSquare, Users } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 import { useQuery } from 'convex/react'
 import { api } from '../../../../convex/_generated/api'
 import { Badge } from '@/components/ui/badge'
 import { useMemo } from 'react'
-
-type Tab = {
-  name: string
-  slug: TabsType
-  icon: React.ReactNode
-  count?: number
-}
+import { MessengerNavbarProps, Tab, TabsType } from './types'
 
 function UserButtonAppearance() {
   return <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-10 h-10' } }} />
 }
-
-type MessengerNavbarProps = Pick<activeConversationStateType, 'activeConversation'> &
-  currentTabStateType
 
 export function MessengerNavbar({
   currentTab,

@@ -1,27 +1,13 @@
 'use client'
 
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import { MessengerNavbar } from './MessengerNavbar'
 import { FriendsContainer } from './friends/FriendsContainer'
 import { ConversationsContainer } from './conversations/ConversationsContainer'
 import { cn } from '@/utilities/ui'
 import { ChatFallback } from './chat/ChatFallback'
 import { ChatContainer } from './chat/ChatContainer'
-import { Id } from 'convex/_generated/dataModel'
-
-export type TabsType = 'friends' | 'conversations'
-
-export type ChatIdType = Id<'conversations'> | null | undefined
-
-export type activeConversationStateType = {
-  activeConversation: ChatIdType
-  setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
-}
-
-export type currentTabStateType = {
-  currentTab: TabsType
-  setCurrentTab: Dispatch<SetStateAction<TabsType>>
-}
+import { ChatIdType, TabsType } from './types'
 
 const defaultTab = 'conversations'
 

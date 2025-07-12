@@ -1,7 +1,6 @@
 'use client'
 
 import { Card } from '@/components/ui/card'
-import { activeConversationStateType } from '../MessengerLayout'
 import { useQuery } from 'convex/react'
 import { api } from '../../../../../convex/_generated/api'
 import { Loader2 } from 'lucide-react'
@@ -13,8 +12,7 @@ import { ChatRemoveFriendDialog } from './ChatRemoveFriendDialog'
 import { Id } from 'convex/_generated/dataModel'
 import { ChatDeleteGroupDialog } from './ChatDeleteGroupDialog'
 import { ChatLeaveGroupDialog } from './ChatLeaveGroupDialog'
-
-type ChatContainerProps = React.PropsWithChildren & activeConversationStateType
+import { ChatContainerProps } from './types'
 
 export function ChatContainer({
   children,

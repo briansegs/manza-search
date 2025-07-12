@@ -1,17 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/utilities/ui'
 import { format } from 'date-fns'
-
-type ChatMessageProps = {
-  fromCurrentUser: boolean
-  senderImage: string
-  senderName: string
-  lastByUser: boolean
-  content: string[]
-  createdAt: number
-  seen?: React.ReactNode
-  type: string
-}
+import { ChatMessageProps } from './types'
 
 export function ChatMessage({
   fromCurrentUser,

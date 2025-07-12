@@ -1,13 +1,7 @@
 import { Card } from '@/components/ui/card'
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import { ChatIdType } from './MessengerLayout'
-
-type MessengerItemListProps = React.PropsWithChildren & {
-  title: string
-  action?: React.ReactNode
-  activeConversation: ChatIdType
-}
+import { MessengerItemListProps } from './types'
 
 export function MessengerItemList({
   children,

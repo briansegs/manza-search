@@ -1,24 +1,11 @@
 'use client'
 
-import { Id } from 'convex/_generated/dataModel'
-import { Dispatch, SetStateAction } from 'react'
-import { ChatIdType } from '../MessengerLayout'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { User } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
-
-type ConversationsDirectMessageItemProps = {
-  setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
-  id: Id<'conversations'>
-  imageUrl: string
-  username: string
-  email: string
-  lastMessageSender?: string
-  lastMessageContent?: string
-  unseenCount: number
-}
+import { ConversationsDirectMessageItemProps } from './types'
 
 export function ConversationsDirectMessageItem({
   setActiveConversation,

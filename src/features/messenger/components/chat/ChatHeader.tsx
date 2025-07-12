@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { CircleArrowLeft, Settings } from 'lucide-react'
-import { activeConversationStateType } from '../MessengerLayout'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -10,16 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/utilities/ui'
-
-type ChatHeaderProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
-  imageUrl?: string
-  name: string | undefined
-  options?: {
-    label: string
-    destructive: boolean
-    onClick: () => void
-  }[]
-}
+import { ChatHeaderProps } from './types'
 
 export function ChatHeader({ setActiveConversation, imageUrl, name, options }: ChatHeaderProps) {
   return (

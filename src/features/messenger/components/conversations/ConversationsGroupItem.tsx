@@ -1,21 +1,10 @@
 'use client'
 
-import { Id } from 'convex/_generated/dataModel'
-import { Dispatch, SetStateAction } from 'react'
-import { ChatIdType } from '../MessengerLayout'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-
-type ConversationsGroupItemProps = {
-  setActiveConversation: Dispatch<SetStateAction<ChatIdType>>
-  id: Id<'conversations'>
-  name: string
-  lastMessageSender?: string
-  lastMessageContent?: string
-  unseenCount: number
-}
+import { ConversationsGroupItemProps } from './types'
 
 export function ConversationsGroupItem({
   setActiveConversation,

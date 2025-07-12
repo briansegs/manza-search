@@ -2,7 +2,6 @@
 
 import { Card } from '@/components/ui/card'
 import { z } from 'zod'
-import { activeConversationStateType } from '../MessengerLayout'
 import { api } from '../../../../../convex/_generated/api'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,14 +13,13 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import TextAreaAutosize from 'react-textarea-autosize'
 import { Button } from '@/components/ui/button'
 import { SendHorizonal } from 'lucide-react'
+import { ChatInputProps } from './types'
 
 const chatMessageSchema = z.object({
   content: z.string().min(1, {
     message: "This field can't be empty",
   }),
 })
-
-type ChatInputProps = Pick<activeConversationStateType, 'activeConversation'>
 
 export function ChatInput({ activeConversation: conversationId }: ChatInputProps) {
   const { mutate: createMessage, pending } = useMutationState(api.message.create)

@@ -2,15 +2,11 @@
 
 import { useQuery } from 'convex/react'
 import { MessengerItemList } from '../MessengerItemList'
-import { activeConversationStateType } from '../MessengerLayout'
 import { FriendsAddDialog } from './FriendsAddDialog'
 import { api } from '../../../../../convex/_generated/api'
 import { Loader2 } from 'lucide-react'
 import { FriendsRequestItem } from './FriendsRequestItem'
-
-type FriendsContainerProps = {
-  activeConversation: activeConversationStateType['activeConversation']
-}
+import { FriendsContainerProps } from './types'
 
 export function FriendsContainer({ activeConversation }: FriendsContainerProps) {
   const requests = useQuery(api.requests.get)

@@ -1,13 +1,11 @@
 import { MessengerItemList } from '@/features/messenger/components/MessengerItemList'
-import { activeConversationStateType } from '../MessengerLayout'
 import { ConversationsDirectMessageItem } from './ConversationsDirectMessageItem'
 import { useQuery } from 'convex/react'
 import { api } from '../../../../../convex/_generated/api'
 import { Loader2 } from 'lucide-react'
 import { ConversationsCreateGroupDialog } from './ConversationsCreateGroupDialog'
 import { ConversationsGroupItem } from './ConversationsGroupItem'
-
-type ConversationsContainerProps = activeConversationStateType
+import { ConversationsContainerProps } from './types'
 
 export function ConversationsContainer({
   activeConversation,

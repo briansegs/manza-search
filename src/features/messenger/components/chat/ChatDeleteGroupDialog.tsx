@@ -1,7 +1,5 @@
 'use client'
 
-import { Id } from 'convex/_generated/dataModel'
-import { Dispatch, SetStateAction } from 'react'
 import { useMutationState } from '../../hooks/useMutationState'
 import { api } from '../../../../../convex/_generated/api'
 import { toast } from 'sonner'
@@ -16,13 +14,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { activeConversationStateType } from '../MessengerLayout'
-
-type ChatDeleteGroupDialogProps = Pick<activeConversationStateType, 'setActiveConversation'> & {
-  conversationId: Id<'conversations'>
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
-}
+import { ChatDeleteGroupDialogProps } from './types'
 
 export function ChatDeleteGroupDialog({
   setActiveConversation,
