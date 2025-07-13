@@ -5,7 +5,7 @@ type ScopeCategory = Pick<Category, 'id' | 'title' | 'slug' | 'Topic'>
 
 type ScopeArticle = Pick<Article, 'id' | 'title' | 'heroImage' | 'categories' | 'slug'>
 
-export type ScopeContentProps = {
+type MenuData = {
   sectionData: ({
     topic: Topic
     articlesByCategory: {
@@ -17,6 +17,9 @@ export type ScopeContentProps = {
       articles: ScopeArticle[]
     }[]
   } | null)[]
+}
+
+export type ScopeContentProps = MenuData & {
   articles: ScopeArticle[]
   categories: ScopeCategory[]
 }
@@ -27,17 +30,11 @@ export type ScopeContentItemProps = {
   media: Media
 }
 
-export type TopMenuContainerProps = {
-  categories: ScopeCategory[]
-}
+export type TopMenuContainerProps = MenuData
 
-export type LeftMenuProps = {
-  categories: ScopeCategory[]
-}
+export type LeftMenuProps = MenuData
 
-export type LeftMenuContainerProps = {
-  categories: ScopeCategory[]
-}
+export type LeftMenuContainerProps = MenuData
 
 export type ScopeContentContainerProps = {
   slug: string

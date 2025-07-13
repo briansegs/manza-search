@@ -3,7 +3,7 @@ import { ScopeLeftMenu } from './ScopeLeftMenu'
 import { cn } from '@/utilities/ui'
 import { LeftMenuContainerProps } from '../types'
 
-export function ScopeLeftMenuContainer({ categories }: LeftMenuContainerProps) {
+export function ScopeLeftMenuContainer({ sectionData }: LeftMenuContainerProps) {
   return (
     <div
       className={cn(
@@ -19,7 +19,7 @@ export function ScopeLeftMenuContainer({ categories }: LeftMenuContainerProps) {
         Table of Content
       </div>
 
-      <ScopeLeftMenu categories={categories} />
+      <ScopeLeftMenu sectionData={sectionData} />
     </div>
   )
 }

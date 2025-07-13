@@ -74,9 +74,9 @@ export default async function Page() {
           <div className="mx-auto flex w-3/4 justify-center rounded-b-[10px] bg-black md:w-1/2 xl:w-1/3">
             <h2 className="py-2 font-serif text-xl uppercase text-white">Scope HomePage</h2>
           </div>
-          <ScopeLeftMenuContainer categories={categories?.docs} />
+          <ScopeLeftMenuContainer sectionData={scopeSectionData} />
 
-          <ScopeTopMenuContainer categories={categories?.docs} />
+          <ScopeTopMenuContainer sectionData={scopeSectionData} />
 
           <ScopeContent
             sectionData={scopeSectionData}

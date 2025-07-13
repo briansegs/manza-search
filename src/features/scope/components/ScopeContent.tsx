@@ -42,6 +42,8 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
           if (!data) return null
           const { topic, articlesByCategory } = data
 
+          if (articlesByCategory.length === 0) return null
+
           return (
             <div key={topic.slug}>
               <SectionTitle title={topic.title} />
@@ -122,7 +124,7 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
               })}
 
             {miscArticles?.length > 0 && (
-              <ScopeContentContainer title="Miscellaneous Articles" slug="miscArticles">
+              <ScopeContentContainer title="Miscellaneous Articles" slug="misc">
                 {miscArticles.map(
                   ({ id, title, slug: articleSlug, heroImage }) =>
                     heroImage &&
