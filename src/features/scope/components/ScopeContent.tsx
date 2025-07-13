@@ -9,7 +9,7 @@ const NoContent = () => <div className="mt-6 w-full text-center">No content to d
 export function ScopeContent({ categories, articles }: ScopeContentProps) {
   const miscArticles = articles.filter((article) => !article.categories)
 
-  if (!categories || (categories?.length === 0 && !miscArticles) || miscArticles?.length === 0) {
+  if ((!categories || categories?.length === 0) && (!miscArticles || miscArticles?.length === 0)) {
     return <NoContent />
   }
 

@@ -116,22 +116,22 @@ html[data-theme='light'] {
 }
 
 @layer utilities {
-  .chat-scrollbar::-webkit-scrollbar {
+  .custom-scrollbar::-webkit-scrollbar {
     width: 14px;
   }
 
-  .chat-scrollbar::-webkit-scrollbar-track {
+  .custom-scrollbar::-webkit-scrollbar-track {
     @apply bg-transparent;
   }
 
-  .chat-scrollbar::-webkit-scrollbar-thumb {
+  .custom-scrollbar::-webkit-scrollbar-thumb {
     @apply bg-neutral-300 dark:bg-neutral-600;
     border: 3px solid transparent;
     background-clip: padding-box;
     border-radius: 9999px;
   }
 
-  .chat-scrollbar::-webkit-scrollbar-thumb:hover {
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-neutral-400 dark:bg-neutral-500;
   }
 }
