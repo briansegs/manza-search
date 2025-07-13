@@ -26,7 +26,7 @@ export function ScopeContentContainer({ slug, title, children }: ScopeContentCon
       <div
         className={cn(
           'flex w-full flex-wrap justify-center gap-4 px-[25px]',
-          'flex-1 overflow-y-auto',
+          'custom-scrollbar flex-1 overflow-y-auto',
         )}
       >
         {children}
