@@ -1,6 +1,6 @@
 import { cn } from '@/utilities/ui'
 import React from 'react'
-import { ScopeContentProps } from '../types'
+import { ScopeContentProps, SectionItemProps } from '../types'
 import { ScopeContentItem } from './ScopeContentItem'
 import { ScopeContentContainer } from './ScopeContentContainer'
 import { Separator } from '@/components/ui/separator'
@@ -10,6 +10,20 @@ const NoContent = () => <div className="mt-6 w-full text-center">No content to d
 const SectionTitle = ({ title }: { title: string }) => (
   <h2 className="ml-0 text-center font-serif text-5xl lg:ml-40 lg:text-left">{title}</h2>
 )
+
+const SectionItem = ({ category, articles }: SectionItemProps) => {
+  return (
+    <ScopeContentContainer slug={category.slug || ''} title={category.title} key={category.id}>
+      {articles.map(
+        ({ id, title, slug: articleSlug, heroImage }) =>
+          heroImage &&
+          typeof heroImage === 'object' && (
+            <ScopeContentItem media={heroImage} slug={articleSlug || ''} title={title} key={id} />
+          ),
+      )}
+    </ScopeContentContainer>
+  )
+}
 
 export function ScopeContent({ sectionData, articles, categories }: ScopeContentProps) {
   const miscArticles = articles.filter((article) => !article.categories)
@@ -27,11 +41,11 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
     }
   })
 
-  const isMiscConetent =
+  const isMiscContent =
     (miscArticles && miscArticles?.length > 0) ||
     (miscCategoriesArticles && miscCategoriesArticles?.length > 0)
 
-  if ((!sectionData || sectionData?.length === 0) && !isMiscConetent) {
+  if ((!sectionData || sectionData?.length === 0) && !isMiscContent) {
     return <NoContent />
   }
 
@@ -58,39 +72,20 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
                 {articlesByCategory.map(({ category, articles }) => {
                   if (!articles || articles.length === 0) return null
 
-                  return (
-                    <ScopeContentContainer
-                      slug={category.slug || ''}
-                      title={category.title}
-                      key={category.id}
-                    >
-                      {articles.map(
-                        ({ id, title, slug: articleSlug, heroImage }) =>
-                          heroImage &&
-                          typeof heroImage === 'object' && (
-                            <ScopeContentItem
-                              media={heroImage}
-                              slug={articleSlug ? articleSlug : ''}
-                              title={title}
-                              key={id}
-                            />
-                          ),
-                      )}
-                    </ScopeContentContainer>
-                  )
+                  return <SectionItem key={category.id} category={category} articles={articles} />
                 })}
               </div>
 
               <Separator
                 className={cn('mx-auto mt-12 w-[90%] bg-primary', {
-                  hidden: index === sectionData.length - 1 && !isMiscConetent,
+                  hidden: index === sectionData.length - 1 && !isMiscContent,
                 })}
               />
             </div>
           )
         })}
 
-      {isMiscConetent && (
+      {isMiscContent && (
         <>
           <SectionTitle title="Miscellaneous" />
 
@@ -101,26 +96,7 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
               miscCategoriesArticles?.map(({ category, articles }) => {
                 if (!articles || articles.length === 0) return null
 
-                return (
-                  <ScopeContentContainer
-                    slug={category.slug || ''}
-                    title={category.title}
-                    key={category.id}
-                  >
-                    {articles.map(
-                      ({ id, title, slug: articleSlug, heroImage }) =>
-                        heroImage &&
-                        typeof heroImage === 'object' && (
-                          <ScopeContentItem
-                            media={heroImage}
-                            slug={articleSlug ? articleSlug : ''}
-                            title={title}
-                            key={id}
-                          />
-                        ),
-                    )}
-                  </ScopeContentContainer>
-                )
+                return <SectionItem key={category.id} category={category} articles={articles} />
               })}
 
             {miscArticles?.length > 0 && (

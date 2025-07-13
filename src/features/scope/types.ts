@@ -41,3 +41,8 @@ export type ScopeContentContainerProps = {
   title: string
   children: ReactNode
 }
+
+export type SectionItemProps = {
+  category: ScopeCategory
+  articles: ScopeArticle[]
+}

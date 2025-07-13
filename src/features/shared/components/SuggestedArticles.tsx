@@ -13,7 +13,7 @@ export function SuggestedArticles(props: SuggestedArticlesProps) {
 
   return (
     <div className="overflow-auto bg-black">
-      <div className="container flex w-full gap-4 overflow-x-auto py-1">
+      <div className="custom-scrollbar container flex w-full gap-4 overflow-x-auto py-1">
         {hasArticles &&
           articles.map((article) => {
             if (typeof article === 'object' && article !== null) {
