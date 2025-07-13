@@ -3,6 +3,7 @@ import React from 'react'
 import { ScopeContentProps } from '../types'
 import { ScopeContentItem } from './ScopeContentItem'
 import { ScopeContentContainer } from './ScopeContentContainer'
+import { Separator } from '@/components/ui/separator'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
@@ -78,8 +79,8 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
                 })}
               </div>
 
-              <div
-                className={cn('mt-12 h-[1px] w-full bg-black', {
+              <Separator
+                className={cn('mx-auto mt-12 w-[90%] bg-primary', {
                   hidden: index === sectionData.length - 1 && !isMiscConetent,
                 })}
               />
