@@ -1,13 +1,24 @@
 import { ReactNode } from 'react'
-import { Article, Category, Media } from '@/payload-types'
+import { Article, Category, Media, Topic } from '@/payload-types'
 
-type ScopeCategory = Pick<Category, 'id' | 'title' | 'slug'>
+type ScopeCategory = Pick<Category, 'id' | 'title' | 'slug' | 'Topic'>
 
 type ScopeArticle = Pick<Article, 'id' | 'title' | 'heroImage' | 'categories' | 'slug'>
 
 export type ScopeContentProps = {
-  categories?: ScopeCategory[]
+  sectionData: ({
+    topic: Topic
+    articlesByCategory: {
+      category: {
+        id: string
+        title: string
+        slug?: string | null | undefined
+      }
+      articles: ScopeArticle[]
+    }[]
+  } | null)[]
   articles: ScopeArticle[]
+  categories: ScopeCategory[]
 }
 
 export type ScopeContentItemProps = {

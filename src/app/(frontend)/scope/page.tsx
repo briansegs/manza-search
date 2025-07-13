@@ -13,6 +13,7 @@ import { BottomMenu } from '@/features/shared/components/BottomMenu'
 
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Scope as ScopeGlobalType } from '@/payload-types'
+import { findArticlesByTopic } from '@/utilities/findArticlesByTopic'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -21,6 +22,23 @@ export default async function Page() {
   const payload = await getPayload({ config: configPromise })
 
   try {
+    const topics = await payload.find({
+      collection: 'topics',
+    })
+
+    const scopeSectionData = await Promise.all(
+      topics.docs.map(async (topic) => {
+        if (!topic.slug) return null
+
+        const articlesByCategory = await findArticlesByTopic(topic.slug)
+
+        return {
+          topic: topic,
+          articlesByCategory: articlesByCategory,
+        }
+      }),
+    )
+
     const categories = await payload.find({
       collection: 'categories',
       depth: 1,
@@ -28,6 +46,7 @@ export default async function Page() {
       select: {
         title: true,
         slug: true,
+        Topic: true,
       },
     })
 
@@ -59,7 +78,11 @@ export default async function Page() {
 
           <ScopeTopMenuContainer categories={categories?.docs} />
 
-          <ScopeContent categories={categories?.docs} articles={articles?.docs} />
+          <ScopeContent
+            sectionData={scopeSectionData}
+            articles={articles?.docs}
+            categories={categories?.docs}
+          />
 
           <RightMenuContainer />
 

@@ -6,7 +6,14 @@ import { LeftMenuProps } from '../types'
 
 export function ScopeLeftMenu({ categories }: LeftMenuProps) {
   return (
-    <ul className={cn('flex flex-col gap-2', 'font-serif text-white', 'px-4', 'overflow-auto')}>
+    <ul
+      className={cn(
+        'flex flex-col gap-2',
+        'font-serif text-white',
+        'px-4',
+        'custom-scrollbar overflow-auto',
+      )}
+    >
       <li>
         <button onClick={scrollToTop} className="hover:text-secondary-blue">
           TOP
