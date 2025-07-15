@@ -1,4 +1,4 @@
-import { internalMutation, internalQuery, mutation } from './_generated/server'
+import { internalMutation, internalQuery, mutation, query } from './_generated/server'
 import { v } from 'convex/values'
 import { getAuthenticatedUser } from './_utils'
 
@@ -115,5 +115,22 @@ export const updateUser = mutation({
     if (!user) throw new Error(`User not found with ClerkId: ${clerkId}`)
 
     await ctx.db.patch(user._id, data)
+  },
+})
+
+export const get = query({
+  args: { clerkId: v.string() },
+  handler: async (ctx, { clerkId }) => {
+    const user = await ctx.db
+      .query('users')
+      .withIndex('by_clerkId', (q) => q.eq('clerkId', clerkId))
+      .unique()
+
+    if (!user) {
+      console.error(`User not found with ClerkId: ${clerkId}`)
+      return null
+    }
+
+    return user
   },
 })
