@@ -50,24 +50,24 @@ export default async function Article({ params: paramsPromise }: Args) {
 
   if (!article) return <PayloadRedirects url={url} />
 
-  const { relatedArticles, layout } = article
+  const { relatedArticles, layout: blocks } = article
 
   return (
-    <ReadModeProvider>
-      <article className="pb-16">
-        <PageClient />
+    <article className="pb-16">
+      <PageClient />
 
-        {/* Allows redirects for valid pages too */}
-        <PayloadRedirects disableNotFound url={url} />
+      {/* Allows redirects for valid pages too */}
+      <PayloadRedirects disableNotFound url={url} />
 
-        {draft && <LivePreviewListener />}
+      {draft && <LivePreviewListener />}
 
-        <RelatedArticles articles={relatedArticles} />
+      <RelatedArticles articles={relatedArticles} />
 
-        <div className="flex">
-          <ArticleLeftMenuContainer article={article} />
+      <div className="flex">
+        <ArticleLeftMenuContainer article={article} />
 
-          <div className="flex w-full min-w-0 flex-col">
+        <div className="flex w-full min-w-0 flex-col">
+          <ReadModeProvider>
             <ArticleTopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
 
             {/* Hero & Content */}
@@ -75,14 +75,14 @@ export default async function Article({ params: paramsPromise }: Args) {
 
             <ArticleTopMenuContainer article={article} className="sm:hidden" />
 
-            <RenderArticleBlocks blocks={layout ?? []} />
-          </div>
+            <RenderArticleBlocks blocks={blocks ?? []} />
+          </ReadModeProvider>
         </div>
-        <RightMenuContainer />
+      </div>
+      <RightMenuContainer />
 
-        <BottomMenu />
-      </article>
-    </ReadModeProvider>
+      <BottomMenu />
+    </article>
   )
 }
 
