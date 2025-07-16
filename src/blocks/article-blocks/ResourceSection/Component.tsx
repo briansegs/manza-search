@@ -1,3 +1,5 @@
+'use client'
+
 import { ResourceSection as ResourceSectionProps } from '@/payload-types'
 import React from 'react'
 import Images from './Images'
@@ -6,6 +8,7 @@ import Audio from './Audio'
 import Videos from './Videos'
 import Shop from './Shop'
 import TitleBar from '../TitleBar'
+import { useReadMode } from '@/providers/ReadModeProvider'
 
 const resource = {
   images: Images,
@@ -16,7 +19,11 @@ const resource = {
 }
 
 export const ResourceSection: React.FC<ResourceSectionProps> = (props) => {
+  const { readMode } = useReadMode()
+
   const { title, type } = props
+
+  if (readMode) return null
 
   if (!type) return null
 

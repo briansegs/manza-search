@@ -3,6 +3,7 @@ import React from 'react'
 import { ArticleMenuButton } from './ArticleMenuButton'
 import { ArticleTopMenuProps } from '../types'
 import { cn } from '@/utilities/ui'
+import { ReadModeButton } from '../readMode/components/ReadModeButton'
 
 export function ArticleTopMenu({ styles }: ArticleTopMenuProps) {
   return (
@@ -13,7 +14,7 @@ export function ArticleTopMenu({ styles }: ArticleTopMenuProps) {
       <ArticleMenuButton>PIN</ArticleMenuButton>
       <ArticleMenuButton>SAVE</ArticleMenuButton>
       <ArticleMenuButton>History</ArticleMenuButton>
-      <ArticleMenuButton>RM</ArticleMenuButton>
+      <ReadModeButton />
       <ArticleMenuButton>LIST</ArticleMenuButton>
 
       <ArticleMenuButton dark>SHARE</ArticleMenuButton>
