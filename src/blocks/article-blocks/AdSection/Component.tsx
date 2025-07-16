@@ -1,3 +1,5 @@
+'use client'
+
 import { CMSLink } from '@/components/Link'
 import { AdSection as AdSectionProps } from '@/payload-types'
 import React from 'react'
@@ -5,9 +7,14 @@ import clsx from 'clsx'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
+import { useReadMode } from '@/providers/ReadModeProvider'
 
 export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
+  const { readMode } = useReadMode()
+
   const { title, ads } = props
+
+  if (readMode) return null
 
   return (
     <div className="flex w-full flex-col gap-4 p-2">

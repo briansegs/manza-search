@@ -14,6 +14,7 @@ import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
 import { ArticleLeftMenuContainer } from '@/features/articles/components/ArticleLeftMenuContainer'
+import { ReadModeProvider } from '@/providers/ReadModeProvider'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -49,7 +50,7 @@ export default async function Article({ params: paramsPromise }: Args) {
 
   if (!article) return <PayloadRedirects url={url} />
 
-  const { relatedArticles, layout } = article
+  const { relatedArticles, layout: blocks } = article
 
   return (
     <article className="pb-16">
@@ -66,14 +67,16 @@ export default async function Article({ params: paramsPromise }: Args) {
         <ArticleLeftMenuContainer article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
-          <ArticleTopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
+          <ReadModeProvider>
+            <ArticleTopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
 
-          {/* Hero & Content */}
-          <ArticleHero article={article} />
+            {/* Hero & Content */}
+            <ArticleHero article={article} />
 
-          <ArticleTopMenuContainer article={article} className="sm:hidden" />
+            <ArticleTopMenuContainer article={article} className="sm:hidden" />
 
-          <RenderArticleBlocks blocks={layout ?? []} />
+            <RenderArticleBlocks blocks={blocks ?? []} />
+          </ReadModeProvider>
         </div>
       </div>
       <RightMenuContainer />
