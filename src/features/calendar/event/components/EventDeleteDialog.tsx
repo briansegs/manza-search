@@ -15,13 +15,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
-
-type EventDeleteDialogProps = {
-  deleteDialogOpen: boolean
-  setDeleteDialogOpen: any
-  selectedEvent: any
-  setEventDialogOpen: any
-}
+import { EventDeleteDialogProps } from '../types'
 
 export function EventDeleteDialog({
   deleteDialogOpen,
