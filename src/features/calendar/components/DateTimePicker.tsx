@@ -52,7 +52,6 @@ export default function DateTimePicker({ value, onChange }: DateTimePickerProps)
             <Calendar
               mode="single"
               selected={value}
-              defaultMonth={value}
               captionLayout="dropdown"
               onSelect={handleDateChange}
             />
