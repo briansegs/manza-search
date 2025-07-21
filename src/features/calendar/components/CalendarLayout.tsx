@@ -7,6 +7,7 @@ import { EventDialog } from '../event/components/EventDialog'
 import { SlotDialog } from '../slot/components/SlotDialog'
 import { api } from '../../../../convex/_generated/api'
 import { useQuery } from 'convex/react'
+import { CalendarSlot, ParsedCalendarEvent } from '../types'
 
 // 👇 Create the localizer
 const localizer = momentLocalizer(moment)
@@ -14,10 +15,10 @@ const localizer = momentLocalizer(moment)
 export function CalendarLayout() {
   const [date, setDate] = useState(new Date())
   const [view, setView] = useState<View>('month')
-  const [selectedEvent, setSelectedEvent] = useState<any | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<ParsedCalendarEvent | null>(null)
   const [eventDialogOpen, setEventDialogOpen] = useState(false)
   const [slotDialogOpen, setSlotDialogOpen] = useState(false)
-  const [selectedSlot, setSelectedSlot] = useState<any | null>(null)
+  const [selectedSlot, setSelectedSlot] = useState<CalendarSlot | null>(null)
 
   const events = useQuery(api.events.get)
 
@@ -31,12 +32,12 @@ export function CalendarLayout() {
     }))
   }, [events])
 
-  const handleSelectEvent = useCallback((event) => {
+  const handleSelectEvent = useCallback((event: ParsedCalendarEvent) => {
     setSelectedEvent(event)
     setEventDialogOpen(true)
   }, [])
 
-  const handleSlotSelect = useCallback((slot) => {
+  const handleSlotSelect = useCallback((slot: CalendarSlot) => {
     setSelectedSlot(slot)
     setSlotDialogOpen(true)
   }, [])
@@ -68,13 +69,13 @@ export function CalendarLayout() {
       <EventDialog
         eventDialogOpen={eventDialogOpen}
         setEventDialogOpen={setEventDialogOpen}
-        selectedEvent={selectedEvent}
+        selectedEvent={selectedEvent!}
       />
 
       <SlotDialog
         slotDialogOpen={slotDialogOpen}
         setSlotDialogOpen={setSlotDialogOpen}
-        selectedSlot={selectedSlot}
+        selectedSlot={selectedSlot!}
       />
     </div>
   )
