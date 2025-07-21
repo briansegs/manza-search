@@ -5,6 +5,7 @@ import useBreakpoint from '@/hooks/useBreakpoint'
 import { PopoverContent } from '@/components/ui/popover'
 import { MOMenuButton } from './MOMenuButton'
 import { Messenger } from '@/features/messenger/components/Messenger'
+import { Calendar } from '@/features/calendar/components/Calendar'
 
 export function MoreOptionsContent() {
   const { isMobileSM } = useBreakpoint()
@@ -17,7 +18,7 @@ export function MoreOptionsContent() {
     >
       {isMobileSM ? (
         <div className="mr-4 flex w-32 flex-wrap gap-2">
-          <MOMenuButton className="bg-[#ffc8ce]">S</MOMenuButton>
+          <Calendar />
           <MOMenuButton className="ml-1 bg-[#0011ff]">B</MOMenuButton>
           <MOMenuButton className="self-end bg-[#0011ff]">P</MOMenuButton>
           <Messenger />
@@ -33,7 +34,7 @@ export function MoreOptionsContent() {
           </div>
 
           <div className="flex flex-col justify-between py-1.5">
-            <MOMenuButton className="bg-[#ffc8ce]">S</MOMenuButton>
+            <Calendar />
             <MOMenuButton className="bg-[#006c00]">K</MOMenuButton>
           </div>
 
