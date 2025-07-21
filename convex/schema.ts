@@ -44,4 +44,13 @@ export default defineSchema({
     type: v.string(),
     content: v.array(v.string()),
   }).index('by_conversationId', ['conversationId']),
+  events: defineTable({
+    userId: v.id('users'),
+    title: v.string(),
+    start: v.string(),
+    end: v.string(),
+    description: v.optional(v.string()),
+    allDay: v.optional(v.boolean()),
+    alertTime: v.optional(v.string()),
+  }).index('by_userId', ['userId']),
 })
