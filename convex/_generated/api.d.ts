@@ -16,6 +16,8 @@ import type {
 import type * as _utils from "../_utils.js";
 import type * as conversation from "../conversation.js";
 import type * as conversations from "../conversations.js";
+import type * as event from "../event.js";
+import type * as events from "../events.js";
 import type * as friend from "../friend.js";
 import type * as friends from "../friends.js";
 import type * as http from "../http.js";
@@ -37,6 +39,8 @@ declare const fullApi: ApiFromModules<{
   _utils: typeof _utils;
   conversation: typeof conversation;
   conversations: typeof conversations;
+  event: typeof event;
+  events: typeof events;
   friend: typeof friend;
   friends: typeof friends;
   http: typeof http;
