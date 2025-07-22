@@ -34,8 +34,8 @@ import { SlotDialogProps } from '../types'
 const eventSchema = z.object({
   title: z.string().min(1, { message: "This field can't be empty" }),
   description: z.optional(z.string()),
-  start: z.string(),
-  end: z.string(),
+  start: z.string().datetime('Invalid start date format'),
+  end: z.string().datetime('Invalid end date format'),
   allDay: z.boolean(),
 })
 
