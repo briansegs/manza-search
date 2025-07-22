@@ -72,7 +72,7 @@ export function SlotDialog({ slotDialogOpen, setSlotDialogOpen, selectedSlot }: 
       start: values.start,
       end: values.end,
       allDay: values.allDay,
-      alertTime: new Date().toISOString(),
+      alertTime: values.start,
     })
       .then(() => {
         form.reset()
