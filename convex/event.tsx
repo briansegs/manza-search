@@ -14,6 +14,10 @@ export const create = mutation({
   handler: async (ctx, args) => {
     const currentUser = await getAuthenticatedUser(ctx)
 
+    if (new Date(args.start) >= new Date(args.end)) {
+      throw new ConvexError('Start time must be before end time')
+    }
+
     const event = await ctx.db.insert('events', {
       userId: currentUser._id,
       ...args,
@@ -61,6 +65,10 @@ export const update = mutation({
 
     if (event.userId !== currentUser._id) {
       throw new ConvexError('User not authorized to update this event')
+    }
+
+    if (new Date(args.data.start) >= new Date(args.data.end)) {
+      throw new ConvexError('Start time must be before end time')
     }
 
     await ctx.db.patch(event._id, args.data)
