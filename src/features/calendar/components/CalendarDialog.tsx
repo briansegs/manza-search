@@ -16,9 +16,6 @@ export function CalendarDialog() {
         <CalendarButton />
       </DialogTrigger>
 
-      <DialogTitle className="sr-only">Calendar</DialogTitle>
-      <DialogDescription className="sr-only">Calendar dialog content</DialogDescription>
-
       <DialogContent
         aria-description="Calendar dialog content"
         className={cn(
@@ -29,6 +26,9 @@ export function CalendarDialog() {
         )}
         closeButtonStyles="text-white"
       >
+        <DialogTitle className="sr-only">Calendar</DialogTitle>
+        <DialogDescription className="sr-only">Calendar dialog content</DialogDescription>
+
         <CalendarLayout />
       </DialogContent>
     </Dialog>
