@@ -10,7 +10,10 @@ import { CalendarDialog } from './CalendarDialog'
 export function Calendar() {
   const { user: clerkUser, isSignedIn, isLoaded } = useUser()
 
-  const convexUser = useQuery(api.user.get, { clerkId: clerkUser?.id || '' })
+  const convexUser = useQuery(
+    api.user.get,
+    isSignedIn && clerkUser?.id ? { clerkId: clerkUser.id } : 'skip',
+  )
 
   const isDesynced = isSignedIn && isLoaded && !convexUser
 
