@@ -26,11 +26,15 @@ export const create = mutation({
 export const deleteEvent = mutation({
   args: { id: v.id('events') },
   handler: async (ctx, args) => {
-    await getAuthenticatedUser(ctx)
+    const currentUser = await getAuthenticatedUser(ctx)
 
     const event = await ctx.db.get(args.id)
 
     if (!event) throw new ConvexError('Event could not be found')
+
+    if (event.userId !== currentUser._id) {
+      throw new ConvexError('User not authorized to delete this event')
+    }
 
     await ctx.db.delete(event._id)
   },
@@ -49,11 +53,15 @@ export const update = mutation({
     }),
   },
   handler: async (ctx, args) => {
-    await getAuthenticatedUser(ctx)
+    const currentUser = await getAuthenticatedUser(ctx)
 
     const event = await ctx.db.get(args.id)
 
     if (!event) throw new ConvexError('Event could not be found')
+
+    if (event.userId !== currentUser._id) {
+      throw new ConvexError('User not authorized to update this event')
+    }
 
     await ctx.db.patch(event._id, args.data)
   },
