@@ -1,16 +1,13 @@
 'use client'
 
-import { Calendar, momentLocalizer, View } from 'react-big-calendar'
-import moment from 'moment'
+import { Calendar, View } from 'react-big-calendar'
+import { localizer } from '@/lib/calendarLocalizer'
 import { useState, useCallback, useMemo } from 'react'
 import { EventDialog } from '../event/components/EventDialog'
 import { SlotDialog } from '../slot/components/SlotDialog'
 import { api } from '../../../../convex/_generated/api'
 import { useQuery } from 'convex/react'
 import { CalendarSlot, ParsedCalendarEvent } from '../types'
-
-// 👇 Create the localizer
-const localizer = momentLocalizer(moment)
 
 export function CalendarLayout() {
   const [date, setDate] = useState(new Date())
