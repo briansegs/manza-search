@@ -39,7 +39,11 @@ export function CalendarLayout() {
     setSlotDialogOpen(true)
   }, [])
 
-  const scrollToTime = useMemo(() => new Date(1970, 1, 1, 6), [])
+  const scrollToTime = useMemo(() => {
+    const date = new Date()
+    date.setHours(6, 0, 0, 0)
+    return date
+  }, [])
 
   const onNavigate = useCallback((newDate: Date) => setDate(newDate), [])
   const onView = useCallback((newView: View) => setView(newView), [])
