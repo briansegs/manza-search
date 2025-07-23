@@ -22,7 +22,7 @@ export function ScopeLeftMenu({ sectionData }: LeftMenuProps) {
       )}
     >
       <li>
-        <button onClick={scrollToTop} className="hover:text-secondary-blue">
+        <button onClick={scrollToTop} className="text-sm hover:text-secondary-blue">
           TOP
         </button>
         <Separator className="mt-2" />
@@ -33,7 +33,9 @@ export function ScopeLeftMenu({ sectionData }: LeftMenuProps) {
           if (!data) return null
           const { topic, articlesByCategory } = data
 
-          if (articlesByCategory.length === 0) return null
+          const hasArticles = articlesByCategory.some(({ articles }) => articles.length > 0)
+
+          if (articlesByCategory.length === 0 || !hasArticles) return null
 
           return (
             <AccordionItem value={`item-${index + 1}`} key={topic.id}>
@@ -64,7 +66,7 @@ export function ScopeLeftMenu({ sectionData }: LeftMenuProps) {
       <li className="hover:text-secondary-blue">
         <Separator className="mb-2" />
 
-        <ScrollToSection className="capitalize" id="misc">
+        <ScrollToSection className="text-sm capitalize" id="misc">
           Miscellaneous
         </ScrollToSection>
       </li>
