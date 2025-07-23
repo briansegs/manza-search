@@ -92,6 +92,7 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
           <SectionTitle title="Miscellaneous" />
 
           <div
+            id="misc"
             className={cn('flex w-full flex-wrap justify-center gap-12', 'mt-4 px-2', 'lg:px-32')}
           >
             {miscCategoriesArticles?.length > 0 &&
@@ -102,7 +103,7 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
               })}
 
             {miscArticles?.length > 0 && (
-              <ScopeContentContainer title="Miscellaneous Articles" slug="misc">
+              <ScopeContentContainer title="Miscellaneous Articles" slug="">
                 {miscArticles.map(
                   ({ id, title, slug: articleSlug, heroImage }) =>
                     heroImage &&

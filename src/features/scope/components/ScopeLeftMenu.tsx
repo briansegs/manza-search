@@ -22,7 +22,7 @@ export function ScopeLeftMenu({ sectionData }: LeftMenuProps) {
       )}
     >
       <li>
-        <button onClick={scrollToTop} className="hover:text-secondary-blue">
+        <button onClick={scrollToTop} className="text-sm hover:text-secondary-blue">
           TOP
         </button>
         <Separator className="mt-2" />
@@ -66,7 +66,7 @@ export function ScopeLeftMenu({ sectionData }: LeftMenuProps) {
       <li className="hover:text-secondary-blue">
         <Separator className="mb-2" />
 
-        <ScrollToSection className="capitalize" id="misc">
+        <ScrollToSection className="text-sm capitalize" id="misc">
           Miscellaneous
         </ScrollToSection>
       </li>
