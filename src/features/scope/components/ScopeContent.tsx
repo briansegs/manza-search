@@ -56,7 +56,9 @@ export function ScopeContent({ sectionData, articles, categories }: ScopeContent
           if (!data) return null
           const { topic, articlesByCategory } = data
 
-          if (articlesByCategory.length === 0) return null
+          const hasArticles = articlesByCategory.some(({ articles }) => articles.length > 0)
+
+          if (articlesByCategory.length === 0 || !hasArticles) return null
 
           return (
             <div key={topic.slug}>
