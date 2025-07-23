@@ -4,6 +4,8 @@ import { cn } from '@/utilities/ui'
 import { DictionaryButton } from '@/features/dictionary/components/DictionaryButton'
 import { MoreOptionsMenu } from '@/features/moreOptions/components/MoreOptionsMenu'
 
+import { zeroRightClassName } from 'react-remove-scroll-bar'
+
 export function RightMenu() {
   return (
     <div
@@ -21,7 +23,7 @@ export function RightMenu() {
 
 export function RightMenuContainer() {
   return (
-    <div className="fixed right-0 top-[35%] z-50 hidden sm:block">
+    <div className={cn(zeroRightClassName, 'fixed right-0 top-[35%] z-50 hidden sm:block')}>
       <RightMenu />
     </div>
   )

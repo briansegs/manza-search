@@ -202,6 +202,9 @@ importers:
       react-hook-form:
         specifier: 7.45.4
         version: 7.45.4(react@19.0.0)
+      react-remove-scroll-bar:
+        specifier: ^2.3.8
+        version: 2.3.8(@types/react@19.0.12)(react@19.0.0)
       react-textarea-autosize:
         specifier: ^8.5.9
         version: 8.5.9(@types/react@19.0.12)(react@19.0.0)
