@@ -33,7 +33,9 @@ export function ScopeLeftMenu({ sectionData }: LeftMenuProps) {
           if (!data) return null
           const { topic, articlesByCategory } = data
 
-          if (articlesByCategory.length === 0) return null
+          const hasArticles = articlesByCategory.some(({ articles }) => articles.length > 0)
+
+          if (articlesByCategory.length === 0 || !hasArticles) return null
 
           return (
             <AccordionItem value={`item-${index + 1}`} key={topic.id}>
