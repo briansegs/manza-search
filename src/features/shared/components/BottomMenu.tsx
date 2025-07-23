@@ -4,9 +4,16 @@ import { DocPadPopoverButton } from '@/features/docPad/components/DocPadPopoverB
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/utilities/ui'
 
+import { noScrollbarsClassName } from 'react-remove-scroll-bar'
+
 export function BottomMenu() {
   return (
-    <div className="fixed bottom-0 z-10 flex h-12 w-full justify-between sm:h-16">
+    <div
+      className={cn(
+        noScrollbarsClassName,
+        'fixed bottom-0 z-10 flex h-12 w-full justify-between sm:h-16',
+      )}
+    >
       <div className="w-16 sm:w-28">
         <Popover>
           <PopoverTrigger asChild>
