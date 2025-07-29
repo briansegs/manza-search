@@ -18,7 +18,7 @@ export function ArticleTopMenuContainer({ article, className }: ArticleTopMenuCo
   return (
     <div className={cn('sticky top-0 z-10', className)}>
       {/* Large device view */}
-      <div className="hidden h-20 w-[750px] items-center justify-center rounded-xl border-4 border-black bg-menu hover:bg-black lg:flex">
+      <div className="hidden h-20 w-fit items-center justify-center rounded-xl border-4 border-black bg-menu px-4 hover:bg-black lg:flex">
         <ArticleTopMenu />
       </div>
 
