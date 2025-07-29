@@ -8,7 +8,7 @@ export function ReadModeButton() {
   const { readMode, toggleReadMode } = useReadMode()
 
   return (
-    <ArticleMenuButton className={cn({ 'text-yellow-300': readMode })} onClick={toggleReadMode}>
+    <ArticleMenuButton className={cn({ 'text-yellow-200': readMode })} onClick={toggleReadMode}>
       RM
     </ArticleMenuButton>
   )

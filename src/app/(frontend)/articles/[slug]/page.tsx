@@ -15,6 +15,7 @@ import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
 import { ArticleLeftMenuContainer } from '@/features/articles/components/ArticleLeftMenuContainer'
 import { ReadModeProvider } from '@/providers/ReadModeProvider'
+import { TextSizeProvider } from '@/providers/TextSizeProvider'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -68,14 +69,13 @@ export default async function Article({ params: paramsPromise }: Args) {
 
         <div className="flex w-full min-w-0 flex-col">
           <ReadModeProvider>
-            <ArticleTopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
-
-            {/* Hero & Content */}
-            <ArticleHero article={article} />
-
-            <ArticleTopMenuContainer article={article} className="sm:hidden" />
-
-            <RenderArticleBlocks blocks={blocks ?? []} />
+            <TextSizeProvider>
+              <ArticleTopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
+              {/* Hero & Content */}
+              <ArticleHero article={article} />
+              <ArticleTopMenuContainer article={article} className="sm:hidden" />
+              <RenderArticleBlocks blocks={blocks ?? []} />
+            </TextSizeProvider>
           </ReadModeProvider>
         </div>
       </div>

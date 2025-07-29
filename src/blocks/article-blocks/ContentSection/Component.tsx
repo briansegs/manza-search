@@ -1,12 +1,12 @@
 import { ContentSection as ContentSectionProps, Media } from '@/payload-types'
 import React from 'react'
-import RichText from '@/components/RichText'
 
 import clsx from 'clsx'
 import ContentButtons from './ContentButtons'
 import { cn } from '@/utilities/ui'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
+import { RichTextWithTextSize } from '@/features/articles/textSize/components/RichTextWithTextSize'
 
 interface ImageContainerProps {
   image: string | Media
@@ -56,7 +56,7 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
             <div className="flex w-full flex-col justify-between gap-8 lg:flex-row">
               {content && (
                 <div className={clsx(image1 && alignment === 'right' && 'mt-2')}>
-                  <RichText className="font-serif" data={content} enableGutter={false} />
+                  <RichTextWithTextSize className="font-serif" content={content} />
                 </div>
               )}
 
@@ -68,7 +68,7 @@ export const ContentSection: React.FC<ContentSectionProps> = (props) => {
             <div className="flex flex-col justify-between gap-8 xl:flex-row">
               {content && (
                 <div className="mt-2">
-                  <RichText className="font-serif" data={content} enableGutter={false} />
+                  <RichTextWithTextSize className="font-serif" content={content} />
                 </div>
               )}
 
