@@ -17,7 +17,7 @@ export const RichTextWithTextSize = ({ className, content }: RichTextWithTextSiz
   return (
     <RichText
       className={cn(className, {
-        '': textSize === 'off',
+        'prose-p:text-base': textSize === 'off',
         'prose-p:text-lg': textSize === 'large',
         'prose-p:text-xl': textSize === 'x-large',
       })}

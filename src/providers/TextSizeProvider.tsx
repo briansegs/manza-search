@@ -2,11 +2,11 @@
 
 import { createContext, useContext, useState } from 'react'
 
-export type TextSize = 'off' | 'large' | 'x-large'
+export type TextSizeOptions = 'off' | 'large' | 'x-large'
 
 type ContextType = {
-  textSize: TextSize
-  setTextSize: (string: TextSize) => void
+  textSize: TextSizeOptions
+  setTextSize: (size: TextSizeOptions) => void
 }
 
 const initialContext: ContextType = {
@@ -17,13 +17,13 @@ const initialContext: ContextType = {
 const TextSizeContext = createContext(initialContext)
 
 export const TextSizeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [textSize, setTextSize] = useState<TextSize>(initialContext.textSize)
+  const [textSize, setTextSize] = useState<TextSizeOptions>(initialContext.textSize)
 
   return (
     <TextSizeContext.Provider
       value={{
         textSize,
-        setTextSize: (size) => setTextSize(size),
+        setTextSize,
       }}
     >
       {children}
