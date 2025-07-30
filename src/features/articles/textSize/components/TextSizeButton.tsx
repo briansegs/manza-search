@@ -13,7 +13,14 @@ export function TextSizeButton() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ArticleMenuButton aria-label="Adjust text size">EXP</ArticleMenuButton>
+        <ArticleMenuButton
+          className={cn({
+            'text-yellow-200': textSize !== 'off',
+          })}
+          aria-label="Adjust text size"
+        >
+          EXP
+        </ArticleMenuButton>
       </PopoverTrigger>
 
       <PopoverContent className="flex w-32 flex-col items-center justify-center border-black bg-menu p-0">
