@@ -1562,8 +1562,8 @@ export interface Redirect {
           value: string | Page;
         } | null)
       | ({
-          relationTo: 'posts';
-          value: string | Post;
+          relationTo: 'articles';
+          value: string | Article;
         } | null);
     url?: string | null;
   };
@@ -1598,8 +1598,8 @@ export interface Search {
   title?: string | null;
   priority?: number | null;
   doc: {
-    relationTo: 'posts';
-    value: string | Post;
+    relationTo: 'articles';
+    value: string | Article;
   };
   slug?: string | null;
   meta?: {
