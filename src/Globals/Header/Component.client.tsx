@@ -17,9 +17,9 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
-import { Search } from '@/search/Component'
 import { Menu, ShoppingCart } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Search } from '@/features/search/components/Search'
 
 export function HeaderClient({ data }: { data: Header }) {
   /* Storing the value in a useState to avoid hydration errors */

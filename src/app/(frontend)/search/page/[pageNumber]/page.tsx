@@ -6,6 +6,7 @@ import React from 'react'
 import PageClient from './page.client'
 import { SearchList } from '@/features/search/components/SearchList'
 import { SearchPageRange } from '@/features/search/components/SearchPageRange'
+import { notFound } from 'next/navigation'
 import { SearchPagination } from '@/features/search/components/SearchPagination'
 import { SearchArticleCardData } from '@/features/search/types'
 
@@ -13,10 +14,21 @@ type Args = {
   searchParams: Promise<{
     q: string
   }>
+  params: Promise<{
+    pageNumber: string
+  }>
 }
-export default async function Page({ searchParams: searchParamsPromise }: Args) {
+export default async function Page({
+  searchParams: searchParamsPromise,
+  params: paramsPromise,
+}: Args) {
   const { q: query } = await searchParamsPromise
+  const { pageNumber } = await paramsPromise
   const payload = await getPayload({ config: configPromise })
+
+  const sanitizedPageNumber = Number(pageNumber)
+
+  if (!Number.isInteger(sanitizedPageNumber)) notFound()
 
   const pageLimit = 5
 
@@ -33,7 +45,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       updatedAt: true,
       publishedAt: true,
     },
-    page: 1,
+    page: sanitizedPageNumber,
     // pagination: false reduces overhead if you don't need totalDocs
     pagination: true,
     ...(query
@@ -84,36 +96,26 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
           <h2 className="py-2 font-serif text-xl uppercase text-white">Search</h2>
         </div>
 
-        {query && (
-          <>
-            <div className="container">
-              <SearchPageRange
-                collection="articles"
-                currentPage={articles.page}
-                limit={pageLimit}
-                totalDocs={articles.totalDocs}
-              />
-            </div>
+        <div className="container">
+          <SearchPageRange
+            collection="articles"
+            currentPage={articles.page}
+            limit={pageLimit}
+            totalDocs={articles.totalDocs}
+          />
+        </div>
 
-            {articles.totalDocs > 0 ? (
-              <SearchList articles={articles.docs as SearchArticleCardData[]} />
-            ) : (
-              <div className="container">No results found.</div>
-            )}
-
-            <div className="container">
-              {articles.totalPages > 1 && articles.page && (
-                <SearchPagination
-                  page={articles.page}
-                  totalPages={articles.totalPages}
-                  query={query}
-                />
-              )}
-            </div>
-          </>
+        {articles.totalDocs > 0 ? (
+          <SearchList articles={articles.docs as SearchArticleCardData[]} />
+        ) : (
+          <div className="container">No results found.</div>
         )}
 
-        {!query && <div className="container">Type in search bar to find articles.</div>}
+        <div className="container">
+          {articles.totalPages > 1 && articles.page && (
+            <SearchPagination page={articles.page} totalPages={articles.totalPages} query={query} />
+          )}
+        </div>
       </div>
     </section>
   )

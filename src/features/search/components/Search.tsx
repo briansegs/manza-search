@@ -1,21 +1,30 @@
 'use client'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-// import React, { useState, useEffect } from 'react'
-// import { useDebounce } from '@/utilities/useDebounce'
-// import { useRouter } from 'next/navigation'
+import React, { useState, useEffect, useRef } from 'react'
+import { useDebounce } from '@/utilities/useDebounce'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { SearchIcon } from 'lucide-react'
 
-export const Search: React.FC = () => {
-  // const [value, setValue] = useState('')
-  // const router = useRouter()
+export function Search() {
+  const [value, setValue] = useState('')
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const hasInteracted = useRef(false)
 
-  // const debouncedValue = useDebounce(value)
+  const debouncedValue = useDebounce(value)
 
-  // useEffect(() => {
-  //   router.push(`/search${debouncedValue ? `?q=${debouncedValue}` : ''}`)
-  // }, [debouncedValue, router])
+  useEffect(() => {
+    const initialQ = searchParams.get('q')
+    if (initialQ) setValue(initialQ)
+  }, [searchParams])
 
+  useEffect(() => {
+    if (!hasInteracted.current) return
+
+    const url = `/search${debouncedValue ? `?q=${debouncedValue}` : ''}`
+    router.push(url)
+  }, [debouncedValue, router])
   return (
     <div>
       <form
@@ -29,9 +38,10 @@ export const Search: React.FC = () => {
         </Label>
         <Input
           id="search"
-          // onChange={(event) => {
-          //   setValue(event.target.value)
-          // }}
+          onChange={(event) => {
+            hasInteracted.current = true
+            setValue(event.target.value)
+          }}
           placeholder="Search"
           className="rounded-none border-none bg-transparent text-primary outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
         />
