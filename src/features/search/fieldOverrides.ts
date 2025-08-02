@@ -58,4 +58,38 @@ export const searchFields: Field[] = [
       },
     ],
   },
+  {
+    label: 'Authors',
+    name: 'authors',
+    type: 'array',
+    admin: {
+      readOnly: true,
+    },
+    fields: [
+      {
+        name: 'id',
+        type: 'text',
+      },
+      {
+        name: 'name',
+        type: 'text',
+      },
+    ],
+  },
+  {
+    label: 'PublishedAt',
+    name: 'publishedAt',
+    type: 'date',
+    admin: {
+      readOnly: true,
+    },
+  },
+  {
+    label: 'UpdatedAt',
+    name: 'updatedAt',
+    type: 'date',
+    admin: {
+      readOnly: true,
+    },
+  },
 ]
