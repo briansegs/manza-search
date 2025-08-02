@@ -75,9 +75,7 @@ export function SearchCard({ doc }: SearchCardProps) {
         <CardFooter className="flex flex-wrap items-center justify-between font-serif">
           <div className="flex flex-col flex-wrap items-start gap-2 md:flex-row md:items-end">
             <span className="text-wrap text-xl capitalize">
-              {authors.map((auther, index) => {
-                return index < authors.length - 1 ? auther.name + ' | ' : auther.name
-              })}
+              {authors.map((author) => author.name).join(' | ')}
             </span>
 
             <div className="mt-2 lg:mt-0">
