@@ -1,5 +1,3 @@
-'use client'
-
 import { Media } from '@/components/Media'
 import {
   Card,
@@ -10,12 +8,10 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import { SearchCardProps } from '../types'
 
 export function SearchCard({ doc }: SearchCardProps) {
-  const { card, link } = useClickableCard({})
   if (!doc || !doc.meta) return null
 
   const { slug, categories, meta, title, authors, updatedAt, publishedAt } = doc
@@ -40,8 +36,8 @@ export function SearchCard({ doc }: SearchCardProps) {
   })
 
   return (
-    <article ref={card.ref}>
-      <Card className="rounded-none border-4 border-black bg-white shadow-[10px_10px_10px_black] hover:cursor-pointer">
+    <Link href={href}>
+      <Card className="rounded-none border-4 border-black bg-white shadow-[10px_10px_10px_black]">
         <CardHeader className="flex flex-col gap-6 md:flex-row">
           <div className="relative h-40 w-64 flex-shrink-0 self-center overflow-hidden rounded-none border-2 border-black bg-white shadow-[10px_10px_10px_black] sm:self-start">
             {!metaImage && <div className="flex h-full items-center justify-center">No image</div>}
@@ -51,11 +47,7 @@ export function SearchCard({ doc }: SearchCardProps) {
           </div>
 
           <div className="flex w-full flex-col gap-4">
-            <CardTitle className="font-serif text-3xl capitalize">
-              <Link href={href} ref={link.ref}>
-                {title}
-              </Link>
-            </CardTitle>
+            <CardTitle className="font-serif text-3xl capitalize">{title}</CardTitle>
 
             <Separator />
 
@@ -102,6 +94,6 @@ export function SearchCard({ doc }: SearchCardProps) {
           </div>
         </CardFooter>
       </Card>
-    </article>
+    </Link>
   )
 }
