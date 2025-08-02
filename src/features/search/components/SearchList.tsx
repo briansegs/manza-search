@@ -14,7 +14,7 @@ export function SearchList(props: SearchListProps) {
           {articles?.map((result, index) => {
             if (typeof result === 'object' && result !== null) {
               return (
-                <div className="col-span-4" key={index}>
+                <div key={index}>
                   <SearchCard doc={result} />
                 </div>
               )

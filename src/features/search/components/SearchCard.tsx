@@ -85,7 +85,7 @@ export function SearchCard({ doc }: SearchCardProps) {
             </div>
           </div>
 
-          <div className="text-base">
+          <div className="self-end text-base">
             <span className="mr-2"> -</span>
             <span className="text-base font-semibold">Last Updated: </span>
             {updatedDate}
