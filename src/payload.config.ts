@@ -17,7 +17,6 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
-import { cloudinaryStorage } from './cloudinaryAdapter'
 import { Articles } from './collections/Articles'
 import { HomeMedia } from './collections/HomeMedia'
 import { Home } from './Globals/Home/config'
@@ -108,27 +107,7 @@ export default buildConfig({
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Home, Scope, Literature, Sound, Travel, Art, HealthAndWellness],
-  plugins: [
-    ...plugins,
-    // storage-adapter-placeholder
-    cloudinaryStorage({
-      config: {
-        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
-        api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!,
-        api_secret: process.env.CLOUDINARY_API_SECRET!,
-      },
-      collections: {
-        media: true,
-        'home-media': true,
-        'literature-media': true,
-        'sound-media': true,
-        'art-media': true,
-        'health-and-wellness-media': true,
-        'travel-media': true,
-      },
-      folder: 'manza-search-media',
-    }),
-  ],
+  plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

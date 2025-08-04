@@ -1562,8 +1562,8 @@ export interface Redirect {
           value: string | Page;
         } | null)
       | ({
-          relationTo: 'posts';
-          value: string | Post;
+          relationTo: 'articles';
+          value: string | Article;
         } | null);
     url?: string | null;
   };
@@ -1598,8 +1598,8 @@ export interface Search {
   title?: string | null;
   priority?: number | null;
   doc: {
-    relationTo: 'posts';
-    value: string | Post;
+    relationTo: 'articles';
+    value: string | Article;
   };
   slug?: string | null;
   meta?: {
@@ -1614,6 +1614,13 @@ export interface Search {
         title?: string | null;
       }[]
     | null;
+  authors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2697,6 +2704,13 @@ export interface SearchSelect<T extends boolean = true> {
         id?: T;
         title?: T;
       };
+  authors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

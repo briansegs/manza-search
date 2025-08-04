@@ -8,11 +8,12 @@ import { Plugin } from 'payload'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
-import { searchFields } from '@/search/fieldOverrides'
-import { beforeSyncWithSearch } from '@/search/beforeSync'
+import { searchFields } from '@/features/search/fieldOverrides'
+import { beforeSyncWithSearch } from '@/features/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { cloudinaryStorage } from '@/cloudinaryAdapter'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
@@ -26,7 +27,7 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 
 export const plugins: Plugin[] = [
   redirectsPlugin({
-    collections: ['pages', 'posts'],
+    collections: ['pages', 'articles'],
     overrides: {
       // @ts-expect-error - This is a valid override, mapped fields don't resolve to the same type
       fields: ({ defaultFields }) => {
@@ -81,8 +82,27 @@ export const plugins: Plugin[] = [
       },
     },
   }),
+  payloadCloudPlugin(),
+  // storage-adapter-placeholder
+  cloudinaryStorage({
+    config: {
+      cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
+      api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY!,
+      api_secret: process.env.CLOUDINARY_API_SECRET!,
+    },
+    collections: {
+      media: true,
+      'home-media': true,
+      'literature-media': true,
+      'sound-media': true,
+      'art-media': true,
+      'health-and-wellness-media': true,
+      'travel-media': true,
+    },
+    folder: 'manza-search-media',
+  }),
   searchPlugin({
-    collections: ['posts'],
+    collections: ['articles'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
       fields: ({ defaultFields }) => {
@@ -90,5 +110,4 @@ export const plugins: Plugin[] = [
       },
     },
   }),
-  payloadCloudPlugin(),
 ]
