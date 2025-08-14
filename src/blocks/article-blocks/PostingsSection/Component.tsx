@@ -50,7 +50,7 @@ export const PostingsSectionBlock: React.FC<PostingsSectionProps> = (props) => {
               )
             })
           ) : (
-            <div className="py-4 text-center">No advertisements available</div>
+            <div className="py-4 text-center">No postings available</div>
           )}
         </div>
       </div>
