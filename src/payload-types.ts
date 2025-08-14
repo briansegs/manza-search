@@ -245,7 +245,7 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | Media;
-  layout?: (AdSection | ContentSection | ResourceSection)[] | null;
+  layout?: (PostingsSection | ContentSection | ResourceSection)[] | null;
   relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
   otherVerifiedSources?:
@@ -407,11 +407,11 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AdSection".
+ * via the `definition` "PostingsSection".
  */
-export interface AdSection {
+export interface PostingsSection {
   title: string;
-  ads?:
+  postings?:
     | {
         media?: (string | null) | Media;
         enableLink?: boolean | null;
@@ -434,7 +434,7 @@ export interface AdSection {
     | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'adSection';
+  blockType: 'postingsSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2013,7 +2013,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        adSection?: T | AdSectionSelect<T>;
+        postingsSection?: T | PostingsSectionSelect<T>;
         contentSection?: T | ContentSectionSelect<T>;
         resourceSection?: T | ResourceSectionSelect<T>;
       };
@@ -2058,11 +2058,11 @@ export interface ArticlesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AdSection_select".
+ * via the `definition` "PostingsSection_select".
  */
-export interface AdSectionSelect<T extends boolean = true> {
+export interface PostingsSectionSelect<T extends boolean = true> {
   title?: T;
-  ads?:
+  postings?:
     | T
     | {
         media?: T;

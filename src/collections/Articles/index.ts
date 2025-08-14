@@ -14,7 +14,7 @@ import { CollectionConfig } from 'payload'
 
 import { revalidateArticle, revalidateDelete } from './hooks/revalidateArticle'
 import { populateAuthors } from './hooks/populateAuthors'
-import { AdSection } from '@/blocks/article-blocks/AdSection/config'
+import { PostingsSection } from '@/blocks/article-blocks/PostingsSection/config'
 import { ContentSection } from '@/blocks/article-blocks/ContentSection/config'
 import { ResourceSection } from '@/blocks/article-blocks/ResourceSection/config'
 import { link } from '@/fields/link'
@@ -81,7 +81,7 @@ export const Articles: CollectionConfig<'articles'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [AdSection, ContentSection, ResourceSection],
+              blocks: [PostingsSection, ContentSection, ResourceSection],
               admin: {
                 initCollapsed: true,
               },
