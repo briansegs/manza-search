@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react'
 
 import {
-  AdSection as AdSectionBlockType,
+  PostingsSection as PostingsSectionBlockType,
   ContentSection as ContentSectionType,
   ResourceSection as ResourceSectionType,
 } from '@/payload-types'
 
-import { AdSectionBlock } from './article-blocks/AdSection/Component'
+import { PostingsSectionBlock } from './article-blocks/PostingsSection/Component'
 import { ContentSection } from './article-blocks/ContentSection/Component'
 import { ResourceSection } from './article-blocks/ResourceSection/Component'
 
 const blockComponents = {
-  adSection: AdSectionBlock,
+  postingsSection: PostingsSectionBlock,
   contentSection: ContentSection,
   resourceSection: ResourceSection,
 }
 
 export const RenderArticleBlocks: React.FC<{
-  blocks: (AdSectionBlockType | ContentSectionType | ResourceSectionType)[] | null
+  blocks: (PostingsSectionBlockType | ContentSectionType | ResourceSectionType)[] | null
 }> = ({ blocks }) => {
   const validBlocks = Array.isArray(blocks) ? blocks : []
   if (validBlocks.length > 0) {

@@ -2,7 +2,7 @@ import { Block, Field } from 'payload'
 
 import { link } from '@/fields/link'
 
-const AdFields: Field[] = [
+const PostingsFields: Field[] = [
   {
     name: 'media',
     type: 'upload',
@@ -23,9 +23,9 @@ const AdFields: Field[] = [
   }),
 ]
 
-export const AdSection: Block = {
-  slug: 'adSection',
-  interfaceName: 'AdSection',
+export const PostingsSection: Block = {
+  slug: 'postingsSection',
+  interfaceName: 'PostingsSection',
   fields: [
     {
       name: 'title',
@@ -34,12 +34,12 @@ export const AdSection: Block = {
       required: true,
     },
     {
-      name: 'ads',
+      name: 'postings',
       type: 'array',
       admin: {
         initCollapsed: true,
       },
-      fields: AdFields,
+      fields: PostingsFields,
       maxRows: 3,
     },
   ],

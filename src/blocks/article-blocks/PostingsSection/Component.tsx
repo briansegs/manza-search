@@ -1,7 +1,7 @@
 'use client'
 
 import { CMSLink } from '@/components/Link'
-import { AdSection as AdSectionProps } from '@/payload-types'
+import { PostingsSection as PostingsSectionProps } from '@/payload-types'
 import React from 'react'
 import clsx from 'clsx'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
@@ -9,10 +9,10 @@ import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
 import { useReadMode } from '@/providers/ReadModeProvider'
 
-export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
+export const PostingsSectionBlock: React.FC<PostingsSectionProps> = (props) => {
   const { readMode } = useReadMode()
 
-  const { title, ads } = props
+  const { title, postings } = props
 
   if (readMode) return null
 
@@ -22,8 +22,8 @@ export const AdSectionBlock: React.FC<AdSectionProps> = (props) => {
 
       <div className="border-content w-full overflow-x-auto py-4 md:py-8">
         <div className="mx-auto flex w-fit gap-6 px-4 xl:px-16">
-          {ads && ads.length > 0 ? (
-            ads.map(({ id, link, media }, index) => {
+          {postings && postings.length > 0 ? (
+            postings.map(({ id, link, media }, index) => {
               const hasValidLink =
                 link && (link.type === 'reference' ? link.reference : link.type === 'custom')
 
