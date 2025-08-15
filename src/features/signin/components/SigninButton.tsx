@@ -1,15 +1,9 @@
 import { Button } from '@/components/ui/button'
-import { cn } from '@/utilities/ui'
 import { SigninButtonProps } from '../types'
 
-export function SigninButton({ children, className, disabled, ref, ...props }: SigninButtonProps) {
+export function SigninButton({ children, disabled, ...props }: SigninButtonProps) {
   return (
-    <Button
-      disabled={disabled}
-      className={cn(className, 'w-full', 'sm:w-96 xl:w-full')}
-      ref={ref}
-      {...props}
-    >
+    <Button disabled={disabled} className="w-full sm:w-96 xl:w-full" {...props}>
       {children}
     </Button>
   )
