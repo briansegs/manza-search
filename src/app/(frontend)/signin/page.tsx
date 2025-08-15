@@ -67,7 +67,7 @@ const SigninPage = async () => {
           <UserSigninButton />
 
           {signinButtons?.links?.map(({ id, title, path }) => {
-            if (!path) return null
+            if (!path || !title) return null
 
             return (
               <Link key={id} href={path}>
