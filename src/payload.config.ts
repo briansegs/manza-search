@@ -33,6 +33,8 @@ import { HealthAndWellness } from './Globals/HealthAndWellness/config'
 import { TravelMedia } from './collections/TravelMedia'
 import { Travel } from './Globals/Travel/config'
 import { Topics } from './collections/Topics'
+import { AdMedia } from './collections/AdMedia'
+import { Signin } from './Globals/Signin/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -100,13 +102,14 @@ export default buildConfig({
     SoundMedia,
     ArtMedia,
     TravelMedia,
+    AdMedia,
     HealthAndWellnessMedia,
     Categories,
     Topics,
     Users,
   ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Home, Scope, Literature, Sound, Travel, Art, HealthAndWellness],
+  globals: [Header, Footer, Home, Scope, Literature, Sound, Travel, Art, HealthAndWellness, Signin],
   plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

@@ -11,7 +11,7 @@ export const Providers: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
   return (
-    <ClerkProvider>
+    <ClerkProvider afterSignOutUrl="/signin">
       <ConvexClientProvider>
         <ThemeProvider>
           <HeaderThemeProvider>

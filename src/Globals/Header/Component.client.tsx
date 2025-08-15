@@ -9,14 +9,6 @@ import type { Header } from '@/payload-types'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav, MobileHeaderNav } from './Nav/HeaderNav'
 
-import {
-  ClerkLoaded,
-  ClerkLoading,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
 import { Menu, ShoppingCart } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Search } from '@/features/search/components/Search'
@@ -60,19 +52,7 @@ export function HeaderClient({ data }: { data: Header }) {
             </Link>
 
             <div className="flex h-9 w-[50px] items-center justify-center">
-              <ClerkLoading>
-                <p>Sign in</p>
-              </ClerkLoading>
-
-              <ClerkLoaded>
-                <SignedOut>
-                  <SignInButton />
-                </SignedOut>
-
-                <SignedIn>
-                  <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-9 h-9' } }} />
-                </SignedIn>
-              </ClerkLoaded>
+              <Link href="/signin">Sign in</Link>
             </div>
           </div>
 
@@ -91,13 +71,7 @@ export function HeaderClient({ data }: { data: Header }) {
                       <ShoppingCart className="w-5" />
                     </Link>
 
-                    <SignedOut>
-                      <SignInButton />
-                    </SignedOut>
-
-                    <SignedIn>
-                      <UserButton appearance={{ elements: { userButtonAvatarBox: 'w-9 h-9' } }} />
-                    </SignedIn>
+                    <Link href="/signin">Sign in</Link>
                   </div>
                 </div>
 

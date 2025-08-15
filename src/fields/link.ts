@@ -19,12 +19,21 @@ type LinkType = (options?: {
   appearances?: LinkAppearances[] | false
   disableLabel?: boolean
   overrides?: Partial<GroupField>
+  label?: string
+  name?: string
 }) => Field
 
-export const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
+export const link: LinkType = ({
+  appearances,
+  disableLabel = false,
+  overrides = {},
+  name = 'link',
+  label = 'Link',
+} = {}) => {
   const linkResult: GroupField = {
-    name: 'link',
+    name: name,
     type: 'group',
+    label: label,
     admin: {
       hideGutter: true,
     },
@@ -39,7 +48,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
               layout: 'horizontal',
               width: '50%',
             },
-            defaultValue: 'reference',
+            defaultValue: 'custom',
             options: [
               {
                 label: 'Internal link',
