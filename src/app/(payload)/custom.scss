@@ -102,6 +102,7 @@ html[data-user-type='artist'] .login {
 }
 
 html[data-user-type='musician'] .login {
+  --brand-500: #10b981;
   background:
     radial-gradient(80rem 60rem at 10% 30%, rgba(16, 185, 129, 0.15), transparent),
     radial-gradient(60rem 40rem at 85% 65%, rgba(16, 185, 129, 0.1), transparent);
