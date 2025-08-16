@@ -39,7 +39,7 @@ export const Signin: GlobalConfig = {
               appearances: false,
               disableLabel: true,
               name: 'url',
-              label: 'Ad Url',
+              label: 'Ad URL',
             }),
           ],
         },
@@ -52,6 +52,7 @@ export const Signin: GlobalConfig = {
               label: 'Links',
               type: 'array',
               maxRows: 5,
+              unique: true,
               fields: [
                 {
                   name: 'title',
