@@ -62,7 +62,7 @@ export function HeaderClient({ data }: { data: Header }) {
                 <Menu />
               </PopoverTrigger>
               <PopoverContent className="block overflow-hidden rounded-xl border-4 border-black bg-primary-blue p-0 lg:hidden">
-                <div className="w- flex items-center justify-between gap-4 px-2 py-3 text-white">
+                <div className="flex w-full items-center justify-between gap-4 px-2 py-3 text-white">
                   <Link href="/settings">Settings</Link>
 
                   <div className="flex gap-4">
