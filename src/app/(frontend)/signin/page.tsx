@@ -68,11 +68,11 @@ const SigninPage = async () => {
         >
           <UserSigninButton />
 
-          {signinButtons?.links?.map(({ id, title, path }) => {
-            if (!path || !title) return null
+          {signinButtons?.links?.map(({ id, title, userType }) => {
+            if (!title || !userType) return null
 
             return (
-              <Link key={id} href={path}>
+              <Link key={id} href={{ pathname: '/admin/login', query: { 'user-type': userType } }}>
                 <SigninButton>For {title}</SigninButton>
               </Link>
             )

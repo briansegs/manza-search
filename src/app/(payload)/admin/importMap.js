@@ -25,7 +25,8 @@ import { RowLabel as RowLabel_e0f442c8c03b09d561354d7db5bfc286 } from '@/Globals
 import { Icon as Icon_a712f2e0e6d8ddaa8b559ddd06cfe304 } from '@/components/Graphics/Icon.tsx'
 import { Logo as Logo_0b153f32bbe0ef56002a7ada293bad49 } from '@/components/Graphics/Logo.tsx'
 import { default as default_1a7510af427896d367a49dbf838d2de6 } from '@/components/BeforeDashboard'
-import { default as default_8a7ab0eb7ab5c511aba12e68480bfe5e } from '@/components/BeforeLogin'
+import { default as default_14c57f653de3e8838e909e5aa1b94565 } from '@/admin/UserTypeInit.tsx'
+import { default as default_34010787dcc8beac1f12c756482c3507 } from '@/components/BeforeLogin/BeforeLogin.tsx'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -55,5 +56,6 @@ export const importMap = {
   "@/components/Graphics/Icon.tsx#Icon": Icon_a712f2e0e6d8ddaa8b559ddd06cfe304,
   "@/components/Graphics/Logo.tsx#Logo": Logo_0b153f32bbe0ef56002a7ada293bad49,
   "@/components/BeforeDashboard#default": default_1a7510af427896d367a49dbf838d2de6,
-  "@/components/BeforeLogin#default": default_8a7ab0eb7ab5c511aba12e68480bfe5e
+  "@/admin/UserTypeInit.tsx#default": default_14c57f653de3e8838e909e5aa1b94565,
+  "@/components/BeforeLogin/BeforeLogin.tsx#default": default_34010787dcc8beac1f12c756482c3507
 }

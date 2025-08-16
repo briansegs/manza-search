@@ -60,8 +60,8 @@ export const Signin: GlobalConfig = {
                   required: true,
                 },
                 {
-                  name: 'path',
-                  label: 'Path',
+                  name: 'userType',
+                  label: 'User Type',
                   type: 'text',
                   required: true,
                 },

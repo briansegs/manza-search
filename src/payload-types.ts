@@ -3274,7 +3274,7 @@ export interface Signin {
     links?:
       | {
           title: string;
-          path: string;
+          userType: string;
           id?: string | null;
         }[]
       | null;
@@ -3556,7 +3556,7 @@ export interface SigninSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
-              path?: T;
+              userType?: T;
               id?: T;
             };
       };
