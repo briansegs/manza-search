@@ -24,7 +24,12 @@ const SigninPage = async () => {
   const hasValidLink = isValidLink(pageAd?.url)
 
   return (
-    <div className={cn('container flex w-full flex-col-reverse gap-2 py-2', 'xl:flex-row')}>
+    <div
+      className={cn(
+        'border-content container my-2 flex w-full flex-col-reverse gap-6 rounded-xl py-6',
+        'xl:flex-row',
+      )}
+    >
       <PageClient />
       <div
         className={cn(
@@ -45,12 +50,12 @@ const SigninPage = async () => {
 
       <div
         className={cn(
-          'border-content flex h-[600px] w-full flex-col justify-center gap-10 rounded-xl p-4',
+          'flex h-[600px] w-full flex-col justify-center gap-10 rounded-xl p-4',
           'xl:w-1/3',
         )}
       >
         <div className="space-y-2 text-center">
-          <div className="flex h-12 justify-center">
+          <div className="flex h-16 justify-center">
             <SignedInButton />
           </div>
 
@@ -73,7 +78,7 @@ const SigninPage = async () => {
 
             return (
               <Link key={id} href={{ pathname: '/admin/login', query: { 'user-type': userType } }}>
-                <SigninButton>For {title}</SigninButton>
+                <SigninButton>{title}</SigninButton>
               </Link>
             )
           })}
