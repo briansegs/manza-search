@@ -33,6 +33,8 @@ import { HealthAndWellness } from './Globals/HealthAndWellness/config'
 import { TravelMedia } from './collections/TravelMedia'
 import { Travel } from './Globals/Travel/config'
 import { Topics } from './collections/Topics'
+import { AdMedia } from './collections/AdMedia'
+import { Signin } from './Globals/Signin/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,10 +44,10 @@ export default buildConfig({
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
-      beforeLogin: ['@/components/BeforeLogin'],
+      beforeLogin: ['@/components/BeforeLogin/BeforeLogin.tsx', '@/admin/UserTypeInit.tsx'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ['@/components/BeforeDashboard'],
+      beforeDashboard: ['@/components/BeforeDashboard', '@/admin/UserTypeInit.tsx'],
 
       // Logo and Icon
       graphics: {
@@ -100,13 +102,14 @@ export default buildConfig({
     SoundMedia,
     ArtMedia,
     TravelMedia,
+    AdMedia,
     HealthAndWellnessMedia,
     Categories,
     Topics,
     Users,
   ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Home, Scope, Literature, Sound, Travel, Art, HealthAndWellness],
+  globals: [Header, Footer, Home, Scope, Literature, Sound, Travel, Art, HealthAndWellness, Signin],
   plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

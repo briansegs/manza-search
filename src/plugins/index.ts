@@ -98,6 +98,7 @@ export const plugins: Plugin[] = [
       'art-media': true,
       'health-and-wellness-media': true,
       'travel-media': true,
+      'ad-media': true,
     },
     folder: 'manza-search-media',
   }),

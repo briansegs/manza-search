@@ -76,6 +76,7 @@ export interface Config {
     'sound-media': SoundMedia;
     'art-media': ArtMedia;
     'travel-media': TravelMedia;
+    'ad-media': AdMedia;
     'health-and-wellness-media': HealthAndWellnessMedia;
     categories: Category;
     topics: Topic;
@@ -100,6 +101,7 @@ export interface Config {
     'sound-media': SoundMediaSelect<false> | SoundMediaSelect<true>;
     'art-media': ArtMediaSelect<false> | ArtMediaSelect<true>;
     'travel-media': TravelMediaSelect<false> | TravelMediaSelect<true>;
+    'ad-media': AdMediaSelect<false> | AdMediaSelect<true>;
     'health-and-wellness-media': HealthAndWellnessMediaSelect<false> | HealthAndWellnessMediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
@@ -126,6 +128,7 @@ export interface Config {
     travel: Travel;
     art: Art;
     'health-and-wellness': HealthAndWellness;
+    signin: Signin;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -137,6 +140,7 @@ export interface Config {
     travel: TravelSelect<false> | TravelSelect<true>;
     art: ArtSelect<false> | ArtSelect<true>;
     'health-and-wellness': HealthAndWellnessSelect<false> | HealthAndWellnessSelect<true>;
+    signin: SigninSelect<false> | SigninSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1441,6 +1445,111 @@ export interface TravelMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ad-media".
+ */
+export interface AdMedia {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "health-and-wellness-media".
  */
 export interface HealthAndWellnessMedia {
@@ -1758,6 +1867,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'travel-media';
         value: string | TravelMedia;
+      } | null)
+    | ({
+        relationTo: 'ad-media';
+        value: string | AdMedia;
       } | null)
     | ({
         relationTo: 'health-and-wellness-media';
@@ -2373,6 +2486,57 @@ export interface ArtMediaSelect<T extends boolean = true> {
  * via the `definition` "travel-media_select".
  */
 export interface TravelMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ad-media_select".
+ */
+export interface AdMediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   cloudinary?:
@@ -3085,6 +3249,41 @@ export interface HealthAndWellness {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "signin".
+ */
+export interface Signin {
+  id: string;
+  pageAd?: {
+    image?: (string | null) | AdMedia;
+    url?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'articles';
+            value: string | Article;
+          } | null);
+      url?: string | null;
+    };
+  };
+  signinButtons?: {
+    links?:
+      | {
+          title: string;
+          userType: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -3328,6 +3527,39 @@ export interface HealthAndWellnessSelect<T extends boolean = true> {
         id?: T;
       };
   paidTopSpot?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "signin_select".
+ */
+export interface SigninSelect<T extends boolean = true> {
+  pageAd?:
+    | T
+    | {
+        image?: T;
+        url?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+      };
+  signinButtons?:
+    | T
+    | {
+        links?:
+          | T
+          | {
+              title?: T;
+              userType?: T;
+              id?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -1,5 +1,5 @@
 import { Media } from '@/components/Media'
-import { Media as MediaType } from '@/payload-types'
+import type { Media as MediaType } from '@/payload-types'
 
 import React from 'react'
 
