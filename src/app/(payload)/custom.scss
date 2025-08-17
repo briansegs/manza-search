@@ -90,14 +90,14 @@ html[data-user-type='artist'] .login {
     radial-gradient(60rem 40rem at 80% 70%, rgba(124, 58, 237, 0.1), transparent);
 
   .template-minimal__wrap {
-    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--brand-500) 15%, transparent);
   }
   .btn {
-    background: #7c3aed;
+    background: var(--brand-500);
   }
 
   .btn:hover {
-    background: #995ffd;
+    background: color-mix(in srgb, var(--brand-500) 80%, white);
   }
 }
 
@@ -108,14 +108,14 @@ html[data-user-type='musician'] .login {
     radial-gradient(60rem 40rem at 85% 65%, rgba(16, 185, 129, 0.1), transparent);
 
   .template-minimal__wrap {
-    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--brand-500) 15%, transparent);
   }
   .btn {
-    background: #10b981;
+    background: var(--brand-500);
   }
 
   .btn:hover {
-    background: #28ecab;
+    background: color-mix(in srgb, var(--brand-500) 80%, white);
   }
 }
 
@@ -126,13 +126,13 @@ html[data-user-type='author'] .login {
     radial-gradient(60rem 40rem at 75% 70%, rgba(190, 18, 60, 0.1), transparent);
 
   .template-minimal__wrap {
-    box-shadow: 0 10px 30px rgba(190, 18, 60, 0.15);
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--brand-500) 15%, transparent);
   }
   .btn {
-    background: #be123c;
+    background: var(--brand-500);
   }
   .btn:hover {
-    background: #e11d48;
+    background: color-mix(in srgb, var(--brand-500) 80%, white);
   }
 }
 
@@ -143,13 +143,13 @@ html[data-user-type='manzeneer'] .login {
     radial-gradient(60rem 40rem at 80% 65%, rgba(245, 158, 11, 0.1), transparent);
 
   .template-minimal__wrap {
-    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.15);
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--brand-500) 15%, transparent);
   }
   .btn {
-    background: #f59e0b;
+    background: var(--brand-500);
   }
   .btn:hover {
-    background: #fbbf24;
+    background: color-mix(in srgb, var(--brand-500) 80%, white);
   }
 }
 
@@ -160,12 +160,12 @@ html[data-user-type='admin'] .login {
     radial-gradient(60rem 40rem at 75% 70%, rgba(15, 118, 110, 0.1), transparent);
 
   .template-minimal__wrap {
-    box-shadow: 0 10px 30px rgba(15, 118, 110, 0.15);
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--brand-500) 15%, transparent);
   }
   .btn {
-    background: #0f766e;
+    background: var(--brand-500);
   }
   .btn:hover {
-    background: #14b8a6;
+    background: color-mix(in srgb, var(--brand-500) 80%, white);
   }
 }
