@@ -9,13 +9,22 @@ type BeforeLoginClientProps = {
 export function BeforeLoginClient({ userTypes }: BeforeLoginClientProps) {
   const searchParams = useSearchParams()
 
-  const type = searchParams.get('user-type') || localStorage.getItem('user-type') || null
+  const rawType = searchParams.get('user-type')
 
-  let userType = null
+  let storedType: string | null = null
 
-  if (type && userTypes.includes(type)) {
-    userType = type
+  try {
+    storedType = localStorage.getItem('user-type')
+  } catch (error) {
+    console.log(`Error getting item (key: user-type) from localStorage: ${error}`)
   }
+
+  const type = rawType ?? storedType
+
+  const allowedTypes = new Set(userTypes.map((u) => u.toLowerCase()))
+
+  const userType: string | null =
+    type && allowedTypes.has(type.toLowerCase()) ? type.toLowerCase() : null
 
   return (
     <div className="space-y-6 pb-4">

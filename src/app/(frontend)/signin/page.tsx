@@ -77,7 +77,10 @@ const SigninPage = async () => {
             if (!title || !userType) return null
 
             return (
-              <Link key={id} href={{ pathname: '/admin/login', query: { 'user-type': userType } }}>
+              <Link
+                key={id}
+                href={{ pathname: '/admin/login', query: { 'user-type': userType.toLowerCase() } }}
+              >
                 <SigninButton>{title}</SigninButton>
               </Link>
             )
