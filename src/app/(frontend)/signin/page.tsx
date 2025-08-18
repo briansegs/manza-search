@@ -16,6 +16,10 @@ import { SignedInButton } from '@/features/signin/components/SignedInButton'
 export const dynamic = 'force-static'
 export const revalidate = 600
 
+const adImageQuality = 'auto:best'
+const adImageSize =
+  '(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1920px) 75vw, 75vw'
+
 const SigninPage = async () => {
   const signinData: signinGlobalType = await getCachedGlobal('signin', 1)()
 
@@ -39,10 +43,18 @@ const SigninPage = async () => {
       >
         {hasValidLink ? (
           <CMSLink {...pageAd?.url}>
-            {pageAd?.image ? <RenderMedia media={pageAd.image as Media} /> : <ImagePlaceholder />}
+            {pageAd?.image ? (
+              <RenderMedia
+                media={pageAd.image as Media}
+                quality={adImageQuality}
+                size={adImageSize}
+              />
+            ) : (
+              <ImagePlaceholder />
+            )}
           </CMSLink>
         ) : pageAd?.image ? (
-          <RenderMedia media={pageAd.image} />
+          <RenderMedia media={pageAd.image as Media} quality={adImageQuality} size={adImageSize} />
         ) : (
           <ImagePlaceholder />
         )}
