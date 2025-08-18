@@ -44,13 +44,13 @@ export const AdMedia: CollectionConfig = {
   ],
   upload: {
     staticDir: path.resolve(dirname, '../../public/ad-media'),
-    adminThumbnail: 'thumbnail',
+    // adminThumbnail: 'thumbnail',
     focalPoint: true,
-    imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 300,
-      },
-    ],
+    // imageSizes: [
+    //   {
+    //     name: 'thumbnail',
+    //     width: 300,
+    //   },
+    // ],
   },
 }
