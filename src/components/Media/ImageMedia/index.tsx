@@ -25,7 +25,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     size: sizeFromProps,
     src: publicIdFromProps,
     loading: loadingFromProps,
-    quality = 95,
+    quality = 'auto',
   } = props
 
   let width: number | undefined
@@ -54,6 +54,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         alt={alt}
         className={cn(imgClassName)}
         fill={fill}
+        width={!fill ? width : undefined}
         height={!fill ? height : undefined}
         placeholder="blur"
         blurDataURL={placeholderBlur}
@@ -63,7 +64,6 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         loading={loading}
         sizes={sizes}
         src={publicIdFromProps ? (publicIdFromProps as string) : publicId}
-        width={!fill ? width : undefined}
       />
     </picture>
   )

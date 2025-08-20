@@ -9,11 +9,11 @@ import {
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
 
-export const HomeMedia: CollectionConfig = {
-  slug: 'home-media',
+export const ArticleMedia: CollectionConfig = {
+  slug: 'article-media',
   labels: {
-    singular: 'Home Media',
-    plural: 'Home Media',
+    singular: 'Article Media',
+    plural: 'Article Media',
   },
   access: {
     create: authenticated,

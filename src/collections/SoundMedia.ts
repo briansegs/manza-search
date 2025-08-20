@@ -8,11 +8,6 @@ import {
 
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
-import { fileURLToPath } from 'url'
-import path from 'path'
-
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
 
 export const SoundMedia: CollectionConfig = {
   slug: 'sound-media',
@@ -43,14 +38,6 @@ export const SoundMedia: CollectionConfig = {
     },
   ],
   upload: {
-    staticDir: path.resolve(dirname, '../../public/sound-media'),
-    adminThumbnail: 'thumbnail',
     focalPoint: true,
-    imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 300,
-      },
-    ],
   },
 }

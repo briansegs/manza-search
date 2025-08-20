@@ -8,11 +8,6 @@ import {
 
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
-import { fileURLToPath } from 'url'
-import path from 'path'
-
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
 
 export const TravelMedia: CollectionConfig = {
   slug: 'travel-media',
@@ -43,14 +38,6 @@ export const TravelMedia: CollectionConfig = {
     },
   ],
   upload: {
-    staticDir: path.resolve(dirname, '../../public/travel-media'),
-    adminThumbnail: 'thumbnail',
     focalPoint: true,
-    imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 300,
-      },
-    ],
   },
 }

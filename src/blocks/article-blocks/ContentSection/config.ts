@@ -44,14 +44,14 @@ export const ContentSection: Block = {
     {
       name: 'image1',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'article-media',
       label: 'Image 1',
       hasMany: false,
     },
     {
       name: 'image2',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'article-media',
       label: 'Image 2',
       admin: {
         condition: (_, siblingData) => siblingData.alignment === 'left & right',

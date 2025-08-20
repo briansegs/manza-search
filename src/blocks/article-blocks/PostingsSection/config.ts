@@ -6,7 +6,7 @@ const PostingsFields: Field[] = [
   {
     name: 'media',
     type: 'upload',
-    relationTo: 'media',
+    relationTo: 'article-media',
   },
   {
     name: 'enableLink',

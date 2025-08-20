@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import PageClient from './page.client'
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import type { Media, Signin as signinGlobalType } from '@/payload-types'
+import type { Signin as signinGlobalType } from '@/payload-types'
 import { isValidLink } from '@/utilities/isValidLink'
 import { CMSLink } from '@/components/Link'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
@@ -15,6 +15,10 @@ import { SignedInButton } from '@/features/signin/components/SignedInButton'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
+
+const adImageQuality = 'auto:best'
+const adImageSize =
+  '(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1920px) 75vw, 75vw'
 
 const SigninPage = async () => {
   const signinData: signinGlobalType = await getCachedGlobal('signin', 1)()
@@ -39,10 +43,14 @@ const SigninPage = async () => {
       >
         {hasValidLink ? (
           <CMSLink {...pageAd?.url}>
-            {pageAd?.image ? <RenderMedia media={pageAd.image as Media} /> : <ImagePlaceholder />}
+            {pageAd?.image ? (
+              <RenderMedia media={pageAd.image} quality={adImageQuality} size={adImageSize} />
+            ) : (
+              <ImagePlaceholder />
+            )}
           </CMSLink>
         ) : pageAd?.image ? (
-          <RenderMedia media={pageAd.image} />
+          <RenderMedia media={pageAd.image} quality={adImageQuality} size={adImageSize} />
         ) : (
           <ImagePlaceholder />
         )}
