@@ -1,10 +1,31 @@
 import { Media } from '@/components/Media'
-import type { Media as MediaType } from '@/payload-types'
+import type {
+  Media as MediaType,
+  AdMedia,
+  HomeMedia,
+  LiteratureMedia,
+  SoundMedia,
+  ArtMedia,
+  TravelMedia,
+  HealthAndWellnessMedia,
+  ArticleMedia,
+} from '@/payload-types'
 
 import React from 'react'
 
+type AnyMedia =
+  | MediaType
+  | AdMedia
+  | HomeMedia
+  | LiteratureMedia
+  | SoundMedia
+  | ArtMedia
+  | TravelMedia
+  | HealthAndWellnessMedia
+  | ArticleMedia
+
 type RenderMediaProps = {
-  media: string | MediaType
+  media: string | AnyMedia
   quality?: number | string
   size?: string
 }
