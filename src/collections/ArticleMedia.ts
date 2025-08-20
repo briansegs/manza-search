@@ -11,6 +11,10 @@ import { authenticated } from '../access/authenticated'
 
 export const ArticleMedia: CollectionConfig = {
   slug: 'article-media',
+  labels: {
+    singular: 'Article Media',
+    plural: 'Article Media',
+  },
   access: {
     create: authenticated,
     delete: authenticated,
