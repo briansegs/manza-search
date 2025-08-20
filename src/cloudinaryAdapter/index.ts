@@ -186,6 +186,7 @@ function cloudinaryStorageInternal({
         prefix: collection.slug,
         versioning,
         publicID,
+        useTimestamp: true,
       }),
       staticHandler: getHandler({ cloudinary, collection, folder }),
     }

@@ -15,6 +15,7 @@ interface Args {
   prefix?: string
   versioning?: CloudinaryVersioningOptions
   publicID?: PublicIDOptions
+  useTimestamp?: boolean
 }
 
 const getUploadOptions = (
@@ -155,15 +156,19 @@ const getPDFPageCount = async (
 }
 
 export const getHandleUpload =
-  ({ cloudinary, folder, prefix = '', versioning, publicID }: Args): HandleUpload =>
+  ({ cloudinary, folder, prefix = '', versioning, publicID, useTimestamp }: Args): HandleUpload =>
   async ({ data, file }) => {
     // Construct the folder path with proper handling of prefix
     const folderPath = data.prefix
       ? path.posix.join(folder, data.prefix)
       : path.posix.join(folder, prefix)
 
-    // Generate the public ID based on options
-    const publicIdValue = generatePublicID(file.filename, folderPath, publicID)
+    const existingPublicId = data.cloudinary?.public_id
+
+    // Generate the Public ID based on options if no existing Public ID
+    const publicIdValue = existingPublicId
+      ? existingPublicId
+      : generatePublicID(file.filename, folderPath, publicID, useTimestamp)
 
     // Basic upload options
     const uploadOptions: UploadApiOptions = {
@@ -172,6 +177,7 @@ export const getHandleUpload =
       use_filename: publicID?.useFilename !== false,
       unique_filename: publicID?.uniqueFilename !== false,
       asset_folder: folderPath,
+      overwrite: true,
     }
 
     return new Promise((resolve, reject) => {
