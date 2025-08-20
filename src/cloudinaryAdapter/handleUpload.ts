@@ -170,6 +170,8 @@ export const getHandleUpload =
       ? existingPublicId
       : generatePublicID(file.filename, folderPath, publicID, useTimestamp)
 
+    const shouldOverwrite = Boolean(existingPublicId)
+
     // Basic upload options
     const uploadOptions: UploadApiOptions = {
       ...getUploadOptions(file.filename, versioning),
@@ -177,7 +179,7 @@ export const getHandleUpload =
       use_filename: publicID?.useFilename !== false,
       unique_filename: publicID?.uniqueFilename !== false,
       asset_folder: folderPath,
-      overwrite: true,
+      overwrite: shouldOverwrite,
     }
 
     return new Promise((resolve, reject) => {
