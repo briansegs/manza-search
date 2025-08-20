@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import PageClient from './page.client'
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import type { Media, Signin as signinGlobalType } from '@/payload-types'
+import type { Signin as signinGlobalType } from '@/payload-types'
 import { isValidLink } from '@/utilities/isValidLink'
 import { CMSLink } from '@/components/Link'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
@@ -44,17 +44,13 @@ const SigninPage = async () => {
         {hasValidLink ? (
           <CMSLink {...pageAd?.url}>
             {pageAd?.image ? (
-              <RenderMedia
-                media={pageAd.image as Media}
-                quality={adImageQuality}
-                size={adImageSize}
-              />
+              <RenderMedia media={pageAd.image} quality={adImageQuality} size={adImageSize} />
             ) : (
               <ImagePlaceholder />
             )}
           </CMSLink>
         ) : pageAd?.image ? (
-          <RenderMedia media={pageAd.image as Media} quality={adImageQuality} size={adImageSize} />
+          <RenderMedia media={pageAd.image} quality={adImageQuality} size={adImageSize} />
         ) : (
           <ImagePlaceholder />
         )}
