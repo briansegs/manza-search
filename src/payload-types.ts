@@ -78,6 +78,7 @@ export interface Config {
     'travel-media': TravelMedia;
     'ad-media': AdMedia;
     'health-and-wellness-media': HealthAndWellnessMedia;
+    'article-media': ArticleMedia;
     categories: Category;
     topics: Topic;
     users: User;
@@ -103,6 +104,7 @@ export interface Config {
     'travel-media': TravelMediaSelect<false> | TravelMediaSelect<true>;
     'ad-media': AdMediaSelect<false> | AdMediaSelect<true>;
     'health-and-wellness-media': HealthAndWellnessMediaSelect<false> | HealthAndWellnessMediaSelect<true>;
+    'article-media': ArticleMediaSelect<false> | ArticleMediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     topics: TopicsSelect<false> | TopicsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -248,7 +250,7 @@ export interface Page {
 export interface Article {
   id: string;
   title: string;
-  heroImage?: (string | null) | Media;
+  heroImage?: (string | null) | ArticleMedia;
   layout?: (PostingsSection | ContentSection | ResourceSection)[] | null;
   relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
@@ -278,7 +280,7 @@ export interface Article {
     /**
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    image?: (string | null) | Media;
+    image?: (string | null) | ArticleMedia;
     description?: string | null;
   };
   publishedAt?: string | null;
@@ -298,9 +300,9 @@ export interface Article {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "article-media".
  */
-export interface Media {
+export interface ArticleMedia {
   id: string;
   alt: string;
   caption?: {
@@ -399,7 +401,7 @@ export interface PostingsSection {
   title: string;
   postings?:
     | {
-        media?: (string | null) | Media;
+        media?: (string | null) | ArticleMedia;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom') | null;
@@ -429,8 +431,8 @@ export interface PostingsSection {
 export interface ContentSection {
   title: string;
   alignment?: ('left' | 'right' | 'left & right') | null;
-  image1?: (string | null) | Media;
-  image2?: (string | null) | Media;
+  image1?: (string | null) | ArticleMedia;
+  image2?: (string | null) | ArticleMedia;
   content?: {
     root: {
       type: string;
@@ -510,6 +512,101 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -614,7 +711,7 @@ export interface ContentBlock {
  * via the `definition` "MediaBlock".
  */
 export interface MediaBlock {
-  media: string | Media;
+  media: string | ArticleMedia;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -1626,7 +1723,7 @@ export interface Search {
   meta?: {
     title?: string | null;
     description?: string | null;
-    image?: (string | null) | Media;
+    image?: (string | null) | ArticleMedia;
   };
   categories?:
     | {
@@ -1787,6 +1884,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'health-and-wellness-media';
         value: string | HealthAndWellnessMedia;
+      } | null)
+    | ({
+        relationTo: 'article-media';
+        value: string | ArticleMedia;
       } | null)
     | ({
         relationTo: 'categories';
@@ -2392,6 +2493,43 @@ export interface AdMediaSelect<T extends boolean = true> {
  * via the `definition` "health-and-wellness-media_select".
  */
 export interface HealthAndWellnessMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-media_select".
+ */
+export interface ArticleMediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   cloudinary?:

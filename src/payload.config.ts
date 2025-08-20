@@ -35,6 +35,7 @@ import { Travel } from './Globals/Travel/config'
 import { Topics } from './collections/Topics'
 import { AdMedia } from './collections/AdMedia'
 import { Signin } from './Globals/Signin/config'
+import { ArticleMedia } from './collections/ArticleMedia'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -104,6 +105,7 @@ export default buildConfig({
     TravelMedia,
     AdMedia,
     HealthAndWellnessMedia,
+    ArticleMedia,
     Categories,
     Topics,
     Users,
