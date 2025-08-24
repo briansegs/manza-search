@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Circle } from 'lucide-react'
 
 import { cn } from '@/utilities/ui'
 import { Button } from '@/components/ui/button'
+import { useAutoplay, UseAutoplayType } from '@/hooks/useAutoplay'
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -29,6 +30,8 @@ type CarouselContextProps = {
   selectedIndex: number
   scrollSnaps: number[]
   onDotButtonClick: (index: number) => void
+  onAutoplayButtonClick: UseAutoplayType['onAutoplayButtonClick']
+  hasAutoplay: UseAutoplayType['hasAutoplay']
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -59,6 +62,8 @@ const Carousel = React.forwardRef<
 
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
+
+  const { onAutoplayButtonClick, hasAutoplay } = useAutoplay(api)
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) {
@@ -142,6 +147,8 @@ const Carousel = React.forwardRef<
         selectedIndex,
         scrollSnaps,
         onDotButtonClick,
+        onAutoplayButtonClick,
+        hasAutoplay,
       }}
     >
       <div
@@ -258,25 +265,38 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 CarouselNext.displayName = 'CarouselNext'
 
 const CarouselDotButtons = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
-  ({ className, variant = 'carouselDot', size = 'icon', ...props }, ref) => {
-    const { selectedIndex, scrollSnaps, onDotButtonClick } = useCarousel()
-
+  ({ className, variant = 'carouselDotDark', size = 'icon', ...props }, ref) => {
+    const { selectedIndex, scrollSnaps, onDotButtonClick, onAutoplayButtonClick, hasAutoplay } =
+      useCarousel()
     return (
       <div className="flex flex-wrap items-center justify-center gap-2">
-        {scrollSnaps.map((_, index) => (
-          <Button
-            ref={ref}
-            variant={variant}
-            size={size}
-            key={index}
-            onClick={() => onDotButtonClick(index)}
-            {...props}
-            className={cn(index === selectedIndex && 'text-muted', className)}
-          >
-            <Circle />
-            <span className="sr-only">Select slide</span>
-          </Button>
-        ))}
+        {scrollSnaps.map((_, index) => {
+          return (
+            <Button
+              ref={ref}
+              variant={variant}
+              size={size}
+              key={index}
+              onClick={() =>
+                hasAutoplay
+                  ? onAutoplayButtonClick(() => onDotButtonClick(index))
+                  : onDotButtonClick(index)
+              }
+              {...props}
+              className={cn(
+                index === selectedIndex
+                  ? variant === 'carouselDotDark'
+                    ? 'text-muted'
+                    : 'text-slate-700'
+                  : '',
+                className,
+              )}
+            >
+              <Circle />
+              <span className="sr-only">Select slide</span>
+            </Button>
+          )
+        })}
       </div>
     )
   },

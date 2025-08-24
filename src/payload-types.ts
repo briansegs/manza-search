@@ -131,6 +131,7 @@ export interface Config {
     art: Art;
     'health-and-wellness': HealthAndWellness;
     signin: Signin;
+    'article-ads': ArticleAd;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -143,6 +144,7 @@ export interface Config {
     art: ArtSelect<false> | ArtSelect<true>;
     'health-and-wellness': HealthAndWellnessSelect<false> | HealthAndWellnessSelect<true>;
     signin: SigninSelect<false> | SigninSelect<true>;
+    'article-ads': ArticleAdsSelect<false> | ArticleAdsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -3212,6 +3214,54 @@ export interface Signin {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-ads".
+ */
+export interface ArticleAd {
+  id: string;
+  adCollections?:
+    | {
+        title: string;
+        adGroups: {
+          title: string;
+          adType: 'black' | 'red' | 'green' | 'yellow' | 'blue';
+          groupImage: string | AdMedia;
+          adSections?:
+            | {
+                title?: string | null;
+                ads?:
+                  | {
+                      media?: (string | null) | AdMedia;
+                      enableLink?: boolean | null;
+                      link?: {
+                        type?: ('reference' | 'custom') | null;
+                        newTab?: boolean | null;
+                        reference?:
+                          | ({
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null)
+                          | ({
+                              relationTo: 'articles';
+                              value: string | Article;
+                            } | null);
+                        url?: string | null;
+                      };
+                      id?: string | null;
+                    }[]
+                  | null;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -3487,6 +3537,50 @@ export interface SigninSelect<T extends boolean = true> {
               userType?: T;
               id?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "article-ads_select".
+ */
+export interface ArticleAdsSelect<T extends boolean = true> {
+  adCollections?:
+    | T
+    | {
+        title?: T;
+        adGroups?:
+          | T
+          | {
+              title?: T;
+              adType?: T;
+              groupImage?: T;
+              adSections?:
+                | T
+                | {
+                    title?: T;
+                    ads?:
+                      | T
+                      | {
+                          media?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                newTab?: T;
+                                reference?: T;
+                                url?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
