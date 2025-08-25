@@ -6,8 +6,10 @@ import { CMSLink } from '@/components/Link'
 import { AdSectionTabsContentProps } from './types'
 
 export function AdSectionTabsContent({ id, ads }: AdSectionTabsContentProps) {
+  if (!id) return null
+
   return (
-    <TabsContent key={id} value={id || ''} className="mx-auto">
+    <TabsContent key={id} value={id} className="mx-auto">
       <div className="grid grid-cols-1 gap-6 p-2 lg:grid-cols-2 lg:p-6 2xl:grid-cols-3">
         {ads?.map(({ media, enableLink, link, id }) => {
           const hasValidLink = isValidLink(link)
