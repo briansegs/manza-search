@@ -52,7 +52,7 @@ export default async function Article({ params: paramsPromise }: Args) {
   const url = '/articles/' + slug
   const article = await queryArticleBySlug({ slug })
 
-  const ads: ArticleAdsGlobalType = await getCachedGlobal('article-ads', 1)()
+  const ads: ArticleAdsGlobalType = await getCachedGlobal('article-ads', 2)()
 
   if (!article) return <PayloadRedirects url={url} />
 

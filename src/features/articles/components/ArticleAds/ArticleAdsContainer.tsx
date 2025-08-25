@@ -26,7 +26,7 @@ export function ArticleAdsContainer({ ads }: ArticleAdsContainerProps) {
           {adCollections && adCollections.length > 0 ? (
             adCollections.map(({ id, adGroups }, index) => {
               return (
-                <ArticleAdsCarousel key={id ? id + index : index}>
+                <ArticleAdsCarousel key={id ?? `collection-${index}`}>
                   <ArticleAdsCarouselContent adGroups={adGroups} />
 
                   <CarouselDotButtons className="mt-2" variant="carouselDotLight" />

@@ -7,7 +7,7 @@ type AdGroup = AdCollection['adGroups'][number]
 type AdSection = NonNullable<AdGroup['adSections']>[number]
 
 // Narrow types
-export type AdType = NonNullable<AdGroup['adType']>
+export type AdType = AdGroup['adType']
 export type AdGroups = AdCollection['adGroups']
 
 // Props
