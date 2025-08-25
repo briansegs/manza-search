@@ -6,7 +6,7 @@ export const revalidateArticleAds: GlobalAfterChangeHook = ({ doc, req: { payloa
   if (!context.disableRevalidate) {
     payload.logger.info(`Revalidating article ads`)
 
-    revalidateTag(`global_${doc.globalType}`)
+    revalidateTag('global_article-ads')
     revalidateTag('articles-sitemap')
     revalidatePath('/articles')
   }
