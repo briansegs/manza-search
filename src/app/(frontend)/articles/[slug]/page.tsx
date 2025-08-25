@@ -16,6 +16,9 @@ import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
 import { ArticleLeftMenuContainer } from '@/features/articles/components/ArticleLeftMenuContainer'
 import { ReadModeProvider } from '@/providers/ReadModeProvider'
 import { TextSizeProvider } from '@/providers/TextSizeProvider'
+import { ArticleAdsContainer } from '@/features/articles/components/ArticleAds/ArticleAdsContainer'
+import { getCachedGlobal } from '@/utilities/getGlobals'
+import type { ArticleAd as ArticleAdsGlobalType } from '@/payload-types'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -49,6 +52,8 @@ export default async function Article({ params: paramsPromise }: Args) {
   const url = '/articles/' + slug
   const article = await queryArticleBySlug({ slug })
 
+  const ads: ArticleAdsGlobalType = await getCachedGlobal('article-ads', 2)()
+
   if (!article) return <PayloadRedirects url={url} />
 
   const { relatedArticles, layout: blocks } = article
@@ -74,6 +79,7 @@ export default async function Article({ params: paramsPromise }: Args) {
               {/* Hero & Content */}
               <ArticleHero article={article} />
               <ArticleTopMenuContainer article={article} className="sm:hidden" />
+              <ArticleAdsContainer ads={ads} />
               <RenderArticleBlocks blocks={blocks ?? []} />
             </TextSizeProvider>
           </ReadModeProvider>

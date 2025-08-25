@@ -3,7 +3,6 @@
 import { CMSLink } from '@/components/Link'
 import { PostingsSection as PostingsSectionProps } from '@/payload-types'
 import React from 'react'
-import clsx from 'clsx'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
@@ -20,22 +19,17 @@ export const PostingsSectionBlock: React.FC<PostingsSectionProps> = (props) => {
     <div className="flex w-full flex-col gap-4 p-2">
       <TitleBar title={title} />
 
-      <div className="border-content w-full overflow-x-auto py-4 md:py-8">
+      <div className="border-content custom-scrollbar w-full overflow-x-auto py-4 md:py-8">
         <div className="mx-auto flex w-fit gap-6 px-4 xl:px-16">
           {postings && postings.length > 0 ? (
-            postings.map(({ id, link, media }, index) => {
+            postings.map(({ id, link, media }) => {
               const hasValidLink =
                 link && (link.type === 'reference' ? link.reference : link.type === 'custom')
 
               return (
                 <div
                   key={id}
-                  className={clsx(
-                    'border-content relative h-72 w-[406px] flex-shrink-0 overflow-hidden rounded-primary hover:shadow-[10px_10px_10px_#60b3d3]',
-                    index === 0 ? 'hover:border-red-500' : '',
-                    index === 1 ? 'hover:border-green-500' : '',
-                    index === 2 ? 'hover:border-blue-500' : '',
-                  )}
+                  className="border-content relative h-72 w-[406px] flex-shrink-0 overflow-hidden rounded-primary hover:shadow-[10px_10px_10px_#60b3d3]"
                 >
                   {hasValidLink ? (
                     <CMSLink {...link}>
