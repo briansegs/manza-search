@@ -36,6 +36,7 @@ import { Topics } from './collections/Topics'
 import { AdMedia } from './collections/AdMedia'
 import { Signin } from './Globals/Signin/config'
 import { ArticleMedia } from './collections/ArticleMedia'
+import { ArticleAds } from './Globals/ArticleAds/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -111,7 +112,19 @@ export default buildConfig({
     Users,
   ],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer, Home, Scope, Literature, Sound, Travel, Art, HealthAndWellness, Signin],
+  globals: [
+    Header,
+    Footer,
+    Home,
+    Scope,
+    Literature,
+    Sound,
+    Travel,
+    Art,
+    HealthAndWellness,
+    Signin,
+    ArticleAds,
+  ],
   plugins: [...plugins],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
