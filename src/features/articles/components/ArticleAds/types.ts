@@ -1,4 +1,5 @@
 import { ArticleAd } from '@/payload-types'
+import type { ReactNode } from 'react'
 
 // Base helpers
 type AdCollection = NonNullable<ArticleAd['adCollections']>[number]
@@ -15,7 +16,7 @@ export type ArticleAdsContainerProps = {
 }
 
 export type ArticleAdsCarouselProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export type ArticleAdsCarouselContentProps = {
