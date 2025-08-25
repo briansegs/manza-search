@@ -10,9 +10,9 @@ import { cn } from '@/utilities/ui'
 
 export function ArticleAdsDialogTrigger({ groupImage, adType }: ArticleAdsDialogTriggerProps) {
   return (
-    <DialogTrigger className="cursor-pointer">
-      <Tooltip>
-        <TooltipTrigger>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <DialogTrigger className="cursor-pointer">
           {groupImage ? (
             <RenderMedia media={groupImage} />
           ) : (
@@ -20,8 +20,10 @@ export function ArticleAdsDialogTrigger({ groupImage, adType }: ArticleAdsDialog
           )}
 
           {adType && <ArticleAdTypeBadge adType={adType} />}
-        </TooltipTrigger>
+        </DialogTrigger>
+      </TooltipTrigger>
 
+      {adType && (
         <TooltipContent
           className={cn('mt-4 border-0 font-semibold text-white', getAdTypeBackgroundColor(adType))}
           side="right"
@@ -29,7 +31,7 @@ export function ArticleAdsDialogTrigger({ groupImage, adType }: ArticleAdsDialog
         >
           {getAdTypeDescription(adType)}
         </TooltipContent>
-      </Tooltip>
-    </DialogTrigger>
+      )}
+    </Tooltip>
   )
 }
