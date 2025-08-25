@@ -1,18 +1,13 @@
 import { AdType } from '@/features/articles/components/ArticleAds/types'
 
-export function getAdTypeDescription(adType: AdType) {
-  switch (adType) {
-    case 'black':
-      return 'Black Friday discount'
-    case 'red':
-      return 'Time limited'
-    case 'green':
-      return 'Great pricing'
-    case 'yellow':
-      return 'Fair pricing'
-    case 'blue':
-      return 'Manza ad'
-    default:
-      return 'Unknown ad type'
-  }
+const DESCRIPTIONS = {
+  black: 'Black Friday discount',
+  red: 'Time limited',
+  green: 'Great pricing',
+  yellow: 'Fair pricing',
+  blue: 'Manza ad',
+} as const satisfies Record<AdType, string>
+
+export function getAdTypeDescription(adType: AdType): string {
+  return DESCRIPTIONS[adType] ?? 'Unknown ad type'
 }
