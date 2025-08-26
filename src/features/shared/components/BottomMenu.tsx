@@ -5,6 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/utilities/ui'
 
 import { noScrollbarsClassName } from 'react-remove-scroll-bar'
+import { ToolsMenu } from '@/features/toolsMenu/components/ToolsMenu'
 
 export function BottomMenu() {
   return (
@@ -21,10 +22,15 @@ export function BottomMenu() {
               Tools
             </Button>
           </PopoverTrigger>
+
           <PopoverContent
-            className={cn('rounded-lg border-2 border-black bg-menu font-serif text-white', 'h-28')}
+            sideOffset={0}
+            className={cn(
+              'ml-0 w-fit rounded-lg border-2 border-red-500 bg-menu font-serif text-white',
+              'lg:ml-28',
+            )}
           >
-            Content...
+            <ToolsMenu />
           </PopoverContent>
         </Popover>
       </div>
