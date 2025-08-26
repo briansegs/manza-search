@@ -45,16 +45,13 @@ export function ToolsMenu() {
       <div className="grid w-full grid-cols-2 gap-y-4 sm:grid-cols-3">
         {menuItems.map(({ label, id }) => {
           return (
-            <div
-              key={id}
-              className="flex cursor-pointer flex-col items-center gap-2 hover:text-secondary-blue"
-            >
+            <button key={id} className="flex flex-col items-center gap-2 hover:text-secondary-blue">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-300 p-2 text-2xl text-white">
                 PP
               </div>
 
-              <div className="text-nowrap font-serif capitalize">{label}</div>
-            </div>
+              <div className="whitespace-nowrap font-serif capitalize">{label}</div>
+            </button>
           )
         })}
       </div>
