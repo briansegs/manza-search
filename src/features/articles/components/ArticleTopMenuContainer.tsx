@@ -8,7 +8,7 @@ import getSectionTitles from '@/utilities/getSectionTitles'
 import { cn } from '@/utilities/ui'
 import { ArticleTopMenuContainerProps } from '../types'
 
-export function ArticleTopMenuContainer({ article, className }: ArticleTopMenuContainerProps) {
+export function ArticleTopMenuContainer({ article, className, url }: ArticleTopMenuContainerProps) {
   const { populatedAuthors, externalAuthors, otherVerifiedSources, layout } = article
 
   const authorList = getAuthorList({ populatedAuthors, externalAuthors })
@@ -30,6 +30,7 @@ export function ArticleTopMenuContainer({ article, className }: ArticleTopMenuCo
               sectionTitles={sectionTitles}
               otherVerifiedSources={otherVerifiedSources}
               authors={authorList}
+              url={url}
             />
           </DropdownMenu>
 

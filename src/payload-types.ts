@@ -253,6 +253,29 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | ArticleMedia;
+  images?:
+    | {
+        image?: (string | null) | ArticleMedia;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        imageType?: ('manza-database' | 'outside-link') | null;
+        id?: string | null;
+      }[]
+    | null;
+  relatedImages?: (string | Article)[] | null;
   layout?: (PostingsSection | ContentSection | ResourceSection)[] | null;
   relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
@@ -2138,6 +2161,23 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        imageType?: T;
+        id?: T;
+      };
+  relatedImages?: T;
   layout?:
     | T
     | {

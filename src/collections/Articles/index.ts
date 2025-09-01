@@ -77,6 +77,66 @@ export const Articles: CollectionConfig<'articles'> = {
           label: 'Hero',
         },
         {
+          label: 'Images',
+          fields: [
+            {
+              name: 'images',
+              type: 'array',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'article-media',
+                },
+                {
+                  name: 'enableLink',
+                  type: 'checkbox',
+                },
+                link({
+                  overrides: {
+                    admin: {
+                      condition: (_, { enableLink }) => Boolean(enableLink),
+                    },
+                  },
+                  appearances: false,
+                  disableLabel: true,
+                }),
+                {
+                  name: 'imageType',
+                  type: 'radio',
+                  options: [
+                    {
+                      label: 'Manza Database',
+                      value: 'manza-database',
+                    },
+                    {
+                      label: 'Outside Link',
+                      value: 'outside-link',
+                    },
+                  ],
+                  defaultValue: 'manza-database',
+                },
+              ],
+            },
+            {
+              name: 'relatedImages',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              filterOptions: ({ id }) => {
+                return {
+                  id: {
+                    not_in: [id],
+                  },
+                }
+              },
+              hasMany: true,
+              relationTo: 'articles',
+            },
+          ],
+        },
+        {
           fields: [
             {
               name: 'layout',

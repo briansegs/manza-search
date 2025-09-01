@@ -28,16 +28,20 @@ type RenderMediaProps = {
   media: string | AnyMedia
   quality?: number | string
   size?: string
+  fill?: boolean
+  width?: number
+  height?: number
+  className?: string
 }
 
-export function RenderMedia({ media, quality, size }: RenderMediaProps) {
+export function RenderMedia({ media, quality, size, fill = true, className }: RenderMediaProps) {
   return (
     <Media
       resource={media}
       quality={quality}
       size={size}
-      imgClassName="size-full object-cover"
-      fill
+      imgClassName={className ? className : 'size-full object-cover'}
+      fill={fill}
     />
   )
 }

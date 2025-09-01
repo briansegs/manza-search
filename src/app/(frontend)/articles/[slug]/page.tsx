@@ -70,15 +70,19 @@ export default async function Article({ params: paramsPromise }: Args) {
       <RelatedArticles articles={relatedArticles} />
 
       <div className="flex">
-        <ArticleLeftMenuContainer article={article} />
+        <ArticleLeftMenuContainer url={url} article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
           <ReadModeProvider>
             <TextSizeProvider>
-              <ArticleTopMenuContainer article={article} className="hidden sm:block lg:ml-auto" />
+              <ArticleTopMenuContainer
+                url={url}
+                article={article}
+                className="hidden sm:block lg:ml-auto"
+              />
               {/* Hero & Content */}
               <ArticleHero article={article} />
-              <ArticleTopMenuContainer article={article} className="sm:hidden" />
+              <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
               <ArticleAdsContainer ads={ads} />
               <RenderArticleBlocks blocks={blocks ?? []} />
             </TextSizeProvider>
