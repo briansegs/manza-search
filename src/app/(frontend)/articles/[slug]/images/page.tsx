@@ -83,9 +83,7 @@ export async function generateMetadata({ params: paramsPromise }: Args) {
     },
   })
 
-  const title = result.docs?.[0]?.title || null
-
-  return {
-    title: `${title} - Images | Manza Search`,
-  }
+  const title = result.docs?.[0]?.title
+  const pageTitle = title ? `${title} - Images | Manza Search` : 'Article Images | Manza Search'
+  return { title: pageTitle }
 }
