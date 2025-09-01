@@ -25,7 +25,7 @@ export default async function ArticleImages({ params }: Args) {
   return (
     <div className="min-h-screen pb-16">
       <PageClient />
-      <RelatedImages images={relatedImages || {}} />
+      <RelatedImages images={relatedImages || []} />
       <div className="h-full bg-black">
         <div className="h-full">
           {(!internalImages || internalImages.length === 0) &&
