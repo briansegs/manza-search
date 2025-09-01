@@ -9,16 +9,18 @@ import { ImageGallery } from './ImageGallery'
 import { useState } from 'react'
 import { ArticleImageGalleryProps } from './types'
 
-export function ArticleImageGallery({ externalImages, internalImages }: ArticleImageGalleryProps) {
-  const [activeTab, setActiveTab] = useState('outside-link')
+type TabValue = 'outside-link' | 'manza-database'
 
-  const tabTitles: Record<string, string> = {
+export function ArticleImageGallery({ externalImages, internalImages }: ArticleImageGalleryProps) {
+  const [activeTab, setActiveTab] = useState<TabValue>('outside-link')
+
+  const tabTitles: Record<TabValue, string> = {
     'outside-link': 'On Links',
     'manza-database': 'On Manza Database',
   }
 
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab}>
+    <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TabValue)}>
       <div className="ml-0 flex flex-col items-center gap-0 sm:ml-12 sm:flex-row sm:gap-4">
         <div className="w-[200px] text-center font-serif text-2xl text-white sm:text-right">
           {tabTitles[activeTab]}
