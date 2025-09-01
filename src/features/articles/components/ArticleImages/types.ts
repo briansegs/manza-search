@@ -19,3 +19,9 @@ export type ArticleImageGalleryProps = {
   externalImages: ArticleImage
   internalImages: ArticleImage
 }
+
+export type GalleryImageProps = Pick<ArticleImageItem, 'link' | 'enableLink'> & {
+  image: ArticleMediaOnly | undefined
+  imageWidth: number
+  hasValidLink: boolean
+}

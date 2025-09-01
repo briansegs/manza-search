@@ -1,11 +1,9 @@
 'use client'
 
 import { isValidLink } from '@/utilities/isValidLink'
-import { CMSLink } from '@/components/Link'
-import { RenderMedia } from '@/features/shared/components/RenderMedia'
-import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { useEffect, useRef, useState } from 'react'
 import { ArticleImageItem, ArticleMediaOnly, ImageGalleryProps } from './types'
+import { GalleryImage } from './GalleryImage'
 
 const GAP = 16 // px gap between images
 
@@ -91,25 +89,14 @@ export function ImageGallery({ images, tabTitle }: ImageGalleryProps) {
                 const hasValidLink = isValidLink(link)
 
                 return (
-                  <div
+                  <GalleryImage
                     key={id}
-                    className="group relative overflow-hidden border-2 border-black shadow-[10px_10px_10px_black] hover:border-secondary-blue"
-                    style={{ width: `${imageWidth}px`, flexShrink: 0 }}
-                  >
-                    {hasValidLink && enableLink ? (
-                      <CMSLink {...link}>
-                        {image ? (
-                          <RenderMedia media={image} className="h-full w-full object-cover" />
-                        ) : (
-                          <ImagePlaceholder />
-                        )}
-                      </CMSLink>
-                    ) : image ? (
-                      <RenderMedia media={image} className="h-full w-full object-cover" />
-                    ) : (
-                      <ImagePlaceholder />
-                    )}
-                  </div>
+                    link={link}
+                    enableLink={enableLink}
+                    image={image}
+                    imageWidth={imageWidth}
+                    hasValidLink={hasValidLink}
+                  />
                 )
               })}
             </div>
