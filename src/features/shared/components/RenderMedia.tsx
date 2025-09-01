@@ -29,8 +29,6 @@ type RenderMediaProps = {
   quality?: number | string
   size?: string
   fill?: boolean
-  width?: number
-  height?: number
   className?: string
 }
 
