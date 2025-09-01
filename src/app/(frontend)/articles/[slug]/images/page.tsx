@@ -28,8 +28,7 @@ export default async function ArticleImages({ params }: Args) {
       <RelatedImages images={relatedImages || []} />
       <div className="h-full bg-black">
         <div className="h-full">
-          {(!internalImages || internalImages.length === 0) &&
-          (!externalImages || externalImages.length === 0) ? (
+          {internalImages.length === 0 && externalImages.length === 0 ? (
             <div className="mt-12 bg-white text-center">No Images for this article yet</div>
           ) : (
             <ArticleImageGallery internalImages={internalImages} externalImages={externalImages} />
@@ -60,10 +59,10 @@ const queryArticleImagesBySlug = cache(async ({ slug }: { slug: string }) => {
     },
   })
 
-  const articles = result.docs?.[0] || null
+  const article = result.docs?.[0] || null
 
-  const images = articles?.images
-  const relatedImages = articles?.relatedImages
+  const images = article?.images
+  const relatedImages = article?.relatedImages
 
   return { images, relatedImages }
 })
