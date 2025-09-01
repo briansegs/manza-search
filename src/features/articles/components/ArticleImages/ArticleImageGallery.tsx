@@ -5,13 +5,9 @@ import {
   ImageGalleryTabsList,
   ImageGalleryTabsTrigger,
 } from '@/features/articles/components/ArticleImages/ImageGalleryTabs'
-import { type ArticleImage, ImageGallery } from './ImageGallery'
+import { ImageGallery } from './ImageGallery'
 import { useState } from 'react'
-
-type ArticleImageGalleryProps = {
-  externalImages: ArticleImage
-  internalImages: ArticleImage
-}
+import { ArticleImageGalleryProps } from './types'
 
 export function ArticleImageGallery({ externalImages, internalImages }: ArticleImageGalleryProps) {
   const [activeTab, setActiveTab] = useState('outside-link')
