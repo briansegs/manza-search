@@ -3,6 +3,7 @@ import { ArticleMenuButton } from './ArticleMenuButton'
 import { ArticlePopoverButton } from './ArticlePopoverButton'
 import scrollToTop from '@/utilities/scrollToTop'
 import { ArticleLeftMenuProps } from '../types'
+import Link from 'next/link'
 
 const MenuSeparator = () => <div className="mb-2 h-1 w-full bg-black" />
 
@@ -10,12 +11,16 @@ export function ArticleLeftMenu({
   authors,
   otherVerifiedSources,
   sectionTitles,
+  url,
 }: ArticleLeftMenuProps) {
   return (
     <>
       <div className="flex flex-col items-center gap-4">
         <ArticleMenuButton onClick={scrollToTop}>TOP</ArticleMenuButton>
-        <ArticleMenuButton>IMG</ArticleMenuButton>
+
+        <ArticleMenuButton asChild>
+          <Link href={`${url}/images`}>IMG</Link>
+        </ArticleMenuButton>
         <ArticleMenuButton>VIDS</ArticleMenuButton>
       </div>
 

@@ -4,7 +4,7 @@ import getAuthorList from '@/utilities/getAuthorList'
 import getSectionTitles from '@/utilities/getSectionTitles'
 import { ArticleLeftMenuContainerProps } from '../types'
 
-export function ArticleLeftMenuContainer({ article }: ArticleLeftMenuContainerProps) {
+export function ArticleLeftMenuContainer({ article, url }: ArticleLeftMenuContainerProps) {
   const { populatedAuthors, externalAuthors, otherVerifiedSources, layout } = article
 
   const authorList = getAuthorList({ populatedAuthors, externalAuthors })
@@ -17,6 +17,7 @@ export function ArticleLeftMenuContainer({ article }: ArticleLeftMenuContainerPr
         authors={authorList}
         otherVerifiedSources={otherVerifiedSources}
         sectionTitles={sectionTitles}
+        url={url}
       />
     </div>
   )

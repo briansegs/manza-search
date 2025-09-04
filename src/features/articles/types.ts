@@ -21,10 +21,12 @@ export type ArticleArchiveProps = {
 export type ArticleLeftMenuProps = Pick<Article, 'otherVerifiedSources'> & {
   authors: string[]
   sectionTitles: sectionTitle[]
+  url?: string
 }
 
 export interface ArticleLeftMenuContainerProps {
   article: Article
+  url?: string
 }
 
 export type ArticleMenuButtonProps = ButtonProps & {
@@ -40,6 +42,7 @@ export type PopoverButtonProps = {
 export type ArticleTopMenuContainerProps = {
   article: Article
   className: string
+  url?: string
 }
 
 export type RelatedArticlesProps = {

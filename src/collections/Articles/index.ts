@@ -77,6 +77,55 @@ export const Articles: CollectionConfig<'articles'> = {
           label: 'Hero',
         },
         {
+          label: 'Images',
+          fields: [
+            {
+              name: 'relatedImages',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              filterOptions: ({ id }) => {
+                return {
+                  id: {
+                    not_in: [id],
+                  },
+                }
+              },
+              hasMany: true,
+              relationTo: 'articles',
+            },
+            {
+              name: 'internal-images',
+              type: 'array',
+              minRows: 1,
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'article-media',
+                },
+              ],
+            },
+            {
+              name: 'outside-images',
+              type: 'array',
+              minRows: 1,
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'article-media',
+                },
+                link({
+                  appearances: false,
+                  disableLabel: true,
+                }),
+              ],
+            },
+          ],
+        },
+        {
           fields: [
             {
               name: 'layout',

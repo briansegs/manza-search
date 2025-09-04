@@ -253,6 +253,33 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | ArticleMedia;
+  relatedImages?: (string | Article)[] | null;
+  'internal-images'?:
+    | {
+        image?: (string | null) | ArticleMedia;
+        id?: string | null;
+      }[]
+    | null;
+  'outside-images'?:
+    | {
+        image?: (string | null) | ArticleMedia;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
   layout?: (PostingsSection | ContentSection | ResourceSection)[] | null;
   relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
@@ -2138,6 +2165,27 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
+  relatedImages?: T;
+  'internal-images'?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  'outside-images'?:
+    | T
+    | {
+        image?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
   layout?:
     | T
     | {
