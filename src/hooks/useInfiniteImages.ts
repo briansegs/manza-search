@@ -28,22 +28,25 @@ export function useInfiniteImages(
   const fetchMore = useCallback(async () => {
     if (loading || !hasMore) return
     setLoading(true)
-
     const nextPage = page + 1
-    const res = await fetch(
-      `/api/article-images/${slug}?page=${nextPage}&imagesType=${imagesType}&limit=${limit}`,
-    )
-    const data = await res.json()
-
-    if (data.docs?.length > 0) {
-      setImages((prev) => [...prev, ...data.docs])
-      setPage(nextPage)
-      setHasMore(nextPage < data.totalPages)
-    } else {
-      setHasMore(false)
+    try {
+      const res = await fetch(
+        `/api/article-images/${slug}?page=${nextPage}&imagesType=${imagesType}&limit=${limit}`,
+      )
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const data = await res.json()
+      if (Array.isArray(data.docs) && data.docs.length > 0) {
+        setImages((prev) => [...prev, ...data.docs])
+        setPage(nextPage)
+        setHasMore(nextPage < data.totalPages)
+      } else {
+        setHasMore(false)
+      }
+    } catch (err) {
+      console.error('Failed to fetch more images:', err)
+    } finally {
+      setLoading(false)
     }
-
-    setLoading(false)
   }, [page, slug, imagesType, limit, hasMore, loading])
 
   useEffect(() => {
