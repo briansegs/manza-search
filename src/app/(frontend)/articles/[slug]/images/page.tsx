@@ -17,10 +17,16 @@ export default async function ArticleImages({ params }: Args) {
   const { slug = '' } = await params
   const imagesData = await queryArticleImagesBySlug({ slug })
 
-  const { images, relatedImages } = imagesData
+  const {
+    relatedImages,
+    outsideImages,
+    internalImages,
+    hasOutsideImagesToLoad,
+    hasInternalImagesToLoad,
+    imageLimit,
+  } = imagesData
 
-  const internalImages = images?.filter((img) => img.imageType === 'manza-database') || []
-  const externalImages = images?.filter((img) => img.imageType === 'outside-link') || []
+  const hasNoImages = internalImages.length === 0 && outsideImages.length === 0
 
   return (
     <div className="min-h-screen pb-16">
@@ -28,10 +34,17 @@ export default async function ArticleImages({ params }: Args) {
       <RelatedImages images={relatedImages || []} />
       <div className="h-full bg-black">
         <div className="h-full">
-          {internalImages.length === 0 && externalImages.length === 0 ? (
+          {hasNoImages ? (
             <div className="mt-12 bg-white text-center">No Images for this article yet</div>
           ) : (
-            <ArticleImageGallery internalImages={internalImages} externalImages={externalImages} />
+            <ArticleImageGallery
+              internalImages={internalImages}
+              externalImages={outsideImages}
+              hasOutsideImagesToLoad={hasOutsideImagesToLoad}
+              hasInternalImagesToLoad={hasInternalImagesToLoad}
+              slug={slug}
+              imageLimit={imageLimit}
+            />
           )}
         </div>
       </div>
@@ -60,11 +73,27 @@ const queryArticleImagesBySlug = cache(async ({ slug }: { slug: string }) => {
   })
 
   const article = result.docs?.[0] || null
+  const imageLimit = 30
 
-  const images = article?.images
   const relatedImages = article?.relatedImages
 
-  return { images, relatedImages }
+  const allOutsideImages = article?.['outside-images'] || []
+  const hasOutsideImagesToLoad = allOutsideImages.length > imageLimit
+
+  const allInternalImages = article?.['internal-images'] || []
+  const hasInternalImagesToLoad = allInternalImages.length > imageLimit
+
+  const outsideImages = allOutsideImages.slice(0, imageLimit)
+  const internalImages = allInternalImages.slice(0, imageLimit)
+
+  return {
+    relatedImages,
+    outsideImages,
+    internalImages,
+    hasOutsideImagesToLoad,
+    hasInternalImagesToLoad,
+    imageLimit,
+  }
 })
 
 export async function generateMetadata({ params: paramsPromise }: Args) {

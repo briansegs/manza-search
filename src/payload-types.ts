@@ -253,10 +253,16 @@ export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | ArticleMedia;
-  images?:
+  relatedImages?: (string | Article)[] | null;
+  'internal-images'?:
     | {
         image?: (string | null) | ArticleMedia;
-        enableLink?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  'outside-images'?:
+    | {
+        image?: (string | null) | ArticleMedia;
         link?: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
@@ -271,11 +277,9 @@ export interface Article {
               } | null);
           url?: string | null;
         };
-        imageType?: ('manza-database' | 'outside-link') | null;
         id?: string | null;
       }[]
     | null;
-  relatedImages?: (string | Article)[] | null;
   layout?: (PostingsSection | ContentSection | ResourceSection)[] | null;
   relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
@@ -2161,11 +2165,17 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
-  images?:
+  relatedImages?: T;
+  'internal-images'?:
     | T
     | {
         image?: T;
-        enableLink?: T;
+        id?: T;
+      };
+  'outside-images'?:
+    | T
+    | {
+        image?: T;
         link?:
           | T
           | {
@@ -2174,10 +2184,8 @@ export interface ArticlesSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
             };
-        imageType?: T;
         id?: T;
       };
-  relatedImages?: T;
   layout?:
     | T
     | {

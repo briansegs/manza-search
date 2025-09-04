@@ -1,29 +1,42 @@
 'use client'
 
 import { isValidLink } from '@/utilities/isValidLink'
-import { useEffect, useRef, useState } from 'react'
-import { ArticleImageItem, ArticleMediaOnly, ImageGalleryProps } from './types'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { GalleryImageItem, GalleryMedia, ImageGalleryProps } from './types'
 import { GalleryImage } from './GalleryImage'
+import { useInfiniteImages } from '@/hooks/useInfiniteImages'
+import { LoaderCircle } from 'lucide-react'
 
 const GAP = 16 // px gap between images
+const MIN_ROW_HEIGHT = 150
+const MAX_ROW_HEIGHT = 250
+const TARGET_HEIGHT = 200
+
+// Normalize image data and calculate aspect ratio
+const getImageAspectRatio = (item: GalleryImageItem) => {
+  const media: GalleryMedia | undefined =
+    typeof item.image !== 'string' && item.image ? item.image : undefined
+  const width = media?.cloudinary?.width ?? 1
+  const height = media?.cloudinary?.height ?? 1
+  return width / height
+}
 
 const calculateJustifiedRows = (
-  images: ArticleImageItem[],
+  images: GalleryImageItem[],
   containerWidth: number,
-  targetHeight = 200,
+  targetHeight = TARGET_HEIGHT,
 ) => {
-  const rows: ArticleImageItem[][] = []
-  let currentRow: ArticleImageItem[] = []
+  const rows: GalleryImageItem[][] = []
+  let currentRow: GalleryImageItem[] = []
   let currentRowWidth = 0
 
-  for (const item of images ?? []) {
-    const image = typeof item.image !== 'string' && item.image ? item.image : undefined
-    const aspectRatio = (image?.cloudinary?.width || 0) / (image?.cloudinary?.height || 1)
-    const scaledWidth = targetHeight * aspectRatio
+  for (const item of images) {
+    const scaledWidth = targetHeight * getImageAspectRatio(item)
+    const spacing = currentRow.length ? GAP : 0
 
-    if (currentRowWidth + (currentRow.length ? GAP : 0) + scaledWidth <= containerWidth) {
+    if (currentRowWidth + spacing + scaledWidth <= containerWidth) {
       currentRow.push(item)
-      currentRowWidth += (currentRow.length ? GAP : 0) + scaledWidth
+      currentRowWidth += spacing + scaledWidth
     } else {
       if (currentRow.length) rows.push([...currentRow])
       currentRow = [item]
@@ -35,15 +48,35 @@ const calculateJustifiedRows = (
   return rows
 }
 
-export function ImageGallery({ images, tabTitle }: ImageGalleryProps) {
+const calculateRowHeight = (row: GalleryImageItem[], containerWidth: number) => {
+  const totalAspectRatio = row.reduce((sum, item) => sum + getImageAspectRatio(item), 0)
+  return Math.max(
+    MIN_ROW_HEIGHT,
+    Math.min(MAX_ROW_HEIGHT, (containerWidth - (row.length - 1) * GAP) / totalAspectRatio),
+  )
+}
+
+export function ImageGallery({
+  images: initialImages,
+  tabTitle,
+  slug,
+  imagesType,
+  imageLimit,
+  hasImagesToLoad,
+}: ImageGalleryProps) {
+  const { images, loaderRef, hasMore, loading } = useInfiniteImages(
+    slug,
+    initialImages || [],
+    imagesType,
+    imageLimit,
+  )
   const [containerWidth, setContainerWidth] = useState(1200)
-  const [justifiedRows, setJustifiedRows] = useState<ArticleImageItem[][]>([])
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Calculate rows whenever images or container width change
-  useEffect(() => {
-    setJustifiedRows(calculateJustifiedRows(images ?? [], containerWidth, 200))
-  }, [images, containerWidth])
+  const justifiedRows = useMemo(
+    () => calculateJustifiedRows(images ?? [], containerWidth, TARGET_HEIGHT),
+    [images, containerWidth],
+  )
 
   // Resize observer to update container width
   useEffect(() => {
@@ -51,9 +84,7 @@ export function ImageGallery({ images, tabTitle }: ImageGalleryProps) {
     if (!container) return
 
     const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        setContainerWidth(entry.contentRect.width)
-      }
+      for (const entry of entries) setContainerWidth(entry.contentRect.width)
     })
 
     resizeObserver.observe(container)
@@ -68,31 +99,21 @@ export function ImageGallery({ images, tabTitle }: ImageGalleryProps) {
     <div className="flex h-full w-full flex-col items-center bg-white p-4">
       <div ref={containerRef} className="flex w-full flex-col gap-4">
         {justifiedRows.map((row, rowIndex) => {
-          // Calculate row height based on total aspect ratios
-          const totalAspectRatio = row.reduce((sum, item) => {
-            const media = typeof item.image !== 'string' && item.image ? item.image : undefined
-            return sum + (media?.cloudinary?.width ?? 0) / (media?.cloudinary?.height ?? 1)
-          }, 0)
-
-          const rowHeight = Math.max(
-            150,
-            Math.min(250, (containerWidth - (row.length - 1) * GAP) / totalAspectRatio),
-          )
+          const rowHeight = calculateRowHeight(row, containerWidth)
 
           return (
             <div key={rowIndex} className="flex gap-4" style={{ height: `${rowHeight}px` }}>
-              {row.map(({ id, link, enableLink, image: imageItem }) => {
-                const image: ArticleMediaOnly | undefined =
-                  typeof imageItem !== 'string' && imageItem ? imageItem : undefined
-                const imageWidth =
-                  rowHeight * ((image?.cloudinary?.width ?? 0) / (image?.cloudinary?.height ?? 1))
+              {row.map((item) => {
+                const image: GalleryMedia | undefined =
+                  typeof item.image !== 'string' && item.image ? item.image : undefined
+                const imageWidth = rowHeight * getImageAspectRatio(item)
+                const link = 'link' in item ? item.link : undefined
                 const hasValidLink = isValidLink(link)
 
                 return (
                   <GalleryImage
-                    key={id}
+                    key={item.id}
                     link={link}
-                    enableLink={enableLink}
                     image={image}
                     imageWidth={imageWidth}
                     hasValidLink={hasValidLink}
@@ -103,6 +124,12 @@ export function ImageGallery({ images, tabTitle }: ImageGalleryProps) {
           )
         })}
       </div>
+
+      {hasImagesToLoad && hasMore && (
+        <div ref={loaderRef} className="flex justify-center">
+          {loading && <LoaderCircle className="my-8 size-14 animate-spin text-muted" />}
+        </div>
+      )}
     </div>
   )
 }

@@ -80,45 +80,6 @@ export const Articles: CollectionConfig<'articles'> = {
           label: 'Images',
           fields: [
             {
-              name: 'images',
-              type: 'array',
-              fields: [
-                {
-                  name: 'image',
-                  type: 'upload',
-                  relationTo: 'article-media',
-                },
-                {
-                  name: 'enableLink',
-                  type: 'checkbox',
-                },
-                link({
-                  overrides: {
-                    admin: {
-                      condition: (_, { enableLink }) => Boolean(enableLink),
-                    },
-                  },
-                  appearances: false,
-                  disableLabel: true,
-                }),
-                {
-                  name: 'imageType',
-                  type: 'radio',
-                  options: [
-                    {
-                      label: 'Manza Database',
-                      value: 'manza-database',
-                    },
-                    {
-                      label: 'Outside Link',
-                      value: 'outside-link',
-                    },
-                  ],
-                  defaultValue: 'manza-database',
-                },
-              ],
-            },
-            {
               name: 'relatedImages',
               type: 'relationship',
               admin: {
@@ -133,6 +94,32 @@ export const Articles: CollectionConfig<'articles'> = {
               },
               hasMany: true,
               relationTo: 'articles',
+            },
+            {
+              name: 'internal-images',
+              type: 'array',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'article-media',
+                },
+              ],
+            },
+            {
+              name: 'outside-images',
+              type: 'array',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'article-media',
+                },
+                link({
+                  appearances: false,
+                  disableLabel: true,
+                }),
+              ],
             },
           ],
         },

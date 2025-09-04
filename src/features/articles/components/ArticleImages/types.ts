@@ -1,14 +1,25 @@
 import { Article, ArticleMedia } from '@/payload-types'
 
-export type ArticleImage = Article['images']
+export type ImageSourceKey = 'outside-images' | 'internal-images'
 
-export type ArticleImageItem = NonNullable<ArticleImage>[number]
+export type ExternalImages = Article['outside-images']
+export type InternalImages = Article['internal-images']
 
-export type ArticleMediaOnly = Extract<ArticleImageItem['image'], ArticleMedia>
+export type GalleryImages = ExternalImages | InternalImages
+
+export type GalleryImageItem = NonNullable<GalleryImages>[number]
+
+export type GalleryMedia = GalleryImageItem['image'] & ArticleMedia
+
+export type GalleryImageWithLink = Extract<GalleryImageItem, { link?: unknown }>
 
 export type ImageGalleryProps = {
-  images: ArticleImage
+  images: GalleryImages
   tabTitle: string
+  slug: string
+  imagesType: ImageSourceKey
+  imageLimit: number
+  hasImagesToLoad: boolean
 }
 
 export type RelatedImagesProps = {
@@ -16,12 +27,20 @@ export type RelatedImagesProps = {
 }
 
 export type ArticleImageGalleryProps = {
-  externalImages: ArticleImage
-  internalImages: ArticleImage
+  externalImages: ExternalImages
+  internalImages: InternalImages
+  hasOutsideImagesToLoad: boolean
+  hasInternalImagesToLoad: boolean
+  slug: string
+  imageLimit: number
 }
 
-export type GalleryImageProps = Pick<ArticleImageItem, 'link' | 'enableLink'> & {
-  image: ArticleMediaOnly | undefined
+export type GalleryImageProps = Pick<GalleryImageWithLink, 'link'> & {
+  image?: GalleryMedia
   imageWidth: number
   hasValidLink: boolean
+}
+
+export type RenderGalleryImageProps = {
+  image: GalleryMedia
 }
