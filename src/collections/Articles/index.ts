@@ -98,6 +98,7 @@ export const Articles: CollectionConfig<'articles'> = {
             {
               name: 'internal-images',
               type: 'array',
+              minRows: 1,
               fields: [
                 {
                   name: 'image',
@@ -109,6 +110,7 @@ export const Articles: CollectionConfig<'articles'> = {
             {
               name: 'outside-images',
               type: 'array',
+              minRows: 1,
               fields: [
                 {
                   name: 'image',
