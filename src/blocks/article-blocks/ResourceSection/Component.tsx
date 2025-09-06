@@ -1,5 +1,4 @@
 import { type ResourceSection as ResourceSectionType } from '@/payload-types'
-import React from 'react'
 import { ImagesSection } from './Images/ImagesSection'
 import { BooksSection } from './Books/BooksSection'
 import { AudioSection } from './Audio/AudioSection'
@@ -24,6 +23,8 @@ export function ResourceSection(props: ResourceSectionProps) {
   if (!type) return null
 
   const ResourceToRender = resource[type]
+
+  if (!ResourceToRender) return null
 
   return <ResourceToRender {...props} />
 }
