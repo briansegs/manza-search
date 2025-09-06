@@ -3,22 +3,11 @@
 import TitleBar from '../../TitleBar'
 import { useReadMode } from '@/providers/ReadModeProvider'
 
-import { Article, ResourceSection } from '@/payload-types'
 import { isValidLink } from '@/utilities/isValidLink'
 import { CMSLinkType } from '@/components/Link'
 import { ArticleImagesLink } from '@/features/articles/components/ImagesSection/ArticleImagesLink'
 import { ImageSectionImage } from '@/features/articles/components/ImagesSection/ImageSectionImage'
-
-type ExternalImages = Article['outside-images']
-type InternalImages = Article['internal-images']
-
-type ImagesClientProps = ResourceSection & {
-  slug: string
-  imagesData: {
-    internalImages: InternalImages
-    outsideImages: ExternalImages
-  }
-}
+import { ImagesClientProps } from '../types'
 
 export function ImagesClient(props: ImagesClientProps) {
   const { readMode } = useReadMode()

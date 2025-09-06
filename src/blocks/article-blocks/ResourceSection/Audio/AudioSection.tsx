@@ -1,6 +1,6 @@
-import { ResourceSection } from '@/payload-types'
 import React from 'react'
 import TitleBar from '../../TitleBar'
+import { ResourceWithSlug } from '../types'
 
 type AudioType = {
   name: string
@@ -8,7 +8,7 @@ type AudioType = {
 
 const audio: AudioType[] = []
 
-export function AudioSection(props: ResourceSection) {
+export function AudioSection(props: ResourceWithSlug) {
   const { title } = props
 
   return (

@@ -4,11 +4,7 @@ import { cache } from 'react'
 import { draftMode } from 'next/headers'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { ResourceSection } from '@/payload-types'
-
-type ImagesProps = ResourceSection & {
-  slug: string
-}
+import { ImagesProps } from '../types'
 
 export async function ImagesSection(props: ImagesProps) {
   const { slug } = props

@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button'
-import { Media, ResourceSection } from '@/payload-types'
+import { Media } from '@/payload-types'
 import React from 'react'
 import clsx from 'clsx'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../../TitleBar'
+import { ResourceWithSlug } from '../types'
 
 type VideosType = {
   image?: Media
@@ -38,7 +39,7 @@ const videos: VideosType[] = [
 const buttonStyles =
   'size-14 rounded-full border-4 border-white bg-black text-xl text-white hover:bg-black hover:text-secondary-blue'
 
-export function VideosSection(props: ResourceSection) {
+export function VideosSection(props: ResourceWithSlug) {
   const { title } = props
 
   return (
