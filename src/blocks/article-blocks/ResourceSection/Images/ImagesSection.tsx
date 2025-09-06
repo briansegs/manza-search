@@ -4,9 +4,9 @@ import { cache } from 'react'
 import { draftMode } from 'next/headers'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { ImagesProps } from '../types'
+import { ResourceWithSlug } from '../types'
 
-export async function ImagesSection(props: ImagesProps) {
+export async function ImagesSection(props: ResourceWithSlug) {
   const { slug } = props
   const { isEnabled: draft } = await draftMode()
 
