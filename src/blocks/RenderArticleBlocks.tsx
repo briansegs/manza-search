@@ -18,7 +18,8 @@ const blockComponents = {
 
 export const RenderArticleBlocks: React.FC<{
   blocks: (PostingsSectionBlockType | ContentSectionType | ResourceSectionType)[] | null
-}> = ({ blocks }) => {
+  slug: string
+}> = ({ blocks, slug }) => {
   const validBlocks = Array.isArray(blocks) ? blocks : []
   if (validBlocks.length > 0) {
     return (
@@ -33,7 +34,7 @@ export const RenderArticleBlocks: React.FC<{
               return (
                 <div className="my-[2px]" key={index} id={block.id ?? undefined}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                  <Block {...block} disableInnerContainer />
+                  <Block {...block} disableInnerContainer slug={slug} />
                 </div>
               )
             }

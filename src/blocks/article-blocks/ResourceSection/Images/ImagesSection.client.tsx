@@ -1,0 +1,64 @@
+'use client'
+
+import TitleBar from '../../TitleBar'
+import { useReadMode } from '@/providers/ReadModeProvider'
+
+import { Article, ResourceSection } from '@/payload-types'
+import { isValidLink } from '@/utilities/isValidLink'
+import { CMSLinkType } from '@/components/Link'
+import { ArticleImagesLink } from '@/features/articles/components/ImagesSection/ArticleImagesLink'
+import { ImageSectionImage } from '@/features/articles/components/ImagesSection/ImageSectionImage'
+
+type ExternalImages = Article['outside-images']
+type InternalImages = Article['internal-images']
+
+type ImagesClientProps = ResourceSection & {
+  slug: string
+  imagesData: {
+    internalImages: InternalImages
+    outsideImages: ExternalImages
+  }
+}
+
+export function ImagesClient(props: ImagesClientProps) {
+  const { readMode } = useReadMode()
+
+  const { title, imagesData, slug } = props
+
+  const { internalImages = [], outsideImages = [] } = imagesData
+
+  const images = outsideImages && outsideImages.length > 0 ? outsideImages : internalImages || []
+
+  if (readMode) return null
+
+  if (images?.length === 0) {
+    return <div className="py-4 text-center">No images available</div>
+  }
+
+  return (
+    <div className="flex w-full flex-col gap-4 p-2">
+      <TitleBar title={title} />
+
+      <div className="border-content relative w-full">
+        <div className="absolute right-0 top-0">
+          <ArticleImagesLink slug={slug} />
+        </div>
+
+        <div className="custom-scrollbar overflow-x-auto pb-4 pt-8 sm:pb-8">
+          <div className="mx-auto flex w-fit gap-8 px-4 xl:px-16">
+            {images.map((item) => {
+              const { image, id } = item
+
+              const link = 'link' in item ? (item.link as CMSLinkType | undefined) : undefined
+              const hasValidLink = isValidLink(link)
+
+              return (
+                <ImageSectionImage key={id} hasValidLink={hasValidLink} link={link} image={image} />
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
