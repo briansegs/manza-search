@@ -84,7 +84,7 @@ export default async function Article({ params: paramsPromise }: Args) {
               <ArticleHero article={article} />
               <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
               <ArticleAdsContainer ads={ads} />
-              <RenderArticleBlocks blocks={blocks ?? []} />
+              <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
             </TextSizeProvider>
           </ReadModeProvider>
         </div>

@@ -1,21 +1,6 @@
-import { Article, Page } from '@/payload-types'
+import { CMSLinkType } from '@/components/Link'
 
-interface Link {
-  type?: ('reference' | 'custom') | null
-  newTab?: boolean | null
-  reference?:
-    | ({
-        relationTo: 'pages'
-        value: string | Page
-      } | null)
-    | ({
-        relationTo: 'articles'
-        value: string | Article
-      } | null)
-  url?: string | null
-}
-
-export const isValidLink = (link?: Link) => {
+export const isValidLink = (link?: CMSLinkType) => {
   if (link) {
     return (link.type === 'reference' && !!link.reference) || (link.type === 'custom' && !!link.url)
   }
