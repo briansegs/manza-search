@@ -21,7 +21,7 @@ export default async function Page() {
   try {
     const imgData: ImgGlobalType = await getCachedGlobal('img', 2)()
 
-    const ArticlesByCategory = await getArticlesByCategory()
+    const articlesByCategory = await getArticlesByCategory()
 
     const { suggestedArticles, pageAds } = imgData
 
@@ -41,7 +41,7 @@ export default async function Page() {
 
           <ImgTopMenuContainer />
 
-          <ImgContent ArticlesByCategory={ArticlesByCategory} />
+          <ImgContent articlesByCategory={articlesByCategory} />
 
           <RightMenuContainer />
 
@@ -69,7 +69,7 @@ export function generateMetadata(): Metadata {
   }
 }
 
-export async function getArticlesByCategory() {
+async function getArticlesByCategory() {
   try {
     const payload = await getPayload({ config: configPromise })
 

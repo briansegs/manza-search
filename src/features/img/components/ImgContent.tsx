@@ -6,8 +6,8 @@ import { ImgContentProps } from '../types'
 
 const NoContent = () => <div className="mt-6 w-full text-center">No content to display.</div>
 
-export function ImgContent({ ArticlesByCategory }: ImgContentProps) {
-  if (!ArticlesByCategory || ArticlesByCategory.length === 0) {
+export function ImgContent({ articlesByCategory }: ImgContentProps) {
+  if (!articlesByCategory || articlesByCategory.length === 0) {
     return <NoContent />
   }
 
@@ -19,7 +19,7 @@ export function ImgContent({ ArticlesByCategory }: ImgContentProps) {
         'lg:mt-12 lg:px-32',
       )}
     >
-      {ArticlesByCategory?.map(({ articles, category }) => {
+      {articlesByCategory?.map(({ articles, category }) => {
         if (!category || articles.length === 0) return null
 
         const { id, title, slug } = category

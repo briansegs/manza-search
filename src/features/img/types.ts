@@ -12,5 +12,5 @@ export type ImgHeroProps = {
 }
 
 export type ImgContentProps = {
-  articlesByTopic?: ImgArticleGroup[]
+  articlesByCategory?: ImgArticleGroup[]
 }
