@@ -19,9 +19,10 @@ export const revalidate = 600
 
 export default async function Page() {
   try {
-    const imgData: ImgGlobalType = await getCachedGlobal('img', 2)()
-
-    const articlesByCategory = await getArticlesByCategory()
+    const [imgData, articlesByCategory]: [
+      ImgGlobalType,
+      Awaited<ReturnType<typeof getArticlesByCategory>>,
+    ] = await Promise.all([getCachedGlobal('img', 2)(), getArticlesByCategory()])
 
     const { suggestedArticles, pageAds } = imgData
 
@@ -96,7 +97,7 @@ async function getArticlesByCategory() {
       },
     })
 
-    const articlesByTopic = categories.docs.map((category) => {
+    const articlesByCategory = categories.docs.map((category) => {
       const relatedArticles = articles.docs.filter((article) =>
         article.categories?.some((c) => typeof c !== 'string' && c.id === category.id),
       )
@@ -107,7 +108,7 @@ async function getArticlesByCategory() {
       }
     })
 
-    return articlesByTopic
+    return articlesByCategory
   } catch (error) {
     console.error('getArticles failed:', error)
     return []
