@@ -110,7 +110,7 @@ async function getArticlesByCategory() {
 
     return articlesByCategory
   } catch (error) {
-    console.error('getArticles failed:', error)
+    console.error('Fetching data failed:', error)
     return []
   }
 }
