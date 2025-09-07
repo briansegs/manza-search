@@ -37,6 +37,8 @@ import { AdMedia } from './collections/AdMedia'
 import { Signin } from './Globals/Signin/config'
 import { ArticleMedia } from './collections/ArticleMedia'
 import { ArticleAds } from './Globals/ArticleAds/config'
+import { ImgMedia } from './collections/ImgMedia'
+import { Img } from './Globals/Img/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -105,6 +107,7 @@ export default buildConfig({
     ArtMedia,
     TravelMedia,
     AdMedia,
+    ImgMedia,
     HealthAndWellnessMedia,
     ArticleMedia,
     Categories,
@@ -121,6 +124,7 @@ export default buildConfig({
     Sound,
     Travel,
     Art,
+    Img,
     HealthAndWellness,
     Signin,
     ArticleAds,

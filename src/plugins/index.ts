@@ -100,6 +100,7 @@ export const plugins: Plugin[] = [
       'travel-media': true,
       'ad-media': true,
       'article-media': true,
+      'img-media': true,
     },
     folder: 'manza-search-media',
   }),
