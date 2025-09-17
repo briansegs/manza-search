@@ -1,9 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { Book } from '@/payload-types'
 import { User } from 'lucide-react'
-
-export type ReaderMenuAuthorBadgeProps = Pick<Book['content'], 'author'>
+import { ReaderMenuAuthorBadgeProps } from '../types'
 
 export function ReaderMenuAuthorBadge({ author }: ReaderMenuAuthorBadgeProps) {
   if (typeof author !== 'object') return null

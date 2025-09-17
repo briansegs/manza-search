@@ -1,11 +1,8 @@
-import { Book } from '@/payload-types'
-
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
 import { ReaderMenuButton } from '@/features/bookReader/components/ReaderMenuButton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-
-export type ReaderMenuSummaryPopoverProps = Pick<Book['content'], 'summary'>
+import { ReaderMenuSummaryPopoverProps } from '../types'
 
 export function ReaderMenuSummaryPopover({ summary }: ReaderMenuSummaryPopoverProps) {
   return (

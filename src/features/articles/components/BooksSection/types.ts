@@ -1,10 +1,11 @@
-import { ArticleMedia } from '@/payload-types'
-import { CMSLinkType } from '@/components/Link'
-
-export type ImageSectionImageProps = {
-  hasValidLink: boolean
-  link?: CMSLinkType
-  image?: string | null | ArticleMedia
-}
+import { Book } from '@/payload-types'
 
 export type ArticleBooksLinkProps = { slug: string }
+
+type Meta = NonNullable<Book['meta']>
+
+export type BookCardProps = Pick<Book, 'content' | 'title'> &
+  Pick<Meta, 'price' | 'shop'> & {
+    hasValidLink: boolean
+    coverImage: React.ReactNode
+  }

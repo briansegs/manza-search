@@ -1,6 +1,3 @@
-import { Book, Chapter } from '@/payload-types'
-import { Dispatch, SetStateAction } from 'react'
-
 import { ReaderMenuPageSelect } from './ReaderMenuPageSelect'
 import { ReaderMenuSummaryPopover } from './ReaderMenuSummaryPopover'
 import { ReaderMenuAuthorBadge } from './ReaderMenuAuthorBadge'
@@ -10,17 +7,7 @@ import { ReaderMenuInformationPopover } from './ReaderMenuInformationPopover'
 import { ReaderDownloadButton } from './ReaderDownloadButton'
 import { Menu } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-
-type Page = NonNullable<Chapter['content']>[number]
-
-type ReaderMenuProps = Omit<Book['content'], 'cover' | 'chapters'> & {
-  currentPage: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
-  pages: Page[]
-  chapters: Chapter[]
-  textEnlarge: boolean
-  setTextEnlarge: Dispatch<SetStateAction<boolean>>
-}
+import { ReaderMenuProps, ReaderMobileMenuProps } from '../types'
 
 export function ReaderMenu({
   author,
@@ -77,8 +64,6 @@ export function ReaderMenu({
     </div>
   )
 }
-
-export type ReaderMobileMenuProps = Omit<ReaderMenuProps, 'author'>
 
 export function ReaderMobileMenu({
   summary,

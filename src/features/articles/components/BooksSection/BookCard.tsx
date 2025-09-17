@@ -1,15 +1,7 @@
-import { Book } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { BookCardButton } from '@/features/articles/components/BooksSection/BookCardButton'
 import { BookReader } from '@/features/bookReader/components/BookReader'
-
-type Meta = NonNullable<Book['meta']>
-
-type BookCardProps = Pick<Book, 'content' | 'title'> &
-  Pick<Meta, 'price' | 'shop'> & {
-    hasValidLink: boolean
-    coverImage: React.ReactNode
-  }
+import { BookCardProps } from './types'
 
 export function BookCard({ shop, hasValidLink, coverImage, price, content, title }: BookCardProps) {
   return (

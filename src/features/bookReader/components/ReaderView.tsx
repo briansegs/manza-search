@@ -1,23 +1,13 @@
 'use client'
 
-import { Book, Chapter } from '@/payload-types'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Dispatch, RefObject, SetStateAction, useRef } from 'react'
+import { useRef } from 'react'
 import RichText from '@/components/RichText'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import { cn } from '@/utilities/ui'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { ReaderNextPageButton } from '@/features/bookReader/components/ReaderNextPageButton'
-
-export type PageOnly = NonNullable<Chapter['content']>[number]
-
-export type ReaderViewProps = {
-  currentPage: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
-  pages: PageOnly[]
-  cover: Book['content']['cover']
-  textEnlarge: boolean
-}
+import { ReaderViewProps, ViewMobileButtonsProps } from '../types'
 
 export function ReaderView({
   currentPage,
@@ -115,10 +105,6 @@ export function ReaderView({
       />
     </div>
   )
-}
-
-export type ViewMobileButtonsProps = Omit<ReaderViewProps, 'cover' | 'textEnlarge'> & {
-  viewRef: RefObject<HTMLDivElement | null>
 }
 
 export function ViewMobileButtons({

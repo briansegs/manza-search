@@ -1,12 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/utilities/ui'
-
-type ReaderNextPageButtonProps = {
-  onClick: () => void
-  disabled: boolean
-  children: React.ReactNode
-  className: string
-}
+import { ReaderNextPageButtonProps } from '../types'
 
 export function ReaderNextPageButton({
   onClick,

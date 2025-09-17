@@ -1,7 +1,7 @@
 'use client'
 
 import { Bookmark } from 'lucide-react'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import { ReaderMenuButton } from '@/features/bookReader/components/ReaderMenuButton'
 import {
   DropdownMenu,
@@ -13,11 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/utilities/ui'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-
-export type ReaderMenuBookmarkDropdownProps = {
-  currentPage: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
-}
+import { ReaderMenuBookmarkDropdownProps } from '../types'
 
 export function ReaderMenuBookmarkDropdown({
   currentPage,

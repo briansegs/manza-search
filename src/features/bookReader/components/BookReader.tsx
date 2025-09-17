@@ -2,16 +2,12 @@
 
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { BookCardButton } from '@/features/articles/components/BooksSection/BookCardButton'
-import { Book, Chapter } from '@/payload-types'
+import { Chapter } from '@/payload-types'
 import { ReaderMenu } from '@/features/bookReader/components/ReaderMenu'
 import { ReaderView } from '@/features/bookReader/components/ReaderView'
 import { useState } from 'react'
 import { cn } from '@/utilities/ui'
-
-type BookReaderProps = {
-  content: Book['content']
-  title: string
-}
+import { BookReaderProps } from '../types'
 
 export function BookReader({ content, title }: BookReaderProps) {
   const [currentPage, setCurrentPage] = useState(0)

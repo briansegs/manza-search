@@ -8,17 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { Chapter } from '@/payload-types'
-import { Dispatch, SetStateAction } from 'react'
-
-export type PageOnly = NonNullable<Chapter['content']>[number]
-
-export type ReaderMenuPageSelectProps = {
-  currentPage: number
-  setCurrentPage: Dispatch<SetStateAction<number>>
-  pages: PageOnly[]
-  chapters: Chapter[]
-}
+import { ReaderMenuPageSelectProps } from '../types'
 
 export function ReaderMenuPageSelect({
   currentPage,

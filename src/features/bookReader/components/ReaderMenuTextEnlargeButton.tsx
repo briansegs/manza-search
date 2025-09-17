@@ -1,15 +1,9 @@
 import { Expand } from 'lucide-react'
-import { Dispatch, SetStateAction } from 'react'
-
 import { ReaderMenuButton } from '@/features/bookReader/components/ReaderMenuButton'
 
 import { cn } from '@/utilities/ui'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-
-export type ReaderMenuTextEnlargeButtonProps = {
-  textEnlarge: boolean
-  setTextEnlarge: Dispatch<SetStateAction<boolean>>
-}
+import { ReaderMenuTextEnlargeButtonProps } from '../types'
 
 export function ReaderMenuTextEnlargeButton({
   textEnlarge,
