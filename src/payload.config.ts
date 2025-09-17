@@ -39,6 +39,10 @@ import { ArticleMedia } from './collections/ArticleMedia'
 import { ArticleAds } from './Globals/ArticleAds/config'
 import { ImgMedia } from './collections/ImgMedia'
 import { Img } from './Globals/Img/config'
+import { BookMedia } from './collections/BookMedia'
+import { Books } from './collections/Books'
+import { Chapters } from './collections/Chapters'
+import { UserMedia } from './collections/UserMedia'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -97,36 +101,40 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   collections: [
-    Pages,
-    Posts,
     Articles,
+    Topics,
+    Categories,
+    Books,
+    Chapters,
+    Users,
     Media,
     HomeMedia,
+    AdMedia,
+    BookMedia,
+    ImgMedia,
     LiteratureMedia,
     SoundMedia,
     ArtMedia,
     TravelMedia,
-    AdMedia,
-    ImgMedia,
     HealthAndWellnessMedia,
     ArticleMedia,
-    Categories,
-    Topics,
-    Users,
+    UserMedia,
+    Pages,
+    Posts,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [
     Header,
     Footer,
     Home,
+    Signin,
     Scope,
+    Img,
     Literature,
     Sound,
-    Travel,
     Art,
-    Img,
+    Travel,
     HealthAndWellness,
-    Signin,
     ArticleAds,
   ],
   plugins: [...plugins],
