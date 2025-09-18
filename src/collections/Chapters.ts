@@ -1,15 +1,22 @@
 import { CollectionConfig } from 'payload'
 import { lexicalEditor, FixedToolbarFeature, HeadingFeature } from '@payloadcms/richtext-lexical'
 
-function getLexicalPlainTextLength(node: any): number {
+type LexicalNode = {
+  text?: string
+  children?: LexicalNode[]
+}
+
+function getLexicalPlainTextLength(node: LexicalNode | undefined | null): number {
   if (!node) return 0
-  if (typeof node.text === 'string') return node.text.length
-  if (Array.isArray(node.children)) {
-    return node.children.reduce(
-      (acc: number, child: any) => acc + getLexicalPlainTextLength(child),
-      0,
-    )
+
+  if (typeof node.text === 'string') {
+    return node.text.length
   }
+
+  if (Array.isArray(node.children)) {
+    return node.children.reduce((acc, child) => acc + getLexicalPlainTextLength(child), 0)
+  }
+
   return 0
 }
 
