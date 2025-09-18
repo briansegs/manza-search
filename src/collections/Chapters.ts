@@ -1,6 +1,18 @@
 import { CollectionConfig } from 'payload'
 import { lexicalEditor, FixedToolbarFeature, HeadingFeature } from '@payloadcms/richtext-lexical'
 
+function getLexicalPlainTextLength(node: any): number {
+  if (!node) return 0
+  if (typeof node.text === 'string') return node.text.length
+  if (Array.isArray(node.children)) {
+    return node.children.reduce(
+      (acc: number, child: any) => acc + getLexicalPlainTextLength(child),
+      0,
+    )
+  }
+  return 0
+}
+
 export const Chapters: CollectionConfig = {
   slug: 'chapters',
   admin: {
@@ -30,11 +42,8 @@ export const Chapters: CollectionConfig = {
               }),
               validate: (val) => {
                 if (!val) return 'Content is required'
-                const plainText = JSON.stringify(val) // Lexical content is JSON
-                if (plainText.length > 3000) {
-                  return 'Page must be under 3000 characters'
-                }
-                return true
+                const len = getLexicalPlainTextLength(val.root)
+                return len > 2000 ? 'Page must be under 3000 characters' : true
               },
             },
           ],
