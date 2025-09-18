@@ -142,6 +142,7 @@ export const Articles: CollectionConfig<'articles'> = {
           label: 'Books',
           fields: [
             {
+              // Actually relatedArticles - Used for constructing route /articles/[slug]/books route
               name: 'relatedBooks',
               type: 'relationship',
               admin: {
