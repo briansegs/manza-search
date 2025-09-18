@@ -25,8 +25,8 @@ export const revalidateBook: CollectionAfterChangeHook<Book> = async ({
       payload.logger.info(`Revalidating article due to book change at path: ${path}`)
 
       revalidatePath(path)
-      revalidateTag('articles-sitemap')
     }
+    revalidateTag('articles-sitemap')
   }
 
   return doc
@@ -54,8 +54,8 @@ export const revalidateDeleteBook: CollectionAfterDeleteHook<Book> = async ({
       payload.logger.info(`Revalidating article due to book deletion at path: ${path}`)
 
       revalidatePath(path)
-      revalidateTag('articles-sitemap')
     }
+    revalidateTag('articles-sitemap')
   }
 
   return doc
