@@ -15,12 +15,36 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
   },
 }
 
+const defaultOptions = [
+  {
+    label: 'Internal link',
+    value: 'reference',
+  },
+  {
+    label: 'Custom URL',
+    value: 'custom',
+  },
+]
+
+const externalLinkOnly = [
+  {
+    label: 'URL',
+    value: 'custom',
+  },
+]
+
+const linkTypeOptionsMap = {
+  default: defaultOptions,
+  'external-only': externalLinkOnly,
+}
+
 type LinkType = (options?: {
   appearances?: LinkAppearances[] | false
   disableLabel?: boolean
   overrides?: Partial<GroupField>
   label?: string
   name?: string
+  linkTypeOptions?: 'default' | 'external-only'
 }) => Field
 
 export const link: LinkType = ({
@@ -29,6 +53,7 @@ export const link: LinkType = ({
   overrides = {},
   name = 'link',
   label = 'Link',
+  linkTypeOptions = 'default',
 } = {}) => {
   const linkResult: GroupField = {
     name: name,
@@ -49,16 +74,7 @@ export const link: LinkType = ({
               width: '50%',
             },
             defaultValue: 'custom',
-            options: [
-              {
-                label: 'Internal link',
-                value: 'reference',
-              },
-              {
-                label: 'Custom URL',
-                value: 'custom',
-              },
-            ],
+            options: linkTypeOptionsMap[linkTypeOptions],
           },
           {
             name: 'newTab',

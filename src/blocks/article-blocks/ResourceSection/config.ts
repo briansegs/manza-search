@@ -11,9 +11,10 @@ export const ResourceSection: Block = {
       required: true,
     },
     {
-      name: 'type',
+      name: 'resourceType',
       type: 'select',
       label: 'Resource Type',
+      required: true,
       options: [
         {
           label: 'Images',

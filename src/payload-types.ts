@@ -67,22 +67,26 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    pages: Page;
-    posts: Post;
     articles: Article;
+    topics: Topic;
+    categories: Category;
+    books: Book;
+    chapters: Chapter;
+    users: User;
     media: Media;
     'home-media': HomeMedia;
+    'ad-media': AdMedia;
+    'book-media': BookMedia;
+    'img-media': ImgMedia;
     'literature-media': LiteratureMedia;
     'sound-media': SoundMedia;
     'art-media': ArtMedia;
     'travel-media': TravelMedia;
-    'ad-media': AdMedia;
-    'img-media': ImgMedia;
     'health-and-wellness-media': HealthAndWellnessMedia;
     'article-media': ArticleMedia;
-    categories: Category;
-    topics: Topic;
-    users: User;
+    'user-media': UserMedia;
+    pages: Page;
+    posts: Post;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -94,22 +98,26 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    pages: PagesSelect<false> | PagesSelect<true>;
-    posts: PostsSelect<false> | PostsSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    topics: TopicsSelect<false> | TopicsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    books: BooksSelect<false> | BooksSelect<true>;
+    chapters: ChaptersSelect<false> | ChaptersSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'home-media': HomeMediaSelect<false> | HomeMediaSelect<true>;
+    'ad-media': AdMediaSelect<false> | AdMediaSelect<true>;
+    'book-media': BookMediaSelect<false> | BookMediaSelect<true>;
+    'img-media': ImgMediaSelect<false> | ImgMediaSelect<true>;
     'literature-media': LiteratureMediaSelect<false> | LiteratureMediaSelect<true>;
     'sound-media': SoundMediaSelect<false> | SoundMediaSelect<true>;
     'art-media': ArtMediaSelect<false> | ArtMediaSelect<true>;
     'travel-media': TravelMediaSelect<false> | TravelMediaSelect<true>;
-    'ad-media': AdMediaSelect<false> | AdMediaSelect<true>;
-    'img-media': ImgMediaSelect<false> | ImgMediaSelect<true>;
     'health-and-wellness-media': HealthAndWellnessMediaSelect<false> | HealthAndWellnessMediaSelect<true>;
     'article-media': ArticleMediaSelect<false> | ArticleMediaSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    topics: TopicsSelect<false> | TopicsSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
+    'user-media': UserMediaSelect<false> | UserMediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -126,28 +134,28 @@ export interface Config {
     header: Header;
     footer: Footer;
     home: Home;
+    signin: Signin;
     scope: Scope;
+    img: Img;
     literature: Literature;
     sound: Sound;
-    travel: Travel;
     art: Art;
-    img: Img;
+    travel: Travel;
     'health-and-wellness': HealthAndWellness;
-    signin: Signin;
     'article-ads': ArticleAd;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
+    signin: SigninSelect<false> | SigninSelect<true>;
     scope: ScopeSelect<false> | ScopeSelect<true>;
+    img: ImgSelect<false> | ImgSelect<true>;
     literature: LiteratureSelect<false> | LiteratureSelect<true>;
     sound: SoundSelect<false> | SoundSelect<true>;
-    travel: TravelSelect<false> | TravelSelect<true>;
     art: ArtSelect<false> | ArtSelect<true>;
-    img: ImgSelect<false> | ImgSelect<true>;
+    travel: TravelSelect<false> | TravelSelect<true>;
     'health-and-wellness': HealthAndWellnessSelect<false> | HealthAndWellnessSelect<true>;
-    signin: SigninSelect<false> | SigninSelect<true>;
     'article-ads': ArticleAdsSelect<false> | ArticleAdsSelect<true>;
   };
   locale: null;
@@ -185,78 +193,13 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
- */
-export interface Page {
-  id: string;
-  title: string;
-  hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'articles';
-                  value: string | Article;
-                } | null);
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
-    media?: (string | null) | Media;
-  };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles".
  */
 export interface Article {
   id: string;
   title: string;
   heroImage?: (string | null) | ArticleMedia;
+  layout?: (PostingsSection | ContentSection | ResourceSection)[] | null;
   relatedImages?: (string | Article)[] | null;
   'internal-images'?:
     | {
@@ -284,7 +227,8 @@ export interface Article {
         id?: string | null;
       }[]
     | null;
-  layout?: (PostingsSection | ContentSection | ResourceSection)[] | null;
+  relatedBooks?: (string | Article)[] | null;
+  books?: (string | Book)[] | null;
   relatedArticles?: (string | Article)[] | null;
   categories?: (string | Category)[] | null;
   otherVerifiedSources?:
@@ -459,92 +403,69 @@ export interface PostingsSection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentSection".
+ * via the `definition` "pages".
  */
-export interface ContentSection {
+export interface Page {
+  id: string;
   title: string;
-  alignment?: ('left' | 'right' | 'left & right') | null;
-  image1?: (string | null) | ArticleMedia;
-  image2?: (string | null) | ArticleMedia;
-  content?: {
-    root: {
-      type: string;
-      children: {
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
         type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contentSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ResourceSection".
- */
-export interface ResourceSection {
-  title: string;
-  type?: ('images' | 'books' | 'audio' | 'videos' | 'shop') | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'resourceSection';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  Topic?: (string | null) | Topic;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'articles';
+                  value: string | Article;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (string | null) | Media;
+  };
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "topics".
- */
-export interface Topic {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: string;
-  name?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -785,6 +706,31 @@ export interface ArchiveBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  Topic?: (string | null) | Topic;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics".
+ */
+export interface Topic {
+  id: string;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
@@ -829,6 +775,127 @@ export interface Post {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  name?: string | null;
+  image?: (string | null) | UserMedia;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-media".
+ */
+export interface UserMedia {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1032,9 +1099,416 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentSection".
+ */
+export interface ContentSection {
+  title: string;
+  alignment?: ('left' | 'right' | 'left & right') | null;
+  image1?: (string | null) | ArticleMedia;
+  image2?: (string | null) | ArticleMedia;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contentSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ResourceSection".
+ */
+export interface ResourceSection {
+  title: string;
+  resourceType: 'images' | 'books' | 'audio' | 'videos' | 'shop';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'resourceSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "books".
+ */
+export interface Book {
+  id: string;
+  title: string;
+  content: {
+    summary?: string | null;
+    information?: string | null;
+    cover?: (string | null) | BookMedia;
+    author: string | User;
+    chapters?: (string | Chapter)[] | null;
+  };
+  meta?: {
+    shop?: {
+      name?: string | null;
+      enableLink?: boolean | null;
+      link?: {
+        type?: 'custom' | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'pages';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'articles';
+              value: string | Article;
+            } | null);
+        url?: string | null;
+      };
+    };
+    /**
+     * Price in USD ($)
+     */
+    price?: number | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "book-media".
+ */
+export interface BookMedia {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chapters".
+ */
+export interface Chapter {
+  id: string;
+  title: string;
+  author: string | User;
+  content?:
+    | (
+        | {
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textPage';
+          }
+        | {
+            image: string | BookMedia;
+            caption?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imagePage';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "home-media".
  */
 export interface HomeMedia {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ad-media".
+ */
+export interface AdMedia {
+  id: string;
+  alt: string;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Cloudinary Media Information
+   */
+  cloudinary?: {
+    /**
+     * Cloudinary Public ID (used for transformations)
+     */
+    public_id?: string | null;
+    /**
+     * Type of the resource (image, video, raw)
+     */
+    resource_type?: string | null;
+    /**
+     * File format
+     */
+    format?: string | null;
+    /**
+     * Secure delivery URL
+     */
+    secure_url?: string | null;
+    /**
+     * File size in bytes
+     */
+    bytes?: number | null;
+    /**
+     * Creation timestamp
+     */
+    created_at?: string | null;
+    /**
+     * Current version number
+     */
+    version?: string | null;
+    /**
+     * Unique version identifier
+     */
+    version_id?: string | null;
+    /**
+     * Width in pixels
+     */
+    width?: number | null;
+    /**
+     * Height in pixels
+     */
+    height?: number | null;
+    /**
+     * Duration in seconds (for videos)
+     */
+    duration?: number | null;
+    /**
+     * Number of pages (for PDFs)
+     */
+    pages?: number | null;
+    /**
+     * Which page of the PDF to use for thumbnails (changes will apply after saving)
+     */
+    selected_page?: number | null;
+    /**
+     * URL for the thumbnail image (automatically generated for PDFs)
+     */
+    thumbnail_url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "img-media".
+ */
+export interface ImgMedia {
   id: string;
   alt: string;
   caption?: {
@@ -1507,196 +1981,6 @@ export interface TravelMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ad-media".
- */
-export interface AdMedia {
-  id: string;
-  alt: string;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * Cloudinary Media Information
-   */
-  cloudinary?: {
-    /**
-     * Cloudinary Public ID (used for transformations)
-     */
-    public_id?: string | null;
-    /**
-     * Type of the resource (image, video, raw)
-     */
-    resource_type?: string | null;
-    /**
-     * File format
-     */
-    format?: string | null;
-    /**
-     * Secure delivery URL
-     */
-    secure_url?: string | null;
-    /**
-     * File size in bytes
-     */
-    bytes?: number | null;
-    /**
-     * Creation timestamp
-     */
-    created_at?: string | null;
-    /**
-     * Current version number
-     */
-    version?: string | null;
-    /**
-     * Unique version identifier
-     */
-    version_id?: string | null;
-    /**
-     * Width in pixels
-     */
-    width?: number | null;
-    /**
-     * Height in pixels
-     */
-    height?: number | null;
-    /**
-     * Duration in seconds (for videos)
-     */
-    duration?: number | null;
-    /**
-     * Number of pages (for PDFs)
-     */
-    pages?: number | null;
-    /**
-     * Which page of the PDF to use for thumbnails (changes will apply after saving)
-     */
-    selected_page?: number | null;
-    /**
-     * URL for the thumbnail image (automatically generated for PDFs)
-     */
-    thumbnail_url?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "img-media".
- */
-export interface ImgMedia {
-  id: string;
-  alt: string;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * Cloudinary Media Information
-   */
-  cloudinary?: {
-    /**
-     * Cloudinary Public ID (used for transformations)
-     */
-    public_id?: string | null;
-    /**
-     * Type of the resource (image, video, raw)
-     */
-    resource_type?: string | null;
-    /**
-     * File format
-     */
-    format?: string | null;
-    /**
-     * Secure delivery URL
-     */
-    secure_url?: string | null;
-    /**
-     * File size in bytes
-     */
-    bytes?: number | null;
-    /**
-     * Creation timestamp
-     */
-    created_at?: string | null;
-    /**
-     * Current version number
-     */
-    version?: string | null;
-    /**
-     * Unique version identifier
-     */
-    version_id?: string | null;
-    /**
-     * Width in pixels
-     */
-    width?: number | null;
-    /**
-     * Height in pixels
-     */
-    height?: number | null;
-    /**
-     * Duration in seconds (for videos)
-     */
-    duration?: number | null;
-    /**
-     * Number of pages (for PDFs)
-     */
-    pages?: number | null;
-    /**
-     * Which page of the PDF to use for thumbnails (changes will apply after saving)
-     */
-    selected_page?: number | null;
-    /**
-     * URL for the thumbnail image (automatically generated for PDFs)
-     */
-    thumbnail_url?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "health-and-wellness-media".
  */
 export interface HealthAndWellnessMedia {
@@ -1970,16 +2254,28 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'pages';
-        value: string | Page;
-      } | null)
-    | ({
-        relationTo: 'posts';
-        value: string | Post;
-      } | null)
-    | ({
         relationTo: 'articles';
         value: string | Article;
+      } | null)
+    | ({
+        relationTo: 'topics';
+        value: string | Topic;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'books';
+        value: string | Book;
+      } | null)
+    | ({
+        relationTo: 'chapters';
+        value: string | Chapter;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
@@ -1988,6 +2284,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'home-media';
         value: string | HomeMedia;
+      } | null)
+    | ({
+        relationTo: 'ad-media';
+        value: string | AdMedia;
+      } | null)
+    | ({
+        relationTo: 'book-media';
+        value: string | BookMedia;
+      } | null)
+    | ({
+        relationTo: 'img-media';
+        value: string | ImgMedia;
       } | null)
     | ({
         relationTo: 'literature-media';
@@ -2006,14 +2314,6 @@ export interface PayloadLockedDocument {
         value: string | TravelMedia;
       } | null)
     | ({
-        relationTo: 'ad-media';
-        value: string | AdMedia;
-      } | null)
-    | ({
-        relationTo: 'img-media';
-        value: string | ImgMedia;
-      } | null)
-    | ({
         relationTo: 'health-and-wellness-media';
         value: string | HealthAndWellnessMedia;
       } | null)
@@ -2022,16 +2322,16 @@ export interface PayloadLockedDocument {
         value: string | ArticleMedia;
       } | null)
     | ({
-        relationTo: 'categories';
-        value: string | Category;
+        relationTo: 'user-media';
+        value: string | UserMedia;
       } | null)
     | ({
-        relationTo: 'topics';
-        value: string | Topic;
+        relationTo: 'pages';
+        value: string | Page;
       } | null)
     | ({
-        relationTo: 'users';
-        value: string | User;
+        relationTo: 'posts';
+        value: string | Post;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2097,177 +2397,18 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages_select".
- */
-export interface PagesSelect<T extends boolean = true> {
-  title?: T;
-  hero?:
-    | T
-    | {
-        type?: T;
-        richText?: T;
-        links?:
-          | T
-          | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
-                  };
-              id?: T;
-            };
-        media?: T;
-      };
-  layout?:
-    | T
-    | {
-        cta?: T | CallToActionBlockSelect<T>;
-        content?: T | ContentBlockSelect<T>;
-        mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
-      };
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishedAt?: T;
-  slug?: T;
-  slugLock?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToActionBlock_select".
- */
-export interface CallToActionBlockSelect<T extends boolean = true> {
-  richText?: T;
-  links?:
-    | T
-    | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContentBlock_select".
- */
-export interface ContentBlockSelect<T extends boolean = true> {
-  columns?:
-    | T
-    | {
-        size?: T;
-        richText?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MediaBlock_select".
- */
-export interface MediaBlockSelect<T extends boolean = true> {
-  media?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock_select".
- */
-export interface ArchiveBlockSelect<T extends boolean = true> {
-  introContent?: T;
-  populateBy?: T;
-  relationTo?: T;
-  categories?: T;
-  limit?: T;
-  selectedDocs?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormBlock_select".
- */
-export interface FormBlockSelect<T extends boolean = true> {
-  form?: T;
-  enableIntro?: T;
-  introContent?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts_select".
- */
-export interface PostsSelect<T extends boolean = true> {
-  title?: T;
-  heroImage?: T;
-  content?: T;
-  relatedPosts?: T;
-  categories?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        description?: T;
-      };
-  publishedAt?: T;
-  authors?: T;
-  populatedAuthors?:
-    | T
-    | {
-        id?: T;
-        name?: T;
-      };
-  slug?: T;
-  slugLock?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles_select".
  */
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   heroImage?: T;
+  layout?:
+    | T
+    | {
+        postingsSection?: T | PostingsSectionSelect<T>;
+        contentSection?: T | ContentSectionSelect<T>;
+        resourceSection?: T | ResourceSectionSelect<T>;
+      };
   relatedImages?: T;
   'internal-images'?:
     | T
@@ -2289,13 +2430,8 @@ export interface ArticlesSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  layout?:
-    | T
-    | {
-        postingsSection?: T | PostingsSectionSelect<T>;
-        contentSection?: T | ContentSectionSelect<T>;
-        resourceSection?: T | ResourceSectionSelect<T>;
-      };
+  relatedBooks?: T;
+  books?: T;
   relatedArticles?: T;
   categories?: T;
   otherVerifiedSources?:
@@ -2378,9 +2514,122 @@ export interface ContentSectionSelect<T extends boolean = true> {
  */
 export interface ResourceSectionSelect<T extends boolean = true> {
   title?: T;
-  type?: T;
+  resourceType?: T;
   id?: T;
   blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topics_select".
+ */
+export interface TopicsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  Topic?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "books_select".
+ */
+export interface BooksSelect<T extends boolean = true> {
+  title?: T;
+  content?:
+    | T
+    | {
+        summary?: T;
+        information?: T;
+        cover?: T;
+        author?: T;
+        chapters?: T;
+      };
+  meta?:
+    | T
+    | {
+        shop?:
+          | T
+          | {
+              name?: T;
+              enableLink?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                  };
+            };
+        price?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "chapters_select".
+ */
+export interface ChaptersSelect<T extends boolean = true> {
+  title?: T;
+  author?: T;
+  content?:
+    | T
+    | {
+        textPage?:
+          | T
+          | {
+              body?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imagePage?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2424,6 +2673,117 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "home-media_select".
  */
 export interface HomeMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ad-media_select".
+ */
+export interface AdMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "book-media_select".
+ */
+export interface BookMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "img-media_select".
+ */
+export interface ImgMediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   cloudinary?:
@@ -2606,80 +2966,6 @@ export interface TravelMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ad-media_select".
- */
-export interface AdMediaSelect<T extends boolean = true> {
-  alt?: T;
-  caption?: T;
-  cloudinary?:
-    | T
-    | {
-        public_id?: T;
-        resource_type?: T;
-        format?: T;
-        secure_url?: T;
-        bytes?: T;
-        created_at?: T;
-        version?: T;
-        version_id?: T;
-        width?: T;
-        height?: T;
-        duration?: T;
-        pages?: T;
-        selected_page?: T;
-        thumbnail_url?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "img-media_select".
- */
-export interface ImgMediaSelect<T extends boolean = true> {
-  alt?: T;
-  caption?: T;
-  cloudinary?:
-    | T
-    | {
-        public_id?: T;
-        resource_type?: T;
-        format?: T;
-        secure_url?: T;
-        bytes?: T;
-        created_at?: T;
-        version?: T;
-        version_id?: T;
-        width?: T;
-        height?: T;
-        duration?: T;
-        pages?: T;
-        selected_page?: T;
-        thumbnail_url?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "health-and-wellness-media_select".
  */
 export interface HealthAndWellnessMediaSelect<T extends boolean = true> {
@@ -2754,49 +3040,206 @@ export interface ArticleMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
+ * via the `definition` "user-media_select".
  */
-export interface CategoriesSelect<T extends boolean = true> {
+export interface UserMediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  cloudinary?:
+    | T
+    | {
+        public_id?: T;
+        resource_type?: T;
+        format?: T;
+        secure_url?: T;
+        bytes?: T;
+        created_at?: T;
+        version?: T;
+        version_id?: T;
+        width?: T;
+        height?: T;
+        duration?: T;
+        pages?: T;
+        selected_page?: T;
+        thumbnail_url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
   title?: T;
-  Topic?: T;
+  hero?:
+    | T
+    | {
+        type?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  layout?:
+    | T
+    | {
+        cta?: T | CallToActionBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
+        mediaBlock?: T | MediaBlockSelect<T>;
+        archive?: T | ArchiveBlockSelect<T>;
+        formBlock?: T | FormBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "topics_select".
+ * via the `definition` "CallToActionBlock_select".
  */
-export interface TopicsSelect<T extends boolean = true> {
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  richText?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock_select".
+ */
+export interface ContentBlockSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        size?: T;
+        richText?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock_select".
+ */
+export interface MediaBlockSelect<T extends boolean = true> {
+  media?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ArchiveBlock_select".
+ */
+export interface ArchiveBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  populateBy?: T;
+  relationTo?: T;
+  categories?: T;
+  limit?: T;
+  selectedDocs?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormBlock_select".
+ */
+export interface FormBlockSelect<T extends boolean = true> {
+  form?: T;
+  enableIntro?: T;
+  introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
-  slugLock?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
- */
-export interface UsersSelect<T extends boolean = true> {
-  name?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+  heroImage?: T;
+  content?: T;
+  relatedPosts?: T;
+  categories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
     | T
     | {
         id?: T;
-        createdAt?: T;
-        expiresAt?: T;
+        name?: T;
       };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3177,11 +3620,77 @@ export interface PromoBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "signin".
+ */
+export interface Signin {
+  id: string;
+  pageAd?: {
+    image?: (string | null) | AdMedia;
+    url?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'articles';
+            value: string | Article;
+          } | null);
+      url?: string | null;
+    };
+  };
+  signinButtons?: {
+    links?:
+      | {
+          title: string;
+          userType: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "scope".
  */
 export interface Scope {
   id: string;
   suggestedArticles?: (string | Article)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "img".
+ */
+export interface Img {
+  id: string;
+  suggestedArticles?: (string | Article)[] | null;
+  pageAds?:
+    | {
+        media?: (string | null) | ImgMedia;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3227,6 +3736,38 @@ export interface Sound {
   pageAds?:
     | {
         media?: (string | null) | SoundMedia;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'articles';
+                value: string | Article;
+              } | null);
+          url?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  paidTopSpot?: (string | Article)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "art".
+ */
+export interface Art {
+  id: string;
+  suggestedArticles?: (string | Article)[] | null;
+  pageAds?:
+    | {
+        media?: (string | null) | ArtMedia;
         enableLink?: boolean | null;
         link?: {
           type?: ('reference' | 'custom') | null;
@@ -3303,69 +3844,6 @@ export interface Travel {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "art".
- */
-export interface Art {
-  id: string;
-  suggestedArticles?: (string | Article)[] | null;
-  pageAds?:
-    | {
-        media?: (string | null) | ArtMedia;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'articles';
-                value: string | Article;
-              } | null);
-          url?: string | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  paidTopSpot?: (string | Article)[] | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "img".
- */
-export interface Img {
-  id: string;
-  suggestedArticles?: (string | Article)[] | null;
-  pageAds?:
-    | {
-        media?: (string | null) | ImgMedia;
-        enableLink?: boolean | null;
-        link?: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'articles';
-                value: string | Article;
-              } | null);
-          url?: string | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "health-and-wellness".
  */
 export interface HealthAndWellness {
@@ -3393,41 +3871,6 @@ export interface HealthAndWellness {
       }[]
     | null;
   paidTopSpot?: (string | Article)[] | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "signin".
- */
-export interface Signin {
-  id: string;
-  pageAd?: {
-    image?: (string | null) | AdMedia;
-    url?: {
-      type?: ('reference' | 'custom') | null;
-      newTab?: boolean | null;
-      reference?:
-        | ({
-            relationTo: 'pages';
-            value: string | Page;
-          } | null)
-        | ({
-            relationTo: 'articles';
-            value: string | Article;
-          } | null);
-      url?: string | null;
-    };
-  };
-  signinButtons?: {
-    links?:
-      | {
-          title: string;
-          userType: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3576,10 +4019,68 @@ export interface PromoBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "signin_select".
+ */
+export interface SigninSelect<T extends boolean = true> {
+  pageAd?:
+    | T
+    | {
+        image?: T;
+        url?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+      };
+  signinButtons?:
+    | T
+    | {
+        links?:
+          | T
+          | {
+              title?: T;
+              userType?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "scope_select".
  */
 export interface ScopeSelect<T extends boolean = true> {
   suggestedArticles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "img_select".
+ */
+export interface ImgSelect<T extends boolean = true> {
+  suggestedArticles?: T;
+  pageAds?:
+    | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -3615,6 +4116,32 @@ export interface LiteratureSelect<T extends boolean = true> {
  * via the `definition` "sound_select".
  */
 export interface SoundSelect<T extends boolean = true> {
+  suggestedArticles?: T;
+  pageAds?:
+    | T
+    | {
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+            };
+        id?: T;
+      };
+  paidTopSpot?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "art_select".
+ */
+export interface ArtSelect<T extends boolean = true> {
   suggestedArticles?: T;
   pageAds?:
     | T
@@ -3678,57 +4205,6 @@ export interface TravelSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "art_select".
- */
-export interface ArtSelect<T extends boolean = true> {
-  suggestedArticles?: T;
-  pageAds?:
-    | T
-    | {
-        media?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-            };
-        id?: T;
-      };
-  paidTopSpot?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "img_select".
- */
-export interface ImgSelect<T extends boolean = true> {
-  suggestedArticles?: T;
-  pageAds?:
-    | T
-    | {
-        media?: T;
-        enableLink?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-            };
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "health-and-wellness_select".
  */
 export interface HealthAndWellnessSelect<T extends boolean = true> {
@@ -3749,39 +4225,6 @@ export interface HealthAndWellnessSelect<T extends boolean = true> {
         id?: T;
       };
   paidTopSpot?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "signin_select".
- */
-export interface SigninSelect<T extends boolean = true> {
-  pageAd?:
-    | T
-    | {
-        image?: T;
-        url?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-            };
-      };
-  signinButtons?:
-    | T
-    | {
-        links?:
-          | T
-          | {
-              title?: T;
-              userType?: T;
-              id?: T;
-            };
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -3840,16 +4283,16 @@ export interface TaskSchedulePublish {
     locale?: string | null;
     doc?:
       | ({
+          relationTo: 'articles';
+          value: string | Article;
+        } | null)
+      | ({
           relationTo: 'pages';
           value: string | Page;
         } | null)
       | ({
           relationTo: 'posts';
           value: string | Post;
-        } | null)
-      | ({
-          relationTo: 'articles';
-          value: string | Article;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

@@ -77,6 +77,19 @@ export const Articles: CollectionConfig<'articles'> = {
           label: 'Hero',
         },
         {
+          fields: [
+            {
+              name: 'layout',
+              type: 'blocks',
+              blocks: [PostingsSection, ContentSection, ResourceSection],
+              admin: {
+                initCollapsed: true,
+              },
+            },
+          ],
+          label: 'Content',
+        },
+        {
           label: 'Images',
           fields: [
             {
@@ -126,17 +139,32 @@ export const Articles: CollectionConfig<'articles'> = {
           ],
         },
         {
+          label: 'Books',
           fields: [
             {
-              name: 'layout',
-              type: 'blocks',
-              blocks: [PostingsSection, ContentSection, ResourceSection],
+              // Actually relatedArticles - Used for constructing route /articles/[slug]/books route
+              name: 'relatedBooks',
+              type: 'relationship',
               admin: {
-                initCollapsed: true,
+                position: 'sidebar',
               },
+              filterOptions: ({ id }) => {
+                return {
+                  id: {
+                    not_in: [id],
+                  },
+                }
+              },
+              hasMany: true,
+              relationTo: 'articles',
+            },
+            {
+              name: 'books',
+              type: 'relationship',
+              relationTo: 'books',
+              hasMany: true,
             },
           ],
-          label: 'Content',
         },
         {
           fields: [

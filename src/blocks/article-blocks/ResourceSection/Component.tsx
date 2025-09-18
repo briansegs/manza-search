@@ -18,13 +18,19 @@ type ResourceSectionProps = ResourceSectionType & {
 }
 
 export function ResourceSection(props: ResourceSectionProps) {
-  const { type } = props
+  const { resourceType, id } = props
 
-  if (!type) return null
+  if (!resourceType) {
+    console.warn(`ResourceSection missing "resourceType" on block id: ${id}`)
+    return null
+  }
 
-  const ResourceToRender = resource[type]
+  const ResourceToRender = resource[resourceType as keyof typeof resource]
 
-  if (!ResourceToRender) return null
+  if (!ResourceToRender) {
+    console.warn(`Unknown ResourceSection resourceType "${resourceType}" on block id: ${id}`)
+    return null
+  }
 
   return <ResourceToRender {...props} />
 }
