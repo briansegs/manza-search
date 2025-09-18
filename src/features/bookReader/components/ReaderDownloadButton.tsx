@@ -8,9 +8,9 @@ export type ReaderDownloadButtonProps = {}
 export function ReaderDownloadButton({}: ReaderDownloadButtonProps) {
   return (
     <Tooltip>
-      <TooltipTrigger>
-        <ReaderMenuButton>
-          <Download />
+      <TooltipTrigger asChild>
+        <ReaderMenuButton type="button" aria-label="Download book">
+          <Download aria-hidden="true" />
         </ReaderMenuButton>
       </TooltipTrigger>
 
