@@ -9,14 +9,14 @@ import { BooksClient } from './BooksSection.client'
 
 export async function BooksSection(props: ResourceWithSlug) {
   const { slug } = props
+  const { isEnabled: draft } = await draftMode()
 
-  const books = await queryArticleBooksBySlug({ slug })
+  const books = await queryArticleBooksBySlug({ slug, draft })
 
   return <BooksClient books={books} {...props} />
 }
 
-const queryArticleBooksBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
+const queryArticleBooksBySlug = cache(async ({ slug, draft }: { slug: string; draft: boolean }) => {
   const payload = await getPayload({ config: configPromise })
 
   try {

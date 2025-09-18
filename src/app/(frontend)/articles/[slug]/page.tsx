@@ -50,7 +50,7 @@ export default async function Article({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode()
   const { slug = '' } = await paramsPromise
   const url = '/articles/' + slug
-  const article = await queryArticleBySlug({ slug })
+  const article = await queryArticleBySlug({ slug, draft })
 
   const ads: ArticleAdsGlobalType = await getCachedGlobal('article-ads', 2)()
 
@@ -96,8 +96,7 @@ export default async function Article({ params: paramsPromise }: Args) {
   )
 }
 
-const queryArticleBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
+const queryArticleBySlug = cache(async ({ slug, draft }: { slug: string; draft: boolean }) => {
   const payload = await getPayload({ config: configPromise })
 
   try {
@@ -118,7 +117,7 @@ const queryArticleBySlug = cache(async ({ slug }: { slug: string }) => {
     if (error instanceof Error) {
       if (
         error.name === 'TypeError' &&
-        error.message === "Cannot read properties of undefined (reading 'type')" &&
+        error.message.includes("reading 'type'") &&
         process.env.NODE_ENV === 'development'
       ) {
         console.error('Error querying article by slug:', error)
@@ -137,7 +136,8 @@ const queryArticleBySlug = cache(async ({ slug }: { slug: string }) => {
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug = '' } = await paramsPromise
-  const article = await queryArticleBySlug({ slug })
+  const { isEnabled: draft } = await draftMode()
+  const article = await queryArticleBySlug({ slug, draft })
 
   return generateMeta({ doc: article })
 }
