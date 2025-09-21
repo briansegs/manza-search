@@ -1,4 +1,3 @@
-// src/collections/hooks/revalidateChapter.ts
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'payload'
 import { revalidatePath, revalidateTag } from 'next/cache'
 
@@ -39,9 +38,6 @@ export const revalidateChapter: CollectionAfterChangeHook<Chapter> = async ({
         }
       }
     }
-
-    // Always revalidate global books/literature page
-    // revalidatePath('/literature')
 
     // If chapter is published, revalidate related books/articles
     if (doc._status === 'published') {
@@ -91,7 +87,6 @@ export const revalidateDeleteChapter: CollectionAfterDeleteHook<Chapter> = async
       }
     }
 
-    // Revalidate global literature page
     revalidatePath('/literature')
     revalidateTag('articles-sitemap')
   }
