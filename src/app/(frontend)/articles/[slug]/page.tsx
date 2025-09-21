@@ -122,7 +122,7 @@ const queryArticleBySlug = cache(async ({ slug, draft }: { slug: string; draft: 
       ) {
         console.error('Error querying article by slug:', error)
         payload.logger.error(
-          `Possible error finding a field that may not exist or be malformed. This could stem from access controls or a hook/hooks on the article config or one of it's relationships.`,
+          `Possible error finding a field that may not exist or be malformed. This could stem from access controls or a hook/hooks on the article config or one of its relationships.`,
         )
       } else {
         console.error('Error querying article by slug:', error)
