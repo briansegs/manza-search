@@ -3,7 +3,8 @@ import { CollectionConfig } from 'payload'
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { link } from '@/fields/link'
-import { revalidateBook, revalidateDeleteBook } from './hooks.ts/revalidateBook'
+import { revalidateBook, revalidateDeleteBook } from './hooks/revalidateBook'
+import { populateAuthor } from './hooks/populateAuthor'
 
 export const Books: CollectionConfig = {
   slug: 'books',
@@ -38,6 +39,35 @@ export const Books: CollectionConfig = {
               type: 'relationship',
               relationTo: 'users',
               required: true,
+            },
+            // This field is only used to populate the user data via the `populateAuthors` hook
+            // This is because the `user` collection has access control locked to protect user privacy
+            // GraphQL will also not return mutated user data that differs from the underlying schema
+            {
+              name: 'populatedAuthor',
+              type: 'group',
+              access: {
+                update: () => false,
+              },
+              admin: {
+                disabled: true,
+                readOnly: true,
+              },
+              fields: [
+                {
+                  name: 'id',
+                  type: 'text',
+                },
+                {
+                  name: 'name',
+                  type: 'text',
+                },
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'user-media',
+                },
+              ],
             },
             {
               name: 'chapters',
@@ -91,9 +121,39 @@ export const Books: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'publishedAt',
+      type: 'date',
+      admin: {
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+        position: 'sidebar',
+      },
+      hooks: {
+        beforeChange: [
+          ({ siblingData, value }) => {
+            if (siblingData._status === 'published' && !value) {
+              return new Date()
+            }
+            return value
+          },
+        ],
+      },
+    },
   ],
   hooks: {
     afterChange: [revalidateBook],
+    afterRead: [populateAuthor],
     afterDelete: [revalidateDeleteBook],
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100, // We set this interval for optimal live preview
+      },
+      schedulePublish: true,
+    },
+    maxPerDoc: 50,
   },
 }

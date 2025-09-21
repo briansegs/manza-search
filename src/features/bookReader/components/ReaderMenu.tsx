@@ -10,7 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { ReaderMenuProps, ReaderMobileMenuProps } from '../types'
 
 export function ReaderMenu({
-  author,
+  populatedAuthor,
   summary,
   information,
   currentPage,
@@ -28,7 +28,7 @@ export function ReaderMenu({
         e.stopPropagation()
       }}
     >
-      <ReaderMenuAuthorBadge author={author} />
+      <ReaderMenuAuthorBadge populatedAuthor={populatedAuthor} />
 
       <div className="hidden w-full justify-between gap-2 sm:flex">
         <ReaderMenuSummaryPopover summary={summary} />

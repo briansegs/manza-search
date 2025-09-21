@@ -1148,6 +1148,11 @@ export interface Book {
     information?: string | null;
     cover?: (string | null) | BookMedia;
     author: string | User;
+    populatedAuthor?: {
+      id?: string | null;
+      name?: string | null;
+      image?: (string | null) | UserMedia;
+    };
     chapters?: (string | Chapter)[] | null;
   };
   meta?: {
@@ -1174,8 +1179,10 @@ export interface Book {
      */
     price?: number | null;
   };
+  publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1311,8 +1318,10 @@ export interface Chapter {
           }
       )[]
     | null;
+  publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2554,6 +2563,13 @@ export interface BooksSelect<T extends boolean = true> {
         information?: T;
         cover?: T;
         author?: T;
+        populatedAuthor?:
+          | T
+          | {
+              id?: T;
+              name?: T;
+              image?: T;
+            };
         chapters?: T;
       };
   meta?:
@@ -2575,8 +2591,10 @@ export interface BooksSelect<T extends boolean = true> {
             };
         price?: T;
       };
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2604,8 +2622,10 @@ export interface ChaptersSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4285,6 +4305,14 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'articles';
           value: string | Article;
+        } | null)
+      | ({
+          relationTo: 'books';
+          value: string | Book;
+        } | null)
+      | ({
+          relationTo: 'chapters';
+          value: string | Chapter;
         } | null)
       | ({
           relationTo: 'pages';

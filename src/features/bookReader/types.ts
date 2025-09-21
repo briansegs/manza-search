@@ -20,7 +20,7 @@ type BookNavigationState = {
   chapters: Chapter[]
 }
 
-type BookAuthor = Pick<BookContent, 'author'>
+type BookAuthor = Pick<BookContent, 'populatedAuthors'>
 type BookSummary = Pick<BookContent, 'summary'>
 type BookInfo = Pick<BookContent, 'information'>
 type BookCover = Pick<BookContent, 'cover'>

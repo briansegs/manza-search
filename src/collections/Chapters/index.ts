@@ -1,5 +1,8 @@
 import { CollectionConfig } from 'payload'
 import { lexicalEditor, FixedToolbarFeature, HeadingFeature } from '@payloadcms/richtext-lexical'
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { revalidateChapter, revalidateDeleteChapter } from './hooks/revalidateChapter'
 
 type LexicalNode = {
   text?: string
@@ -24,6 +27,12 @@ export const Chapters: CollectionConfig = {
   slug: 'chapters',
   admin: {
     useAsTitle: 'title',
+  },
+  access: {
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
   },
   labels: { singular: 'Chapter', plural: 'Chapters' },
   fields: [
@@ -65,5 +74,38 @@ export const Chapters: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'publishedAt',
+      type: 'date',
+      admin: {
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+        position: 'sidebar',
+      },
+      hooks: {
+        beforeChange: [
+          ({ siblingData, value }) => {
+            if (siblingData._status === 'published' && !value) {
+              return new Date()
+            }
+            return value
+          },
+        ],
+      },
+    },
   ],
+  hooks: {
+    afterChange: [revalidateChapter],
+    afterDelete: [revalidateDeleteChapter],
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100, // We set this interval for optimal live preview
+      },
+      schedulePublish: true,
+    },
+    maxPerDoc: 50,
+  },
 }
