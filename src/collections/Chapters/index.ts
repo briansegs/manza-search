@@ -59,7 +59,7 @@ export const Chapters: CollectionConfig = {
               validate: (val) => {
                 if (!val) return 'Content is required'
                 const len = getLexicalPlainTextLength(val.root)
-                return len > 2000 ? 'Page must be under 3000 characters' : true
+                return len > 2000 ? 'Page must be under 2000 characters' : true
               },
             },
           ],
