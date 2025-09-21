@@ -40,7 +40,7 @@ export const Books: CollectionConfig = {
               relationTo: 'users',
               required: true,
             },
-            // This field is only used to populate the user data via the `populateAuthors` hook
+            // This field is only used to populate the user data via the `populateAuthor` hook
             // This is because the `user` collection has access control locked to protect user privacy
             // GraphQL will also not return mutated user data that differs from the underlying schema
             {
