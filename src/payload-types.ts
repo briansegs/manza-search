@@ -1143,16 +1143,12 @@ export interface ResourceSection {
 export interface Book {
   id: string;
   title: string;
-  content: {
+  content?: {
+    authorName?: string | null;
+    authorImage?: (string | null) | BookMedia;
     summary?: string | null;
     information?: string | null;
     cover?: (string | null) | BookMedia;
-    author: string | User;
-    populatedAuthor?: {
-      id?: string | null;
-      name?: string | null;
-      image?: (string | null) | UserMedia;
-    };
     chapters?: (string | Chapter)[] | null;
   };
   meta?: {
@@ -2559,17 +2555,11 @@ export interface BooksSelect<T extends boolean = true> {
   content?:
     | T
     | {
+        authorName?: T;
+        authorImage?: T;
         summary?: T;
         information?: T;
         cover?: T;
-        author?: T;
-        populatedAuthor?:
-          | T
-          | {
-              id?: T;
-              name?: T;
-              image?: T;
-            };
         chapters?: T;
       };
   meta?:

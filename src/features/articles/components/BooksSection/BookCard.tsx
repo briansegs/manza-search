@@ -36,7 +36,7 @@ export function BookCard({ shop, hasValidLink, coverImage, price, content, title
           <BookCardButton>B</BookCardButton>
           <BookCardButton>A</BookCardButton>
           <BookCardButton>LM</BookCardButton>
-          <BookReader title={title} content={content} />
+          <BookReader title={title} content={content || {}} />
         </div>
       </div>
     </div>

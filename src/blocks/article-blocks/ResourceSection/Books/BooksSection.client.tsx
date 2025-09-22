@@ -42,9 +42,9 @@ export function BooksClient(props: BooksClientProps) {
 
                 const { title, content, meta, id } = book
 
-                const { cover } = content
-
                 const { shop = {}, price = 0 } = meta || {}
+
+                const cover = content?.cover
 
                 const coverImage = cover ? <RenderMedia media={cover} /> : <ImagePlaceholder />
 

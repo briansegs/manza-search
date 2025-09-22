@@ -13,7 +13,7 @@ export function BookReader({ content, title }: BookReaderProps) {
   const [currentPage, setCurrentPage] = useState(0)
   const [textEnlarge, setTextEnlarge] = useState(false)
 
-  const { summary, information, populatedAuthor, chapters, cover } = content
+  const { summary, information, authorName, authorImage, chapters, cover } = content
 
   const pages =
     chapters?.flatMap((chapter) => {
@@ -45,7 +45,8 @@ export function BookReader({ content, title }: BookReaderProps) {
         <DialogTitle className="px-4 text-3xl capitalize text-white">{title}</DialogTitle>
 
         <ReaderMenu
-          populatedAuthor={populatedAuthor}
+          authorName={authorName}
+          authorImage={authorImage}
           summary={summary}
           information={information}
           chapters={chaptersOnly}
