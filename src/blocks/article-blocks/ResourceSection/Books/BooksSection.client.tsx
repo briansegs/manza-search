@@ -19,6 +19,8 @@ export function BooksClient(props: BooksClientProps) {
 
   const { title, books, slug } = props
 
+  const allBooksAreIds = books?.every((book) => typeof book === 'string')
+
   if (readMode) return null
 
   return (
@@ -34,15 +36,15 @@ export function BooksClient(props: BooksClientProps) {
 
         <div className="custom-scrollbar overflow-x-auto pb-4 pt-8 sm:pb-8">
           <div className="mx-auto flex w-fit gap-8 px-4 xl:px-16">
-            {books && books.length > 0 ? (
+            {books && books.length > 0 && !allBooksAreIds ? (
               books.map((book) => {
                 if (typeof book === 'string') return null
 
                 const { title, content, meta, id } = book
 
-                const { cover } = content
-
                 const { shop = {}, price = 0 } = meta || {}
+
+                const cover = content?.cover
 
                 const coverImage = cover ? <RenderMedia media={cover} /> : <ImagePlaceholder />
 

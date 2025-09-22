@@ -122,7 +122,7 @@ const queryArticleBySlug = cache(async ({ slug, draft }: { slug: string; draft: 
       ) {
         console.error('Error querying article by slug:', error)
         payload.logger.error(
-          `Payload has not initialized Collection metadata yet. Relationships have not been "warmed up" and need to be triggered. Log into the admin UI and go to the Articles Collection and click on the article with slug === ${slug}. Then reload the article page with slug === ${slug}.`,
+          `Possible error finding a field that may not exist or be malformed. This could stem from access controls or a hook/hooks on the article config or one of its relationships.`,
         )
       } else {
         console.error('Error querying article by slug:', error)

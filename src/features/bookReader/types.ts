@@ -11,7 +11,7 @@ type TextEnlargeState = {
   setTextEnlarge: Dispatch<SetStateAction<boolean>>
 }
 
-type BookContent = Book['content']
+type BookContent = NonNullable<Book['content']>
 
 type Page = NonNullable<Chapter['content']>[number]
 
@@ -20,7 +20,7 @@ type BookNavigationState = {
   chapters: Chapter[]
 }
 
-type BookAuthor = Pick<BookContent, 'author'>
+type BookAuthor = Pick<BookContent, 'authorName' | 'authorImage'>
 type BookSummary = Pick<BookContent, 'summary'>
 type BookInfo = Pick<BookContent, 'information'>
 type BookCover = Pick<BookContent, 'cover'>
@@ -37,7 +37,7 @@ export type ReaderMenuProps = PageState &
   BookInfo &
   BookNavigationState
 
-export type ReaderMobileMenuProps = Omit<ReaderMenuProps, 'author'>
+export type ReaderMobileMenuProps = Omit<ReaderMenuProps, 'authorName' | 'authorImage'>
 
 export type ReaderMenuAuthorBadgeProps = BookAuthor
 

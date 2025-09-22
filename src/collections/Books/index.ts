@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload'
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { link } from '@/fields/link'
-import { revalidateBook, revalidateDeleteBook } from './hooks.ts/revalidateBook'
+import { revalidateBook, revalidateDeleteBook } from './hooks/revalidateBook'
 
 export const Books: CollectionConfig = {
   slug: 'books',
@@ -30,15 +30,18 @@ export const Books: CollectionConfig = {
           name: 'content',
           label: 'Content',
           fields: [
+            {
+              name: 'authorName',
+              type: 'text',
+            },
+            {
+              name: 'authorImage',
+              type: 'upload',
+              relationTo: 'book-media',
+            },
             { name: 'summary', type: 'textarea' },
             { name: 'information', type: 'textarea' },
             { name: 'cover', type: 'upload', relationTo: 'book-media' },
-            {
-              name: 'author',
-              type: 'relationship',
-              relationTo: 'users',
-              required: true,
-            },
             {
               name: 'chapters',
               type: 'relationship',
@@ -91,9 +94,38 @@ export const Books: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'publishedAt',
+      type: 'date',
+      admin: {
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+        position: 'sidebar',
+      },
+      hooks: {
+        beforeChange: [
+          ({ siblingData, value }) => {
+            if (siblingData._status === 'published' && !value) {
+              return new Date()
+            }
+            return value
+          },
+        ],
+      },
+    },
   ],
   hooks: {
     afterChange: [revalidateBook],
     afterDelete: [revalidateDeleteBook],
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 100, // We set this interval for optimal live preview
+      },
+      schedulePublish: true,
+    },
+    maxPerDoc: 50,
   },
 }

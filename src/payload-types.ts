@@ -1143,11 +1143,12 @@ export interface ResourceSection {
 export interface Book {
   id: string;
   title: string;
-  content: {
+  content?: {
+    authorName?: string | null;
+    authorImage?: (string | null) | BookMedia;
     summary?: string | null;
     information?: string | null;
     cover?: (string | null) | BookMedia;
-    author: string | User;
     chapters?: (string | Chapter)[] | null;
   };
   meta?: {
@@ -1174,8 +1175,10 @@ export interface Book {
      */
     price?: number | null;
   };
+  publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1311,8 +1314,10 @@ export interface Chapter {
           }
       )[]
     | null;
+  publishedAt?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2550,10 +2555,11 @@ export interface BooksSelect<T extends boolean = true> {
   content?:
     | T
     | {
+        authorName?: T;
+        authorImage?: T;
         summary?: T;
         information?: T;
         cover?: T;
-        author?: T;
         chapters?: T;
       };
   meta?:
@@ -2575,8 +2581,10 @@ export interface BooksSelect<T extends boolean = true> {
             };
         price?: T;
       };
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2604,8 +2612,10 @@ export interface ChaptersSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4285,6 +4295,14 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'articles';
           value: string | Article;
+        } | null)
+      | ({
+          relationTo: 'books';
+          value: string | Book;
+        } | null)
+      | ({
+          relationTo: 'chapters';
+          value: string | Chapter;
         } | null)
       | ({
           relationTo: 'pages';
