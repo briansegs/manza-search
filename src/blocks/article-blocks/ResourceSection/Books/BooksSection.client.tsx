@@ -54,6 +54,7 @@ export function BooksClient(props: BooksClientProps) {
                 return (
                   <BookCard
                     key={id}
+                    id={id}
                     shop={shop}
                     hasValidLink={hasValidLink}
                     coverImage={coverImage}

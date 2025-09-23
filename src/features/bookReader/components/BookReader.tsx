@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { cn } from '@/utilities/ui'
 import { BookReaderProps } from '../types'
 
-export function BookReader({ content, title }: BookReaderProps) {
+export function BookReader({ content, title, id }: BookReaderProps) {
   const [currentPage, setCurrentPage] = useState(0)
   const [textEnlarge, setTextEnlarge] = useState(false)
 
@@ -45,6 +45,8 @@ export function BookReader({ content, title }: BookReaderProps) {
         <DialogTitle className="px-4 text-3xl capitalize text-white">{title}</DialogTitle>
 
         <ReaderMenu
+          id={id}
+          title={title}
           authorName={authorName}
           authorImage={authorImage}
           summary={summary}

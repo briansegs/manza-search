@@ -10,6 +10,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { ReaderMenuProps, ReaderMobileMenuProps } from '../types'
 
 export function ReaderMenu({
+  id,
+  title,
   authorName,
   authorImage,
   summary,
@@ -47,7 +49,7 @@ export function ReaderMenu({
 
         <ReaderMenuTextEnlargeButton textEnlarge={textEnlarge} setTextEnlarge={setTextEnlarge} />
 
-        <ReaderDownloadButton />
+        <ReaderDownloadButton id={id} title={title} />
       </div>
 
       <div className="sm:hidden">
@@ -60,6 +62,8 @@ export function ReaderMenu({
           information={information}
           textEnlarge={textEnlarge}
           setTextEnlarge={setTextEnlarge}
+          id={id}
+          title={title}
         />
       </div>
     </div>
@@ -67,6 +71,8 @@ export function ReaderMenu({
 }
 
 export function ReaderMobileMenu({
+  id,
+  title,
   summary,
   information,
   currentPage,
@@ -95,7 +101,7 @@ export function ReaderMobileMenu({
           <ReaderMenuInformationPopover information={information} />
           <ReaderMenuBookmarkDropdown currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <ReaderMenuTextEnlargeButton textEnlarge={textEnlarge} setTextEnlarge={setTextEnlarge} />
-          <ReaderDownloadButton />
+          <ReaderDownloadButton id={id} title={title} />
         </div>
       </PopoverContent>
     </Popover>

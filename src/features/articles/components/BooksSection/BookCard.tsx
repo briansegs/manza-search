@@ -3,7 +3,15 @@ import { BookCardButton } from '@/features/articles/components/BooksSection/Book
 import { BookReader } from '@/features/bookReader/components/BookReader'
 import { BookCardProps } from './types'
 
-export function BookCard({ shop, hasValidLink, coverImage, price, content, title }: BookCardProps) {
+export function BookCard({
+  shop,
+  hasValidLink,
+  coverImage,
+  price,
+  content,
+  title,
+  id,
+}: BookCardProps) {
   return (
     <div className="border-content h-fit overflow-hidden rounded-primary bg-primary-blue">
       <div className="relative h-96 w-[300px] flex-shrink-0">
@@ -36,7 +44,7 @@ export function BookCard({ shop, hasValidLink, coverImage, price, content, title
           <BookCardButton>B</BookCardButton>
           <BookCardButton>A</BookCardButton>
           <BookCardButton>LM</BookCardButton>
-          <BookReader title={title} content={content || {}} />
+          <BookReader title={title} id={id} content={content || {}} />
         </div>
       </div>
     </div>

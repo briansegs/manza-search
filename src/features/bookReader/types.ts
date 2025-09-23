@@ -24,10 +24,10 @@ type BookAuthor = Pick<BookContent, 'authorName' | 'authorImage'>
 type BookSummary = Pick<BookContent, 'summary'>
 type BookInfo = Pick<BookContent, 'information'>
 type BookCover = Pick<BookContent, 'cover'>
+type BookIdentification = Pick<Book, 'title' | 'id'>
 
-export type BookReaderProps = {
+export type BookReaderProps = BookIdentification & {
   content: BookContent
-  title: string
 }
 
 export type ReaderMenuProps = PageState &
@@ -35,7 +35,8 @@ export type ReaderMenuProps = PageState &
   BookAuthor &
   BookSummary &
   BookInfo &
-  BookNavigationState
+  BookNavigationState &
+  BookIdentification
 
 export type ReaderMobileMenuProps = Omit<ReaderMenuProps, 'authorName' | 'authorImage'>
 
