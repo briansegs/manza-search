@@ -9,6 +9,7 @@ import { Menu } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ReaderMenuProps, ReaderMobileMenuProps } from '../types'
 import { Chapter } from '@/payload-types'
+import { getBookPages } from '../getBookPages'
 
 export function ReaderMenu({
   book,
@@ -21,13 +22,7 @@ export function ReaderMenu({
 
   const { summary, information, authorName, authorImage, chapters } = content || {}
 
-  const pages =
-    chapters?.flatMap((chapter) => {
-      if (chapter && typeof chapter === 'object' && Array.isArray(chapter.content)) {
-        return chapter.content
-      }
-      return []
-    }) ?? []
+  const pages = getBookPages(chapters || [])
 
   const chaptersOnly: Chapter[] = (chapters ?? []).filter(
     (ch): ch is Chapter => typeof ch === 'object' && ch !== null,
