@@ -8,15 +8,16 @@ import { cn } from '@/utilities/ui'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { ReaderNextPageButton } from '@/features/bookReader/components/ReaderNextPageButton'
 import { ReaderViewProps, ViewMobileButtonsProps } from '../types'
+import { getBookPages } from '../getBookPages'
 
-export function ReaderView({
-  currentPage,
-  setCurrentPage,
-  pages,
-  cover,
-  textEnlarge,
-}: ReaderViewProps) {
+export function ReaderView({ book, currentPage, setCurrentPage, textEnlarge }: ReaderViewProps) {
   const viewRef = useRef<HTMLDivElement>(null)
+
+  const { content } = book
+
+  const { chapters, cover } = content || {}
+
+  const pages = getBookPages(chapters || [])
 
   return (
     <div className="flex w-full flex-1 flex-col items-center gap-1 overflow-hidden sm:flex-row">

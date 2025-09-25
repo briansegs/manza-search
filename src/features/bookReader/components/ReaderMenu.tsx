@@ -8,19 +8,26 @@ import { ReaderDownloadButton } from './ReaderDownloadButton'
 import { Menu } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { ReaderMenuProps, ReaderMobileMenuProps } from '../types'
+import { Chapter } from '@/payload-types'
+import { getBookPages } from '../getBookPages'
 
 export function ReaderMenu({
-  authorName,
-  authorImage,
-  summary,
-  information,
+  book,
   currentPage,
   setCurrentPage,
-  pages,
-  chapters,
   textEnlarge,
   setTextEnlarge,
 }: ReaderMenuProps) {
+  const { content } = book
+
+  const { summary, information, authorName, authorImage, chapters } = content || {}
+
+  const pages = getBookPages(chapters || [])
+
+  const chaptersOnly: Chapter[] = (chapters ?? []).filter(
+    (ch): ch is Chapter => typeof ch === 'object' && ch !== null,
+  )
+
   return (
     <div
       className="flex w-full items-center justify-between gap-2 rounded-lg bg-black p-3"
@@ -40,24 +47,23 @@ export function ReaderMenu({
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           pages={pages}
-          chapters={chapters}
+          chapters={chaptersOnly}
         />
 
         <ReaderMenuBookmarkDropdown currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
         <ReaderMenuTextEnlargeButton textEnlarge={textEnlarge} setTextEnlarge={setTextEnlarge} />
 
-        <ReaderDownloadButton />
+        <ReaderDownloadButton book={book} />
       </div>
 
       <div className="sm:hidden">
         <ReaderMobileMenu
+          book={book}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           pages={pages}
-          chapters={chapters}
-          summary={summary}
-          information={information}
+          chapters={chaptersOnly}
           textEnlarge={textEnlarge}
           setTextEnlarge={setTextEnlarge}
         />
@@ -67,8 +73,7 @@ export function ReaderMenu({
 }
 
 export function ReaderMobileMenu({
-  summary,
-  information,
+  book,
   currentPage,
   setCurrentPage,
   pages,
@@ -76,6 +81,10 @@ export function ReaderMobileMenu({
   textEnlarge,
   setTextEnlarge,
 }: ReaderMobileMenuProps) {
+  const { content } = book
+
+  const { summary, information } = content || {}
+
   return (
     <Popover>
       <PopoverTrigger>
@@ -95,7 +104,7 @@ export function ReaderMobileMenu({
           <ReaderMenuInformationPopover information={information} />
           <ReaderMenuBookmarkDropdown currentPage={currentPage} setCurrentPage={setCurrentPage} />
           <ReaderMenuTextEnlargeButton textEnlarge={textEnlarge} setTextEnlarge={setTextEnlarge} />
-          <ReaderDownloadButton />
+          <ReaderDownloadButton book={book} />
         </div>
       </PopoverContent>
     </Popover>

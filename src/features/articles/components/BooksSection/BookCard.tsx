@@ -1,9 +1,29 @@
 import { CMSLink } from '@/components/Link'
 import { BookCardButton } from '@/features/articles/components/BooksSection/BookCardButton'
-import { BookReader } from '@/features/bookReader/components/BookReader'
 import { BookCardProps } from './types'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
+import { isValidLink } from '@/utilities/isValidLink'
 
-export function BookCard({ shop, hasValidLink, coverImage, price, content, title }: BookCardProps) {
+import dynamic from 'next/dynamic'
+
+const BookReader = dynamic(
+  () => import('@/features/bookReader/components/BookReader').then((m) => m.BookReader),
+  { ssr: false, loading: () => <BookCardButton disabled>QS</BookCardButton> },
+)
+
+export function BookCard({ book }: BookCardProps) {
+  const { title, content, meta } = book
+
+  const shop = meta?.shop
+  const price = meta?.price ?? 0
+
+  const cover = content?.cover
+
+  const coverImage = cover ? <RenderMedia media={cover} /> : <ImagePlaceholder />
+
+  const hasValidLink = isValidLink(shop?.link)
+
   return (
     <div className="border-content h-fit overflow-hidden rounded-primary bg-primary-blue">
       <div className="relative h-96 w-[300px] flex-shrink-0">
@@ -36,7 +56,7 @@ export function BookCard({ shop, hasValidLink, coverImage, price, content, title
           <BookCardButton>B</BookCardButton>
           <BookCardButton>A</BookCardButton>
           <BookCardButton>LM</BookCardButton>
-          <BookReader title={title} content={content || {}} />
+          <BookReader book={book} />
         </div>
       </div>
     </div>

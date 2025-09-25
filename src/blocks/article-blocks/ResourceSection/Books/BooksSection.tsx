@@ -13,7 +13,7 @@ export async function BooksSection(props: ResourceWithSlug) {
 
   const books = await queryArticleBooksBySlug({ slug, draft })
 
-  return <BooksClient books={books} {...props} />
+  return <BooksClient books={books || []} {...props} />
 }
 
 const queryArticleBooksBySlug = cache(async ({ slug, draft }: { slug: string; draft: boolean }) => {

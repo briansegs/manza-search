@@ -1,17 +1,15 @@
 'use client'
 
 import { useReadMode } from '@/providers/ReadModeProvider'
-import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
-import { RenderMedia } from '@/features/shared/components/RenderMedia'
+
 import TitleBar from '../../TitleBar'
 import { ResourceWithSlug } from '../types'
-import { Article } from '@/payload-types'
-import { isValidLink } from '@/utilities/isValidLink'
+import { Book } from '@/payload-types'
 import { ArticleBooksLink } from '@/features/articles/components/BooksSection/ArticleBooksLink'
 import { BookCard } from '@/features/articles/components/BooksSection/BookCard'
 
 type BooksClientProps = ResourceWithSlug & {
-  books: Article['books']
+  books: (string | Book)[]
 }
 
 export function BooksClient(props: BooksClientProps) {
@@ -40,28 +38,7 @@ export function BooksClient(props: BooksClientProps) {
               books.map((book) => {
                 if (typeof book === 'string') return null
 
-                const { title, content, meta, id } = book
-
-                const { shop = {}, price = 0 } = meta || {}
-
-                const cover = content?.cover
-
-                const coverImage = cover ? <RenderMedia media={cover} /> : <ImagePlaceholder />
-
-                const hasValidLink =
-                  (shop?.link && shop.link.type && isValidLink(shop.link)) || false
-
-                return (
-                  <BookCard
-                    key={id}
-                    shop={shop}
-                    hasValidLink={hasValidLink}
-                    coverImage={coverImage}
-                    title={title}
-                    price={price}
-                    content={content}
-                  />
-                )
+                return <BookCard key={book.id} book={book} />
               })
             ) : (
               <div className="py-4 text-center">No books available</div>
