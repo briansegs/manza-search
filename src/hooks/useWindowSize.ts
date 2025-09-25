@@ -2,6 +2,7 @@ import { useSyncExternalStore } from 'react'
 
 const listeners: Set<() => void> = new Set()
 let size = { width: 0, height: 0 }
+
 // Initialize size if in browser
 if (typeof window !== 'undefined') {
   size = { width: window.innerWidth, height: window.innerHeight }
@@ -11,11 +12,13 @@ function getSnapshot() {
   return size
 }
 
+// Use a stable object for SSR snapshot
+const serverSnapshot = { width: 0, height: 0 }
 function getServerSnapshot() {
-  return { width: 0, height: 0 }
+  return serverSnapshot
 }
 
-// Throttle resize handling (~60fps = every ~16ms)
+// Throttle resize handling
 let timeout: ReturnType<typeof setTimeout> | null = null
 function onResize() {
   if (timeout) return
@@ -23,7 +26,7 @@ function onResize() {
     timeout = null
     size = { width: window.innerWidth, height: window.innerHeight }
     listeners.forEach((listener) => listener())
-  }, 100) // Tweak the delay
+  }, 100) // Tweak delay
 }
 
 function subscribe(callback: () => void) {
