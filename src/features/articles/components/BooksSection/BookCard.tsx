@@ -15,13 +15,14 @@ const BookReader = dynamic(
 export function BookCard({ book }: BookCardProps) {
   const { title, content, meta } = book
 
-  const { shop = {}, price = 0 } = meta || {}
+  const shop = meta?.shop
+  const price = meta?.price ?? 0
 
   const cover = content?.cover
 
   const coverImage = cover ? <RenderMedia media={cover} /> : <ImagePlaceholder />
 
-  const hasValidLink = isValidLink(shop.link)
+  const hasValidLink = isValidLink(shop?.link)
 
   return (
     <div className="border-content h-fit overflow-hidden rounded-primary bg-primary-blue">
