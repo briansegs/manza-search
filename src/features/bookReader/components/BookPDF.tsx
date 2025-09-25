@@ -77,14 +77,14 @@ function renderLexicalNode(node: LexicalNode): React.ReactNode {
     case 'root':
       return node.children?.map((child, i) => <View key={i}>{renderLexicalNode(child)}</View>)
 
-    case 'paragraph':
+    case 'paragraph': {
       const align = node.format === 'center' ? styles.center : {}
       return (
         <Text style={[styles.paragraph, align]}>
           {node.children?.map((child) => renderLexicalNode(child))}
         </Text>
       )
-
+    }
     case 'heading': {
       const align = node.format === 'center' ? styles.center : {}
       const heading = node.tag === 'h2' ? styles.h2 : styles.h3
@@ -172,6 +172,13 @@ export function BookPDF({ book }: { book: Book }) {
                 block.image?.cloudinary?.secure_url
               ) {
                 const src = fetchImageForPdf(block.image.cloudinary.secure_url || '')
+
+                if (!src)
+                  return (
+                    <Page key={`${ci}-${bi}`} size="A4" style={styles.page}>
+                      <Text style={styles.h3}>Missing Image...</Text>
+                    </Page>
+                  )
 
                 return (
                   <Page key={`${ci}-${bi}`} size="A4" style={styles.imagePage}>

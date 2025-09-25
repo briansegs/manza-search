@@ -82,7 +82,6 @@
     "payload-admin-bar": "^1.0.6",
     "pino": "^9.6.0",
     "prism-react-renderer": "^2.3.1",
-    "puppeteer": "^24.22.1",
     "react": "19.0.0",
     "react-big-calendar": "^1.19.4",
     "react-day-picker": "^9.8.0",
@@ -125,16 +124,12 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "puppeteer",
       "sharp"
     ],
     "overrides": {
       "@types/react": "19.0.12",
       "@types/react-dom": "19.0.4",
       "pino": "9.6.0"
-    },
-    "ignoredBuiltDependencies": [
-      "puppeteer"
-    ]
+    }
   }
 }
