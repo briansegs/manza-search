@@ -1,6 +1,12 @@
 'use client'
 
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { BookCardButton } from '@/features/articles/components/BooksSection/BookCardButton'
 import { ReaderMenu } from '@/features/bookReader/components/ReaderMenu'
 import { ReaderView } from '@/features/bookReader/components/ReaderView'
@@ -21,6 +27,7 @@ export function BookReader({ book }: BookReaderProps) {
       </DialogTrigger>
 
       <DialogContent
+        aria-describedby="Book Reader Dialog"
         closeButtonStyles="text-white"
         className={cn(
           'flex flex-col border-4 border-black bg-primary-blue font-serif',
@@ -30,6 +37,8 @@ export function BookReader({ book }: BookReaderProps) {
         )}
       >
         <DialogTitle className="px-4 text-3xl capitalize text-white">{title}</DialogTitle>
+
+        <DialogDescription className="sr-only">Book Reader Menu and View.</DialogDescription>
 
         <ReaderMenu
           book={book}
