@@ -5,6 +5,7 @@ import { Document, Page, Text, View, Image, StyleSheet } from '@react-pdf/render
 import { Book } from '@/payload-types'
 import { fetchImageForPdf } from '@/utilities/fetchImageForPdf'
 import type { ReactNode } from 'react'
+import { Fragment } from 'react'
 
 const styles = StyleSheet.create({
   page: {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  image: { maxWidth: '100%', height: 'auto', marginVertical: 10, objectFit: 'cover' },
+  image: { maxWidth: '100%', height: 'auto', marginVertical: 10, objectFit: 'contain' },
   imageCaption: {
     fontSize: 18,
     marginTop: 8,
@@ -82,7 +83,9 @@ function renderLexicalNode(node: LexicalNode): ReactNode {
       const align = node.format === 'center' ? styles.center : {}
       return (
         <Text style={[styles.paragraph, align]}>
-          {node.children?.map((child) => renderLexicalNode(child))}
+          {node.children?.map((child, i) => (
+            <Fragment key={i}>{renderLexicalNode(child)}</Fragment>
+          ))}
         </Text>
       )
     }
@@ -91,7 +94,9 @@ function renderLexicalNode(node: LexicalNode): ReactNode {
       const heading = node.tag === 'h2' ? styles.h2 : styles.h3
       return (
         <Text style={[align, heading]}>
-          {node.children?.map((child) => renderLexicalNode(child))}
+          {node.children?.map((child, i) => (
+            <Fragment key={i}>{renderLexicalNode(child)}</Fragment>
+          ))}
         </Text>
       )
     }
