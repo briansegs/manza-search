@@ -118,12 +118,14 @@ function renderLexicalNode(node: LexicalNode): ReactNode {
 }
 
 export function BookPDF({ book }: { book: Book }) {
-  const { authorName, summary, information, chapters, cover } = book.content || {}
+  const { content, title } = book
+
+  const { authorName, summary, information, chapters, cover } = content || {}
   const coverUrl = cover && typeof cover === 'object' ? cover.cloudinary?.secure_url : null
   const normalizedCover = coverUrl ? fetchImageForPdf(coverUrl) : null
 
   return (
-    <Document>
+    <Document title={title} author={authorName || ''} subject="Book export" creator="Manza Search">
       {/* Cover */}
       {normalizedCover && (
         <Page size="A4" style={styles.coverPage}>
