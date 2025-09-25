@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 1.6,
   },
+
   coverPage: {
     padding: 0,
   },
@@ -25,12 +26,8 @@ const styles = StyleSheet.create({
   h2: { fontSize: 24, marginBottom: 16, fontWeight: 'bold' },
   h3: { marginBottom: 16, fontWeight: 'bold' },
 
-  title: { fontSize: 24, textAlign: 'center', marginBottom: 12 },
-  author: { fontSize: 18, textAlign: 'center', marginBottom: 24 },
-  heading: { fontSize: 16, marginVertical: 8, fontWeight: 'bold' },
-
   paragraph: { marginBottom: 16, textAlign: 'justify' },
-  chapterTitle: { fontSize: 20, marginBottom: 12, fontWeight: 'bold' },
+
   imagePage: {
     padding: 40,
     fontFamily: 'Times-Roman',
@@ -84,7 +81,7 @@ function renderLexicalNode(node: LexicalNode): React.ReactNode {
       const align = node.format === 'center' ? styles.center : {}
       return (
         <Text style={[styles.paragraph, align]}>
-          {node.children?.map((child, i) => renderLexicalNode(child))}
+          {node.children?.map((child) => renderLexicalNode(child))}
         </Text>
       )
 
@@ -93,7 +90,7 @@ function renderLexicalNode(node: LexicalNode): React.ReactNode {
       const heading = node.tag === 'h2' ? styles.h2 : styles.h3
       return (
         <Text style={[align, heading]}>
-          {node.children?.map((child, i) => renderLexicalNode(child))}
+          {node.children?.map((child) => renderLexicalNode(child))}
         </Text>
       )
     }
