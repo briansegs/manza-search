@@ -9,7 +9,7 @@ import { ArticleBooksLink } from '@/features/articles/components/BooksSection/Ar
 import { BookCard } from '@/features/articles/components/BooksSection/BookCard'
 
 type BooksClientProps = ResourceWithSlug & {
-  books: Book[]
+  books: (string | Book)[]
 }
 
 export function BooksClient(props: BooksClientProps) {

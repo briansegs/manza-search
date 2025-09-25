@@ -11,6 +11,10 @@ type TextEnlargeState = {
   setTextEnlarge: Dispatch<SetStateAction<boolean>>
 }
 
+type BookType = {
+  book: Book
+}
+
 type BookContent = NonNullable<Book['content']>
 
 type Page = NonNullable<Chapter['content']>[number]
@@ -23,14 +27,10 @@ type BookNavigationState = {
 type BookAuthor = Pick<BookContent, 'authorName' | 'authorImage'>
 type BookSummary = Pick<BookContent, 'summary'>
 type BookInfo = Pick<BookContent, 'information'>
-type BookCover = Pick<BookContent, 'cover'>
-type BookIdentification = Pick<Book, 'title' | 'id'>
 
-export type BookReaderProps = {
-  book: Book
-}
+export type BookReaderProps = BookType
 
-export type ReaderMenuProps = PageState & TextEnlargeState & { book: Book }
+export type ReaderMenuProps = PageState & TextEnlargeState & BookType
 
 export type ReaderMobileMenuProps = ReaderMenuProps & BookNavigationState
 
@@ -51,8 +51,9 @@ export type ReaderNextPageButtonProps = React.ButtonHTMLAttributes<HTMLButtonEle
   disabled: boolean
 }
 
-export type ReaderViewProps = PageState & Pick<TextEnlargeState, 'textEnlarge'> & { book: Book }
+export type ReaderViewProps = PageState & Pick<TextEnlargeState, 'textEnlarge'> & BookType
 
-export type ViewMobileButtonsProps = Omit<ReaderViewProps, 'cover' | 'textEnlarge'> & {
-  viewRef: RefObject<HTMLDivElement | null>
-}
+export type ViewMobileButtonsProps = PageState &
+  Pick<BookNavigationState, 'pages'> & {
+    viewRef: RefObject<HTMLDivElement | null>
+  }
