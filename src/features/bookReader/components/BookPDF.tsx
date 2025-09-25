@@ -4,6 +4,7 @@
 import { Document, Page, Text, View, Image, StyleSheet } from '@react-pdf/renderer'
 import { Book } from '@/payload-types'
 import { fetchImageForPdf } from '@/utilities/fetchImageForPdf'
+import type { ReactNode } from 'react'
 
 const styles = StyleSheet.create({
   page: {
@@ -70,7 +71,7 @@ type LexicalNode =
       image?: { cloudinary?: { secure_url?: string } }
     }
 
-function renderLexicalNode(node: LexicalNode): React.ReactNode {
+function renderLexicalNode(node: LexicalNode): ReactNode {
   if (!node) return null
 
   switch (node.type) {

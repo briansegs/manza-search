@@ -7,7 +7,7 @@ import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { isValidLink } from '@/utilities/isValidLink'
 
 export function BookCard({ book }: BookCardProps) {
-  const { title, content, meta, id } = book
+  const { title, content, meta } = book
 
   const { shop = {}, price = 0 } = meta || {}
 
@@ -15,7 +15,7 @@ export function BookCard({ book }: BookCardProps) {
 
   const coverImage = cover ? <RenderMedia media={cover} /> : <ImagePlaceholder />
 
-  const hasValidLink = (shop?.link && shop.link.type && isValidLink(shop.link)) || false
+  const hasValidLink = isValidLink(shop.link)
 
   return (
     <div className="border-content h-fit overflow-hidden rounded-primary bg-primary-blue">

@@ -17,10 +17,10 @@ type BookType = {
 
 type BookContent = NonNullable<Book['content']>
 
-type Page = NonNullable<Chapter['content']>[number]
+type BookPage = NonNullable<Chapter['content']>[number]
 
 type BookNavigationState = {
-  pages: Page[]
+  pages: BookPage[]
   chapters: Chapter[]
 }
 
