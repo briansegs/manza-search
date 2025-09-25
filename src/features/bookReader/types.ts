@@ -26,19 +26,13 @@ type BookInfo = Pick<BookContent, 'information'>
 type BookCover = Pick<BookContent, 'cover'>
 type BookIdentification = Pick<Book, 'title' | 'id'>
 
-export type BookReaderProps = BookIdentification & {
-  content: BookContent
+export type BookReaderProps = {
+  book: Book
 }
 
-export type ReaderMenuProps = PageState &
-  TextEnlargeState &
-  BookAuthor &
-  BookSummary &
-  BookInfo &
-  BookNavigationState &
-  BookIdentification
+export type ReaderMenuProps = PageState & TextEnlargeState & { book: Book }
 
-export type ReaderMobileMenuProps = Omit<ReaderMenuProps, 'authorName' | 'authorImage'>
+export type ReaderMobileMenuProps = ReaderMenuProps & BookNavigationState
 
 export type ReaderMenuAuthorBadgeProps = BookAuthor
 
@@ -57,10 +51,7 @@ export type ReaderNextPageButtonProps = React.ButtonHTMLAttributes<HTMLButtonEle
   disabled: boolean
 }
 
-export type ReaderViewProps = PageState &
-  BookCover &
-  Pick<TextEnlargeState, 'textEnlarge'> &
-  Pick<BookNavigationState, 'pages'>
+export type ReaderViewProps = PageState & Pick<TextEnlargeState, 'textEnlarge'> & { book: Book }
 
 export type ViewMobileButtonsProps = Omit<ReaderViewProps, 'cover' | 'textEnlarge'> & {
   viewRef: RefObject<HTMLDivElement | null>

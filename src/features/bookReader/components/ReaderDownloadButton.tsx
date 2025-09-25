@@ -1,34 +1,56 @@
-import { Download } from 'lucide-react'
+'use client'
+
+import { useState } from 'react'
+import { Download, Loader2 } from 'lucide-react'
 import { ReaderMenuButton } from '@/features/bookReader/components/ReaderMenuButton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Book } from '@/payload-types'
+import { BookPDF } from './BookPDF'
+import { pdf } from '@react-pdf/renderer'
 
-export type ReaderDownloadButtonProps = Pick<Book, 'id' | 'title'>
+export type ReaderDownloadButtonProps = { book: Book }
 
-export function ReaderDownloadButton({ id, title }: ReaderDownloadButtonProps) {
+export function ReaderDownloadButton({ book }: ReaderDownloadButtonProps) {
+  const { title, id } = book
+  const [loading, setLoading] = useState(false)
+
   const handleDownload = async () => {
-    const res = await fetch(`/api/books/${id}/download`)
-    if (!res.ok) return alert('Failed to download book')
+    try {
+      setLoading(true)
 
-    const blob = await res.blob()
-    const url = window.URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = title ? `${title}.pdf` : `Book-${id}.pdf`
-    document.body.appendChild(a)
-    a.click()
-    a.remove()
+      const blob = await pdf(<BookPDF book={book} />).toBlob()
+      const url = URL.createObjectURL(blob)
+
+      const link = document.createElement('a')
+      link.href = url
+      link.download = title ? `${title}.pdf` : `Book-${id}.pdf`
+      link.click()
+
+      URL.revokeObjectURL(url)
+    } catch (err) {
+      console.error('Failed to generate PDF:', err)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <ReaderMenuButton onClick={handleDownload} type="button" aria-label="Download book">
-          <Download aria-hidden="true" />
+        <ReaderMenuButton
+          type="button"
+          aria-label="Download book"
+          onClick={handleDownload}
+          disabled={loading}
+        >
+          {loading ? (
+            <Loader2 className="animate-spin" aria-hidden="true" />
+          ) : (
+            <Download aria-hidden="true" />
+          )}
         </ReaderMenuButton>
       </TooltipTrigger>
-
-      <TooltipContent>Download Book</TooltipContent>
+      <TooltipContent>{loading ? 'Generating PDF…' : 'Download Book'}</TooltipContent>
     </Tooltip>
   )
 }

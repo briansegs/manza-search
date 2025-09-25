@@ -2,16 +2,21 @@ import { CMSLink } from '@/components/Link'
 import { BookCardButton } from '@/features/articles/components/BooksSection/BookCardButton'
 import { BookReader } from '@/features/bookReader/components/BookReader'
 import { BookCardProps } from './types'
+import { RenderMedia } from '@/features/shared/components/RenderMedia'
+import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
+import { isValidLink } from '@/utilities/isValidLink'
 
-export function BookCard({
-  shop,
-  hasValidLink,
-  coverImage,
-  price,
-  content,
-  title,
-  id,
-}: BookCardProps) {
+export function BookCard({ book }: BookCardProps) {
+  const { title, content, meta, id } = book
+
+  const { shop = {}, price = 0 } = meta || {}
+
+  const cover = content?.cover
+
+  const coverImage = cover ? <RenderMedia media={cover} /> : <ImagePlaceholder />
+
+  const hasValidLink = (shop?.link && shop.link.type && isValidLink(shop.link)) || false
+
   return (
     <div className="border-content h-fit overflow-hidden rounded-primary bg-primary-blue">
       <div className="relative h-96 w-[300px] flex-shrink-0">
@@ -44,7 +49,7 @@ export function BookCard({
           <BookCardButton>B</BookCardButton>
           <BookCardButton>A</BookCardButton>
           <BookCardButton>LM</BookCardButton>
-          <BookReader title={title} id={id} content={content || {}} />
+          <BookReader book={book} />
         </div>
       </div>
     </div>
