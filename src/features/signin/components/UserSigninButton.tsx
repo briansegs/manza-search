@@ -14,7 +14,9 @@ export function UserSigninButton() {
 
       <ClerkLoaded>
         <SignedOut>
-          <SigninButton onClick={() => openSignIn()}>For All Users</SigninButton>
+          <SigninButton onClick={() => openSignIn({ redirectUrl: '/' })}>
+            For All Users
+          </SigninButton>
         </SignedOut>
 
         <SignedIn>
