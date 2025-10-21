@@ -1,6 +1,9 @@
+'use client'
+
 import { LogOut } from 'lucide-react'
 import { useClerk, UserButton } from '@clerk/nextjs'
 import { usePathname } from 'next/navigation'
+import { toast } from 'sonner'
 
 export function HeaderUserButton() {
   const { signOut } = useClerk()
@@ -11,6 +14,7 @@ export function HeaderUserButton() {
       await signOut({ redirectUrl: pathname })
     } catch (err) {
       console.error('Error signing out:', err)
+      toast.error('Failed to login due to network issues. Try again later.')
     }
   }
 
