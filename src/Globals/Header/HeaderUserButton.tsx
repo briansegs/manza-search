@@ -14,7 +14,7 @@ export function HeaderUserButton() {
       await signOut({ redirectUrl: pathname })
     } catch (err) {
       console.error('Error signing out:', err)
-      toast.error('Failed to login due to network issues. Try again later.')
+      toast.error('Failed to sign out due to network issues. Try again later.')
     }
   }
 
