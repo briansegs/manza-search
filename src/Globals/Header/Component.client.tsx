@@ -12,6 +12,8 @@ import { HeaderNav, MobileHeaderNav } from './Nav/HeaderNav'
 import { Menu, ShoppingCart } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Search } from '@/features/search/components/Search'
+import { ClerkLoading, SignedIn, SignedOut } from '@clerk/nextjs'
+import { HeaderUserButton } from './HeaderUserButton'
 
 export function HeaderClient({ data }: { data: Header }) {
   /* Storing the value in a useState to avoid hydration errors */
@@ -52,7 +54,17 @@ export function HeaderClient({ data }: { data: Header }) {
             </Link>
 
             <div className="flex h-9 w-[50px] items-center justify-center">
-              <Link href="/signin">Sign in</Link>
+              <SignedOut>
+                <Link href="/signin">Sign in</Link>
+              </SignedOut>
+
+              <ClerkLoading>
+                <div className="animate-pulse">Sign in</div>
+              </ClerkLoading>
+
+              <SignedIn>
+                <HeaderUserButton />
+              </SignedIn>
             </div>
           </div>
 
@@ -71,7 +83,17 @@ export function HeaderClient({ data }: { data: Header }) {
                       <ShoppingCart className="w-5" />
                     </Link>
 
-                    <Link href="/signin">Sign in</Link>
+                    <SignedOut>
+                      <Link href="/signin">Sign in</Link>
+                    </SignedOut>
+
+                    <ClerkLoading>
+                      <div className="animate-pulse">Sign in</div>
+                    </ClerkLoading>
+
+                    <SignedIn>
+                      <HeaderUserButton />
+                    </SignedIn>
                   </div>
                 </div>
 
