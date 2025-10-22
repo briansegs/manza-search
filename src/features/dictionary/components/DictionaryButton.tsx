@@ -19,6 +19,7 @@ import DefinitionFetching from './DefinitionFetching'
 
 import { errorMessage } from '@/utilities/errorMessage'
 import { DictionaryEntry } from '../types'
+import { DictionaryIcon } from '@/components/site-icons'
 
 export function DictionaryButton() {
   const [definitions, setDefinitions] = useState<DictionaryEntry[]>([])
@@ -57,7 +58,12 @@ export function DictionaryButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="size-full rounded-primary bg-menu-red hover:bg-black">d</Button>
+        <Button
+          aria-label="Open dictionary"
+          className="flex size-full w-full items-center justify-center rounded-primary bg-menu-red px-2 py-1 hover:bg-black sm:px-4 sm:py-2"
+        >
+          <DictionaryIcon className="h-5 w-5 text-white sm:h-full sm:w-full" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="border-4 border-black bg-menu" closeButtonStyles="text-white">
         <DialogHeader>
@@ -77,7 +83,7 @@ export function DictionaryButton() {
                 placeholder="Search"
                 className="rounded-none border-none bg-transparent font-serif text-primary outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
               />
-              <button type="submit" className="">
+              <button type="submit">
                 <SearchIcon className="mx-3 w-6 text-muted-foreground" />
               </button>
             </div>
