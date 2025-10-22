@@ -58,7 +58,10 @@ export function DictionaryButton() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="flex size-full w-full items-center justify-center rounded-primary bg-menu-red px-2 py-1 hover:bg-black sm:px-4 sm:py-2">
+        <Button
+          aria-label="Open dictionary"
+          className="flex size-full w-full items-center justify-center rounded-primary bg-menu-red px-2 py-1 hover:bg-black sm:px-4 sm:py-2"
+        >
           <DictionaryIcon className="h-5 w-5 text-white sm:h-full sm:w-full" />
         </Button>
       </DialogTrigger>

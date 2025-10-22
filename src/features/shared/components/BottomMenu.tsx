@@ -19,7 +19,10 @@ export function BottomMenu() {
       <div className="w-16 sm:w-28">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="size-full rounded-b-none rounded-tl-none rounded-tr-xl bg-menu-red hover:bg-pink-500">
+            <Button
+              aria-label="Tools"
+              className="size-full rounded-b-none rounded-tl-none rounded-tr-xl bg-menu-red hover:bg-pink-500"
+            >
               <ToolsIcon className="h-8 w-8 text-white" />
             </Button>
           </PopoverTrigger>
@@ -45,7 +48,10 @@ export function BottomMenu() {
       <div className="w-16 sm:w-28">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="flex size-full gap-1 rounded-b-none rounded-tl-xl rounded-tr-none bg-blue-800 hover:bg-green-600">
+            <Button
+              aria-label="Menu box"
+              className="flex size-full gap-1 rounded-b-none rounded-tl-xl rounded-tr-none bg-blue-800 hover:bg-green-600"
+            >
               <MenuBoxIcon className="h-8 w-8 text-white" />
             </Button>
           </PopoverTrigger>
