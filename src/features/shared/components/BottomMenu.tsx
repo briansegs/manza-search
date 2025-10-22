@@ -6,6 +6,7 @@ import { cn } from '@/utilities/ui'
 
 import { noScrollbarsClassName } from 'react-remove-scroll-bar'
 import { ToolsMenu } from '@/features/toolsMenu/components/ToolsMenu'
+import { MenuBoxIcon, ToolsIcon } from '@/components/site-icons'
 
 export function BottomMenu() {
   return (
@@ -18,8 +19,8 @@ export function BottomMenu() {
       <div className="w-16 sm:w-28">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="size-full rounded-b-none rounded-tl-none rounded-tr-xl bg-menu-red font-serif text-base hover:bg-pink-500">
-              Tools
+            <Button className="size-full rounded-b-none rounded-tl-none rounded-tr-xl bg-menu-red hover:bg-pink-500">
+              <ToolsIcon className="h-8 w-8 text-white" />
             </Button>
           </PopoverTrigger>
 
@@ -44,8 +45,8 @@ export function BottomMenu() {
       <div className="w-16 sm:w-28">
         <Popover>
           <PopoverTrigger asChild>
-            <Button className="flex size-full gap-1 rounded-b-none rounded-tl-xl rounded-tr-none bg-blue-800 font-serif text-base hover:bg-green-600">
-              Menu <span className="hidden sm:block">Box</span>
+            <Button className="flex size-full gap-1 rounded-b-none rounded-tl-xl rounded-tr-none bg-blue-800 hover:bg-green-600">
+              <MenuBoxIcon className="h-8 w-8 text-white" />
             </Button>
           </PopoverTrigger>
           <PopoverContent
