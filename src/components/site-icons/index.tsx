@@ -17,6 +17,7 @@ function MenuBoxIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+MenuBoxIcon.displayName = 'MenuBoxIcon'
 
 function ToolsIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -34,6 +35,7 @@ function ToolsIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+ToolsIcon.displayName = 'ToolsIcon'
 
 function DictionaryIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -51,6 +53,7 @@ function DictionaryIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+DictionaryIcon.displayName = 'DictionaryIcon'
 
 function MoreOptionsIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -93,5 +96,6 @@ function MoreOptionsIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+MoreOptionsIcon.displayName = 'MoreOptionsIcon'
 
 export { MenuBoxIcon, ToolsIcon, DictionaryIcon, MoreOptionsIcon }
