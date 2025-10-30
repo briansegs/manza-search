@@ -53,4 +53,11 @@ export default defineSchema({
     allDay: v.optional(v.boolean()),
     alertTime: v.optional(v.string()),
   }).index('by_userId', ['userId']),
+  savedContent: defineTable({
+    userId: v.id('users'),
+    contentId: v.string(),
+    contentType: v.string(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_user_content', ['userId', 'contentId']),
 })
