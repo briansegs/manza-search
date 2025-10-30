@@ -5,15 +5,17 @@ import { ArticleTopMenuProps } from '../types'
 import { cn } from '@/utilities/ui'
 import { ReadModeButton } from '../readMode/components/ReadModeButton'
 import { TextSizeButton } from '../textSize/components/TextSizeButton'
+import { SaveButton } from '@/features/filo/SaveButton'
 
-export function ArticleTopMenu({ styles }: ArticleTopMenuProps) {
+export function ArticleTopMenu({ article, styles }: ArticleTopMenuProps) {
   return (
     <div className={cn(styles, 'flex')}>
       <ArticleMenuButton onClick={scrollToTop}>TOP</ArticleMenuButton>
       <ArticleMenuButton>HIGHLIGHT</ArticleMenuButton>
       <ArticleMenuButton>LOVE</ArticleMenuButton>
       <ArticleMenuButton>PIN</ArticleMenuButton>
-      <ArticleMenuButton>SAVE</ArticleMenuButton>
+      <SaveButton article={article} />
+
       <ArticleMenuButton>History</ArticleMenuButton>
       <TextSizeButton />
       <ReadModeButton />
