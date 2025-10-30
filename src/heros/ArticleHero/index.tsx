@@ -3,6 +3,7 @@ import { Media } from '@/components/Media'
 import { Article } from '@/payload-types'
 import React from 'react'
 import TableOfContent from './TableOfContent'
+import { ArticleHeroMenu } from './menu'
 
 export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
   const { heroImage, layout } = article
@@ -17,16 +18,7 @@ export const ArticleHero: React.FC<{ article: Article }> = ({ article }) => {
         <div className="flex flex-wrap-reverse justify-center gap-2 px-2 pb-4 lg:pb-8 xl:flex-nowrap xl:justify-between">
           <div className="flex w-full flex-col items-center gap-2 md:flex-row md:items-stretch">
             <div className="flex w-full items-center justify-center bg-slate-100 px-12 py-6 sm:w-[480px] md:w-full">
-              <div className="flex items-center gap-6">
-                <p className="hover:text-secondary-blue cursor-pointer font-serif text-xl">Menu</p>
-
-                <ul className="list-inside list-disc font-serif text-lg">
-                  <li className="hover:text-secondary-blue cursor-pointer">Pin</li>
-                  <li className="hover:text-secondary-blue cursor-pointer">Save</li>
-                  <li className="hover:text-secondary-blue cursor-pointer">History</li>
-                  <li className="hover:text-secondary-blue cursor-pointer">Lists</li>
-                </ul>
-              </div>
+              <ArticleHeroMenu />
             </div>
 
             <TableOfContent layout={layout} />
