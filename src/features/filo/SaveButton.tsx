@@ -30,7 +30,7 @@ export function SaveButton({ article }: SaveButtonProps) {
     setSaved(!!savedArticle)
   }, [setSaved, savedArticle])
 
-  async function handleSubmit() {
+  async function handleSave() {
     if (saved) {
       await removeArticle({ contentId: article.id })
         .then(() => {
@@ -54,7 +54,7 @@ export function SaveButton({ article }: SaveButtonProps) {
     <ArticleMenuButton
       className={cn({ 'text-yellow-200': saved })}
       disabled={saveArticlePending || removeArticlePending}
-      onClick={handleSubmit}
+      onClick={handleSave}
     >
       SAVE
     </ArticleMenuButton>

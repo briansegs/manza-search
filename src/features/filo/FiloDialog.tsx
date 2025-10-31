@@ -16,26 +16,36 @@ import { Search, X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { fetchSavedContent } from '@/actions/fetchSavedContent'
 import { useAction } from 'next-safe-action/hooks'
-import { Article } from '@/payload-types'
+import { Article, ArticleMedia } from '@/payload-types'
 import { parseActionError } from '@/utilities/parseActionError'
 import { toast } from 'sonner'
 import { Spinner } from '@/components/ui/spinner'
+import { Media } from '@/components/Media'
+import MissingImage from '@/components/ImageMissing'
+import { RenderMedia } from '../shared/components/RenderMedia'
+import { ImagePlaceholder } from '../shared/components/ImagePlaceholder'
 
 export type ArticleWithType = Article & {
-  type: string
+  type: 'article'
 }
+
+export type ArticleMediaWithType = ArticleMedia & {
+  type: 'image'
+}
+
+export type FiloContent = ArticleWithType | ArticleMediaWithType
 
 export function FiloDialog() {
   const { open, setOpen, section } = useFilo()
 
-  const [savedContent, setSavedContent] = useState<ArticleWithType[]>([])
+  const [savedContent, setSavedContent] = useState<FiloContent[]>([])
 
-  const savedList = useQuery(api.saves.getSaved)
+  const savedResult = useQuery(api.saves.getSaved)
 
-  const savedIds = useMemo(() => {
-    if (!savedList) return null
-    return savedList?.map((item) => item.contentId)
-  }, [savedList])
+  const saveList = useMemo(() => {
+    if (!savedResult) return null
+    return savedResult
+  }, [savedResult])
 
   const { execute, result, isPending } = useAction(fetchSavedContent, {
     onSuccess: () => {
@@ -50,10 +60,10 @@ export function FiloDialog() {
   })
 
   useEffect(() => {
-    if (savedIds?.length) {
-      execute({ savedIds })
+    if (saveList?.length) {
+      execute({ saveList })
     }
-  }, [savedIds, execute])
+  }, [saveList, execute])
 
   const filoSections = useMemo(
     () => [
@@ -64,11 +74,12 @@ export function FiloDialog() {
     ],
     [savedContent],
   )
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         aria-describedby="Filo content"
-        className="custom-scrollbar flex h-[500px] flex-col gap-2 overflow-y-auto border-2 border-black bg-primary-blue"
+        className="flex h-[560px] flex-col gap-2 border-2 border-black bg-primary-blue"
         closeButtonStyles="hidden"
       >
         <DialogHeader className="flex w-full flex-row items-center justify-between text-white">
@@ -83,7 +94,7 @@ export function FiloDialog() {
           A list of tabs that filo content when clicked
         </DialogDescription>
 
-        <Tabs defaultValue={section}>
+        <Tabs defaultValue={section} className="flex min-h-0 w-full flex-1 flex-col">
           <TabsList className="h-fit w-full flex-wrap gap-2 bg-black py-2">
             {filoSections?.map((section, index) => {
               return (
@@ -103,10 +114,50 @@ export function FiloDialog() {
 
           {filoSections?.map((section, index) => {
             return (
-              <TabsContent key={section.name + index} value={section.name} className="mx-auto">
-                <div className="text-white">
+              <TabsContent
+                key={section.name + index}
+                value={section.name}
+                className="custom-scrollbar mx-auto w-full flex-1 overflow-y-scroll p-0"
+              >
+                <div className="custom-scrollbar flex h-full w-full flex-wrap justify-between gap-6 text-white">
                   {section?.content?.map((content) => {
-                    return <div key={content.id}>{`${content.type}, ${content.slug}`}</div>
+                    switch (content.type) {
+                      case 'article':
+                        return (
+                          <div className="space-y-2">
+                            <div className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black">
+                              {content.heroImage && typeof content.heroImage !== 'string' ? (
+                                <Media
+                                  imgClassName="size-full object-cover"
+                                  resource={content.heroImage}
+                                  fill
+                                />
+                              ) : (
+                                <div className="flex size-full flex-col items-center justify-center overflow-hidden rounded-md bg-card text-black">
+                                  <MissingImage />
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="w-32 truncate text-center text-lg">{content.title}</div>
+                          </div>
+                        )
+                      case 'image':
+                        return (
+                          <div className="space-y-2">
+                            <div
+                              key={content.id}
+                              className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black"
+                            >
+                              {content ? <RenderMedia media={content} /> : <ImagePlaceholder />}
+                            </div>
+
+                            <div className="w-32 truncate text-center text-lg">{content.alt}</div>
+                          </div>
+                        )
+                      default:
+                        return null
+                    }
                   })}
 
                   {isPending && (
