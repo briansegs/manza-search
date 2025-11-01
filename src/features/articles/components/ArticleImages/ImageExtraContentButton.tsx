@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useMutationState } from '@/features/messenger/hooks/useMutationState'
 import { ArticleMedia } from '@/payload-types'
+import { useAuth } from '@clerk/nextjs'
 import { api } from 'convex/_generated/api'
 import { ConvexError } from 'convex/values'
 import { toast } from 'sonner'
@@ -12,6 +13,7 @@ export type ImageExtraContentButtonProps = {
 
 export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps) {
   const { mutate: saveImage, pending: saveImagePending } = useMutationState(api.save.saveContent)
+  const { isSignedIn } = useAuth()
 
   async function handleSave() {
     if (typeof image === 'object')
@@ -32,7 +34,7 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
     {
       name: 'save',
       onClick: handleSave,
-      disabled: saveImagePending,
+      disabled: !isSignedIn || saveImagePending,
     },
     {
       name: 'download',
