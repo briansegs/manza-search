@@ -1,18 +1,12 @@
 'use client'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useFilo } from '@/providers/FiloProvider'
 import { cn } from '@/utilities/ui'
 import { api } from '../../../convex/_generated/api'
 import { useQuery } from 'convex/react'
-import { Search, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { fetchSavedContent } from '@/actions/fetchSavedContent'
 import { useAction } from 'next-safe-action/hooks'
@@ -24,6 +18,8 @@ import { Media } from '@/components/Media'
 import MissingImage from '@/components/ImageMissing'
 import { RenderMedia } from '../shared/components/RenderMedia'
 import { ImagePlaceholder } from '../shared/components/ImagePlaceholder'
+import { Button } from '@/components/ui/button'
+import { FiloDialogHeader } from './FiloDialogHeader'
 
 export type ArticleWithType = Article & {
   type: 'article'
@@ -82,13 +78,7 @@ export function FiloDialog() {
         className="flex h-[560px] flex-col gap-2 border-2 border-black bg-primary-blue"
         closeButtonStyles="hidden"
       >
-        <DialogHeader className="flex w-full flex-row items-center justify-between text-white">
-          <DialogTitle className="uppercase">Filo</DialogTitle>
-
-          <Search />
-
-          <X onClick={() => setOpen(false)} className="cursor-pointer" />
-        </DialogHeader>
+        <FiloDialogHeader setOpen={setOpen} />
 
         <DialogDescription className="sr-only">
           A list of tabs that filo content when clicked
@@ -117,7 +107,7 @@ export function FiloDialog() {
               <TabsContent
                 key={section.name + index}
                 value={section.name}
-                className="custom-scrollbar mx-auto w-full flex-1 overflow-y-scroll p-0"
+                className="custom-scrollbar relative mx-auto w-full flex-1 overflow-y-scroll p-0"
               >
                 <div className="custom-scrollbar flex h-full w-full flex-wrap justify-between gap-6 text-white">
                   {section?.content?.map((content) => {
@@ -137,6 +127,13 @@ export function FiloDialog() {
                                   <MissingImage />
                                 </div>
                               )}
+
+                              <Button
+                                size="icon"
+                                className="absolute right-1 top-1 size-8 rounded-full bg-black/50 p-1 text-white"
+                              >
+                                <X className="size-5" />
+                              </Button>
                             </div>
 
                             <div className="w-32 truncate text-center text-lg">{content.title}</div>
