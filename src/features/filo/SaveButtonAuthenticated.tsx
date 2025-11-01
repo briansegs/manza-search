@@ -10,11 +10,11 @@ import { useEffect, useState } from 'react'
 import { cn } from '@/utilities/ui'
 import { useQuery } from 'convex/react'
 
-type SaveButtonProps = {
+type SaveButtonAuthenticatedProps = {
   article: Article
 }
 
-export function SaveButton({ article }: SaveButtonProps) {
+export function SaveButtonAuthenticated({ article }: SaveButtonAuthenticatedProps) {
   const { mutate: saveArticle, pending: saveArticlePending } = useMutationState(
     api.save.saveContent,
   )

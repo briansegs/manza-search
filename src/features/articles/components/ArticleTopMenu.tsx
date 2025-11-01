@@ -5,7 +5,7 @@ import { ArticleTopMenuProps } from '../types'
 import { cn } from '@/utilities/ui'
 import { ReadModeButton } from '../readMode/components/ReadModeButton'
 import { TextSizeButton } from '../textSize/components/TextSizeButton'
-import { SaveButton } from '@/features/filo/SaveButton'
+import { SaveButton } from './saveArticle/components/SaveButton'
 
 export function ArticleTopMenu({ article, styles }: ArticleTopMenuProps) {
   return (
