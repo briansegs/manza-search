@@ -6,7 +6,6 @@ import { useFilo } from '@/providers/FiloProvider'
 import { cn } from '@/utilities/ui'
 import { api } from '../../../convex/_generated/api'
 import { useQuery } from 'convex/react'
-import { X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { fetchSavedContent } from '@/actions/fetchSavedContent'
 import { useAction } from 'next-safe-action/hooks'
@@ -14,12 +13,8 @@ import { Article, ArticleMedia, Book } from '@/payload-types'
 import { parseActionError } from '@/utilities/parseActionError'
 import { toast } from 'sonner'
 import { Spinner } from '@/components/ui/spinner'
-import { Media } from '@/components/Media'
-import MissingImage from '@/components/ImageMissing'
-import { RenderMedia } from '../shared/components/RenderMedia'
-import { ImagePlaceholder } from '../shared/components/ImagePlaceholder'
-import { Button } from '@/components/ui/button'
 import { FiloDialogHeader } from './FiloDialogHeader'
+import { FiloContentCard } from './FiloContentCard'
 
 export type ArticleWithType = Article & {
   type: 'article'
@@ -67,7 +62,7 @@ export function FiloDialog() {
 
   const filoSections = useMemo(
     () => [
-      { name: 'pin', conent: null },
+      { name: 'pin', content: null },
       { name: 'save', content: savedContent },
       { name: 'history', content: null },
       { name: 'lists', content: null },
@@ -115,69 +110,7 @@ export function FiloDialog() {
               >
                 <div className="custom-scrollbar flex h-full w-full flex-wrap gap-6 pl-2 text-white">
                   {section?.content?.map((content) => {
-                    switch (content.type) {
-                      case 'article':
-                        return (
-                          <div className="space-y-2">
-                            <div className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black">
-                              {content.heroImage && typeof content.heroImage !== 'string' ? (
-                                <Media
-                                  imgClassName="size-full object-cover"
-                                  resource={content.heroImage}
-                                  fill
-                                />
-                              ) : (
-                                <div className="flex size-full flex-col items-center justify-center overflow-hidden rounded-md bg-card text-black">
-                                  <MissingImage />
-                                </div>
-                              )}
-
-                              <RemoveFiloItemButton onClick={() => {}} />
-                            </div>
-
-                            <div className="w-32 truncate text-center text-lg">{content.title}</div>
-                          </div>
-                        )
-                      case 'image':
-                        return (
-                          <div className="space-y-2">
-                            <div
-                              key={content.id}
-                              className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black"
-                            >
-                              {content ? <RenderMedia media={content} /> : <ImagePlaceholder />}
-
-                              <RemoveFiloItemButton onClick={() => {}} />
-                            </div>
-
-                            <div className="w-32 truncate text-center text-lg">{content.alt}</div>
-                          </div>
-                        )
-                      case 'book':
-                        return (
-                          <div className="space-y-2">
-                            <div
-                              key={content.id}
-                              className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black"
-                            >
-                              {typeof content?.content?.cover !== 'string' &&
-                              content?.content?.cover ? (
-                                <RenderMedia media={content.content.cover} />
-                              ) : (
-                                <div className="flex size-full flex-col items-center justify-center overflow-hidden rounded-md bg-card text-black">
-                                  <MissingImage />
-                                </div>
-                              )}
-
-                              <RemoveFiloItemButton onClick={() => {}} />
-                            </div>
-
-                            <div className="w-32 truncate text-center text-lg">{content.title}</div>
-                          </div>
-                        )
-                      default:
-                        return null
-                    }
+                    return <FiloContentCard key={content.id} content={content} />
                   })}
 
                   {isPending && (
@@ -192,21 +125,5 @@ export function FiloDialog() {
         </Tabs>
       </DialogContent>
     </Dialog>
-  )
-}
-
-export type RemoveFiloItemButtonProps = {
-  onClick: () => void
-}
-
-export function RemoveFiloItemButton({ onClick }: RemoveFiloItemButtonProps) {
-  return (
-    <Button
-      onClick={onClick}
-      size="icon"
-      className="absolute right-1 top-1 size-8 rounded-full bg-black/50 p-1 text-white"
-    >
-      <X className="size-5" />
-    </Button>
   )
 }
