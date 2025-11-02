@@ -45,6 +45,10 @@ export const unsaveContent = mutation({
       )
       .unique()
 
+    if (!saved) {
+      throw new ConvexError("Content doesn't exist")
+    }
+
     if (saved) await ctx.db.delete(saved._id)
   },
 })
