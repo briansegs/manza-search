@@ -18,7 +18,7 @@ export const fetchSavedContent = actionClient
 
       const savedIds = saveList.map((saved) => saved.contentId)
 
-      const [articleResults, imageResults] = await Promise.all([
+      const [articleResults, imageResults, bookResults] = await Promise.all([
         await payload.find({
           collection: 'articles',
           pagination: false,
@@ -35,16 +35,24 @@ export const fetchSavedContent = actionClient
           },
           depth: 1,
         }),
+        await payload.find({
+          collection: 'books',
+          pagination: false,
+          where: {
+            id: { in: savedIds },
+          },
+          depth: 1,
+        }),
       ])
 
       const articles = articleResults.docs.map((doc) => ({ ...doc, type: 'article' as const }))
-
       const images = imageResults.docs.map((doc) => ({ ...doc, type: 'image' as const }))
+      const books = bookResults.docs.map((doc) => ({ ...doc, type: 'book' as const }))
 
-      const mergedList = [...articles, ...images].sort(
-        (articles, images) =>
-          saveList.findIndex((saved) => saved.contentId === articles.id) -
-          saveList.findIndex((saved) => saved.contentId === images.id),
+      const orderMap = new Map(saveList.map((saved, index) => [saved.contentId, index]))
+
+      const mergedList = [...articles, ...images, ...books].sort(
+        (a, b) => (orderMap.get(a.id) ?? Infinity) - (orderMap.get(b.id) ?? Infinity),
       )
 
       return mergedList

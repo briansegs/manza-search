@@ -10,7 +10,7 @@ import { X } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { fetchSavedContent } from '@/actions/fetchSavedContent'
 import { useAction } from 'next-safe-action/hooks'
-import { Article, ArticleMedia } from '@/payload-types'
+import { Article, ArticleMedia, Book } from '@/payload-types'
 import { parseActionError } from '@/utilities/parseActionError'
 import { toast } from 'sonner'
 import { Spinner } from '@/components/ui/spinner'
@@ -29,7 +29,11 @@ export type ArticleMediaWithType = ArticleMedia & {
   type: 'image'
 }
 
-export type FiloContent = ArticleWithType | ArticleMediaWithType
+export type BookWithType = Book & {
+  type: 'book'
+}
+
+export type FiloContent = ArticleWithType | ArticleMediaWithType | BookWithType
 
 export function FiloDialog() {
   const { open, setOpen, section } = useFilo()
@@ -109,7 +113,7 @@ export function FiloDialog() {
                 value={section.name}
                 className="custom-scrollbar relative mx-auto w-full flex-1 overflow-y-scroll p-0"
               >
-                <div className="custom-scrollbar flex h-full w-full flex-wrap justify-between gap-6 text-white">
+                <div className="custom-scrollbar flex h-full w-full flex-wrap gap-6 pl-2 text-white">
                   {section?.content?.map((content) => {
                     switch (content.type) {
                       case 'article':
@@ -128,12 +132,7 @@ export function FiloDialog() {
                                 </div>
                               )}
 
-                              <Button
-                                size="icon"
-                                className="absolute right-1 top-1 size-8 rounded-full bg-black/50 p-1 text-white"
-                              >
-                                <X className="size-5" />
-                              </Button>
+                              <RemoveFiloItemButton onClick={() => {}} />
                             </div>
 
                             <div className="w-32 truncate text-center text-lg">{content.title}</div>
@@ -147,9 +146,33 @@ export function FiloDialog() {
                               className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black"
                             >
                               {content ? <RenderMedia media={content} /> : <ImagePlaceholder />}
+
+                              <RemoveFiloItemButton onClick={() => {}} />
                             </div>
 
                             <div className="w-32 truncate text-center text-lg">{content.alt}</div>
+                          </div>
+                        )
+                      case 'book':
+                        return (
+                          <div className="space-y-2">
+                            <div
+                              key={content.id}
+                              className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black"
+                            >
+                              {typeof content?.content?.cover !== 'string' &&
+                              content?.content?.cover ? (
+                                <RenderMedia media={content.content.cover} />
+                              ) : (
+                                <div className="flex size-full flex-col items-center justify-center overflow-hidden rounded-md bg-card text-black">
+                                  <MissingImage />
+                                </div>
+                              )}
+
+                              <RemoveFiloItemButton onClick={() => {}} />
+                            </div>
+
+                            <div className="w-32 truncate text-center text-lg">{content.title}</div>
                           </div>
                         )
                       default:
@@ -169,5 +192,21 @@ export function FiloDialog() {
         </Tabs>
       </DialogContent>
     </Dialog>
+  )
+}
+
+export type RemoveFiloItemButtonProps = {
+  onClick: () => void
+}
+
+export function RemoveFiloItemButton({ onClick }: RemoveFiloItemButtonProps) {
+  return (
+    <Button
+      onClick={onClick}
+      size="icon"
+      className="absolute right-1 top-1 size-8 rounded-full bg-black/50 p-1 text-white"
+    >
+      <X className="size-5" />
+    </Button>
   )
 }
