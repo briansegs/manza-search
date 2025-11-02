@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Popover, PopoverTrigger } from '@/components/ui/popover'
 import { useMutationState } from '@/features/messenger/hooks/useMutationState'
 import { ArticleMedia } from '@/payload-types'
 import { useAuth } from '@clerk/nextjs'
 import { api } from 'convex/_generated/api'
 import { ConvexError } from 'convex/values'
 import { toast } from 'sonner'
+import { ExtraContentPopoverMenu } from '../ExtraContentPopoverMenu'
 
 export type ImageExtraContentButtonProps = {
   image: string | null | ArticleMedia
@@ -30,6 +31,7 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
     {
       name: 'pin',
       onClick: () => {},
+      disabled: !isSignedIn,
     },
     {
       name: 'save',
@@ -39,10 +41,12 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
     {
       name: 'download',
       onClick: () => {},
+      disabled: !isSignedIn,
     },
     {
       name: 'share',
       onClick: () => {},
+      disabled: !isSignedIn,
     },
   ]
 
@@ -54,25 +58,7 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="flex w-40 flex-col items-center border-2 border-black">
-        <div className="font-serif text-lg font-bold text-secondary-blue">Extra Content</div>
-        <ul className="flex w-full flex-col items-center">
-          {menuItems.map(({ name, onClick, disabled }) => {
-            return (
-              <li key={name} className="w-full">
-                <Button
-                  onClick={onClick}
-                  variant="ghost"
-                  className="w-full font-serif font-bold"
-                  disabled={disabled}
-                >
-                  {name}
-                </Button>
-              </li>
-            )
-          })}
-        </ul>
-      </PopoverContent>
+      <ExtraContentPopoverMenu menuItems={menuItems} />
     </Popover>
   )
 }
