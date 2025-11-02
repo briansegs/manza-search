@@ -3,16 +3,28 @@ import { ExtraContentPopoverMenu } from '../ExtraContentPopoverMenu'
 import { BookCardButton } from './BookCardButton'
 import { Book } from '@/payload-types'
 import { useAuth } from '@clerk/nextjs'
+import { api } from 'convex/_generated/api'
+import { useMutationState } from '@/features/messenger/hooks/useMutationState'
+import { toast } from 'sonner'
+import { ConvexError } from 'convex/values'
 
 export type BookExtraContentButtonProps = {
   book: Book
 }
 
 export function BookExtraContentButton({ book }: BookExtraContentButtonProps) {
+  const { mutate: saveBook, pending: saveBookPending } = useMutationState(api.save.saveContent)
   const { isSignedIn } = useAuth()
 
   async function handleSave() {
-    console.log('book: ', book)
+    if (typeof book === 'object')
+      await saveBook({ contentId: book?.id, contentType: 'book' })
+        .then(() => {
+          toast.success('book saved!')
+        })
+        .catch((error) => {
+          toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+        })
   }
 
   const menuItems = [
@@ -24,7 +36,7 @@ export function BookExtraContentButton({ book }: BookExtraContentButtonProps) {
     {
       name: 'save',
       onClick: handleSave,
-      disabled: !isSignedIn,
+      disabled: !isSignedIn || saveBookPending,
     },
     {
       name: 'download',
