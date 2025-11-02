@@ -6,6 +6,7 @@ import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { isValidLink } from '@/utilities/isValidLink'
 
 import dynamic from 'next/dynamic'
+import { BookExtraContentButton } from './BookExtraContentButton'
 
 const BookReader = dynamic(
   () => import('@/features/bookReader/components/BookReader').then((m) => m.BookReader),
@@ -55,7 +56,7 @@ export function BookCard({ book }: BookCardProps) {
         <div className="mb-3 flex justify-center gap-4">
           <BookCardButton>B</BookCardButton>
           <BookCardButton>A</BookCardButton>
-          <BookCardButton>LM</BookCardButton>
+          <BookExtraContentButton book={book} />
           <BookReader book={book} />
         </div>
       </div>
