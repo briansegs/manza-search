@@ -71,7 +71,7 @@ export function FiloDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         aria-describedby="Filo content"
-        className="flex h-[560px] flex-col gap-2 border-2 border-black bg-primary-blue"
+        className="flex h-[560px] flex-col gap-2 border-2 border-black bg-primary-blue p-4 sm:p-6"
         closeButtonStyles="hidden"
       >
         <FiloDialogHeader setOpen={setOpen} />
@@ -81,7 +81,7 @@ export function FiloDialog() {
         </DialogDescription>
 
         <Tabs defaultValue={section} className="flex min-h-0 w-full flex-1 flex-col">
-          <TabsList className="h-fit w-full flex-wrap gap-2 bg-black py-2">
+          <TabsList className="flex h-fit w-full flex-wrap gap-2 bg-black py-2">
             {filoSections?.map((section, index) => {
               return (
                 <TabsTrigger
@@ -105,7 +105,7 @@ export function FiloDialog() {
                 value={section.name}
                 className="custom-scrollbar relative mx-auto w-full flex-1 overflow-y-scroll p-0"
               >
-                <div className="custom-scrollbar flex h-full w-full flex-wrap gap-6 pl-2 text-white">
+                <div className="flex h-full w-full flex-wrap justify-center gap-6 pl-2 text-white sm:justify-start">
                   {section?.content?.map((content) => {
                     return <FiloContentCard key={content.id} content={content} />
                   })}

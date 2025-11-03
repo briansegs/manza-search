@@ -23,7 +23,7 @@ export function ArticleTopMenuContainer({ article, className, url }: ArticleTopM
       </div>
 
       {/* Mobile view */}
-      <div className="sticky top-0 z-10 ml-auto flex justify-between px-1 lg:hidden">
+      <div className="sticky top-0 z-10 ml-auto flex flex-wrap justify-between px-1 lg:hidden">
         <div className="flex gap-1">
           <DropdownMenu label="Resources">
             <ArticleLeftMenu
