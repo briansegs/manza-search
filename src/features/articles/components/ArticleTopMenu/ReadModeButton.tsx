@@ -1,7 +1,7 @@
 'use client'
 
 import { useReadMode } from '@/providers/ReadModeProvider'
-import { ArticleMenuButton } from '../../components/ArticleMenuButton'
+import { ArticleMenuButton } from '../ArticleMenuButton'
 import { cn } from '@/utilities/ui'
 
 export function ReadModeButton() {

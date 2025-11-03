@@ -6,7 +6,7 @@ import ContentButtons from './ContentButtons'
 import { cn } from '@/utilities/ui'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
-import { RichTextWithTextSize } from '@/features/articles/textSize/components/RichTextWithTextSize'
+import { RichTextWithTextSize } from '@/features/articles/components/ArticleTopMenu/textSize/components/RichTextWithTextSize'
 
 interface ImageContainerProps {
   image: string | Media

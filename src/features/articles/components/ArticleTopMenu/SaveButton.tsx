@@ -2,7 +2,7 @@
 
 import { Article } from '@/payload-types'
 import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react'
-import { ArticleMenuButton } from '../../ArticleMenuButton'
+import { ArticleMenuButton } from '../ArticleMenuButton'
 import { SaveButtonAuthenticated } from '@/features/filo/SaveButtonAuthenticated'
 
 type SaveButtonProps = {

@@ -1,6 +1,6 @@
 'use client'
 
-import { ArticleMenuButton } from '../../components/ArticleMenuButton'
+import { ArticleMenuButton } from '../../../ArticleMenuButton'
 import { TextSizeOptions, useTextSize } from '@/providers/TextSizeProvider'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/utilities/ui'

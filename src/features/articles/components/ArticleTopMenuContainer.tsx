@@ -2,11 +2,11 @@ import React from 'react'
 import { RightMenu } from '@/features/shared/components/RightMenu'
 import getAuthorList from '@/utilities/getAuthorList'
 import { ArticleLeftMenu } from './ArticleLeftMenu'
-import { ArticleTopMenu } from './ArticleTopMenu'
 import { DropdownMenu } from '@/features/shared/components/DropdownMenu'
 import getSectionTitles from '@/utilities/getSectionTitles'
 import { cn } from '@/utilities/ui'
 import { ArticleTopMenuContainerProps } from '../types'
+import { ArticleTopMenu } from './ArticleTopMenu/ArticleTopMenu'
 
 export function ArticleTopMenuContainer({ article, className, url }: ArticleTopMenuContainerProps) {
   const { populatedAuthors, externalAuthors, otherVerifiedSources, layout } = article
