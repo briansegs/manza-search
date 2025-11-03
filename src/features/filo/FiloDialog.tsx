@@ -37,11 +37,6 @@ export function FiloDialog() {
 
   const savedResult = useQuery(api.saves.getSaved)
 
-  const saveList = useMemo(() => {
-    if (!savedResult) return null
-    return savedResult
-  }, [savedResult])
-
   const { execute, result, isPending } = useAction(fetchSavedContent, {
     onSuccess: () => {
       setSavedContent(result.data || [])
@@ -55,10 +50,12 @@ export function FiloDialog() {
   })
 
   useEffect(() => {
-    if (saveList?.length) {
-      execute({ saveList })
+    if (savedResult === undefined) return
+
+    if (savedResult.length > 0) {
+      execute({ saveList: savedResult })
     }
-  }, [saveList, execute])
+  }, [savedResult, execute])
 
   const filoSections = useMemo(
     () => [
