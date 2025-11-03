@@ -20,7 +20,7 @@ export function GalleryImage({ link, image, imageWidth, hasValidLink }: GalleryI
         <ImagePlaceholder />
       )}
 
-      {image && <ImageExtraContentButton />}
+      {image && <ImageExtraContentButton image={image} />}
     </div>
   )
 }
