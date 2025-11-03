@@ -56,7 +56,7 @@ export default defineSchema({
   savedContent: defineTable({
     userId: v.id('users'),
     contentId: v.string(),
-    contentType: v.string(),
+    contentType: v.union(v.literal('article'), v.literal('image'), v.literal('book')),
   })
     .index('by_user', ['userId'])
     .index('by_user_content', ['userId', 'contentId']),

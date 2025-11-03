@@ -5,7 +5,7 @@ import { getAuthenticatedUser } from './_utils'
 export const saveContent = mutation({
   args: {
     contentId: v.string(),
-    contentType: v.string(),
+    contentType: v.union(v.literal('article'), v.literal('image'), v.literal('book')),
   },
   handler: async (ctx, { contentId, contentType }) => {
     const currentUser = await getAuthenticatedUser(ctx)
