@@ -4,7 +4,7 @@ import { ImagePlaceholder } from '../shared/components/ImagePlaceholder'
 import { FiloContent } from './FiloDialog'
 import { RemoveFiloItemButton } from './RemoveFiloItemButton'
 import { useMutationState } from '../messenger/hooks/useMutationState'
-import { api } from 'convex/_generated/api'
+import { api } from '../../../convex/_generated/api'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
 
