@@ -19,7 +19,7 @@ export const fetchSavedContent = actionClient
       const savedIds = saveList.map((saved) => saved.contentId)
 
       const [articleResults, imageResults, bookResults] = await Promise.all([
-        await payload.find({
+        payload.find({
           collection: 'articles',
           pagination: false,
           where: {
@@ -27,7 +27,7 @@ export const fetchSavedContent = actionClient
           },
           depth: 1,
         }),
-        await payload.find({
+        payload.find({
           collection: 'article-media',
           pagination: false,
           where: {
@@ -35,7 +35,7 @@ export const fetchSavedContent = actionClient
           },
           depth: 1,
         }),
-        await payload.find({
+        payload.find({
           collection: 'books',
           pagination: false,
           where: {
