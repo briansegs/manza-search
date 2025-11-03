@@ -111,7 +111,7 @@ export function FiloDialog() {
                   })}
 
                   {isPending && (
-                    <div className="mt-4 flex items-center justify-center gap-4">
+                    <div className="mt-4 flex w-full items-center justify-center">
                       <Spinner className="h-12 w-12" />
                     </div>
                   )}
