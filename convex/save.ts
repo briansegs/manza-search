@@ -21,13 +21,11 @@ export const saveContent = mutation({
       throw new ConvexError(`${contentType} already saved`)
     }
 
-    if (!exists) {
-      await ctx.db.insert('savedContent', {
-        userId: currentUser._id,
-        contentId,
-        contentType,
-      })
-    }
+    await ctx.db.insert('savedContent', {
+      userId: currentUser._id,
+      contentId,
+      contentType,
+    })
   },
 })
 
@@ -49,7 +47,7 @@ export const unsaveContent = mutation({
       throw new ConvexError("Content doesn't exist")
     }
 
-    if (saved) await ctx.db.delete(saved._id)
+    await ctx.db.delete(saved._id)
   },
 })
 
