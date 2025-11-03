@@ -41,9 +41,7 @@ export function FiloContentCard({ content }: FiloContentCardProps) {
       break
 
     case 'image':
-      if (content) {
-        mediaElement = <RenderMedia media={content} />
-      }
+      mediaElement = <RenderMedia media={content} />
 
       label = content.alt
       break
