@@ -1,6 +1,6 @@
 'use client'
 
-import { useMutationState } from '@/features/messenger/hooks/useMutationState'
+import { useMutationState } from '@/hooks/useMutationState'
 import { api } from '../../../../../convex/_generated/api'
 
 import {

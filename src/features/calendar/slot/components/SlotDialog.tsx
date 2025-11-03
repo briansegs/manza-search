@@ -10,7 +10,7 @@ import {
 import { api } from '../../../../../convex/_generated/api'
 
 import { z } from 'zod'
-import { useMutationState } from '@/features/messenger/hooks/useMutationState'
+import { useMutationState } from '@/hooks/useMutationState'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'

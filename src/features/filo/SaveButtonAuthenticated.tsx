@@ -3,7 +3,7 @@
 import { Article } from '@/payload-types'
 import { ArticleMenuButton } from '../articles/components/ArticleMenuButton'
 import { api } from '../../../convex/_generated/api'
-import { useMutationState } from '../messenger/hooks/useMutationState'
+import { useMutationState } from '../../hooks/useMutationState'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
 import { useEffect, useState } from 'react'
