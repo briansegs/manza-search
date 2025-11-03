@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Search, X } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
@@ -13,7 +14,9 @@ export function FiloDialogHeader({ setOpen }: FiloDialogHeaderProps) {
 
       <Search />
 
-      <X onClick={() => setOpen(false)} className="cursor-pointer" />
+      <Button onClick={() => setOpen(false)} className="rounded-full bg-transparent" size="icon">
+        <X />
+      </Button>
     </DialogHeader>
   )
 }
