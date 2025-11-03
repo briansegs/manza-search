@@ -51,4 +51,5 @@ export type RelatedArticlesProps = {
 
 export type ArticleTopMenuProps = {
   styles?: string
+  article: Article
 }

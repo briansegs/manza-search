@@ -12,7 +12,7 @@ export function ImageSectionImage({ hasValidLink, link, image }: ImageSectionIma
     <div className="border-content relative h-72 w-96 flex-shrink-0 overflow-hidden rounded-primary">
       {hasValidLink ? <CMSLink {...link}>{content}</CMSLink> : content}
 
-      {image && <ImageExtraContentButton />}
+      {image && <ImageExtraContentButton image={image} />}
     </div>
   )
 }

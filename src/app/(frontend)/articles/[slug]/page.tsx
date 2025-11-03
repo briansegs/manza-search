@@ -19,6 +19,9 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import type { ArticleAd as ArticleAdsGlobalType } from '@/payload-types'
 import { generateMeta } from '@/utilities/generateMeta'
 import { Metadata } from 'next'
+import { FiloProvider } from '@/providers/FiloProvider'
+import { FiloDialog } from '@/features/filo/FiloDialog'
+import { auth } from '@clerk/nextjs/server'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -51,6 +54,7 @@ export default async function Article({ params: paramsPromise }: Args) {
   const { slug = '' } = await paramsPromise
   const url = '/articles/' + slug
   const article = await queryArticleBySlug({ slug, draft })
+  const { userId } = await auth()
 
   const ads: ArticleAdsGlobalType = await getCachedGlobal('article-ads', 2)()
 
@@ -75,16 +79,20 @@ export default async function Article({ params: paramsPromise }: Args) {
         <div className="flex w-full min-w-0 flex-col">
           <ReadModeProvider>
             <TextSizeProvider>
-              <ArticleTopMenuContainer
-                url={url}
-                article={article}
-                className="hidden sm:block lg:ml-auto"
-              />
-              {/* Hero & Content */}
-              <ArticleHero article={article} />
-              <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
-              <ArticleAdsContainer ads={ads} />
-              <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
+              <FiloProvider>
+                <ArticleTopMenuContainer
+                  url={url}
+                  article={article}
+                  className="hidden sm:block lg:ml-auto"
+                />
+                {/* Hero & Content */}
+                <ArticleHero article={article} />
+                <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
+                <ArticleAdsContainer ads={ads} />
+                <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
+
+                {userId && <FiloDialog />}
+              </FiloProvider>
             </TextSizeProvider>
           </ReadModeProvider>
         </div>

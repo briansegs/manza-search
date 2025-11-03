@@ -1,7 +1,55 @@
 import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Popover, PopoverTrigger } from '@/components/ui/popover'
+import { useMutationState } from '@/hooks/useMutationState'
+import { ArticleMedia } from '@/payload-types'
+import { useAuth } from '@clerk/nextjs'
+import { api } from '../../../../../convex/_generated/api'
+import { ConvexError } from 'convex/values'
+import { toast } from 'sonner'
+import { ExtraContentPopoverMenu } from '../ExtraContentPopoverMenu'
 
-export function ImageExtraContentButton() {
+export type ImageExtraContentButtonProps = {
+  image: string | null | ArticleMedia
+}
+
+export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps) {
+  const { mutate: saveImage, pending: saveImagePending } = useMutationState(api.save.saveContent)
+  const { isSignedIn } = useAuth()
+
+  async function handleSave() {
+    if (typeof image === 'object' && image?.id)
+      await saveImage({ contentId: image?.id, contentType: 'image' })
+        .then(() => {
+          toast.success('Image saved!')
+        })
+        .catch((error) => {
+          toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+        })
+  }
+
+  const menuItems = [
+    {
+      name: 'pin',
+      onClick: () => {},
+      disabled: !isSignedIn,
+    },
+    {
+      name: 'save',
+      onClick: handleSave,
+      disabled: !isSignedIn || saveImagePending,
+    },
+    {
+      name: 'download',
+      onClick: () => {},
+      disabled: !isSignedIn,
+    },
+    {
+      name: 'share',
+      onClick: () => {},
+      disabled: !isSignedIn,
+    },
+  ]
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -10,31 +58,7 @@ export function ImageExtraContentButton() {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="flex w-fit flex-col items-center border-2 border-black">
-        <div className="font-serif text-lg font-bold text-secondary-blue">Extra Content</div>
-        <ul className="flex flex-col items-center">
-          <li>
-            <Button variant="ghost" className="font-serif font-bold">
-              pin
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" className="font-serif font-bold">
-              save
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" className="font-serif font-bold">
-              download
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" className="font-serif font-bold">
-              share
-            </Button>
-          </li>
-        </ul>
-      </PopoverContent>
+      <ExtraContentPopoverMenu menuItems={menuItems} />
     </Popover>
   )
 }

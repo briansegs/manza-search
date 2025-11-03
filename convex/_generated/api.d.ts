@@ -25,6 +25,8 @@ import type * as message from "../message.js";
 import type * as messages from "../messages.js";
 import type * as request from "../request.js";
 import type * as requests from "../requests.js";
+import type * as save from "../save.js";
+import type * as saves from "../saves.js";
 import type * as user from "../user.js";
 
 /**
@@ -48,6 +50,8 @@ declare const fullApi: ApiFromModules<{
   messages: typeof messages;
   request: typeof request;
   requests: typeof requests;
+  save: typeof save;
+  saves: typeof saves;
   user: typeof user;
 }>;
 export declare const api: FilterApi<
