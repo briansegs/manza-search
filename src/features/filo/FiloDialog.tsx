@@ -9,26 +9,12 @@ import { useQuery } from 'convex/react'
 import { useEffect, useMemo, useState } from 'react'
 import { fetchSavedContent } from '@/actions/fetchSavedContent'
 import { useAction } from 'next-safe-action/hooks'
-import { Article, ArticleMedia, Book } from '@/payload-types'
 import { parseActionError } from '@/utilities/parseActionError'
 import { toast } from 'sonner'
 import { Spinner } from '@/components/ui/spinner'
 import { FiloDialogHeader } from './FiloDialogHeader'
 import { FiloContentCard } from './FiloContentCard'
-
-export type ArticleWithType = Article & {
-  type: 'article'
-}
-
-export type ArticleMediaWithType = ArticleMedia & {
-  type: 'image'
-}
-
-export type BookWithType = Book & {
-  type: 'book'
-}
-
-export type FiloContent = ArticleWithType | ArticleMediaWithType | BookWithType
+import { FiloContent } from './types'
 
 export function FiloDialog() {
   const { open, setOpen, section } = useFilo()

@@ -1,16 +1,12 @@
 import { Media } from '@/components/Media'
 import { RenderMedia } from '../shared/components/RenderMedia'
 import { ImagePlaceholder } from '../shared/components/ImagePlaceholder'
-import { FiloContent } from './FiloDialog'
 import { RemoveFiloItemButton } from './RemoveFiloItemButton'
 import { useMutationState } from '../../hooks/useMutationState'
 import { api } from '../../../convex/_generated/api'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
-
-export type FiloContentCardProps = {
-  content: FiloContent
-}
+import { FiloContentCardProps } from './types'
 
 export function FiloContentCard({ content }: FiloContentCardProps) {
   const { mutate: removeContent, pending: removeContentPending } = useMutationState(

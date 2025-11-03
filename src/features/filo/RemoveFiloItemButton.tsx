@@ -1,10 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
-
-export type RemoveFiloItemButtonProps = {
-  onClick: () => void
-  disabled: boolean
-}
+import { RemoveFiloItemButtonProps } from './types'
 
 export function RemoveFiloItemButton({ onClick, disabled }: RemoveFiloItemButtonProps) {
   return (

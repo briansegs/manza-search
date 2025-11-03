@@ -1,11 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Search, X } from 'lucide-react'
-import { Dispatch, SetStateAction } from 'react'
-
-export type FiloDialogHeaderProps = {
-  setOpen: Dispatch<SetStateAction<boolean>>
-}
+import { FiloDialogHeaderProps } from './types'
 
 export function FiloDialogHeader({ setOpen }: FiloDialogHeaderProps) {
   return (

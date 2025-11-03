@@ -5,3 +5,7 @@ export type ArticleBooksLinkProps = { slug: string }
 export type BookCardProps = {
   book: Book
 }
+
+export type BookExtraContentButtonProps = {
+  book: Book
+}

@@ -1,6 +1,5 @@
 'use client'
 
-import { Article } from '@/payload-types'
 import { ArticleMenuButton } from '../articles/components/ArticleMenuButton'
 import { api } from '../../../convex/_generated/api'
 import { useMutationState } from '../../hooks/useMutationState'
@@ -9,10 +8,7 @@ import { ConvexError } from 'convex/values'
 import { useEffect, useState } from 'react'
 import { cn } from '@/utilities/ui'
 import { useQuery } from 'convex/react'
-
-type SaveButtonAuthenticatedProps = {
-  article: Article
-}
+import { SaveButtonAuthenticatedProps } from './types'
 
 export function SaveButtonAuthenticated({ article }: SaveButtonAuthenticatedProps) {
   const { mutate: saveArticle, pending: saveArticlePending } = useMutationState(
