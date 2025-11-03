@@ -57,7 +57,7 @@ export const fetchSavedContent = actionClient
 
       return mergedList
     } catch (error) {
-      console.error('[fetchSavedContent] Failed to query articles:', error)
+      console.error('[fetchSavedContent] Failed to query saved content:', error)
       throw new Error('Failed to fetch saved content.')
     }
   })
