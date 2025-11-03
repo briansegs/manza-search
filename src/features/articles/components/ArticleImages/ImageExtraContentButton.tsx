@@ -17,7 +17,7 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
   const { isSignedIn } = useAuth()
 
   async function handleSave() {
-    if (typeof image === 'object')
+    if (typeof image === 'object' && image?.id)
       await saveImage({ contentId: image?.id, contentType: 'image' })
         .then(() => {
           toast.success('Image saved!')
