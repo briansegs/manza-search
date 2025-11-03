@@ -18,13 +18,12 @@ export function FiloContentCard({ content }: FiloContentCardProps) {
   )
 
   async function handleRemove() {
-    await removeContent({ contentId: content.id })
-      .then(() => {
-        toast.success('Content removed!')
-      })
-      .catch((error) => {
-        toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
-      })
+    try {
+      await removeContent({ contentId: content.id })
+      toast.success('Content removed!')
+    } catch (error) {
+      toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+    }
   }
 
   let mediaElement: React.ReactNode = <ImagePlaceholder className="p-0 text-black" />

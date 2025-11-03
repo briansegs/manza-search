@@ -32,21 +32,19 @@ export function SaveButtonAuthenticated({ article }: SaveButtonAuthenticatedProp
 
   async function handleSave() {
     if (saved) {
-      await removeArticle({ contentId: article.id })
-        .then(() => {
-          toast.success('Article unsaved!')
-        })
-        .catch((error) => {
-          toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
-        })
+      try {
+        await removeArticle({ contentId: article.id })
+        toast.success('Article unsaved!')
+      } catch (error) {
+        toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+      }
     } else {
-      await saveArticle({ contentId: article.id, contentType: 'article' })
-        .then(() => {
-          toast.success('Article saved!')
-        })
-        .catch((error) => {
-          toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
-        })
+      try {
+        await saveArticle({ contentId: article.id, contentType: 'article' })
+        toast.success('Article saved!')
+      } catch (error) {
+        toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+      }
     }
   }
 

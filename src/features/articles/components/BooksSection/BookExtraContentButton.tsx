@@ -17,14 +17,12 @@ export function BookExtraContentButton({ book }: BookExtraContentButtonProps) {
   const { isSignedIn } = useAuth()
 
   async function handleSave() {
-    if (typeof book === 'object')
+    try {
       await saveBook({ contentId: book?.id, contentType: 'book' })
-        .then(() => {
-          toast.success('book saved!')
-        })
-        .catch((error) => {
-          toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
-        })
+      toast.success('book saved!')
+    } catch (error) {
+      toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+    }
   }
 
   const menuItems = [
