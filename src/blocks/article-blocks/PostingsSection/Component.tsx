@@ -6,10 +6,10 @@ import React from 'react'
 import { ImagePlaceholder } from '@/features/shared/components/ImagePlaceholder'
 import { RenderMedia } from '@/features/shared/components/RenderMedia'
 import TitleBar from '../TitleBar'
-import { useReadMode } from '@/providers/ReadModeProvider'
+import { useReadMode } from '@/stores/readModeStore'
 
 export const PostingsSectionBlock: React.FC<PostingsSectionProps> = (props) => {
-  const { readMode } = useReadMode()
+  const readMode = useReadMode()
 
   const { title, postings } = props
 

@@ -2,15 +2,15 @@
 
 import TitleBar from '@/blocks/article-blocks/TitleBar'
 
-import { useReadMode } from '@/providers/ReadModeProvider'
 import { CarouselDotButtons } from '@/components/ui/carousel'
 
 import { ArticleAdsContainerProps } from './types'
 import { ArticleAdsCarousel } from './ArticleAdsCarousel'
 import { ArticleAdsCarouselContent } from './ArticleAdsCarouselContent'
+import { useReadMode } from '@/stores/readModeStore'
 
 export function ArticleAdsContainer({ ads }: ArticleAdsContainerProps) {
-  const { readMode } = useReadMode()
+  const readMode = useReadMode()
 
   if (!ads) return null
   if (readMode) return null

@@ -1,16 +1,16 @@
 'use client'
 
 import TitleBar from '../../TitleBar'
-import { useReadMode } from '@/providers/ReadModeProvider'
 
 import { isValidLink } from '@/utilities/isValidLink'
 import { CMSLinkType } from '@/components/Link'
 import { ArticleImagesLink } from '@/features/articles/components/ImagesSection/ArticleImagesLink'
 import { ImageSectionImage } from '@/features/articles/components/ImagesSection/ImageSectionImage'
 import { ImagesClientProps } from '../types'
+import { useReadMode } from '@/stores/readModeStore'
 
 export function ImagesClient(props: ImagesClientProps) {
-  const { readMode } = useReadMode()
+  const readMode = useReadMode()
 
   const { title, imagesData, slug } = props
 
