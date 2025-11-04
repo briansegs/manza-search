@@ -40,6 +40,8 @@ export function FiloDialog() {
 
     if (savedResult.length > 0) {
       execute({ saveList: savedResult })
+    } else {
+      setSavedContent([])
     }
   }, [savedResult, execute])
 
