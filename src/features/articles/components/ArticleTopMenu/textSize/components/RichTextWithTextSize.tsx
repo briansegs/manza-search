@@ -2,7 +2,7 @@
 
 import RichText from '@/components/RichText'
 import { ContentSection as ContentSectionProps } from '@/payload-types'
-import { useTextSize } from '@/providers/TextSizeProvider'
+import { useTextSize } from '@/stores/textSizeStore'
 import { cn } from '@/utilities/ui'
 
 type RichTextWithTextSizeProps = Pick<ContentSectionProps, 'content'> & {
@@ -10,7 +10,7 @@ type RichTextWithTextSizeProps = Pick<ContentSectionProps, 'content'> & {
 }
 
 export const RichTextWithTextSize = ({ className, content }: RichTextWithTextSizeProps) => {
-  const { textSize } = useTextSize()
+  const textSize = useTextSize()
 
   if (!content) return null
 

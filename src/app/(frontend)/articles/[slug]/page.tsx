@@ -12,7 +12,6 @@ import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
 import { ArticleLeftMenuContainer } from '@/features/articles/components/ArticleLeftMenuContainer'
-import { TextSizeProvider } from '@/providers/TextSizeProvider'
 import { ArticleAdsContainer } from '@/features/articles/components/ArticleAds/ArticleAdsContainer'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import type { ArticleAd as ArticleAdsGlobalType } from '@/payload-types'
@@ -76,22 +75,20 @@ export default async function Article({ params: paramsPromise }: Args) {
         <ArticleLeftMenuContainer url={url} article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
-          <TextSizeProvider>
-            <FiloProvider>
-              <ArticleTopMenuContainer
-                url={url}
-                article={article}
-                className="hidden sm:block lg:ml-auto"
-              />
-              {/* Hero & Content */}
-              <ArticleHero article={article} />
-              <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
-              <ArticleAdsContainer ads={ads} />
-              <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
+          <FiloProvider>
+            <ArticleTopMenuContainer
+              url={url}
+              article={article}
+              className="hidden sm:block lg:ml-auto"
+            />
+            {/* Hero & Content */}
+            <ArticleHero article={article} />
+            <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
+            <ArticleAdsContainer ads={ads} />
+            <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
 
-              {userId && <FiloDialog />}
-            </FiloProvider>
-          </TextSizeProvider>
+            {userId && <FiloDialog />}
+          </FiloProvider>
         </div>
       </div>
       <RightMenuContainer />

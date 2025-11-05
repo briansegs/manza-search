@@ -1,14 +1,15 @@
 'use client'
 
 import { ArticleMenuButton } from '../../../ArticleMenuButton'
-import { TextSizeOptions, useTextSize } from '@/providers/TextSizeProvider'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { TextSizeOptions, useTextSize, useTextSizeActions } from '@/stores/textSizeStore'
 import { cn } from '@/utilities/ui'
 
 const sizes: TextSizeOptions[] = ['off', 'large', 'x-large']
 
 export function TextSizeButton() {
-  const { textSize, setTextSize } = useTextSize()
+  const textSize = useTextSize()
+  const { setTextSize } = useTextSizeActions()
 
   return (
     <Popover>
