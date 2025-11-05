@@ -10,6 +10,7 @@ import { BookExtraContentButtonProps } from './types'
 
 export function BookExtraContentButton({ book }: BookExtraContentButtonProps) {
   const { mutate: saveBook, pending: saveBookPending } = useMutationState(api.save.saveContent)
+  const { mutate: pinBook, pending: pinBookPending } = useMutationState(api.pin.pinContent)
   const { isSignedIn } = useAuth()
 
   async function handleSave() {
@@ -21,11 +22,20 @@ export function BookExtraContentButton({ book }: BookExtraContentButtonProps) {
     }
   }
 
+  async function handlePin() {
+    try {
+      await pinBook({ contentId: book?.id, contentType: 'book' })
+      toast.success('book pinned!')
+    } catch (error) {
+      toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+    }
+  }
+
   const menuItems = [
     {
       name: 'pin',
-      onClick: () => {},
-      disabled: !isSignedIn,
+      onClick: handlePin,
+      disabled: !isSignedIn || pinBookPending,
     },
     {
       name: 'save',
@@ -35,12 +45,12 @@ export function BookExtraContentButton({ book }: BookExtraContentButtonProps) {
     {
       name: 'download',
       onClick: () => {},
-      disabled: !isSignedIn,
+      disabled: true,
     },
     {
       name: 'share',
       onClick: () => {},
-      disabled: !isSignedIn,
+      disabled: true,
     },
   ]
 

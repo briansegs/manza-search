@@ -15,6 +15,8 @@ import { FiloDialogHeader } from './FiloDialogHeader'
 import { FiloContentCard } from './FiloContentCard'
 import { FiloContent } from './types'
 import { useFiloActions, useFiloOpen, useFiloSection } from '@/stores/filoStore'
+import { fetchPinnedContent } from '@/actions/fetchPinnedContent'
+import { useMutationState } from '@/hooks/useMutationState'
 
 export function FiloDialog() {
   const open = useFiloOpen()
@@ -22,12 +24,42 @@ export function FiloDialog() {
   const section = useFiloSection()
 
   const [savedContent, setSavedContent] = useState<FiloContent[]>([])
+  const [pinnedContent, setPinnedContent] = useState<FiloContent[]>([])
 
   const savedResult = useQuery(api.saves.getSaved)
+  const pinnedResult = useQuery(api.pins.getPinned)
 
-  const { execute, result, isPending } = useAction(fetchSavedContent, {
+  const { mutate: removeContent, pending: removeContentPending } = useMutationState(
+    api.save.unsaveContent,
+  )
+
+  const { mutate: unpinContent, pending: unpinContentPending } = useMutationState(
+    api.pin.unpinContent,
+  )
+
+  const {
+    execute: fetchSaved,
+    result: fetchSavedResult,
+    isPending: fetchSavedIsPending,
+  } = useAction(fetchSavedContent, {
     onSuccess: () => {
-      setSavedContent(result.data || [])
+      setSavedContent(fetchSavedResult.data || [])
+    },
+    onError: (actionError) => {
+      const errorMsg = parseActionError(actionError.error)
+
+      console.error(errorMsg)
+      toast.error(errorMsg)
+    },
+  })
+
+  const {
+    execute: fetchPinned,
+    result: fetchPinnedResult,
+    isPending: fetchPinnedIsPending,
+  } = useAction(fetchPinnedContent, {
+    onSuccess: () => {
+      setPinnedContent(fetchPinnedResult.data || [])
     },
     onError: (actionError) => {
       const errorMsg = parseActionError(actionError.error)
@@ -41,20 +73,47 @@ export function FiloDialog() {
     if (savedResult === undefined) return
 
     if (savedResult.length > 0) {
-      execute({ saveList: savedResult })
+      fetchSaved({ saveList: savedResult })
     } else {
       setSavedContent([])
     }
-  }, [savedResult, execute])
+  }, [savedResult, fetchSaved])
+
+  useEffect(() => {
+    if (pinnedResult === undefined) return
+
+    if (pinnedResult.length > 0) {
+      fetchPinned({ pinList: pinnedResult })
+    } else {
+      setPinnedContent([])
+    }
+  }, [pinnedResult, fetchPinned])
 
   const filoSections = useMemo(
     () => [
-      { name: 'pin', content: null },
-      { name: 'save', content: savedContent },
+      {
+        name: 'pin',
+        content: pinnedContent,
+        removeFn: unpinContent,
+        removePending: unpinContentPending,
+      },
+      {
+        name: 'save',
+        content: savedContent,
+        removeFn: removeContent,
+        removePending: removeContentPending,
+      },
       { name: 'history', content: null },
       { name: 'lists', content: null },
     ],
-    [savedContent],
+    [
+      savedContent,
+      removeContent,
+      removeContentPending,
+      pinnedContent,
+      unpinContent,
+      unpinContentPending,
+    ],
   )
 
   return (
@@ -97,14 +156,23 @@ export function FiloDialog() {
               >
                 <div className="flex h-full w-full flex-wrap justify-center gap-6 pl-2 text-white sm:justify-start">
                   {section?.content?.map((content) => {
-                    return <FiloContentCard key={content.id} content={content} />
+                    return (
+                      <FiloContentCard
+                        key={content.id}
+                        content={content}
+                        removeFn={section.removeFn}
+                        pending={section.removePending}
+                        name={section.name}
+                      />
+                    )
                   })}
 
-                  {isPending && (
-                    <div className="mt-4 flex w-full items-center justify-center">
-                      <Spinner className="h-12 w-12" />
-                    </div>
-                  )}
+                  {fetchSavedIsPending ||
+                    (fetchPinnedIsPending && (
+                      <div className="mt-4 flex w-full items-center justify-center">
+                        <Spinner className="h-12 w-12" />
+                      </div>
+                    ))}
                 </div>
               </TabsContent>
             )

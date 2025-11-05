@@ -17,6 +17,13 @@ export type FiloContent = ArticleWithType | ArticleMediaWithType | BookWithType
 
 export type FiloContentCardProps = {
   content: FiloContent
+  removeFn?: (args: { contentId: string }) => Promise<void> | null
+  pending?: boolean
+  name?: string
+}
+
+export type handleRemoveSaveProps = {
+  content: FiloContent
 }
 
 export type FiloDialogHeaderProps = Pick<FiloActions, 'setOpen'>
@@ -27,5 +34,9 @@ export type RemoveFiloItemButtonProps = {
 }
 
 export type SaveButtonAuthenticatedProps = {
+  article: Article
+}
+
+export type PinButtonAuthenticatedProps = {
   article: Article
 }
