@@ -2,7 +2,6 @@
 
 import { Dialog, DialogContent, DialogDescription } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useFilo } from '@/providers/FiloProvider'
 import { cn } from '@/utilities/ui'
 import { api } from '../../../convex/_generated/api'
 import { useQuery } from 'convex/react'
@@ -15,9 +14,12 @@ import { Spinner } from '@/components/ui/spinner'
 import { FiloDialogHeader } from './FiloDialogHeader'
 import { FiloContentCard } from './FiloContentCard'
 import { FiloContent } from './types'
+import { useFiloActions, useFiloOpen, useFiloSection } from '@/stores/filoStore'
 
 export function FiloDialog() {
-  const { open, setOpen, section } = useFilo()
+  const open = useFiloOpen()
+  const { setOpen } = useFiloActions()
+  const section = useFiloSection()
 
   const [savedContent, setSavedContent] = useState<FiloContent[]>([])
 

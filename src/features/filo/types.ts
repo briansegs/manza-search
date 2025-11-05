@@ -1,5 +1,5 @@
 import { Article, ArticleMedia, Book } from '@/payload-types'
-import { Dispatch, SetStateAction } from 'react'
+import { FiloActions } from '@/stores/filoStore'
 
 export type ArticleWithType = Article & {
   type: 'article'
@@ -19,9 +19,7 @@ export type FiloContentCardProps = {
   content: FiloContent
 }
 
-export type FiloDialogHeaderProps = {
-  setOpen: Dispatch<SetStateAction<boolean>>
-}
+export type FiloDialogHeaderProps = Pick<FiloActions, 'setOpen'>
 
 export type RemoveFiloItemButtonProps = {
   onClick: () => void

@@ -1,19 +1,18 @@
 'use client'
 
-import { useReadMode } from '@/providers/ReadModeProvider'
-
 import TitleBar from '../../TitleBar'
 import { ResourceWithSlug } from '../types'
 import { Book } from '@/payload-types'
 import { ArticleBooksLink } from '@/features/articles/components/BooksSection/ArticleBooksLink'
 import { BookCard } from '@/features/articles/components/BooksSection/BookCard'
+import { useReadMode } from '@/stores/readModeStore'
 
 type BooksClientProps = ResourceWithSlug & {
   books: (string | Book)[]
 }
 
 export function BooksClient(props: BooksClientProps) {
-  const { readMode } = useReadMode()
+  const readMode = useReadMode()
 
   const { title, books, slug } = props
 

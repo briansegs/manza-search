@@ -1,13 +1,13 @@
 'use client'
 
-import { SectionOptions, useFilo } from '@/providers/FiloProvider'
 import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react'
 
 import { FiloMenu } from './FiloMenu'
 import { FiloMenuUnauthenticated } from './FiloMenuUnauthenticated'
+import { SectionOptions, useFiloActions } from '@/stores/filoStore'
 
 export function ArticleHeroMenu() {
-  const { setOpen, setSection } = useFilo()
+  const { setOpen, setSection } = useFiloActions()
 
   const filoSections = ['pin', 'save', 'history', 'lists'] as const
 
