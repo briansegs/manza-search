@@ -17,7 +17,6 @@ import { getCachedGlobal } from '@/utilities/getGlobals'
 import type { ArticleAd as ArticleAdsGlobalType } from '@/payload-types'
 import { generateMeta } from '@/utilities/generateMeta'
 import { Metadata } from 'next'
-import { FiloProvider } from '@/providers/FiloProvider'
 import { FiloDialog } from '@/features/filo/FiloDialog'
 import { auth } from '@clerk/nextjs/server'
 
@@ -75,20 +74,18 @@ export default async function Article({ params: paramsPromise }: Args) {
         <ArticleLeftMenuContainer url={url} article={article} />
 
         <div className="flex w-full min-w-0 flex-col">
-          <FiloProvider>
-            <ArticleTopMenuContainer
-              url={url}
-              article={article}
-              className="hidden sm:block lg:ml-auto"
-            />
-            {/* Hero & Content */}
-            <ArticleHero article={article} />
-            <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
-            <ArticleAdsContainer ads={ads} />
-            <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
+          <ArticleTopMenuContainer
+            url={url}
+            article={article}
+            className="hidden sm:block lg:ml-auto"
+          />
+          {/* Hero & Content */}
+          <ArticleHero article={article} />
+          <ArticleTopMenuContainer url={url} article={article} className="sm:hidden" />
+          <ArticleAdsContainer ads={ads} />
+          <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
 
-            {userId && <FiloDialog />}
-          </FiloProvider>
+          {userId && <FiloDialog />}
         </div>
       </div>
       <RightMenuContainer />

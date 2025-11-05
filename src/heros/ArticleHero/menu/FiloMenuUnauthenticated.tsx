@@ -1,7 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { SectionOptions } from '@/stores/filoStore'
 import { AlertCircle } from 'lucide-react'
-import { SectionOptions } from '@/providers/FiloProvider'
 
 export type FiloMenuUnauthenticatedProps = {
   filoSections: readonly SectionOptions[]

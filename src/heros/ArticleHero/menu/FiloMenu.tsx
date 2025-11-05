@@ -1,4 +1,4 @@
-import { SectionOptions } from '@/providers/FiloProvider'
+import { SectionOptions } from '@/stores/filoStore'
 import { cn } from '@/utilities/ui'
 
 export type FiloMenuProps = {
