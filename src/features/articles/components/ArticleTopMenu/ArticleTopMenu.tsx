@@ -6,6 +6,7 @@ import { cn } from '@/utilities/ui'
 import { ReadModeButton } from './ReadModeButton'
 import { TextSizeButton } from './textSize/components/TextSizeButton'
 import { SaveButton } from './SaveButton'
+import { PinButton } from './PinButton'
 
 export function ArticleTopMenu({ article, styles }: ArticleTopMenuProps) {
   return (
@@ -13,7 +14,7 @@ export function ArticleTopMenu({ article, styles }: ArticleTopMenuProps) {
       <ArticleMenuButton onClick={scrollToTop}>TOP</ArticleMenuButton>
       <ArticleMenuButton>HIGHLIGHT</ArticleMenuButton>
       <ArticleMenuButton>LOVE</ArticleMenuButton>
-      <ArticleMenuButton>PIN</ArticleMenuButton>
+      <PinButton article={article} />
       <SaveButton article={article} />
 
       <ArticleMenuButton>History</ArticleMenuButton>

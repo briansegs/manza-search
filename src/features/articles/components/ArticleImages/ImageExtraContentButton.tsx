@@ -14,6 +14,7 @@ export type ImageExtraContentButtonProps = {
 
 export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps) {
   const { mutate: saveImage, pending: saveImagePending } = useMutationState(api.save.saveContent)
+  const { mutate: pinImage, pending: pinImagePending } = useMutationState(api.pin.pinContent)
   const { isSignedIn } = useAuth()
 
   async function handleSave() {
@@ -27,11 +28,22 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
         })
   }
 
+  async function handlePin() {
+    if (typeof image === 'object' && image?.id)
+      await pinImage({ contentId: image?.id, contentType: 'image' })
+        .then(() => {
+          toast.success('Image pinned!')
+        })
+        .catch((error) => {
+          toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
+        })
+  }
+
   const menuItems = [
     {
       name: 'pin',
-      onClick: () => {},
-      disabled: !isSignedIn,
+      onClick: handlePin,
+      disabled: !isSignedIn || pinImagePending,
     },
     {
       name: 'save',
@@ -41,12 +53,12 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
     {
       name: 'download',
       onClick: () => {},
-      disabled: !isSignedIn,
+      disabled: true,
     },
     {
       name: 'share',
       onClick: () => {},
-      disabled: !isSignedIn,
+      disabled: true,
     },
   ]
 

@@ -2,21 +2,17 @@ import { Media } from '@/components/Media'
 import { RenderMedia } from '../shared/components/RenderMedia'
 import { ImagePlaceholder } from '../shared/components/ImagePlaceholder'
 import { RemoveFiloItemButton } from './RemoveFiloItemButton'
-import { useMutationState } from '../../hooks/useMutationState'
-import { api } from '../../../convex/_generated/api'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
 import { FiloContentCardProps } from './types'
 
-export function FiloContentCard({ content }: FiloContentCardProps) {
-  const { mutate: removeContent, pending: removeContentPending } = useMutationState(
-    api.save.unsaveContent,
-  )
-
+export function FiloContentCard({ content, removeFn, pending, name }: FiloContentCardProps) {
   async function handleRemove() {
     try {
-      await removeContent({ contentId: content.id })
-      toast.success('Content removed!')
+      if (removeFn) {
+        await removeFn({ contentId: content.id })
+        toast.success(`${name ? name : 'Content'} removed!`)
+      }
     } catch (error) {
       toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
     }
@@ -56,7 +52,7 @@ export function FiloContentCard({ content }: FiloContentCardProps) {
       <div className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black">
         {mediaElement}
 
-        <RemoveFiloItemButton onClick={handleRemove} disabled={removeContentPending} />
+        <RemoveFiloItemButton onClick={handleRemove} disabled={pending ? pending : false} />
       </div>
 
       <div className="w-32 truncate text-center text-lg">{label}</div>
