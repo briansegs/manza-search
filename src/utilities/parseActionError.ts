@@ -2,7 +2,7 @@ type ValidationErrors = Record<string, { _errors?: string[] }> & {
   title?: { _errors?: string[] }
 }
 
-type SafeActionInnerError = {
+export type SafeActionInnerError = {
   serverError?: string
   validationErrors?: ValidationErrors
   thrownError?: Error

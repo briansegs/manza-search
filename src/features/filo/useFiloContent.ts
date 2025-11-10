@@ -5,7 +5,7 @@ import { api } from '../../../convex/_generated/api'
 import { fetchSavedContent } from '@/actions/fetchSavedContent'
 import { fetchPinnedContent } from '@/actions/fetchPinnedContent'
 import { useMutationState } from '@/hooks/useMutationState'
-import { parseActionError } from '@/utilities/parseActionError'
+import { parseActionError, SafeActionInnerError } from '@/utilities/parseActionError'
 import { toast } from 'sonner'
 import { FiloContent } from './types'
 
@@ -19,29 +19,42 @@ export function useFiloContent() {
   const removeSaved = useMutationState(api.save.unsaveContent)
   const removePinned = useMutationState(api.pin.unpinContent)
 
-  const { execute: fetchSaved, isPending: fetchSavedIsPending } = useAction(fetchSavedContent, {
-    onSuccess: ({ data }) => {
-      setSavedContent(data ?? [])
-    },
-    onError: (actionError) => {
-      const errorMsg = parseActionError(actionError.error)
+  const saveOptions = useMemo(
+    () => ({
+      onSuccess: ({ data }: { data: FiloContent[] }) => {
+        setSavedContent(data ?? [])
+      },
+      onError: (actionError: { error: SafeActionInnerError }) => {
+        const errorMsg = parseActionError(actionError.error)
+        console.error(errorMsg)
+        toast.error(errorMsg)
+      },
+    }),
+    [],
+  )
 
-      console.error(errorMsg)
-      toast.error(errorMsg)
-    },
-  })
+  const pinOptions = useMemo(
+    () => ({
+      onSuccess: ({ data }: { data: FiloContent[] }) => {
+        setPinnedContent(data ?? [])
+      },
+      onError: (actionError: { error: SafeActionInnerError }) => {
+        const errorMsg = parseActionError(actionError.error)
+        console.error(errorMsg)
+        toast.error(errorMsg)
+      },
+    }),
+    [],
+  )
 
-  const { execute: fetchPinned, isPending: fetchPinnedIsPending } = useAction(fetchPinnedContent, {
-    onSuccess: ({ data }) => {
-      setPinnedContent(data ?? [])
-    },
-    onError: (actionError) => {
-      const errorMsg = parseActionError(actionError.error)
-
-      console.error(errorMsg)
-      toast.error(errorMsg)
-    },
-  })
+  const { execute: fetchSaved, isPending: fetchSavedIsPending } = useAction(
+    fetchSavedContent,
+    saveOptions,
+  )
+  const { execute: fetchPinned, isPending: fetchPinnedIsPending } = useAction(
+    fetchPinnedContent,
+    pinOptions,
+  )
 
   useEffect(() => {
     if (savedResult === undefined) return
