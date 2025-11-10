@@ -17,6 +17,7 @@ import type * as _utils from "../_utils.js";
 import type * as cleanupPinned from "../cleanupPinned.js";
 import type * as conversation from "../conversation.js";
 import type * as conversations from "../conversations.js";
+import type * as crons from "../crons.js";
 import type * as event from "../event.js";
 import type * as events from "../events.js";
 import type * as friend from "../friend.js";
@@ -30,7 +31,6 @@ import type * as request from "../request.js";
 import type * as requests from "../requests.js";
 import type * as save from "../save.js";
 import type * as saves from "../saves.js";
-import type * as scheduler from "../scheduler.js";
 import type * as user from "../user.js";
 
 /**
@@ -46,6 +46,7 @@ declare const fullApi: ApiFromModules<{
   cleanupPinned: typeof cleanupPinned;
   conversation: typeof conversation;
   conversations: typeof conversations;
+  crons: typeof crons;
   event: typeof event;
   events: typeof events;
   friend: typeof friend;
@@ -59,7 +60,6 @@ declare const fullApi: ApiFromModules<{
   requests: typeof requests;
   save: typeof save;
   saves: typeof saves;
-  scheduler: typeof scheduler;
   user: typeof user;
 }>;
 export declare const api: FilterApi<
