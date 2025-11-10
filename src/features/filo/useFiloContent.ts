@@ -19,13 +19,9 @@ export function useFiloContent() {
   const removeSaved = useMutationState(api.save.unsaveContent)
   const removePinned = useMutationState(api.pin.unpinContent)
 
-  const {
-    execute: fetchSaved,
-    result: fetchSavedResult,
-    isPending: fetchSavedIsPending,
-  } = useAction(fetchSavedContent, {
-    onSuccess: () => {
-      setSavedContent(fetchSavedResult.data || [])
+  const { execute: fetchSaved, isPending: fetchSavedIsPending } = useAction(fetchSavedContent, {
+    onSuccess: ({ data }) => {
+      setSavedContent(data ?? [])
     },
     onError: (actionError) => {
       const errorMsg = parseActionError(actionError.error)
@@ -35,13 +31,9 @@ export function useFiloContent() {
     },
   })
 
-  const {
-    execute: fetchPinned,
-    result: fetchPinnedResult,
-    isPending: fetchPinnedIsPending,
-  } = useAction(fetchPinnedContent, {
-    onSuccess: () => {
-      setPinnedContent(fetchPinnedResult.data || [])
+  const { execute: fetchPinned, isPending: fetchPinnedIsPending } = useAction(fetchPinnedContent, {
+    onSuccess: ({ data }) => {
+      setPinnedContent(data ?? [])
     },
     onError: (actionError) => {
       const errorMsg = parseActionError(actionError.error)
