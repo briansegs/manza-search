@@ -4,8 +4,7 @@ export const cleanupPinned = internalMutation({
   args: {},
   handler: async (ctx) => {
     const now = Date.now()
-    // const oneDay = 24 * 60 * 60 * 1000
-    const oneDay = 20 * 1000 // 30 seconds for testing
+    const oneDay = 24 * 60 * 60 * 1000
     const batchSize = 100
 
     let cursor: string | null = null
