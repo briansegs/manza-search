@@ -20,7 +20,7 @@ export function PinButtonAuthenticated({ article }: PinButtonAuthenticatedProps)
 
   useEffect(() => {
     setPinned(!!pinnedArticle)
-  }, [setPinned, pinnedArticle])
+  }, [pinnedArticle])
 
   async function handlePin() {
     if (pinned) {
