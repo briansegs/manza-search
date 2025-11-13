@@ -1,13 +1,13 @@
 import scrollToTop from '@/utilities/scrollToTop'
 import React from 'react'
 import { ArticleMenuButton } from '../ArticleMenuButton'
-import { ArticleTopMenuProps } from '../../types'
 import { cn } from '@/utilities/ui'
 import { ReadModeButton } from './ReadModeButton'
 import { TextSizeButton } from './textSize/components/TextSizeButton'
 import { SaveButton } from './SaveButton'
 import { PinButton } from './PinButton'
 import { ListsButton } from './Lists/ListsButton'
+import { ArticleTopMenuProps } from './types'
 
 export function ArticleTopMenu({ article, styles }: ArticleTopMenuProps) {
   return (
