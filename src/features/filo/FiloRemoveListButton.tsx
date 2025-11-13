@@ -45,19 +45,19 @@ export function FiloRemoveListButton({ group }: FiloRemoveListButtonProps) {
           <AlertDialogDescription className="text-accent">
             Are you sure you want to delete this list?
           </AlertDialogDescription>
-
-          <AlertDialogFooter>
-            <AlertDialogCancel className="bg-transparent text-white">Cancel</AlertDialogCancel>
-
-            <AlertDialogAction
-              disabled={pending}
-              onClick={handleRemove}
-              className="bg-red-600 hover:bg-red-900"
-            >
-              Remove
-            </AlertDialogAction>
-          </AlertDialogFooter>
         </AlertDialogHeader>
+
+        <AlertDialogFooter>
+          <AlertDialogCancel className="bg-transparent text-white">Cancel</AlertDialogCancel>
+
+          <AlertDialogAction
+            disabled={pending}
+            onClick={handleRemove}
+            className="bg-red-600 hover:bg-red-900"
+          >
+            Remove
+          </AlertDialogAction>
+        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   )
