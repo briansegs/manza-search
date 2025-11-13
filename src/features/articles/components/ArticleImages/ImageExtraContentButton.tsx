@@ -70,7 +70,12 @@ export function ImageExtraContentButton({ image }: ImageExtraContentButtonProps)
         </Button>
       </PopoverTrigger>
 
-      <ExtraContentPopoverMenu menuItems={menuItems} />
+      <ExtraContentPopoverMenu
+        menuItems={menuItems}
+        content={image}
+        isSignedIn={isSignedIn}
+        contentType="image"
+      />
     </Popover>
   )
 }
