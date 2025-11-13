@@ -18,11 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { ListedGroup } from './types'
-
-export type FiloListHeaderProps = {
-  group: ListedGroup
-}
+import { FiloListHeaderProps } from './types'
 
 export function FiloListHeader({ group }: FiloListHeaderProps) {
   const { mutate: removeList, pending } = useMutationState(api.list.removeList)

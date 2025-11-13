@@ -44,3 +44,7 @@ export type GalleryImageProps = Pick<GalleryImageWithLink, 'link'> & {
 export type RenderGalleryImageProps = {
   image: GalleryMedia
 }
+
+export type ImageExtraContentButtonProps = {
+  image: string | null | ArticleMedia
+}

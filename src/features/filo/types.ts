@@ -91,3 +91,7 @@ export type FiloTabsProps = {
   defaultSection: TabsNames
   isPending: boolean
 }
+
+export type FiloListHeaderProps = {
+  group: ListedGroup
+}

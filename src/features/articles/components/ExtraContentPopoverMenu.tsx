@@ -1,20 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { PopoverContent } from '@/components/ui/popover'
-import { ArticleMedia, Book } from '@/payload-types'
 import { ListsButtonAuthenticated } from './ArticleTopMenu/Lists/ListsButtonAuthenticated'
-
-type MenuItem = {
-  name: string
-  onClick: () => void
-  disabled: boolean
-}
-
-export type ExtraContentPopoverMenuProps = {
-  menuItems: MenuItem[]
-  content: string | null | ArticleMedia | Book
-  isSignedIn?: boolean
-  contentType: 'article' | 'image' | 'book'
-}
+import { ExtraContentPopoverMenuProps } from '../types'
 
 export function ExtraContentPopoverMenu({
   menuItems,
