@@ -67,4 +67,19 @@ export default defineSchema({
   })
     .index('by_user', ['userId'])
     .index('by_user_content', ['userId', 'contentId']),
+  contentLists: defineTable({
+    userId: v.id('users'),
+    name: v.string(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_user_name', ['userId', 'name']),
+  listedContent: defineTable({
+    userId: v.id('users'),
+    listId: v.id('contentLists'),
+    contentId: v.string(),
+    contentType: v.union(v.literal('article'), v.literal('image'), v.literal('book')),
+  })
+    .index('by_user', ['userId'])
+    .index('by_list', ['listId'])
+    .index('by_list_content', ['listId', 'contentId']),
 })
