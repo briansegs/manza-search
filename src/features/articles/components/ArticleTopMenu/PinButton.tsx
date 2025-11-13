@@ -1,13 +1,9 @@
 'use client'
 
-import { Article } from '@/payload-types'
 import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react'
 import { ArticleMenuButton } from '../ArticleMenuButton'
 import { PinButtonAuthenticated } from '@/features/filo/PinButtonAuthenticated'
-
-type PinButtonProps = {
-  article: Article
-}
+import { PinButtonProps } from './types'
 
 export function PinButton({ article }: PinButtonProps) {
   return (
