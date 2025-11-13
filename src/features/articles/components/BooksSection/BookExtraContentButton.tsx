@@ -60,7 +60,12 @@ export function BookExtraContentButton({ book }: BookExtraContentButtonProps) {
         <BookCardButton className="bg-red-500 hover:bg-red-500 hover:text-white">e</BookCardButton>
       </PopoverTrigger>
 
-      <ExtraContentPopoverMenu menuItems={menuItems} />
+      <ExtraContentPopoverMenu
+        menuItems={menuItems}
+        content={book}
+        isSignedIn={isSignedIn}
+        contentType="book"
+      />
     </Popover>
   )
 }
