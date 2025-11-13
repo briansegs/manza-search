@@ -23,6 +23,8 @@ import type * as events from "../events.js";
 import type * as friend from "../friend.js";
 import type * as friends from "../friends.js";
 import type * as http from "../http.js";
+import type * as list from "../list.js";
+import type * as lists from "../lists.js";
 import type * as message from "../message.js";
 import type * as messages from "../messages.js";
 import type * as pin from "../pin.js";
@@ -52,6 +54,8 @@ declare const fullApi: ApiFromModules<{
   friend: typeof friend;
   friends: typeof friends;
   http: typeof http;
+  list: typeof list;
+  lists: typeof lists;
   message: typeof message;
   messages: typeof messages;
   pin: typeof pin;
