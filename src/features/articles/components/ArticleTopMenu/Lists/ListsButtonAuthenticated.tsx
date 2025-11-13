@@ -45,16 +45,19 @@ export function ListsButtonAuthenticated({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
 
-      <DropdownMenuContent>
-        <DropdownMenuItem className="flex justify-center">
-          <Button className="w-full" onClick={handleNewList}>
+      <DropdownMenuContent className="border-black bg-menu">
+        <DropdownMenuItem className="flex justify-center focus:bg-gray-700">
+          <Button className="w-full bg-black hover:bg-black/80" onClick={handleNewList}>
             New
           </Button>
         </DropdownMenuItem>
 
         {lists?.map((list) => {
           return (
-            <DropdownMenuItem key={list._id} className="flex w-full justify-center">
+            <DropdownMenuItem
+              key={list._id}
+              className="flex w-full justify-center text-white focus:bg-gray-700 focus:text-accent"
+            >
               <button disabled={addPending} onClick={() => handleAddToList({ list: list })}>
                 {list.name}
               </button>
