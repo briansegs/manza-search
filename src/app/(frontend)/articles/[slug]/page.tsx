@@ -19,6 +19,7 @@ import { generateMeta } from '@/utilities/generateMeta'
 import { Metadata } from 'next'
 import { FiloDialog } from '@/features/filo/FiloDialog'
 import { auth } from '@clerk/nextjs/server'
+import { NewListDialog } from '@/features/articles/components/ArticleTopMenu/Lists/NewListDialog'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -86,6 +87,7 @@ export default async function Article({ params: paramsPromise }: Args) {
           <RenderArticleBlocks blocks={blocks ?? []} slug={slug} />
 
           {userId && <FiloDialog />}
+          {userId && <NewListDialog />}
         </div>
       </div>
       <RightMenuContainer />
