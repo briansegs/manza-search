@@ -43,17 +43,21 @@ export function FiloListHeader({ group }: FiloListHeaderProps) {
           </Button>
         </AlertDialogTrigger>
 
-        <AlertDialogContent>
+        <AlertDialogContent className="border-black bg-menu">
           <AlertDialogHeader>
-            <AlertDialogTitle>{`Delete list: ${group.name}`}</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className="text-white">{`List: ${group.name}`}</AlertDialogTitle>
+            <AlertDialogDescription className="text-accent">
               Are you sure you want to delete this list?
             </AlertDialogDescription>
 
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogCancel className="bg-transparent text-white">Cancel</AlertDialogCancel>
 
-              <AlertDialogAction disabled={pending} onClick={handleRemove}>
+              <AlertDialogAction
+                disabled={pending}
+                onClick={handleRemove}
+                className="bg-red-600 hover:bg-red-900"
+              >
                 Remove
               </AlertDialogAction>
             </AlertDialogFooter>

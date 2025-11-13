@@ -68,10 +68,12 @@ export function NewListDialog() {
 
   return (
     <Dialog onOpenChange={setOpen} open={open}>
-      <DialogContent>
+      <DialogContent className="border-black bg-menu" closeButtonStyles="text-white">
         <DialogHeader>
-          <DialogTitle>Create a new list</DialogTitle>
-          <DialogDescription>Item will be added to newly created list</DialogDescription>
+          <DialogTitle className="text-white">Create a new list</DialogTitle>
+          <DialogDescription className="">
+            Item will be added to newly created list
+          </DialogDescription>
         </DialogHeader>
 
         <Form {...form}>
@@ -82,7 +84,7 @@ export function NewListDialog() {
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel className="text-white">Name</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -102,11 +104,12 @@ export function NewListDialog() {
                 }}
                 variant="outline"
                 disabled={pending}
+                className="bg-transparent text-white"
               >
                 Cancel
               </Button>
 
-              <Button disabled={pending} type="submit">
+              <Button disabled={pending} type="submit" className="bg-black hover:bg-neutral-900">
                 Create
               </Button>
             </DialogFooter>
