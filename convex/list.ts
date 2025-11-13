@@ -82,21 +82,17 @@ export const removeList = mutation({
 
     const list = await ctx.db.get(listId)
 
+    if (!list) throw new ConvexError('List not found')
+    if (list.userId !== user._id) throw new ConvexError('unauthorized')
+
     const listContent = await ctx.db
       .query('listedContent')
       .withIndex('by_list', (q) => q.eq('listId', listId))
       .collect()
 
     if (listContent && listContent.length > 0) {
-      await Promise.all(
-        listContent.map((item) => {
-          ctx.db.delete(item._id)
-        }),
-      )
+      await Promise.all(listContent.map((item) => ctx.db.delete(item._id)))
     }
-
-    if (!list) throw new ConvexError('List not found')
-    if (list.userId !== user._id) throw new ConvexError('unauthorized')
 
     await ctx.db.delete(list._id)
   },
