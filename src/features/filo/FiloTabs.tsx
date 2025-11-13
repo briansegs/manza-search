@@ -2,24 +2,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/utilities/ui'
 import { Spinner } from '@/components/ui/spinner'
 import { FiloContentCard } from './FiloContentCard'
-import { FiloContent } from './types'
+import { FiloContent, FiloTabsProps, ListedGroup } from './types'
+import { Separator } from '@/components/ui/separator'
+import { FiloListCard } from './FiloListCard'
+import { FiloListHeader } from './FiloListHeader'
 
-type Section = {
-  name: string
-  content: FiloContent[] | null
-  removeFn?: (args: { contentId: string }) => Promise<void> | null
-  pending?: boolean
-}
-
-export function FiloTabs({
-  sections,
-  defaultSection,
-  isPending,
-}: {
-  sections: Section[]
-  defaultSection: string
-  isPending: boolean
-}) {
+export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps) {
   return (
     <Tabs defaultValue={defaultSection} className="flex min-h-0 w-full flex-1 flex-col">
       <TabsList className="flex h-fit w-full flex-wrap gap-2 bg-black py-2">
@@ -44,15 +32,46 @@ export function FiloTabs({
           className="custom-scrollbar relative mx-auto w-full flex-1 overflow-y-scroll p-0"
         >
           <div className="flex h-full w-full flex-wrap justify-center gap-6 pl-2 text-white sm:justify-start">
-            {section.content?.map((content) => (
-              <FiloContentCard
-                key={content.id}
-                content={content}
-                removeFn={section.removeFn}
-                pending={section.pending}
-                name={section.name}
-              />
-            ))}
+            {section.content?.map((content) => {
+              if (section.name === 'lists') {
+                const group = content as ListedGroup
+
+                return (
+                  <div key={group._id} className="w-full">
+                    <FiloListHeader group={group} />
+
+                    <Separator className="mb-4" />
+
+                    <div className="flex flex-wrap gap-6">
+                      {group.items.map((item) => {
+                        return (
+                          <FiloListCard
+                            key={item.id}
+                            content={item}
+                            groupId={group._id}
+                            removeFn={section.removeFn}
+                            pending={section.pending}
+                            name={section.name}
+                          />
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              } else {
+                const group = content as FiloContent
+
+                return (
+                  <FiloContentCard
+                    key={group.id}
+                    content={group}
+                    removeFn={section.removeFn}
+                    pending={section.pending}
+                    name={section.name}
+                  />
+                )
+              }
+            })}
 
             {isPending && (
               <div className="mt-4 flex w-full items-center justify-center">
