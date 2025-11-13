@@ -12,14 +12,14 @@ export type ListsActions = {
 
 export type ListsState = {
   open: boolean
-  contentId: string
+  contentId: string | null
   contentType: ContentType
   actions: ListsActions
 }
 
 const useListsStore = create<ListsState>((set) => ({
   open: false,
-  contentId: '',
+  contentId: null,
   contentType: null,
   actions: {
     setOpen: (open) => set({ open }),
