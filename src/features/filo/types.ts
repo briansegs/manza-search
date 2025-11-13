@@ -95,3 +95,7 @@ export type FiloTabsProps = {
 export type FiloListHeaderProps = {
   group: ListedGroup
 }
+
+export type FiloRemoveListButtonProps = {
+  group: ListedGroup
+}
