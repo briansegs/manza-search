@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
 import { useMutationState } from '@/hooks/useMutationState'
-import { api } from 'convex/_generated/api'
+import { api } from '../../../convex/_generated/api'
 import { ConvexError } from 'convex/values'
 import { toast } from 'sonner'
 

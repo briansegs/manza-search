@@ -26,7 +26,7 @@ import {
   useListsOpen,
 } from '@/stores/listsStore'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { api } from 'convex/_generated/api'
+import { api } from '../../../../../../convex/_generated/api'
 import { ConvexError } from 'convex/values'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
