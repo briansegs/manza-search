@@ -1,13 +1,9 @@
 'use client'
 
-import { Article } from '@/payload-types'
 import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react'
 import { ArticleMenuButton } from '../ArticleMenuButton'
 import { SaveButtonAuthenticated } from '@/features/filo/SaveButtonAuthenticated'
-
-type SaveButtonProps = {
-  article: Article
-}
+import { SaveButtonProps } from './types'
 
 export function SaveButton({ article }: SaveButtonProps) {
   return (

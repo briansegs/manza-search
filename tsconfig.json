@@ -49,7 +49,7 @@
     "redirects.js",
     "next.config.js",
     "next-sitemap.config.cjs"
-, "src/features/moreOptions", "convex/crons.js"  ],
+, "src/features/moreOptions", "convex/crons.ts"  ],
   "exclude": [
     "node_modules"
   ]

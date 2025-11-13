@@ -1,4 +1,4 @@
-import { Article } from '@/payload-types'
+import { Article, ArticleMedia, Book } from '@/payload-types'
 import { sectionTitle } from '@/utilities/getSectionTitles'
 import { ButtonProps } from '@/components/ui/button'
 import { ReactNode } from 'react'
@@ -49,7 +49,15 @@ export type RelatedArticlesProps = {
   articles: Article['relatedArticles']
 }
 
-export type ArticleTopMenuProps = {
-  styles?: string
-  article: Article
+type MenuItem = {
+  name: string
+  onClick: () => void
+  disabled: boolean
+}
+
+export type ExtraContentPopoverMenuProps = {
+  menuItems: MenuItem[]
+  content: string | null | ArticleMedia | Book
+  isSignedIn?: boolean
+  contentType: 'article' | 'image' | 'book'
 }

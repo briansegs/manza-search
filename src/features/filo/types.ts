@@ -13,6 +13,8 @@ export type BookWithType = Book & {
   type: 'book'
 }
 
+type TabsNames = 'pin' | 'save' | 'history' | 'lists'
+
 export type FiloContent = ArticleWithType | ArticleMediaWithType | BookWithType
 
 export type FiloContentCardProps = {
@@ -20,6 +22,14 @@ export type FiloContentCardProps = {
   removeFn?: (args: { contentId: string }) => Promise<void> | null
   pending?: boolean
   name?: string
+}
+
+export type FiloListCardProps = {
+  content: FiloContent
+  removeFn?: (args: { contentId: string; listId?: string }) => Promise<void> | null
+  pending?: boolean
+  name?: string
+  groupId: string
 }
 
 export type handleRemoveSaveProps = {
@@ -39,4 +49,53 @@ export type SaveButtonAuthenticatedProps = {
 
 export type PinButtonAuthenticatedProps = {
   article: Article
+}
+
+export type ListedGroup = {
+  _id: string
+  name: string
+  items: FiloContent[]
+}
+
+type BaseSection = {
+  pending?: boolean
+  removeFn?: (args: { contentId: string }) => Promise<void> | null
+}
+
+type PinSection = BaseSection & {
+  name: 'pin'
+  content: FiloContent[]
+}
+
+type SaveSection = BaseSection & {
+  name: 'save'
+  content: FiloContent[]
+}
+
+type ListSection = {
+  name: 'lists'
+  content: ListedGroup[]
+  removeFn?: (args: { contentId: string; listId?: string }) => Promise<void> | null
+  pending: boolean
+}
+
+type HistorySection = BaseSection & {
+  name: 'history'
+  content: null
+}
+
+type Section = PinSection | SaveSection | ListSection | HistorySection
+
+export type FiloTabsProps = {
+  sections: Section[]
+  defaultSection: TabsNames
+  isPending: boolean
+}
+
+export type FiloListHeaderProps = {
+  group: ListedGroup
+}
+
+export type FiloRemoveListButtonProps = {
+  group: ListedGroup
 }
