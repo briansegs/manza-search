@@ -26,7 +26,7 @@ export type FiloContentCardProps = {
 
 export type FiloListCardProps = {
   content: FiloContent
-  removeFn?: (args: { contentId: string; listId: string }) => Promise<void> | null
+  removeFn?: (args: { contentId: string; listId?: string }) => Promise<void> | null
   pending?: boolean
   name?: string
   groupId: string
@@ -72,9 +72,11 @@ type SaveSection = BaseSection & {
   content: FiloContent[]
 }
 
-type ListSection = BaseSection & {
+type ListSection = {
   name: 'lists'
   content: ListedGroup[]
+  removeFn?: (args: { contentId: string; listId?: string }) => Promise<void> | null
+  pending: boolean
 }
 
 type HistorySection = BaseSection & {
