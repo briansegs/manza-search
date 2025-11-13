@@ -35,7 +35,7 @@ export function ListsButtonAuthenticated({
   async function handleAddToList({ list }: { list: { name: string; _id: string } }) {
     try {
       await addToList({ listId: list._id, contentId: content.id, contentType })
-      toast.success(`${contentType} added to list (${list.name})`)
+      toast.success(`${contentType} added to list: ${list.name}`)
     } catch (error) {
       toast.error(error instanceof ConvexError ? error.data : 'Unexpected error occurred')
     }
