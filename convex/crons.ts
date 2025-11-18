@@ -10,4 +10,10 @@ crons.daily(
   internal.cleanupPinned.cleanupPinned,
 )
 
+crons.daily(
+  'cleanupHistoryDaily',
+  { hourUTC: 0, minuteUTC: 0 }, // runs every day at midnight UTC
+  internal.cleanupHistory.cleanupHistory,
+)
+
 export default crons
