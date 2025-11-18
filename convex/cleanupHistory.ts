@@ -21,7 +21,7 @@ export const cleanupHistory = internalMutation({
           continueCursor,
         } = await ctx.db
           .query('history')
-          .withIndex('by_creationTime', (q) => q.lt('_creationTime', cutoff))
+          .withIndex('by_visitedAt', (q) => q.lt('visitedAt', cutoff))
           .paginate({ cursor, numItems: batchSize })
 
         for (const entry of entries) {

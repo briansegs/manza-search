@@ -14,6 +14,7 @@ export const recordVisit = mutation({
     await ctx.db.insert('history', {
       userId: (await user)._id,
       articleId,
+      visitedAt: Date.now(),
     })
   },
 })

@@ -21,7 +21,7 @@ export const cleanupPinned = internalMutation({
           continueCursor,
         } = await ctx.db
           .query('pinnedContent')
-          .withIndex('by_creationTime', (q) => q.lt('_creationTime', cutoff))
+          .withIndex('by_pinnedAt', (q) => q.lt('pinnedAt', cutoff))
           .paginate({ cursor, numItems: batchSize })
 
         for (const pin of pins) {
