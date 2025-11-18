@@ -1,5 +1,6 @@
 import { Article, ArticleMedia, Book } from '@/payload-types'
 import { FiloActions } from '@/stores/filoStore'
+import { Doc } from 'convex/_generated/dataModel'
 
 export type ArticleWithType = Article & {
   type: 'article'
@@ -79,9 +80,13 @@ type ListSection = {
   pending: boolean
 }
 
+export type HistoryContent = Doc<'history'> & { article?: Article }
+
 type HistorySection = BaseSection & {
   name: 'history'
-  content: null
+  content: HistoryContent[]
+  removeFn?: (args: { visitId: string }) => Promise<void> | null
+  pending: boolean
 }
 
 type Section = PinSection | SaveSection | ListSection | HistorySection
@@ -98,4 +103,14 @@ export type FiloListHeaderProps = {
 
 export type FiloRemoveListButtonProps = {
   group: ListedGroup
+}
+
+export type FiloHistoryCardProps = {
+  index: number
+  section: HistorySection
+  historyContent: HistoryContent
+}
+
+export type FiloClearHistoryButtonProps = {
+  disabled: boolean
 }
