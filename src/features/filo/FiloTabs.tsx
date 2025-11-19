@@ -83,21 +83,20 @@ export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps)
               </div>
             )}
 
-            {section.name === 'pin' ||
-              (section.name === 'save' &&
-                section.content?.map((content) => {
-                  const group = content as FiloContent
+            {(section.name === 'pin' || section.name === 'save') &&
+              section.content?.map((content) => {
+                const group = content as FiloContent
 
-                  return (
-                    <FiloContentCard
-                      key={group.id}
-                      content={group}
-                      removeFn={section.removeFn}
-                      pending={section.pending}
-                      name={section.name}
-                    />
-                  )
-                }))}
+                return (
+                  <FiloContentCard
+                    key={group.id}
+                    content={group}
+                    removeFn={section.removeFn}
+                    pending={section.pending}
+                    name={section.name}
+                  />
+                )
+              })}
 
             {isPending && (
               <div className="mt-4 flex w-full items-center justify-center">
