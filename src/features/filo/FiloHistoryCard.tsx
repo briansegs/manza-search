@@ -42,7 +42,7 @@ export function FiloHistoryCard({ historyContent, index, section }: FiloHistoryC
 
           <div>
             <div>{article?.title} </div>
-            <div>{`Visited: ${format(historyContent._creationTime, 'MM/dd/yyyy @ h:m aaa')}`}</div>
+            <div>{`Visited: ${format(historyContent._creationTime, 'MM/dd/yyyy @ h:mm a')}`}</div>
           </div>
         </div>
 
