@@ -56,7 +56,7 @@ export function FiloHistoryCard({ historyContent, index, section }: FiloHistoryC
         </Button>
       </div>
 
-      {section.content.length !== index - 1 && <Separator />}
+      {index !== section.content.length - 1 && <Separator />}
     </div>
   )
 }
