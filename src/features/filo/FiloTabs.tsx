@@ -27,9 +27,9 @@ export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps)
         ))}
       </TabsList>
 
-      {sections.map((section, i) => (
+      {sections.map((section) => (
         <TabsContent
-          key={section.name + i}
+          key={section.name}
           value={section.name}
           className="custom-scrollbar relative mx-auto w-full flex-1 overflow-y-scroll p-0"
         >
