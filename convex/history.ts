@@ -44,12 +44,8 @@ export const removeAllVisits = mutation({
       .withIndex('by_user', (q) => q.eq('userId', user._id))
       .collect()
 
-    if (entries) {
-      await Promise.all(
-        entries.map((entry) => {
-          ctx.db.delete(entry._id)
-        }),
-      )
+    if (entries.length > 0) {
+      await Promise.all(entries.map((entry) => ctx.db.delete(entry._id)))
     }
   },
 })
