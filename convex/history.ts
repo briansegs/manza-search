@@ -9,8 +9,6 @@ export const recordVisit = mutation({
   handler: async (ctx, { articleId }) => {
     const user = await getAuthenticatedUser(ctx)
 
-    if (!user) throw new ConvexError('Could not record visit entry becuase user is not logged in')
-
     await ctx.db.insert('history', {
       userId: (await user)._id,
       articleId,
