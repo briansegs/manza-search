@@ -65,7 +65,7 @@ export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps)
             {section.name === 'history' && (
               <div className="w-full space-y-2">
                 <div className="my-2 flex justify-center">
-                  <FiloClearHistoryButton disabled={section?.content?.length === 0} />
+                  <FiloClearHistoryButton disabled={!section?.content?.length} />
                 </div>
 
                 {section.content?.map((content, index) => {
