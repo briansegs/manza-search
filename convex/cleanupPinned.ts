@@ -5,29 +5,49 @@ export const cleanupPinned = internalMutation({
   handler: async (ctx) => {
     const now = Date.now()
     const oneDay = 24 * 60 * 60 * 1000
+    const cutoff = now - oneDay
     const batchSize = 100
 
+    console.log('Running cleanupPinned...')
+
     let cursor: string | null = null
-    let done = false
+    let deleted = 0
 
-    while (!done) {
-      const {
-        page: pins,
-        isDone,
-        continueCursor,
-      } = await ctx.db.query('pinnedContent').paginate({ cursor, numItems: batchSize })
+    try {
+      while (true) {
+        const {
+          page: pins,
+          isDone,
+          continueCursor,
+        } = await ctx.db
+          .query('pinnedContent')
+          .withIndex('by_pinnedAt', (q) => q.lt('pinnedAt', cutoff))
+          .paginate({ cursor, numItems: batchSize })
 
-      for (const pin of pins) {
-        if (now - pin._creationTime > oneDay) {
-          await ctx.db.delete(pin._id)
+        for (const pin of pins) {
+          try {
+            await ctx.db.delete(pin._id)
+            deleted++
+          } catch (pinErr) {
+            console.error(
+              `cleanupPinned: failed to delete pinned item ${pin._id}:`,
+              pinErr instanceof Error ? pinErr.message : pinErr,
+            )
+          }
         }
-      }
 
-      if (isDone) {
-        done = true
-      } else {
+        if (isDone) break
         cursor = continueCursor
       }
+
+      console.log(`cleanupPinned complete — deleted ${deleted} items`)
+      return { deleted }
+    } catch (err) {
+      console.error(
+        'cleanupPinned: fatal error during cleanup — aborting cron run:',
+        err instanceof Error ? err.message : err,
+      )
+      throw err
     }
   },
 })

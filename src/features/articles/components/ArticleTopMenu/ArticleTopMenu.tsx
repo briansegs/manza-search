@@ -8,6 +8,7 @@ import { SaveButton } from './SaveButton'
 import { PinButton } from './PinButton'
 import { ListsButton } from './Lists/ListsButton'
 import { ArticleTopMenuProps } from './types'
+import { HistoryButton } from './HistoryButton'
 
 export function ArticleTopMenu({ article, styles }: ArticleTopMenuProps) {
   return (
@@ -18,7 +19,7 @@ export function ArticleTopMenu({ article, styles }: ArticleTopMenuProps) {
       <PinButton article={article} />
       <SaveButton article={article} />
 
-      <ArticleMenuButton>History</ArticleMenuButton>
+      <HistoryButton />
       <TextSizeButton />
       <ReadModeButton />
       <ListsButton content={article} contentType="article" />

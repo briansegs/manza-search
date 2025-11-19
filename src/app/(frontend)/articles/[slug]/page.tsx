@@ -62,7 +62,7 @@ export default async function Article({ params: paramsPromise }: Args) {
 
   return (
     <article className="pb-16">
-      <PageClient />
+      <PageClient articleId={article.id} />
 
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />

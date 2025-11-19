@@ -2,10 +2,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/utilities/ui'
 import { Spinner } from '@/components/ui/spinner'
 import { FiloContentCard } from './FiloContentCard'
-import { FiloContent, FiloTabsProps, ListedGroup } from './types'
+import { FiloContent, FiloTabsProps, HistoryContent, ListedGroup } from './types'
 import { Separator } from '@/components/ui/separator'
 import { FiloListCard } from './FiloListCard'
 import { FiloListHeader } from './FiloListHeader'
+import { FiloHistoryCard } from './FiloHistoryCard'
+import { FiloClearHistoryButton } from './FiloClearHistoryButton'
 
 export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps) {
   return (
@@ -25,15 +27,15 @@ export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps)
         ))}
       </TabsList>
 
-      {sections.map((section, i) => (
+      {sections.map((section) => (
         <TabsContent
-          key={section.name + i}
+          key={section.name}
           value={section.name}
           className="custom-scrollbar relative mx-auto w-full flex-1 overflow-y-scroll p-0"
         >
           <div className="flex h-full w-full flex-wrap justify-center gap-6 pl-2 text-white sm:justify-start">
-            {section.content?.map((content) => {
-              if (section.name === 'lists') {
+            {section.name === 'lists' &&
+              section.content?.map((content) => {
                 const group = content as ListedGroup
 
                 return (
@@ -58,7 +60,31 @@ export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps)
                     </div>
                   </div>
                 )
-              } else {
+              })}
+
+            {section.name === 'history' && (
+              <div className="w-full space-y-2">
+                <div className="my-2 flex justify-center">
+                  <FiloClearHistoryButton disabled={!section?.content?.length} />
+                </div>
+
+                {section.content?.map((content, index) => {
+                  const historyContent = content as HistoryContent
+
+                  return (
+                    <FiloHistoryCard
+                      key={historyContent._id}
+                      index={index}
+                      historyContent={historyContent}
+                      section={section}
+                    />
+                  )
+                })}
+              </div>
+            )}
+
+            {(section.name === 'pin' || section.name === 'save') &&
+              section.content?.map((content) => {
                 const group = content as FiloContent
 
                 return (
@@ -70,8 +96,7 @@ export function FiloTabs({ sections, defaultSection, isPending }: FiloTabsProps)
                     name={section.name}
                   />
                 )
-              }
-            })}
+              })}
 
             {isPending && (
               <div className="mt-4 flex w-full items-center justify-center">

@@ -25,6 +25,7 @@ export const pinContent = mutation({
       userId: currentUser._id,
       contentId,
       contentType,
+      pinnedAt: Date.now(),
     })
   },
 })

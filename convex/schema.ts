@@ -64,9 +64,11 @@ export default defineSchema({
     userId: v.id('users'),
     contentId: v.string(),
     contentType: v.union(v.literal('article'), v.literal('image'), v.literal('book')),
+    pinnedAt: v.number(),
   })
     .index('by_user', ['userId'])
-    .index('by_user_content', ['userId', 'contentId']),
+    .index('by_user_content', ['userId', 'contentId'])
+    .index('by_pinnedAt', ['pinnedAt']),
   contentLists: defineTable({
     userId: v.id('users'),
     name: v.string(),
@@ -82,4 +84,11 @@ export default defineSchema({
     .index('by_user', ['userId'])
     .index('by_list', ['listId'])
     .index('by_list_content', ['listId', 'contentId']),
+  history: defineTable({
+    userId: v.id('users'),
+    articleId: v.string(),
+    visitedAt: v.number(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_visitedAt', ['visitedAt']),
 })

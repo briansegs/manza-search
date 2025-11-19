@@ -7,21 +7,25 @@ import { fetchPinnedContent } from '@/actions/fetchPinnedContent'
 import { useMutationState } from '@/hooks/useMutationState'
 import { parseActionError, SafeActionInnerError } from '@/utilities/parseActionError'
 import { toast } from 'sonner'
-import { FiloContent, ListedGroup } from './types'
+import { FiloContent, HistoryContent, ListedGroup } from './types'
 import { fetchListsContent } from '@/actions/fetchListedContent'
+import { fetchHistoryContent } from '@/actions/fetchHistoryContent'
 
 export function useFiloContent() {
   const [savedContent, setSavedContent] = useState<FiloContent[]>([])
   const [pinnedContent, setPinnedContent] = useState<FiloContent[]>([])
   const [listsContent, setListsContent] = useState<ListedGroup[]>([])
+  const [historyContent, setHistoryContent] = useState<HistoryContent[]>([])
 
   const savedResult = useQuery(api.saves.getSaved)
   const pinnedResult = useQuery(api.pins.getPinned)
   const listsResult = useQuery(api.lists.getListsWithContent)
+  const historyResult = useQuery(api.history.getVisits)
 
   const removeSaved = useMutationState(api.save.unsaveContent)
   const removePinned = useMutationState(api.pin.unpinContent)
   const removeListItem = useMutationState(api.list.removeFromList)
+  const removeVisit = useMutationState(api.history.removeVisit)
 
   const saveOptions = useMemo(
     () => ({
@@ -65,6 +69,20 @@ export function useFiloContent() {
     [],
   )
 
+  const historyOptions = useMemo(
+    () => ({
+      onSuccess: ({ data }: { data: HistoryContent[] }) => {
+        setHistoryContent(data ?? [])
+      },
+      onError: (actionError: { error: SafeActionInnerError }) => {
+        const errorMsg = parseActionError(actionError.error)
+        console.error(errorMsg)
+        toast.error(errorMsg)
+      },
+    }),
+    [],
+  )
+
   const { execute: fetchSaved, isPending: fetchSavedIsPending } = useAction(
     fetchSavedContent,
     saveOptions,
@@ -76,6 +94,10 @@ export function useFiloContent() {
   const { execute: fetchLists, isPending: fetchListsIsPending } = useAction(
     fetchListsContent,
     listOptions,
+  )
+  const { execute: fetchHistory, isPending: fetchHistoryIsPending } = useAction(
+    fetchHistoryContent,
+    historyOptions,
   )
 
   useEffect(() => {
@@ -107,6 +129,15 @@ export function useFiloContent() {
       setListsContent([])
     }
   }, [listsResult, fetchLists])
+  useEffect(() => {
+    if (historyResult === undefined) return
+
+    if (historyResult.length > 0) {
+      fetchHistory({ historyList: historyResult })
+    } else {
+      setHistoryContent([])
+    }
+  }, [historyResult, fetchHistory])
 
   const sections = useMemo(
     () => [
@@ -122,7 +153,12 @@ export function useFiloContent() {
         removeFn: removeSaved.mutate,
         pending: removeSaved.pending,
       },
-      { name: 'history' as const, content: null },
+      {
+        name: 'history' as const,
+        content: historyContent,
+        removeFn: removeVisit.mutate,
+        pending: removeVisit.pending,
+      },
       {
         name: 'lists' as const,
         content: listsContent,
@@ -130,11 +166,21 @@ export function useFiloContent() {
         pending: removeListItem.pending,
       },
     ],
-    [pinnedContent, savedContent, listsContent, removePinned, removeSaved, removeListItem],
+    [
+      pinnedContent,
+      savedContent,
+      listsContent,
+      historyContent,
+      removePinned,
+      removeSaved,
+      removeListItem,
+      removeVisit,
+    ],
   )
 
   return {
     sections,
-    isPending: fetchSavedIsPending || fetchPinnedIsPending || fetchListsIsPending,
+    isPending:
+      fetchSavedIsPending || fetchPinnedIsPending || fetchListsIsPending || fetchHistoryIsPending,
   }
 }

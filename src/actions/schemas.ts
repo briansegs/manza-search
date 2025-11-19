@@ -11,6 +11,8 @@ type ListItems = {
   items: Doc<'listedContent'>[]
 }
 
+type Visit = Doc<'history'>
+
 export const fetchSavedContentSchema = z.object({
   saveList: z.array(z.custom<Saves>()),
 })
@@ -21,4 +23,8 @@ export const fetchPinnedContentSchema = z.object({
 
 export const fetchListedContentSchema = z.object({
   listItems: z.array(z.custom<ListItems>()),
+})
+
+export const fetchHistoryContentSchema = z.object({
+  historyList: z.array(z.custom<Visit>()),
 })
