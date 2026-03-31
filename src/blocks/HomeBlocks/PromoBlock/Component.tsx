@@ -21,7 +21,7 @@ const PromoBlock: React.FC<PromoBlockProps> = (props) => {
         {title}
       </div>
 
-      <div className="flex max-w-[1075px] flex-wrap justify-center gap-14 px-4 py-12">
+      <div className="flex max-w-[1075px] flex-wrap justify-center gap-10 px-4 py-12 lg:gap-6 xl:gap-6 2xl:gap-14">
         {content && content.length > 0 ? (
           content.map(({ id, link, media }) => {
             const hasValidLink = isValidLink(link)
