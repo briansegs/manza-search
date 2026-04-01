@@ -38,13 +38,13 @@ export default async function Page() {
 
       <SuggestedArticles articles={suggestedArticles} />
 
-      <div className={cn('mt-0 flex flex-col gap-2', 'xl:mt-10 xl:max-h-full xl:flex-row')}>
+      <div className={cn('flex flex-col gap-2', 'xl:max-h-full xl:flex-row')}>
         <HomeMenu />
 
         <div className="flex flex-1 flex-col items-center">
           <HomeWelcomeBanner />
 
-          <div className="size-full overflow-y-auto border-[1px] border-black p-4">
+          <div className="custom-scrollbar mb-20 mt-5 size-full overflow-y-auto rounded-primary border-x-[30px] border-y-[5px] border-black p-4">
             {layout && layout.length > 0 ? (
               <RenderHomeBlocks blocks={layout} />
             ) : (
