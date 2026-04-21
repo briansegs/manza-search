@@ -11,7 +11,7 @@ export function HomeWelcomeBanner() {
     <div className="flex min-h-6 w-fit items-center justify-center rounded-primary bg-black shadow-[10px_10px_10px_black] sm:w-[350px] md:w-[400px] lg:w-[600px]">
       <div className="text-wrap px-4 py-2 font-serif text-2xl text-white">
         Welcome
-        {<span className="ml-1">{name}</span>}!
+        <span className="ml-1">{name}</span>!
       </div>
     </div>
   )
