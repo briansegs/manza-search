@@ -57,7 +57,9 @@ export function BookCard({ book }: BookCardProps) {
           <BookCardButton>B</BookCardButton>
           <BookCardButton>A</BookCardButton>
           <BookExtraContentButton book={book} />
-          <BookReader book={book} />
+          <BookReader book={book}>
+            <BookCardButton>QS</BookCardButton>
+          </BookReader>
         </div>
       </div>
     </div>

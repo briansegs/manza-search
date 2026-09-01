@@ -25,6 +25,12 @@ export type FiloContentCardProps = {
   name?: string
 }
 
+export type FiloCardMediaProps = {
+  content: FiloContent
+  mediaElement: React.ReactNode
+  label: string
+}
+
 export type FiloListCardProps = {
   content: FiloContent
   removeFn?: (args: { contentId: string; listId?: string }) => Promise<void> | null

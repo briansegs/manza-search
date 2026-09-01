@@ -28,7 +28,9 @@ type BookAuthor = Pick<BookContent, 'authorName' | 'authorImage'>
 type BookSummary = Pick<BookContent, 'summary'>
 type BookInfo = Pick<BookContent, 'information'>
 
-export type BookReaderProps = BookType
+export type BookReaderProps = BookType & {
+  children: React.ReactNode
+}
 
 export type ReaderMenuProps = PageState & TextEnlargeState & BookType
 

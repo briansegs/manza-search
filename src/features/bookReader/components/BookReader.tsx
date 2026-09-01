@@ -7,14 +7,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { BookCardButton } from '@/features/articles/components/BooksSection/BookCardButton'
 import { ReaderMenu } from '@/features/bookReader/components/ReaderMenu'
 import { ReaderView } from '@/features/bookReader/components/ReaderView'
 import { useState } from 'react'
 import { cn } from '@/utilities/ui'
 import { BookReaderProps } from '../types'
 
-export function BookReader({ book }: BookReaderProps) {
+export function BookReader({ book, children }: BookReaderProps) {
   const [currentPage, setCurrentPage] = useState(0)
   const [textEnlarge, setTextEnlarge] = useState(false)
 
@@ -22,9 +21,7 @@ export function BookReader({ book }: BookReaderProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <BookCardButton>QS</BookCardButton>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
 
       <DialogContent
         aria-describedby="Book Reader Dialog"

@@ -2,6 +2,7 @@ import { Media } from '@/components/Media'
 import { RenderMedia } from '../shared/components/RenderMedia'
 import { ImagePlaceholder } from '../shared/components/ImagePlaceholder'
 import { RemoveFiloItemButton } from './RemoveFiloItemButton'
+import { FiloCardMedia } from './FiloCardMedia'
 import { toast } from 'sonner'
 import { ConvexError } from 'convex/values'
 import { FiloContentCardProps } from './types'
@@ -50,7 +51,7 @@ export function FiloContentCard({ content, removeFn, pending, name }: FiloConten
   return (
     <div className="space-y-2">
       <div className="relative h-40 w-32 overflow-hidden rounded-md border-2 border-black">
-        {mediaElement}
+        <FiloCardMedia content={content} mediaElement={mediaElement} label={label} />
 
         <RemoveFiloItemButton onClick={handleRemove} disabled={pending ? pending : false} />
       </div>
