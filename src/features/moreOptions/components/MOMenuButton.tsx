@@ -1,7 +1,7 @@
 import { cn } from '@/utilities/ui'
 
 const buttonStyles =
-  'size-14 rounded-full border-4 border-black font-serif text-white shadow-[10px_10px_10px_black] hover:text-white/50'
+  'flex size-14 items-center justify-center rounded-full border-4 border-black font-serif text-white shadow-[10px_10px_10px_black] hover:text-white/50'
 
 type MOMenuButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string
