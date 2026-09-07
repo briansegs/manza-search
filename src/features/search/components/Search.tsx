@@ -1,35 +1,19 @@
 'use client'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useState, useEffect, useRef } from 'react'
-import { useDebounce } from '@/utilities/useDebounce'
-import { useRouter, useSearchParams } from 'next/navigation'
+import React from 'react'
 import { SearchIcon } from 'lucide-react'
+import { useArticleSearch } from '../hooks/useArticleSearch'
 
 export function Search() {
-  const [value, setValue] = useState('')
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const hasInteracted = useRef(false)
+  const { value, onChange, onSubmit } = useArticleSearch()
 
-  const debouncedValue = useDebounce(value)
-
-  useEffect(() => {
-    const initialQ = searchParams.get('q')
-    if (initialQ) setValue(initialQ)
-  }, [searchParams])
-
-  useEffect(() => {
-    if (!hasInteracted.current) return
-
-    const url = `/search${debouncedValue ? `?q=${debouncedValue}` : ''}`
-    router.push(url)
-  }, [debouncedValue, router])
   return (
     <div>
       <form
         onSubmit={(e) => {
           e.preventDefault()
+          onSubmit()
         }}
         className="flex h-8 items-center rounded border border-border bg-background"
       >
@@ -38,10 +22,8 @@ export function Search() {
         </Label>
         <Input
           id="search"
-          onChange={(event) => {
-            hasInteracted.current = true
-            setValue(event.target.value)
-          }}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
           placeholder="Search"
           className="rounded-none border-none bg-transparent text-primary outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
         />

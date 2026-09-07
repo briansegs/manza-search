@@ -20,6 +20,7 @@ export function HeaderClient({ data }: { data: Header }) {
   const [theme, setTheme] = useState<string | null>(null)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
+  const isSearchPage = pathname?.startsWith('/search')
 
   useEffect(() => {
     setHeaderTheme(null)
@@ -42,9 +43,11 @@ export function HeaderClient({ data }: { data: Header }) {
             <Logo loading="eager" priority="high" src="/manzaSearch-logo-long.png" />
           </Link>
 
-          <div className="prose mx-auto hidden max-w-[30rem] flex-grow text-center lg:block">
-            <Search />
-          </div>
+          {!isSearchPage && (
+            <div className="prose mx-auto hidden max-w-[30rem] flex-grow text-center lg:block">
+              <Search />
+            </div>
+          )}
 
           <div className="hidden items-center gap-4 lg:flex">
             <Link href="/settings">Settings</Link>
@@ -97,20 +100,22 @@ export function HeaderClient({ data }: { data: Header }) {
                   </div>
                 </div>
 
-                <div className="bg-black px-2 py-2">
-                  <div className="mx-auto w-64">
-                    <Search />
+                {!isSearchPage && (
+                  <div className="bg-black px-2 py-2">
+                    <div className="mx-auto w-64">
+                      <Search />
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <MobileHeaderNav data={data} />
+                {!isSearchPage && <MobileHeaderNav data={data} />}
               </PopoverContent>
             </Popover>
           </div>
         </div>
       </header>
 
-      <HeaderNav data={data} />
+      {!isSearchPage && <HeaderNav data={data} />}
     </>
   )
 }

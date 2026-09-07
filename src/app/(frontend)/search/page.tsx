@@ -1,13 +1,10 @@
 import type { Metadata } from 'next/types'
 
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
-import { SearchList } from '@/features/search/components/SearchList'
-import { SearchPageRange } from '@/features/search/components/SearchPageRange'
-import { SearchPagination } from '@/features/search/components/SearchPagination'
-import { SearchArticleCardData } from '@/features/search/types'
+import { SearchLanding } from '@/features/search/components/SearchLanding'
+import { WebSearchResults } from '@/features/webSearch/components/WebSearchResults'
+import { BottomMenu } from '@/features/shared/components/BottomMenu'
 
 type Args = {
   searchParams: Promise<{
@@ -16,65 +13,18 @@ type Args = {
 }
 export default async function Page({ searchParams: searchParamsPromise }: Args) {
   const { q: query } = await searchParamsPromise
-  const payload = await getPayload({ config: configPromise })
+  if (!query) {
+    return (
+      <section className="mb-24">
+        <PageClient />
+        <div className="min-h-screen w-full">
+          <SearchLanding />
+        </div>
 
-  const pageLimit = 5
-
-  const articles = await payload.find({
-    collection: 'search',
-    depth: 1,
-    limit: pageLimit,
-    select: {
-      title: true,
-      slug: true,
-      categories: true,
-      meta: true,
-      authors: true,
-      updatedAt: true,
-      publishedAt: true,
-    },
-    page: 1,
-    // pagination: false reduces overhead if you don't need totalDocs
-    pagination: true,
-    ...(query
-      ? {
-          where: {
-            or: [
-              {
-                title: {
-                  like: query,
-                },
-              },
-              {
-                'meta.description': {
-                  like: query,
-                },
-              },
-              {
-                'meta.title': {
-                  like: query,
-                },
-              },
-              {
-                slug: {
-                  like: query,
-                },
-              },
-              {
-                'categories.title': {
-                  like: query,
-                },
-              },
-              {
-                'authors.name': {
-                  like: query,
-                },
-              },
-            ],
-          },
-        }
-      : {}),
-  })
+        <BottomMenu />
+      </section>
+    )
+  }
 
   return (
     <section className="mb-24">
@@ -84,37 +34,10 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
           <h2 className="py-2 font-serif text-xl uppercase text-white">Search</h2>
         </div>
 
-        {query && (
-          <>
-            <div className="container">
-              <SearchPageRange
-                collection="articles"
-                currentPage={articles.page}
-                limit={pageLimit}
-                totalDocs={articles.totalDocs}
-              />
-            </div>
-
-            {articles.totalDocs > 0 ? (
-              <SearchList articles={articles.docs as SearchArticleCardData[]} />
-            ) : (
-              <div className="container">No results found.</div>
-            )}
-
-            <div className="container">
-              {articles.totalPages > 1 && articles.page && (
-                <SearchPagination
-                  page={articles.page}
-                  totalPages={articles.totalPages}
-                  query={query}
-                />
-              )}
-            </div>
-          </>
-        )}
-
-        {!query && <div className="container">Type in search bar to find articles.</div>}
+        <WebSearchResults initialQuery={query} />
       </div>
+
+      <BottomMenu />
     </section>
   )
 }
