@@ -41,10 +41,6 @@ export type GalleryImageProps = Pick<GalleryImageWithLink, 'link'> & {
   hasValidLink: boolean
 }
 
-export type RenderGalleryImageProps = {
-  image: GalleryMedia
-}
-
 export type ImageExtraContentButtonProps = {
   image: string | null | ArticleMedia
 }
