@@ -1,12 +1,10 @@
 import React from 'react'
 import PageClient from './page.client'
 
-import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { HealthAndWellness as HealthAndWellnessGlobalType } from '@/payload-types'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import { HealthAndWellnessTopMenuContainer } from '@/features/healthAndWellness/components/HealthAndWellnessTopMenuContainer'
 import { HealthAndWellnessContent } from '@/features/healthAndWellness/components/HealthAndWellnessContent'
 import { HealthAndWellnessHero } from '@/features/healthAndWellness/components/HealthAndWellnessHero'
 import { Metadata } from 'next'
@@ -40,11 +38,9 @@ export default async function Page() {
 
           <HealthAndWellnessHero ads={pageAds} />
 
-          <HealthAndWellnessTopMenuContainer />
 
           <HealthAndWellnessContent articlesByTopic={articlesByTopic} paidTopSpot={paidTopSpot} />
 
-          <RightMenuContainer />
 
           <BottomMenu />
         </div>

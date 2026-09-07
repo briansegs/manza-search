@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { useUser } from '@clerk/nextjs'
 import { BookOpen, Compass, FileText, PartyPopper } from 'lucide-react'
 import useBreakpoint from '@/hooks/useBreakpoint'
 import { PopoverContent } from '@/components/ui/popover'
@@ -11,11 +10,9 @@ import { Calendar } from '@/features/calendar/components/Calendar'
 import { MistralDialog } from '@/features/mistral/components/MistralDialog'
 import { DashboardDialog } from './DashboardDialog'
 import { FiloButton } from './FiloButton'
-import { FiloDialog } from '@/features/filo/FiloDialog'
 
 export function MoreOptionsContent() {
   const { isMobileSM } = useBreakpoint()
-  const { isSignedIn } = useUser()
 
   const items = [
     <Calendar key="calendar" />,
@@ -38,22 +35,18 @@ export function MoreOptionsContent() {
   ]
 
   return (
-    <>
-      <PopoverContent
-        side={isMobileSM ? 'bottom' : 'left'}
-        sideOffset={isMobileSM ? 20 : 80}
-        className="w-fit border-0 bg-transparent p-0 shadow-none"
-      >
-        <div className="grid grid-cols-3 gap-4">
-          {items.map((item) => (
-            <div key={item.key} className="flex items-center justify-center">
-              {item}
-            </div>
-          ))}
-        </div>
-      </PopoverContent>
-
-      {isSignedIn && <FiloDialog />}
-    </>
+    <PopoverContent
+      side={isMobileSM ? 'bottom' : 'left'}
+      sideOffset={isMobileSM ? 20 : 80}
+      className="w-fit border-0 bg-transparent p-0 shadow-none"
+    >
+      <div className="grid grid-cols-3 gap-4">
+        {items.map((item) => (
+          <div key={item.key} className="flex items-center justify-center">
+            {item}
+          </div>
+        ))}
+      </div>
+    </PopoverContent>
   )
 }

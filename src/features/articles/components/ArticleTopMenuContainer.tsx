@@ -1,5 +1,4 @@
 import React from 'react'
-import { RightMenu } from '@/features/shared/components/RightMenu'
 import getAuthorList from '@/utilities/getAuthorList'
 import { ArticleLeftMenu } from './ArticleLeftMenu'
 import { DropdownMenu } from '@/features/shared/components/DropdownMenu'
@@ -37,10 +36,6 @@ export function ArticleTopMenuContainer({ article, className, url }: ArticleTopM
           <DropdownMenu label="Actions">
             <ArticleTopMenu article={article} styles="flex-col items-center" />
           </DropdownMenu>
-        </div>
-
-        <div className="block sm:hidden">
-          <RightMenu />
         </div>
       </div>
     </div>

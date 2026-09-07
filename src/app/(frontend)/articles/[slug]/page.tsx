@@ -7,7 +7,6 @@ import React, { cache } from 'react'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { RelatedArticles } from '@/features/articles/components/RelatedArticles'
 import { ArticleTopMenuContainer } from '@/features/articles/components/ArticleTopMenuContainer'
-import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { ArticleHero } from '@/heros/ArticleHero'
 import { RenderArticleBlocks } from '@/blocks/RenderArticleBlocks'
@@ -90,7 +89,6 @@ export default async function Article({ params: paramsPromise }: Args) {
           {userId && <NewListDialog />}
         </div>
       </div>
-      <RightMenuContainer />
 
       <BottomMenu />
     </article>

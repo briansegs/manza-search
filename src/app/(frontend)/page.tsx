@@ -6,7 +6,6 @@ import React from 'react'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import NotFound from './not-found'
-import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { RenderHomeBlocks } from '@/blocks/RenderHomeBlocks'
 import { Home as HomeGlobalType } from '@/payload-types'
@@ -62,8 +61,6 @@ export default async function Page() {
           </div>
         </div>
       </div>
-
-      <RightMenuContainer />
 
       <BottomMenu />
     </section>

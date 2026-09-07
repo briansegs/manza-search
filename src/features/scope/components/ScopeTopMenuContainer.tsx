@@ -1,5 +1,4 @@
 import React from 'react'
-import { RightMenu } from '@/features/shared/components/RightMenu'
 
 import { ScopeLeftMenu } from './ScopeLeftMenu'
 import { DropdownMenu } from '@/features/shared/components/DropdownMenu'
@@ -13,10 +12,6 @@ export function ScopeTopMenuContainer({ sectionData }: TopMenuContainerProps) {
         <DropdownMenu label="Table of Content">
           <ScopeLeftMenu sectionData={sectionData} />
         </DropdownMenu>
-
-        <div className="block sm:hidden">
-          <RightMenu />
-        </div>
       </div>
     </div>
   )

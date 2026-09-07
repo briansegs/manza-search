@@ -2,13 +2,11 @@ import React from 'react'
 import PageClient from './page.client'
 import { Metadata } from 'next'
 
-import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Art as ArtGlobalType } from '@/payload-types'
 
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import { ArtTopMenuContainer } from '@/features/art/components/ArtTopMenuContainer'
 import { ArtContent } from '@/features/art/components/ArtContent'
 import { ArtHero } from '@/features/art/components/ArtHero'
 import { findArticlesByTopic } from '@/utilities/findArticlesByTopic'
@@ -38,11 +36,9 @@ export default async function Page() {
 
           <ArtHero ads={pageAds} />
 
-          <ArtTopMenuContainer />
 
           <ArtContent articlesByTopic={articlesByTopic} paidTopSpot={paidTopSpot} />
 
-          <RightMenuContainer />
 
           <BottomMenu />
         </div>

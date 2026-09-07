@@ -2,7 +2,6 @@ import React from 'react'
 import PageClient from './page.client'
 import { Metadata } from 'next'
 
-import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Img as ImgGlobalType } from '@/payload-types'
@@ -11,7 +10,6 @@ import { SuggestedArticles } from '@/features/shared/components/SuggestedArticle
 import { ImgHero } from '@/features/img/components/ImgHero'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
-import { ImgTopMenuContainer } from '@/features/img/components/ImgTopMenuContainer'
 import { ImgContent } from '@/features/img/components/ImgContent'
 
 export const dynamic = 'force-static'
@@ -40,11 +38,9 @@ export default async function Page() {
 
           <ImgHero ads={pageAds} />
 
-          <ImgTopMenuContainer />
 
           <ImgContent articlesByCategory={articlesByCategory} />
 
-          <RightMenuContainer />
 
           <BottomMenu />
         </div>

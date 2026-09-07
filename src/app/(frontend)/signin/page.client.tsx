@@ -1,5 +1,6 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
+import { HideToolboxOnMount } from '@/features/shared/components/HideToolboxOnMount'
 import React, { useEffect } from 'react'
 
 const PageClient: React.FC = () => {
@@ -9,7 +10,7 @@ const PageClient: React.FC = () => {
   useEffect(() => {
     setHeaderTheme('light')
   }, [setHeaderTheme])
-  return <React.Fragment />
+  return <HideToolboxOnMount />
 }
 
 export default PageClient

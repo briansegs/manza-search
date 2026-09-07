@@ -1,12 +1,10 @@
 import React from 'react'
 import PageClient from './page.client'
 
-import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Sound as SoundGlobalType } from '@/payload-types'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import { SoundTopMenuContainer } from '@/features/sound/components/SoundTopMenuContainer'
 import { SoundContent } from '@/features/sound/components/SoundContent'
 import { SoundHero } from '@/features/sound/components/SoundHero'
 import { findArticlesByTopic } from '@/utilities/findArticlesByTopic'
@@ -37,11 +35,9 @@ export default async function Page() {
 
           <SoundHero ads={pageAds} />
 
-          <SoundTopMenuContainer />
 
           <SoundContent articlesByTopic={articlesByTopic} paidTopSpot={paidTopSpot} />
 
-          <RightMenuContainer />
 
           <BottomMenu />
         </div>

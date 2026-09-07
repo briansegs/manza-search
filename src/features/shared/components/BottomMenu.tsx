@@ -7,6 +7,7 @@ import { cn } from '@/utilities/ui'
 import { noScrollbarsClassName } from 'react-remove-scroll-bar'
 import { ToolsMenu } from '@/features/toolsMenu/components/ToolsMenu'
 import { MenuBoxIcon, ToolsIcon } from '@/components/site-icons'
+import { FiloStorageButton } from '@/features/shared/components/FiloStorageButton'
 
 export function BottomMenu() {
   return (
@@ -56,9 +57,11 @@ export function BottomMenu() {
             </Button>
           </PopoverTrigger>
           <PopoverContent
-            className={cn('rounded-lg border-2 border-black bg-menu font-serif text-white', 'h-28')}
+            className={cn(
+              'flex h-28 items-center justify-center rounded-lg border-2 border-black bg-menu font-serif text-white',
+            )}
           >
-            Content...
+            <FiloStorageButton />
           </PopoverContent>
         </Popover>
       </div>

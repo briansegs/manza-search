@@ -20,3 +20,11 @@ export function RightMenuContainer() {
     </div>
   )
 }
+
+export function RightMenuMobileContainer() {
+  return (
+    <div className={cn(zeroRightClassName, 'fixed right-0 top-2 z-50 sm:hidden')}>
+      <RightMenu />
+    </div>
+  )
+}

@@ -2,12 +2,10 @@ import React from 'react'
 import PageClient from './page.client'
 import { Metadata } from 'next'
 
-import { RightMenuContainer } from '@/features/shared/components/RightMenu'
 import { BottomMenu } from '@/features/shared/components/BottomMenu'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Literature as LiteratureGlobalType } from '@/payload-types'
 import { SuggestedArticles } from '@/features/shared/components/SuggestedArticles'
-import { LiteratureTopMenuContainer } from '@/features/literature/components/LiteratureTopMenuContainer'
 import { LiteratureContent } from '@/features/literature/components/LiteratureContent'
 import { LiteratureHero } from '@/features/literature/components/LiteratureHero'
 import { findArticlesByTopic } from '@/utilities/findArticlesByTopic'
@@ -37,11 +35,9 @@ export default async function Page() {
 
           <LiteratureHero ads={pageAds} />
 
-          <LiteratureTopMenuContainer />
 
           <LiteratureContent articlesByTopic={articlesByTopic} paidTopSpot={paidTopSpot} />
 
-          <RightMenuContainer />
 
           <BottomMenu />
         </div>
